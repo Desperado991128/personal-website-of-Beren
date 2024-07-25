@@ -42,3 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+if (document.querySelector('.blog-posts')) {
+    console.log('Blog page loaded');
+}
+
+
+
