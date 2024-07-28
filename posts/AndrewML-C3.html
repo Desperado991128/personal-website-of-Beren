@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsupervised Learning: Clustering, Anomaly Detection, and Beyond</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Unsupervised Learning: Clustering, Anomaly Detection, and Beyond</h2>
+            <div class="post-meta">
+                <span class="date">July 26, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">Andrew Ng's classic course series on Machine Learning</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#supervised-to-unsupervised-learning">From Supervised Learning to Unsupervised
+                            Learning</a></li>
+                    <ul>
+                        <li><a href="#applications">Applications of Unsupervised Learning</a></li>
+                        <li><a href="#clustering">Clustering: Unveiling Hidden Structures</a></li>
+                        <li><a href="#k-means">K-means Algorithm</a></li>
+                        <li><a href="#optimization-objective">Optimization Objective</a></li>
+                        <li><a href="#choosing-k">Choosing the Number of Clusters (K)</a></li>
+                    </ul>
+                    <li><a href="#anomaly-detection">Anomaly Detection: Finding the Outliers</a></li>
+                    <ul>
+                        <li><a href="#gaussian-distribution">Gaussian Distribution: The Foundation</a></li>
+                        <li><a href="#anomaly-algorithm">Anomaly Detection Algorithm</a></li>
+                        <li><a href="#anomaly-applications">Applications of Anomaly Detection</a></li>
+                        <li><a href="#anomaly-vs-supervised">Anomaly Detection vs. Supervised Learning</a></li>
+                        <li><a href="#feature-engineering">Feature Engineering for Anomaly Detection</a></li>
+                    </ul>
+                    <li><a href="#recommender-systems">The Magic Behind Recommender Systems</a></li>
+                    <ul>
+                        <li><a href="#basics-recommender">The Basics of Recommender Systems</a></li>
+                        <li><a href="#collaborative-filtering">Collaborative Filtering: Leveraging User Similarities</a>
+                        </li>
+                        <li><a href="#binary-labels">Binary Labels: Extending to Likes and Clicks</a></li>
+                        <li><a href="#mean-normalization">Mean Normalization: Handling New Users</a></li>
+                        <li><a href="#related-items">Finding Related Items</a></li>
+                        <li><a href="#content-filtering">Content-Based Filtering: Incorporating Item and User
+                                Features</a></li>
+                        <li><a href="#deep-learning">Deep Learning for Content-Based Filtering</a></li>
+                        <li><a href="#advanced-implementation">Advanced Implementation: Recommending from Large
+                                Catalogs</a></li>
+                        <li><a href="#ethical-considerations">Ethical Considerations in Recommender Systems</a></li>
+                        <li><a href="#tensorflow-implementation">TensorFlow Implementation</a></li>
+                    </ul>
+                    <li><a href="#rl-intro">Reinforcement Learning: Teaching Machines to Make Decisions</a></li>
+                    <ul>
+                        <li><a href="#rl-basics">Introduction to Reinforcement Learning</a></li>
+                        <li><a href="#rl-applications">Real-World Applications</a></li>
+                        <li><a href="#rl-formalism">Reinforcement Learning Formalism</a></li>
+                        <li><a href="#deep-rl">Deep Reinforcement Learning</a></li>
+                        <li><a href="#rl-challenges">Limitations and Future Directions</a></li>
+                        <li><a href="#further-reading">Further Reading</a></li>
+                    </ul>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="supervised-to-unsupervised-learning">
+                    <h3>From Supervised Learning to Unsupervised Learning</h3>
+                    <p>This is the third and final course from the Machine Learning series: <b>Unsupervised Learning and
+                            Recommender Systems.</b> In this post, I seek to organize and extract the most essential
+                        part from the mentioned course and notes taught by Andrew. Let's dive in!</p>
+                    <p>Unsupervised learning stands apart from its supervised counterpart in a fundamental way: it
+                        doesn't rely on labeled data. Instead, it seeks to uncover hidden patterns and structures within
+                        datasets, making it an invaluable tool for exploratory data analysis and feature learning.</p>
+                    <p><img src="../images/AndrewML3/1-1-Comparison of supervised and unsupervised learning.png" alt="Comparison of supervised and unsupervised learning"></p>
+                    <p>In the unsupervised learning paradigm, we're presented with a training set of unlabeled examples,
+                        \(\{x^{(1)}, x^{(2)}, x^{(3)}, ..., x^{(m)}\}\). The goal is to find some structure or patterns
+                        in
+                        this data without the guidance of predefined labels.</p>
+                </section>
+
+                <section id="applications">
+                    <h3>Applications of Unsupervised Learning</h3>
+                    <p>The applications of unsupervised learning are vast and varied:</p>
+                    <ul>
+                        <li>Market Segmentation: Identifying distinct customer groups for targeted marketing strategies.
+                        </li>
+                        <li>News Aggregation: Grouping similar news articles to improve content organization and
+                            discovery.</li>
+                        <li>Astronomical Data Analysis: Uncovering patterns in celestial data to advance our
+                            understanding of the universe.</li>
+                        <li>DNA Analysis: Identifying genetic patterns and clusters in genomic data.</li>
+                    </ul>
+                    <p>These applications highlight the versatility of unsupervised learning in extracting meaningful
+                        insights across diverse domains.</p>
+                </section>
+
+                <section id="clustering">
+                    <h3>Clustering: Unveiling Hidden Structures</h3>
+                    <p>Clustering is a cornerstone technique in unsupervised learning. It aims to group similar data
+                        points together while separating dissimilar ones. Among clustering algorithms, K-means stands
+                        out for its simplicity and effectiveness.</p>
+                </section>
+
+                <div id="k-means" class="section">
+                    <h3>K-means Algorithm</h3>
+
+                    <p>The K-means algorithm is an iterative process that seeks to partition \(n\) observations into
+                        \(K\) clusters, where each observation belongs to the cluster with the nearest mean (centroid).
+                        Here's a step-by-step breakdown of the algorithm:</p>
+
+                    <ol>
+                        <li>Initialization: Randomly initialize \(K\) cluster centroids, \(\{\mu_1, \mu_2, ...,
+                            \mu_K\}\)</li>
+                        <li>Repeat until convergence:
+                            <ol type="a">
+                                <li>Assign points to clusters:
+                                    <pre><code>For i = 1 to m:
+                c^(i) := index (from 1 to K) of cluster centroid closest to x^(i)</code></pre>
+                                </li>
+                                <li>Move cluster centroids:
+                                    <pre><code>For k = 1 to K:
+                μ_k := average (mean) of points assigned to cluster k</code></pre>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+
+                    <p><img src="../images/AndrewML3/1-2-K-means algorithm visualization.png" alt="K-means algorithm visualization"></p>
+
+                    <p>The algorithm continues to iterate until the assignments no longer change significantly or a
+                        maximum number of iterations is reached.</p>
+                </div>
+
+                <div id="optimization-objective" class="section">
+                    <h3>Optimization Objective</h3>
+
+                    <p>The K-means algorithm aims to minimize the following cost function:</p>
+
+                    <p>\[J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^m ||x^{(i)} -
+                        \mu_{c^{(i)}}||^2\]</p>
+
+                    <p>Where:</p>
+                    <ul>
+                        <li>\(c^{(i)}\) is the index of the cluster to which example \(x^{(i)}\) is currently assigned
+                        </li>
+                        <li>\(\mu_k\) is the centroid of cluster k</li>
+                        <li>\(\mu_{c^{(i)}}\) is the cluster centroid of the cluster to which example \(x^{(i)}\) has
+                            been
+                            assigned</li>
+                    </ul>
+
+                    <p>This cost function represents the average squared distance between data points and their assigned
+                        cluster centroids. The algorithm seeks to minimize this cost, thereby creating tighter, more
+                        coherent clusters.</p>
+                </div>
+
+                <section id="choosing-k">
+                    <h3>Choosing the Number of Clusters (K)</h3>
+                    <p>One of the challenges in applying K-means is determining the optimal number of clusters. Two
+                        common approaches are:</p>
+                    <ul>
+                        <li>Elbow Method: Plot the cost function \(J\) against the number of clusters \(K\). The "elbow"
+                            in
+                            the
+                            resulting curve often indicates a good choice for \(K\).</li>
+                        <li>Purpose-driven Selection: Choose \(K\) based on the downstream purpose of the clustering.
+                            For
+                            example, in T-shirt sizing, you might choose \(K=5\) for XS, S, M, L, XL sizes.</li>
+                    </ul>
+                    <p><img src="../images/AndrewML3/1-3-Elbow method graph.png" alt="Elbow method graph"></p>
+                </section>
+
+                <section id="anomaly-detection">
+                    <h3>Anomaly Detection: Finding the Outliers</h3>
+                    <p>Anomaly detection is another crucial application of unsupervised learning, focused on identifying
+                        rare items, events, or observations that raise suspicions by differing significantly from the
+                        majority of the data.</p>
+                </section>
+
+                <div id="gaussian-distribution" class="section">
+                    <h3>Gaussian Distribution: The Foundation</h3>
+
+                    <p>At the heart of many anomaly detection techniques lies the Gaussian (Normal) distribution. For a
+                        univariate Gaussian distribution, the probability density function is given by:</p>
+
+                    <p>\[p(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</p>
+
+                    <p>Where \(\mu\) is the mean and \(\sigma^2\) is the variance of the distribution.</p>
+                </div>
+
+                <div id="anomaly-algorithm" class="section">
+                    <h3>Anomaly Detection Algorithm</h3>
+
+                    <p>The anomaly detection algorithm typically follows these steps:</p>
+
+                    <ol>
+                        <li>Choose n features \(x_i\) that might be indicative of anomalous examples.</li>
+                        <li>Fit parameters \(\mu_1, ..., \mu_n, \sigma_1^2, ..., \sigma_n^2\):
+                            <p>\[\mu_j = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\]
+                                \[\sigma_j^2 = \frac{1}{m} \sum_{i=1}^m (x_j^{(i)} - \mu_j)^2\]</p>
+                        </li>
+                        <li>Given a new example x, compute p(x):
+                            <p>\[p(x) = \prod_{j=1}^n p(x_j; \mu_j, \sigma_j^2) = \prod_{j=1}^n
+                                \frac{1}{\sqrt{2\pi}\sigma_j} exp(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2})\]</p>
+                        </li>
+                        <li>Anomaly if \(p(x) < \epsilon\) for some chosen threshold \(\epsilon\).</li>
+                    </ol>
+
+                    <p>This algorithm models the probability distribution of the normal data and flags examples with low
+                        probability as anomalies.</p>
+                </div>
+
+                <section id="anomaly-applications">
+                    <h3>Applications of Anomaly Detection</h3>
+                    <ul>
+                        <li>Fraud Detection: Identifying unusual user activities in financial transactions.</li>
+                        <li>Manufacturing: Detecting defects in products during quality control.</li>
+                        <li>Data Center Monitoring: Identifying unusual behavior in computer systems.</li>
+                    </ul>
+                </section>
+
+                <section id="anomaly-vs-supervised">
+                    <h3>Anomaly Detection vs. Supervised Learning</h3>
+                    <p>While both can be used for similar problems, they have distinct characteristics:</p>
+                    <h4>Anomaly Detection:</h4>
+                    <ul>
+                        <li>Very small number of positive (anomalous) examples</li>
+                        <li>Many different types of anomalies</li>
+                        <li>Future anomalies may look nothing like past anomalies</li>
+                    </ul>
+                    <h4>Supervised Learning:</h4>
+                    <ul>
+                        <li>Large number of positive and negative examples</li>
+                        <li>Enough positive examples to get a sense of what positive examples are like</li>
+                        <li>Future positive examples likely to be similar to ones in training set</li>
+                    </ul>
+                    <p>Choose anomaly detection when you have very few positive examples and many different "types" of
+                        anomalies. Opt for supervised learning when you have a substantial number of positive and
+                        negative examples, and future positive examples are likely to be similar to those in your
+                        training set.</p>
+                </section>
+
+                <div id="feature-engineering" class="section">
+                    <h3>Feature Engineering for Anomaly Detection</h3>
+
+                    <p>Feature selection and engineering play a crucial role in the effectiveness of anomaly detection
+                        systems. Here are some key considerations:</p>
+
+                    <ul>
+                        <li>Non-Gaussian Features: If features are not Gaussian, consider transformations like log(x),
+                            log(x+1), or \(\sqrt{x}\) to make them more Gaussian-like.</li>
+                        <li>Error Analysis: If p(x) is comparable for normal and anomalous examples, consider creating
+                            new features that better distinguish between them.</li>
+                        <li>Combine Features: Create new features by combining existing ones. For example, in computer
+                            monitoring, you might create features like:
+                            <p>\[x_5 = \frac{\text{CPU load}}{\text{network traffic}}\]
+                                \[x_6 = \frac{(\text{CPU load})^2}{\text{network traffic}}\]</p>
+                        </li>
+                    </ul>
+
+                    <p><img src="../images/AndrewML3/1-4-Feature transformation examples.png" alt="Feature transformation examples"></p>
+
+                    <p>These engineered features can often capture anomalies that individual features might miss.</p>
+                </div>
+
+                <section id="recommender-systems">
+                    <h3>The Magic Behind Recommender Systems</h3>
+                    <p>In today's data-driven world, recommender systems have become an integral part of our daily
+                        digital experiences. From suggesting movies on Netflix to product recommendations on Amazon,
+                        these systems play a crucial role in personalizing content for users. This lecture delves deep
+                        into the world of recommender systems, exploring various techniques, algorithms, and ethical
+                        considerations.</p>
+                </section>
+
+                <section id="basics-recommender">
+                    <h3>The Basics of Recommender Systems</h3>
+                    <h4>Predicting Movie Ratings</h4>
+                    <p>The journey begins with a fundamental problem: predicting movie ratings. Consider a matrix where
+                        rows represent movies, columns represent users, and each cell contains a rating (or is empty if
+                        the user hasn't rated that movie).</p>
+                    <p><img src="../images/AndrewML3/2-1-Movie rating matrix.png" alt="Movie rating matrix"></p>
+                    <p>Key notations:</p>
+                    <ul>
+                        <li>\(n_u\): number of users</li>
+                        <li>\(n_m\): number of movies</li>
+                        <li>\(r(i,j)\): 1 if user \(j\) has rated movie \(i\), 0 otherwise</li>
+                        <li>\(y^{(i,j)}\): rating given by user \(j\) to movie \(i\) (defined only if \(r(i,j)=1\))</li>
+                    </ul>
+                    <p>This setup forms the foundation for our exploration into recommender systems.</p>
+                </section>
+
+                <div id="collaborative-filtering" class="section">
+                    <h3>Collaborative Filtering: Leveraging User Similarities</h3>
+
+                    <h4>Using Per-Item Features</h4>
+
+                    <p>For each movie i, we have a feature vector \(x^{(i)}\). For each user j, we aim to learn
+                        parameters \(w^{(j)}\) and \(b^{(j)}\) to predict the user's rating for movie i as:</p>
+
+                    <p>\[w^{(j)} \cdot x^{(i)} + b^{(j)}\]</p>
+
+                    <p>The cost function to learn these parameters for a single user j is:</p>
+
+                    <p>\[J(w^{(j)}, b^{(j)}) = \frac{1}{2m^{(j)}} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} -
+                        y^{(i,j)})^2 + \frac{\lambda}{2m^{(j)}} \sum_{k=1}^n (w_k^{(j)})^2\]</p>
+
+                    <p>Where \(m^{(j)}\) is the number of movies rated by user j, and \(\lambda\) is a regularization
+                        parameter.</p>
+                </div>
+
+                <div id="binary-labels" class="section">
+                    <h3>Binary Labels: Extending to Likes and Clicks</h3>
+
+                    <p>In many real-world scenarios, we deal with binary feedback (like/dislike, click/no-click) rather
+                        than numerical ratings. For these cases, we modify our prediction to use a logistic function:
+                    </p>
+
+                    <p>\[P(y^{(i,j)} = 1) = g(w^{(j)} \cdot x^{(i)} + b^{(j)})\]</p>
+
+                    <p>Where \(g(z) = \frac{1}{1+e^{-z}}\) is the sigmoid function.</p>
+
+                    <p>The corresponding loss function for a single example becomes:</p>
+
+                    <p>\[L(f_{(w,b,x)}(x), y^{(i,j)}) = -y^{(i,j)} \log(f_{(w,b,x)}(x)) - (1-y^{(i,j)})
+                        \log(1-f_{(w,b,x)}(x))\]</p>
+                </div>
+
+
+                <section id="mean-normalization">
+                    <h3>Mean Normalization: Handling New Users</h3>
+
+                    <p>A common challenge in recommender systems is the "cold start" problem for new users who haven't
+                        rated any items. Mean normalization helps address this:</p>
+
+                    <ul>
+                        <li>Compute the mean rating \(\mu_i\) for each item \(i\).</li>
+                        <li>Normalize ratings: \(y^{(i,j)}_{\text{norm}} = y^{(i,j)} - \mu_i\)</li>
+                        <li>Train the model on normalized ratings.</li>
+                        <li>For predictions, add back the mean: \(w^{(j)} \cdot x^{(i)} + b^{(j)} + \mu_i\)</li>
+                    </ul>
+
+                    <p>This ensures that new users (with zero parameters) receive average predictions.</p>
+                </section>
+
+                <div id="related-items" class="section">
+                    <h3>Finding Related Items</h3>
+
+                    <p>Once we have learned feature vectors for items, we can find related items by computing the
+                        distance between their feature vectors:</p>
+
+                    <p>\[\text{distance} = ||x^{(k)} - x^{(i)}||^2 = \sum_{l=1}^n (x_l^{(k)} - x_l^{(i)})^2\]</p>
+
+                    <p>Items with the smallest distance are considered most similar.</p>
+                </div>
+
+                <section id="content-filtering">
+                    <h3>Content-Based Filtering: Incorporating Item and User Features</h3>
+                    <p>Content-based filtering recommends items based on features of both the user and the item. This
+                        approach can help alleviate the cold start problem by incorporating known information about new
+                        users or items.</p>
+                </section>
+
+                <div id="deep-learning" class="section">
+                    <h3>Deep Learning for Content-Based Filtering</h3>
+
+                    <p>A neural network architecture for content-based filtering might look like this:</p>
+
+                    <p><img src="../images/AndrewML3/2-2-Neural network architecture for content-based filtering.png" alt="Neural network architecture for content-based filtering"></p>
+
+                    <p>The network learns to map user features \(x_u\) and movie features \(x_m\) to vectors \(v_u\) and
+                        \(v_m\) respectively. The dot product \(v_u \cdot v_m\) then predicts the user's rating or
+                        likelihood of interaction with the item.</p>
+
+                    <p>The cost function for this approach is:</p>
+
+                    <p>\[J = \sum_{i,j:r(i,j)=1} (v_u^{(j)} \cdot v_m^{(i)} - y^{(i,j)})^2 + \text{NN regularization
+                        term}\]
+                    </p>
+                </div>
+
+                <section id="advanced-implementation">
+                    <h3>Advanced Implementation: Recommending from Large Catalogs</h3>
+                    <p>When dealing with millions of items, computing recommendations becomes computationally expensive.
+                        A two-step approach is often used:</p>
+                    <ul>
+                        <li>Retrieval: Generate a large list of plausible candidates (e.g., similar items to recently
+                            watched, top items in favorite genres).</li>
+                        <li>Ranking: Use the learned model to rank the retrieved items and display the top results.</li>
+                    </ul>
+                    <p>This approach balances between recommendation quality and computational efficiency.</p>
+                </section>
+
+                <section id="ethical-considerations">
+                    <h3>Ethical Considerations in Recommender Systems</h3>
+                    <p>As recommender systems become more prevalent, it's crucial to consider their ethical
+                        implications:</p>
+                    <ul>
+                        <li>Goal Definition: What is the system optimizing for? Watch time? User satisfaction? Company
+                            profit?</li>
+                        <li>Potential for Exploitation: Recommender systems can potentially amplify harmful content or
+                            exploitative business practices.</li>
+                        <li>Transparency: Users should understand how recommendations are generated and what they're
+                            optimizing for.</li>
+                    </ul>
+                    <p>Amelioration strategies include:</p>
+                    <ul>
+                        <li>Filtering out problematic content</li>
+                        <li>Being transparent about recommendation criteria</li>
+                        <li>Balancing profit motives with user welfare</li>
+                    </ul>
+                </section>
+
+                <div id="tensorflow-implementation" class="section">
+                    <h3>TensorFlow Implementation</h3>
+
+                    <p>The lecture concludes with a TensorFlow implementation of a content-based filtering model. Here's
+                        a
+                        snippet of the core model architecture:</p>
+
+                    <pre><code>user_NN = tf.keras.models.Sequential([
+                tf.keras.layers.Dense(256, activation='relu'),
+                tf.keras.layers.Dense(128, activation='relu'),
+                tf.keras.layers.Dense(32)
+            ])
+
+            item_NN = tf.keras.models.Sequential([
+                tf.keras.layers.Dense(256, activation='relu'),
+                tf.keras.layers.Dense(128, activation='relu'),
+                tf.keras.layers.Dense(32)
+            ])
+
+            input_user = tf.keras.layers.Input(shape=(num_user_features))
+            vu = user_NN(input_user)
+            vu = tf.linalg.l2_normalize(vu, axis=1)
+
+            input_item = tf.keras.layers.Input(shape=(num_item_features))
+            vm = item_NN(input_item)
+            vm = tf.linalg.l2_normalize(vm, axis=1)
+
+            output = tf.keras.layers.Dot(axes=1)([vu, vm])
+
+            model = Model([input_user, input_item], output)</code></pre>
+
+                    <p>This implementation demonstrates how to create separate neural networks for users and items,
+                        normalize their outputs, and compute a similarity score using a dot product.</p>
+                </div>
+
+                <section id="rl-intro">
+                    <h3>Reinforcement Learning: Teaching Machines to Make Decisions</h3>
+                    <p>Reinforcement Learning (RL) is a fascinating branch of machine learning that focuses on teaching
+                        agents to make sequences of decisions. Unlike supervised learning, where we have labeled data,
+                        RL agents learn through trial and error, interacting with an environment to maximize a
+                        cumulative reward. This lecture provides an in-depth look at the fundamentals of reinforcement
+                        learning, its applications, and advanced techniques using deep learning.</p>
+                </section>
+
+                <section id="rl-basics">
+                    <h3>Introduction to Reinforcement Learning</h3>
+                    <h4>What is Reinforcement Learning?</h4>
+                    <p>Reinforcement Learning is a type of machine learning where an agent learns to make decisions by
+                        interacting with an environment. The key components are:</p>
+                    <ul>
+                        <li>State (\(s\)): The current situation of the agent</li>
+                        <li>Action (\(a\)): What the agent can do</li>
+                        <li>Reward (\(R\)): Feedback from the environment</li>
+                        <li>Policy (\(\pi\)): Strategy that the agent follows to determine the next action</li>
+                    </ul>
+                    <p><img src="../images/AndrewML3/3-1-Reinforcement Learning components.png" alt="Reinforcement Learning components"></p>
+                </section>
+
+                <section id="rl-applications">
+                    <h3>Real-World Applications</h3>
+                    <ul>
+                        <li>Autonomous Helicopter: Learning to fly complex maneuvers</li>
+                        <li>Robotic Control: Teaching robots to walk or manipulate objects</li>
+                        <li>Factory Optimization: Improving manufacturing processes</li>
+                        <li>Financial Trading: Developing strategies for stock trading</li>
+                        <li>Game Playing: Mastering complex games like Go or video games</li>
+                    </ul>
+                </section>
+
+                <div id="rl-formalism" class="section">
+                    <h3>Reinforcement Learning Formalism</h3>
+
+                    <h4>The Mars Rover Example</h4>
+
+                    <p>Consider a Mars rover navigating a grid-like environment:</p>
+
+                    <ul>
+                        <li>States: Different positions on the grid</li>
+                        <li>Actions: Move left or right</li>
+                        <li>Rewards: Positive for reaching the goal, negative for dangerous areas</li>
+                        <li>Terminal states: Goal positions or dangerous areas</li>
+                    </ul>
+
+                    <h4>The Concept of Return</h4>
+
+                    <p>The return is the cumulative reward an agent receives, often with future rewards discounted:</p>
+
+                    <p>\[\text{Return} = R_1 + \gamma R_2 + \gamma^2 R_3 + ...\]</p>
+
+                    <p>Where:</p>
+                    <ul>
+                        <li>\(R_t\) is the reward at time step t</li>
+                        <li>\(\gamma\) is the discount factor (0 ≤ γ ≤ 1)</li>
+                    </ul>
+
+                    <p>The discount factor determines how much the agent values future rewards compared to immediate
+                        ones.</p>
+
+                    <h4>Policies in Reinforcement Learning</h4>
+
+                    <p>A policy π is a function that maps states to actions, telling the agent what to do in each state.
+                        The goal of RL is to find an optimal policy π* that maximizes the expected return.</p>
+
+                    <h4>The State-Action Value Function (Q-function)</h4>
+
+                    <p>The Q-function Q(s, a) represents the expected return starting from state s, taking action a, and
+                        then following the optimal policy thereafter:</p>
+
+                    <p>\[Q(s, a) = \mathbb{E}[R_1 + \gamma R_2 + \gamma^2 R_3 + ... | s_0 = s, a_0 = a]\]</p>
+
+                    <h4>The Bellman Equation</h4>
+
+                    <p>The Bellman equation is a fundamental concept in RL that relates the value of a state-action pair
+                        to the value of subsequent states:</p>
+
+                    <p>\[Q(s, a) = R(s) + \gamma \max_{a'} Q(s', a')\]</p>
+
+                    <p>Where:</p>
+                    <ul>
+                        <li>R(s) is the immediate reward in state s</li>
+                        <li>s' is the next state after taking action a in state s</li>
+                        <li>\(\gamma\) is the discount factor</li>
+                    </ul>
+
+                    <p>This equation forms the basis for many RL algorithms, including Q-learning.</p>
+                </div>
+
+                <div id="deep-rl" class="section">
+                    <h3>Deep Reinforcement Learning</h3>
+
+                    <p>For complex problems with continuous state spaces, we can use neural networks to approximate the
+                        Q-function. This approach is called Deep Q-Learning (DQN).</p>
+
+                    <h4>Neural Network Architecture</h4>
+
+                    <p><img src="../images/AndrewML3/3-2-DQN architecture.png" alt="DQN architecture"></p>
+
+                    <p>The network takes the state as input and outputs Q-values for each possible action. The agent
+                        then chooses the action with the highest Q-value.</p>
+
+                    <h4>Learning Algorithm</h4>
+
+                    <ol>
+                        <li>Initialize the Q-network with random weights</li>
+                        <li>Collect experience tuples (s, a, R(s), s') by interacting with the environment</li>
+                        <li>Store these experiences in a replay buffer</li>
+                        <li>Sample mini-batches from the replay buffer</li>
+                        <li>Train the network to minimize the loss:
+                            <p>\[L = (R(s) + \gamma \max_{a'} Q(s', a') - Q(s, a))^2\]</p>
+                        </li>
+                        <li>Periodically update the target network used for computing the target Q-values</li>
+                    </ol>
+
+                    <h4>Improvements to the Basic Algorithm</h4>
+
+                    <ul>
+                        <li>ε-greedy Policy: With probability ε, choose a random action; otherwise, choose the action
+                            with the highest Q-value. This balances exploration and exploitation.</li>
+                        <li>Experience Replay: Use a buffer of past experiences to break correlations between
+                            consecutive training samples and stabilize learning.</li>
+                        <li>Soft Updates: Instead of directly copying weights to the target network, use a weighted
+                            average:
+                            <p>\[\theta_\text{target} = \tau \theta + (1-\tau) \theta_\text{target}\]</p>
+                            Where τ is a small value (e.g., 0.001)
+                        </li>
+                    </ul>
+                    <p><img src="../images/AndrewML3/3-3-improvement policy.png" alt="improvement policy"></p>
+                </div>
+
+                <div id="rl-challenges" class="section">
+                    <h3>Limitations and Future Directions</h3>
+
+                    <p>While reinforcement learning has shown impressive results in simulated environments and games, it
+                        faces challenges in real-world applications:</p>
+
+                    <ul>
+                        <li>Sample Inefficiency: RL often requires many interactions with the environment to learn
+                            effectively.</li>
+                        <li>Stability and Reproducibility: Training can be unstable and sensitive to hyperparameters.
+                        </li>
+                        <li>Reward Design: Crafting appropriate reward functions for complex tasks can be challenging.
+                        </li>
+                        <li>Sim-to-Real Transfer: Policies learned in simulation may not transfer well to real-world
+                            scenarios.</li>
+                    </ul>
+
+                    <p>Despite these challenges, RL remains an exciting area of research with potential applications in
+                        robotics, autonomous systems, and decision-making processes.</p>
+                </div>
+
+                <section>
+                    <h3 id="further-reading">Further Reading</h3>
+                    <ul>
+                        <li><b>Pattern Recognition and Machine Learning</b> by Christopher M. Bishop</li>
+                        <li><b>Reinforcement Learning: An Introduction</b> by Richard S. Sutton and Andrew G. Barto</li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Qingyu Meng. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>

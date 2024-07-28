@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Machine Learning - Qingyu Meng's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Introduction to Machine Learning</h2>
+            <div class="post-meta">
+                <span class="date">July 26, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">Andrew Ng's classic course series on Machine Learning</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#classification-decision-making">Introduction to Machine Learning</a>
+                <ul>
+                  <li><a href="#supervised-learning">Supervised Learning</a>
+                  <li><a href="#regression">Regression</a></li>
+                  <li><a href="#classification">Classification</a></li>
+                  <li><a href="#linear-regression-model">Linear Regression Model</a></li>
+                  <li><a href="#cost-function">Cost Function</a></li>
+                  <li><a href="#gradient-descent">Gradient Descent</a></li>
+                </ul>
+                <li><a href="#multiple-feature-linear-regression">Multiple Feature Linear Regression</a>
+                  <ul>
+                    <li><a href="#vectorization">Vectorization</a></li>
+                    <li><a href="#gradient-descent-multiple">Gradient Descent for Multiple Linear Regression</a></li>
+                    <li><a href="#feature-scaling">Feature Scaling and Normalization</a></li>
+                    <li><a href="#practical-tips">Practical Tips for Implementation</a></li>
+                  </ul>
+                </li>
+                <li><a href="#classification-decision-making">Classification: The Foundation of Decision-Making in Machine Learning</a>
+                  <ul>
+                    <li><a href="#binary-classification">Binary Classification</a></li>
+                    <li><a href="#logistic-regression">Logistic Regression</a></li>
+                    <li><a href="#decision-boundaries">Decision Boundaries</a></li>
+                    <li><a href="#cost-function-logistic">Cost Function and Gradient Descent for Logistic Regression</a></li>
+                    <li><a href="#overfitting">Overfitting</a></li>
+                    <li><a href="#addressing-overfitting">Addressing Overfitting</a></li>
+                    <li><a href="#further-reading">Further Reading</a></li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <h3 id="supervised-learning">Supervised Learning</h3>
+                <p><b>Andrew Ng's classic course series on Machine Learning hosted by DeepLearning.AI and Stanford University, is an inevitable must for those who wants to get their hands dirty before knocking on the door of Machine Learning. Having said that, I personally regard it as a great resource not only for ML rookie, but also for experienced practioner who occasionally intends to refresh their theoretical understanding of the subject.</b></p> 
+                <p>In this post, I seek to organize and extract the most essential part from the mentioned course and notes taught by Andrew. The first course from the Machine Learning series is <b>Supervised Machine Learning: Regression and Classification.</b> Let's dive in!</p>
+                <p>Machine learning, as defined by Arthur Samuel in 1959, gives "computers the ability to learn without being explicitly programmed." This course covers various types of machine learning algorithms:</p>
+                <ul>
+                    <li>Supervised learning</li>
+                    <li>Unsupervised learning</li>
+                    <li>Recommender systems</li>
+                    <li>Reinforcement learning</li>
+                </ul>
+                <p>Supervised learning is a type of machine learning where the algorithm learns from labeled data, or "right answers." It involves input (X) and output (Y) pairs.</p>
+                <h4 id="regression">Regression</h4>
+                <ul>
+                    <li>Predicts a continuous number</li>
+                    <li>Infinite possible outputs</li>
+                    <li>Example: Housing price prediction based on house size</li>
+                </ul>
+
+                <h4 id="classification">Classification</h4>
+                <ul>
+                    <li>Predicts discrete categories</li>
+                    <li>Small number of possible outputs</li>
+                    <li>Example: Breast cancer detection (benign/malignant)</li>
+                </ul>
+
+                <p><img src="../images/AndrewML1/1-1-Regression vs Classification examples.png" alt="Regression vs Classification examples"></p>
+
+                <h3 id="linear-regression-model">Linear Regression Model</h3>
+                <p>Linear regression with one variable, also known as univariate linear regression, is a fundamental supervised learning algorithm.</p>
+                <h4>Model Representation:</h4>
+                <p>f<sub>w,b</sub>(x) = wx + b</p>
+                <p>Where:</p>
+                <ul>
+                    <li>w and b are parameters (weights)</li>
+                    <li>x is the input feature</li>
+                    <li>f<sub>w,b</sub>(x) is the predicted output</li>
+                </ul>
+                <h4>Notation:</h4>
+                <ul>
+                    <li>(x<sup>(i)</sup>, y<sup>(i)</sup>) represents the i-th training example</li>
+                    <li>m is the number of training examples</li>
+                    <li>x is the feature or "input" variable</li>
+                    <li>y is the "output" or "target" variable</li>
+                </ul>
+                <p>Goal: Find w and b so that f<sub>w,b</sub>(x) is close to y for all (x,y) in the training set.</p>
+
+                <h3 id="cost-function">Cost Function</h3>
+                <p>To evaluate the accuracy of the model, we use a cost function:</p>
+                <h4>Squared Error Cost Function:</h4>
+                <p>J(w,b) = \(\frac{1}{2m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2\)</p>
+                <p>Where:</p>
+                <ul>
+                    <li>m is the number of training examples</li>
+                    <li>Σ denotes the sum from i=1 to m</li>
+                    <li>(f<sub>w,b</sub>(x<sup>(i)</sup>) - y<sup>(i)</sup>)<sup>2</sup> is the squared difference between the prediction and actual value</li>
+                </ul>
+                <p>Goal: Minimize J(w,b) with respect to w and b</p>
+
+                <p><img src="../images/AndrewML1/1-2-Cost function visualization.png" alt="Cost function visualization"></p>
+
+                <h4>Intuition behind the cost function:</h4>
+                <ul>
+                    <li>J(w,b) measures the average squared difference between predictions and actual values</li>
+                    <li>Squaring the differences penalizes large errors more heavily</li>
+                    <li>The 1/2 factor is added for mathematical convenience in later calculations</li>
+                </ul>
+                <h4>Visualizing the Cost Function:</h4>
+                <ul>
+                    <li>For a simplified model with only w (setting b=0), we can visualize J(w) as a parabola</li>
+                    <li>The global minimum of this parabola represents the optimal value of w</li>
+                </ul>
+
+                <h3 id="gradient-descent">Gradient Descent</h3>
+                <p>Gradient descent is an optimization algorithm used to minimize the cost function:</p>
+                <h4>Algorithm:</h4>
+                <p>Repeat until convergence:</p>
+                <p>w = w - α * ∂J(w,b)/∂w</p>
+                <p>b = b - α * ∂J(w,b)/∂b</p>
+                <h4>Key Concepts:</h4>
+                <ul>
+                    <li>α is the learning rate, which determines the step size in each iteration</li>
+                    <li>∂J(w,b)/∂w and ∂J(w,b)/∂b are partial derivatives that indicate the direction of steepest descent</li>
+                    <li>Simultaneous update of w and b is crucial for correct implementation</li>
+                </ul>
+
+                <p><img src="../images/AndrewML1/1-3-Gradient descent visualization.png" alt="Gradient descent visualization"></p>
+
+                <h4>Learning Rate Considerations:</h4>
+                <ul>
+                    <li>If α is too small, convergence may be slow</li>
+                    <li>If α is too large, it may overshoot the minimum and fail to converge</li>
+                    <li>A fixed learning rate can still reach the minimum as the derivative becomes smaller near the minimum</li>
+                </ul>
+
+                <h4>Convexity:</h4>
+                <ul>
+                    <li>For linear regression, the cost function J(w,b) is always convex</li>
+                    <li>This ensures that gradient descent will converge to the global minimum, regardless of the starting point</li>
+                </ul>
+
+                <pre><code class="language-python">def gradient_descent(X, y, w_init, b_init, alpha, num_iters):
+    """
+    Performs gradient descent to fit w,b to training data
+    Args:
+      X (ndarray (m,))  : Data, m examples 
+      y (ndarray (m,))  : target values
+      w_init,b_init : initial values of model parameters  
+      alpha : Learning rate
+      num_iters : number of iterations to run gradient descent
+    Returns:
+      w (scalar): Updated value of parameter after running gradient descent
+      b (scalar): Updated value of parameter after running gradient descent
+      J_history : History of cost values
+    """
+    w = w_init
+    b = b_init
+    J_history = []
+    m = X.shape[0]  # Number of training examples
+
+    for i in range(num_iters):
+        # Calculate gradients
+        dj_dw = (1/m) * np.sum((w*X + b - y) * X)
+        dj_db = (1/m) * np.sum(w*X + b - y)
+
+        # Update parameters
+        w = w - alpha * dj_dw
+        b = b - alpha * dj_db
+
+        # Save cost J at each iteration
+        J_history.append(compute_cost(X, y, w, b))
+
+    return w, b, J_history
+
+def compute_cost(X, y, w, b):
+    """
+    Computes the cost function for linear regression.
+    Args:
+      X (ndarray (m,)): Data, m examples 
+      y (ndarray (m,)): target values
+      w,b (scalar)    : model parameters  
+    Returns
+      total_cost (float): The cost of using w,b as the parameters for linear regression
+             to fit the data points in X and y
+    """
+    m = X.shape[0]
+    total_cost = (1 / (2 * m)) * np.sum((w * X + b - y) ** 2)
+    return total_cost
+                </code></pre>
+
+                <h3 id="linear-regression-gradient-descent">Linear Regression with Gradient Descent</h3>
+                <p>Combining linear regression with gradient descent:</p>
+                <h4>Update Rules:</h4>
+                <p>w = w - α * (1/m) * Σ(f<sub>w,b</sub>(x<sup>(i)</sup>) - y<sup>(i)</sup>) * x<sup>(i)</sup></p>
+                <p>b = b - α * (1/m) * Σ(f<sub>w,b</sub>(x<sup>(i)</sup>) - y<sup>(i)</sup>)</p>
+                <h4>Properties:</h4>
+                <ul>
+                    <li>The cost function J(w,b) is always convex for linear regression</li>
+                    <li>Gradient descent will always converge to the global minimum, given a suitable learning rate</li>
+                </ul>
+
+                <h4>"Batch" Gradient Descent:</h4>
+                <ul>
+                    <li>Each step of gradient descent uses all training examples</li>
+                    <li>This approach is called "batch" gradient descent</li>
+                    <li>It ensures a stable convergence but can be computationally expensive for large datasets</li>
+                </ul>
+
+                <p><img src="../images/AndrewML1/1-4-Gradient descent for linear regression.png" alt="Gradient descent for linear regression"></p>
+
+                <h4 id="practical-considerations">Practical Considerations:</h4>
+                <h5 id="feature-scaling">Feature Scaling:</h5>
+                <p>When dealing with multiple features, it's important to scale them to similar ranges. This ensures that gradient descent converges more quickly and efficiently.</p>
+
+                <h5 id="learning-rate">Learning Rate Selection:</h5>
+                <ul>
+                    <li>Start with a small learning rate and gradually increase if convergence is too slow</li>
+                    <li>Monitor the cost function: if it increases, the learning rate is likely too large</li>
+                </ul>
+
+                <h5 id="convergence-criteria">Convergence Criteria:</h5>
+                <p>Set a threshold for the change in cost function or parameter values. Stop the algorithm when the change falls below this threshold.</p>
+
+                <h5 id="polynomial-regression">Polynomial Regression:</h5>
+                <p>Linear regression can be extended to fit polynomial functions by adding higher-order terms. This increases the model's flexibility but also the risk of overfitting.</p>
+
+                <h5 id="regularization">Regularization:</h5>
+                <p>To prevent overfitting in more complex models, regularization techniques can be applied. This involves adding a penalty term to the cost function to discourage large parameter values.</p>
+
+                <h4 id="key-takeaways">Key Takeaways:</h4>
+                <ul>
+                    <li>Linear regression is a fundamental supervised learning algorithm for predicting continuous values.</li>
+                    <li>The cost function quantifies the error of the model's predictions and guides the optimization process.</li>
+                    <li>Gradient descent is an iterative optimization algorithm used to minimize the cost function by adjusting model parameters.</li>
+                    <li>The learning rate in gradient descent is crucial for effective convergence and must be chosen carefully.</li>
+                    <li>For linear regression, the cost function is convex, ensuring a global minimum and reliable convergence.</li>
+                    <li>Batch gradient descent uses all training examples in each iteration, providing stable but potentially slow updates for large datasets.</li>
+                    <li>Proper feature scaling and learning rate selection are essential for efficient training of linear regression models.</li>
+
+                <h2 id="multiple-feature-linear-regression">Introduction to Multiple Feature Linear Regression</h2>
+                <p>Linear regression, a fundamental concept in machine learning, takes on new dimensions when we move from single-variable to multiple-variable scenarios. This expansion allows us to model more complex relationships between various input features and the target variable, significantly enhancing the predictive power of our models.</p>
+
+                <h3 id="single-to-multiple">From Single to Multiple Features</h3>
+                <p>In the realm of linear regression, the transition from a single feature to multiple features marks a significant leap in model complexity and capability. The fundamental equation evolves from:</p>
+                <p>f<sub>w,b</sub>(x) = wx + b</p>
+                <p>to:</p>
+                <p>f<sub>w,b</sub>(x) = w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub> + ... + w<sub>n</sub>x<sub>n</sub> + b</p>
+                <p>Where:</p>
+                <ul>
+                    <li>w<sub>i</sub> represents the weight for the i-th feature</li>
+                    <li>x<sub>i</sub> is the i-th feature</li>
+                    <li>b is the bias term</li>
+                    <li>n is the total number of features</li>
+                </ul>
+                <p>This expansion allows us to capture intricate relationships between multiple input variables and the target variable. For instance, in a house price prediction model, we can now incorporate factors such as size, number of bedrooms, location, and age, providing a more comprehensive and accurate estimation.</p>
+                <p><img src="../images/AndrewML1/2-1-Model equation.png" alt="Model equation"></p>
+
+                <h3 id="vectorization">Vectorization: Streamlining Computations</h3>
+                <p>Vectorization is a powerful technique that transforms our approach to handling multiple features, offering significant computational advantages.</p>
+                <h4>Basic Vectorization</h4>
+                <p>The core idea of vectorization is to replace element-wise operations with matrix operations. For our multiple feature linear regression model, we can express it in vector form as:</p>
+                <p>f<sub>w,b</sub>(x) = w · x + b</p>
+                <p>Where:</p>
+                <ul>
+                    <li>w and x are vectors: w = [w<sub>1</sub>, w<sub>2</sub>, ..., w<sub>n</sub>]<sup>T</sup> and x = [x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>]<sup>T</sup></li>
+                    <li>· denotes the dot product</li>
+                </ul>
+                <p>This vectorized form allows us to leverage efficient linear algebra libraries, significantly speeding up computations, especially for large datasets.</p>
+                <pre><code class="language-python"># Non-vectorized
+f = 0
+for j in range(n):
+    f += w[j] * x[j]
+f += b
+
+# Vectorized
+f = np.dot(w, x) + b
+                </code></pre>
+
+                <h4 id="advanced-vectorization">Advanced Vectorization</h4>
+                <p>Vectorization becomes even more powerful when dealing with multiple training examples simultaneously. Instead of looping over each example, we can perform operations on entire matrices of features and parameters.</p>
+                <p><img src="../images/AndrewML1/2-2-Vectorization comparison.png" alt="Vectorization comparison"></p>
+                <p>This approach not only speeds up computations but also leads to cleaner, more maintainable code. It's particularly beneficial when working with large datasets or when using hardware accelerators like GPUs.</p>
+
+                <h3 id="gradient-descent-multiple">Gradient Descent for Multiple Linear Regression</h3>
+                <p>The gradient descent algorithm, crucial for optimizing our model parameters, extends naturally to the multiple feature case.</p>
+                <p>The update rules for each weight w<sub>j</sub> and the bias term b are:</p>
+                <p>w<sub>j</sub> = w<sub>j</sub> - α ∂J(w, b) / ∂w<sub>j</sub></p>
+                <p>b = b - α ∂J(w, b) / ∂b</p>
+                <p>Where:</p>
+                <ul>
+                    <li>α is the learning rate</li>
+                    <li>J(w, b) is the cost function</li>
+                </ul>
+                <p>In vectorized form, the update for all weights can be expressed as:</p>
+                <p>w = w - α (1/m) Σ (f<sub>w,b</sub>(x<sup>(i)</sup>) - y<sup>(i)</sup>) x<sup>(i)</sup></p>
+                <p><img src="../images/AndrewML1/2-3-Gradient descent equations.png" alt="Gradient descent equations"></p>
+                <p>This vectorized form allows for efficient computation of gradients across all features simultaneously, crucial for handling high-dimensional datasets.</p>
+
+                <h3 id="feature-scaling">Feature Scaling and Normalization</h3>
+                <p>Feature scaling is a critical preprocessing step in multiple linear regression, ensuring that all features contribute proportionally to the model's predictions.</p>
+                <h4>The Need for Scaling</h4>
+                <p>When features have vastly different ranges, the model may struggle to converge efficiently. For example, in a house price prediction model:</p>
+                <ul>
+                    <li>Size in square feet: 300 to 2000</li>
+                    <li>Number of bedrooms: 0 to 5</li>
+                </ul>
+                <p>Without scaling, the model might incorrectly prioritize the 'size' feature due to its larger numerical range.</p>
+
+                <h4>Scaling Techniques</h4>
+                <p>Several scaling techniques can be employed:</p>
+                <h5>Simple Rescaling:</h5>
+                <p>x<sub>scaled</sub> = x / x<sub>max</sub></p>
+
+                <h5>Mean Normalization:</h5>
+                <p>x<sub>normalized</sub> = (x - μ) / (x<sub>max</sub> - x<sub>min</sub>)</p>
+                <p>Where μ is the mean of the feature.</p>
+
+                <h5>Z-score Normalization:</h5>
+                <p>x<sub>normalized</sub> = (x - μ) / σ</p>
+                <p>Where σ is the standard deviation of the feature.</p>
+                <p><img src="../images/AndrewML1/2-4-Feature scaling examples.png" alt="Feature scaling examples"></p>
+                <p>The goal is to bring all features to a similar scale, typically aiming for a range of approximately -1 to 1 for each feature.</p>
+
+                <h3 id="practical-tips">Practical Tips for Implementation</h3>
+                <h4 id="checking-convergence">Checking Gradient Descent Convergence</h4>
+                <p>Monitoring the cost function J(w, b) over iterations is crucial. A properly functioning gradient descent should show a decreasing cost function value with each iteration.</p>
+                <p><img src="../images/AndrewML1/2-5-Gradient descent convergence graph.png" alt="Gradient descent convergence graph"></p>
+                <p>Implement an automatic convergence test: If J(w, b) decreases by less than a small threshold ε (e.g., 10<sup>-3</sup>) in one iteration, declare convergence.</p>
+
+                <h4 id="choosing-learning-rate">Choosing the Learning Rate</h4>
+                <p>The learning rate α is a critical hyperparameter. If it's too large, gradient descent may fail to converge or even diverge. If it's too small, convergence will be slow.</p>
+                <p><img src="../images/AndrewML1/2-6-Learning rate comparison graphs.png" alt="Learning rate comparison graphs"></p>
+                <p>Experiment with a range of values (e.g., 0.001, 0.01, 0.1, 1) and observe the convergence behavior of J(w, b).</p>
+
+                <h4 id="feature-engineering">Feature Engineering</h4>
+                <p>Feature engineering involves creating new features by transforming or combining existing ones, often based on domain knowledge. For example, in a real estate model, creating an 'area' feature by multiplying 'frontage' and 'depth'.</p>
+                <p>x<sub>3</sub> = x<sub>1</sub> × x<sub>2</sub></p>
+
+                <h4 id="polynomial-regression">Polynomial Regression</h4>
+                <p>For non-linear relationships, consider polynomial features:</p>
+                <p>f<sub>w,b</sub>(x) = w<sub>1</sub>x + w<sub>2</sub>x<sup>2</sup> + w<sub>3</sub>x<sup>3</sup> + b</p>
+                <p>This allows the model to capture more complex patterns in the data.</p>
+                <p><img src="../images/AndrewML1/2-7-Polynomial regression graph.png" alt="Polynomial regression graph"></p>
+
+                <h4 id="key-takeaways">Key Takeaways:</h4>
+                <ul>
+                    <li>Multiple feature linear regression extends the basic model to capture complex relationships between multiple input variables and the target.</li>
+                    <li>Vectorization significantly improves computational efficiency, especially for large datasets.</li>
+                    <li>Gradient descent for multiple features follows the same principle as single-feature cases but requires careful consideration of all parameters.</li>
+                    <li>Feature scaling is crucial for ensuring all features contribute proportionally to the model's predictions.</li>
+                    <li>Practical implementation involves careful monitoring of convergence, appropriate learning rate selection, and potential feature engineering or polynomial expansion for complex relationships.</li>
+                </ul>
+
+                <p>Understanding and implementing multiple feature linear regression lays the groundwork for more advanced machine learning techniques. It introduces key concepts like vectorization and feature scaling that are fundamental across many ML algorithms. As we progress, these concepts will be built upon to tackle more complex problems and develop more sophisticated models, ultimately leading to a comprehensive understanding of machine learning principles and practices.</p>
+
+                <h2 id="classification-decision-making">Classification: The Foundation of Decision-Making in Machine Learning</h2>
+                <p>Classification is a fundamental concept in machine learning, serving as the backbone for numerous real-world applications. This lecture delves into the intricacies of binary classification, logistic regression, and the critical issue of overfitting, providing a robust framework for understanding these essential components of machine learning.</p>
+
+                <h3 id="binary-classification">Binary Classification: Making Yes-or-No Decisions</h3>
+                <p>Binary classification forms the basis of many machine learning tasks, where the goal is to categorize input data into one of two distinct classes. This seemingly simple concept has far-reaching implications in various domains:</p>
+                <ul>
+                    <li>Email Spam Detection: Determining whether an incoming email is legitimate or spam.</li>
+                    <li>Fraud Detection: Identifying fraudulent transactions in financial systems.</li>
+                    <li>Medical Diagnosis: Classifying tumors as benign or malignant.</li>
+                </ul>
+                <p>In mathematical terms, binary classification assigns a label y to input x, where y ∈ {0, 1} or y ∈ {-1, 1}. The choice between these two conventions often depends on the specific algorithm or problem context.</p>
+                <p><img src="../images/AndrewML1/3-1-Tumor size classification example.png" alt="Tumor size classification example"></p>
+
+                <h3 id="logistic-regression">Logistic Regression: Probabilistic Approach to Classification</h3>
+                <p>Logistic regression, despite its name, is a powerful classification algorithm that estimates the probability of an input belonging to a particular class. The core of logistic regression lies in its use of the sigmoid function, which maps any real-valued input to a value between 0 and 1.</p>
+                <p>The logistic function, also known as the sigmoid function, is defined as:</p>
+                <p>g(z) = \(\frac{1}{1 + e^{-z}}\)</p>
+                <p>where z = w · x + b, w is the weight vector, x is the input vector, and b is the bias term.</p>
+                <p>The output of the logistic function, f<sub>w,b</sub>(x) = g(w · x + b), represents the probability that the input x belongs to the positive class (y = 1). This probabilistic interpretation is a key strength of logistic regression, allowing for nuanced decision-making in classification tasks.</p>
+                <p><img src="../images/AndrewML1/3-2-Logistic function graph.png" alt="Logistic function graph"></p>
+
+                <h3 id="decision-boundaries">Decision Boundaries: Separating Classes in Feature Space</h3>
+                <p>The concept of decision boundaries is crucial in understanding how logistic regression (and other classification algorithms) make decisions. A decision boundary is the hyperplane in the feature space that separates the two classes.</p>
+                <p>For logistic regression, the decision boundary is defined by the equation:</p>
+                <p>w · x + b = 0</p>
+                <p>This boundary divides the feature space into regions where the model predicts y = 1 (when w · x + b ≥ 0) and y = 0 (when w · x + b < 0).</p>
+                <p><img src="../images/AndrewML1/3-3-Linear decision boundary example.png" alt="Linear decision boundary example"></p>
+                <p>It's important to note that while logistic regression typically produces linear decision boundaries, it's possible to create non-linear boundaries by incorporating higher-order terms or using kernel methods. This flexibility allows logistic regression to handle more complex classification tasks.</p>
+                <p><img src="../images/AndrewML1/3-4-Non-linear decision boundary example.png" alt="Non-linear decision boundary example"></p>
+
+                <h3 id="cost-function-logistic">Cost Function and Gradient Descent for Logistic Regression</h3>
+                <p>To train a logistic regression model, we need to define a cost function that quantifies the model's performance. Unlike linear regression, which uses the mean squared error, logistic regression employs a logarithmic loss function:</p>
+                <p>L(f<sub>w,b</sub>(x), y) = -y log(f<sub>w,b</sub>(x)) - (1-y) log(1 - f<sub>w,b</sub>(x))</p>
+                <p>This loss function penalizes predictions that are confident and wrong more heavily than those that are less confident. The overall cost function J(w, b) is the average of this loss over all training examples:</p>
+                <p>J(w, b) = \(\frac{1}{m} \sum_{i=1}^m L(f_{w,b}(x^{(i)}), y^{(i)})\)</p>
+                <p>where m is the number of training examples.</p>
+                <p>To minimize this cost function, we use gradient descent, iteratively updating the parameters w and b:</p>
+                <p>w<sub>j</sub> := w<sub>j</sub> - α ∂J(w,b)/∂w<sub>j</sub></p>
+                <p>b := b - α ∂J(w,b)/∂b</p>
+                <p>where α is the learning rate.</p>
+                <p>The partial derivatives for logistic regression have a similar form to those of linear regression:</p>
+                <p>∂J(w,b)/∂w<sub>j</sub> = \(\frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)}) x_j^{(i)}\)</p>
+                <p>∂J(w,b)/∂b = \(\frac{1}{m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})\)</p>
+                <p>These update rules allow the model to converge to the optimal parameters that minimize the cost function.</p>
+
+                <h3 id="overfitting">Overfitting: The Curse of Excessive Complexity</h3>
+                <p>As we increase the complexity of our models to capture more intricate patterns in the data, we run the risk of overfitting. Overfitting occurs when a model learns the training data too well, including its noise and peculiarities, leading to poor generalization on unseen data.</p>
+                <p><img src="../images/AndrewML1/3-5-Overfitting examples in regression and classification.png" alt="Overfitting examples in regression and classification"></p>
+                <p>Overfitting can manifest in various ways:</p>
+                <ul>
+                    <li>In regression: Extremely wiggly curves that pass through all training points.</li>
+                    <li>In classification: Highly complex decision boundaries that perfectly separate training data but may not generalize well.</li>
+                </ul>
+
+                <h3 id="addressing-overfitting">Addressing Overfitting: Regularization and Other Techniques</h3>
+                <p>To combat overfitting, several strategies can be employed:</p>
+                <ul>
+                    <li>Collect more training data: This helps the model learn more general patterns.</li>
+                    <li>Feature selection: Carefully choose which features to include in the model.</li>
+                    <li>Regularization: Penalize large parameter values to encourage simpler models.</li>
+                </ul>
+                <p>Regularization is a powerful technique that adds a penalty term to the cost function, discouraging the model from relying too heavily on any single feature. The most common forms of regularization are L1 (Lasso) and L2 (Ridge) regularization.</p>
+                <p>For logistic regression with L2 regularization, the cost function becomes:</p>
+                <p>J(w, b) = \(\frac{1}{m} \sum_{i=1}^m L(f_{w,b}(x^{(i)}), y^{(i)}) + \frac{\lambda}{2m} \sum_{j=1}^n w_j^2\)</p>
+                <p>where λ is the regularization parameter that controls the strength of the penalty.</p>
+                <p><img src="../images/AndrewML1/3-6-Effect of regularization on decision boundaries.png" alt="Effect of regularization on decision boundaries"></p>
+                <p>The gradient descent update rules for regularized logistic regression are modified as follows:</p>
+                <p>w<sub>j</sub> := w<sub>j</sub>(1 - α(λ/m)) - α ∂J(w,b)/∂w<sub>j</sub></p>
+                <p>b := b - α ∂J(w,b)/∂b</p>
+                <p>Note that the bias term b is typically not regularized, as doing so can introduce unwanted bias in the model.</p>
+
+                <h4 id="key-takeaways">Key Takeaways:</h4>
+                <ul>
+                    <li>Binary classification is a fundamental task in machine learning with wide-ranging applications.</li>
+                    <li>Logistic regression uses the sigmoid function to estimate class probabilities and make decisions.</li>
+                    <li>The decision boundary in logistic regression separates the feature space into regions for each class.</li>
+                    <li>Gradient descent is used to optimize the parameters of logistic regression by minimizing a logarithmic loss function.</li>
+                    <li>Overfitting is a common problem in machine learning that can be addressed through regularization and other techniques.</li>
+                </ul>
+
+                <h3 id="further-reading">Further Reading</h3>
+                <ul>
+                    <li><a href="https://www.deeplearning.ai/courses/machine-learning-specialization/">Andrew Ng's Machine Learning Specialization course series at DeepLearning.AI</a></li>
+                    <li><b>Elements of Statistical Learning</b> by Trevor Hastie, Robert Tibshirani, and Jerome Friedman</li>
+                    <li><a href="https://scikit-learn.org/stable/supervised_learning.html">Scikit-Learn Documentation on supervised learning</a></li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Qingyu Meng. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../main.js"></script>
+</body>
+</html>

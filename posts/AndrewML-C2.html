@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks: From Biological Inspiration to Practical Implementation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Neural Networks: From Biological Inspiration to Practical Implementation</h2>
+            <div class="post-meta">
+                <span class="date">July 26, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">Andrew Ng's classic course series on Machine Learning</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#introduction">Introduction to Neural Networks</a></li>
+                <li><a href="#architectures">Architectures and Applications</a></li>
+                <li><a href="#forward-propagation">Forward Propagation: Making Predictions</a></li>
+                <li><a href="#vectorization">Efficient Implementation with Vectorization</a></li>
+                <li><a href="#training">Training Neural Networks</a></li>
+                <li><a href="#advanced-training">Mastering Neural Network Training</a></li>
+                <li><a href="#advanced-practices">Advanced Machine Learning Practices</a></li>
+                <li><a href="#decision-trees">Decision Trees and Ensemble Methods</a></li>
+                <li><a href="#further-reading">Further Reading</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="introduction">
+                    <h3>Introduction to Neural Networks</h3>
+                    <p>This is the second course from the Machine Learning series: <b>Advanced Learning Algorithms.</b> In this post, I seek to organize and extract the most essential part from the mentioned course and notes taught by Andrew. Let's dive in!</p>
+                    <p>Neural networks, a cornerstone of modern machine learning, have a fascinating history rooted in attempts to mimic the human brain. While their popularity has fluctuated over the decades, they've experienced a significant resurgence since 2005, driving breakthroughs in speech recognition, image processing, and natural language processing (NLP).</p>
+                    <p><img src="../images/AndrewML2/1-1-Graph showing performance of neural networks over time.png" alt="Graph showing performance of neural networks over time"></p>
+
+                    <h4>The Biological Inspiration</h4>
+                    <p>At their core, neural networks draw inspiration from the structure and function of biological neurons. In the brain, neurons receive inputs through dendrites, process this information in the cell body, and transmit outputs via axons. This complex biological process is simplified in artificial neural networks:</p>
+                    <p><img src="../images/AndrewML2/1-2-Comparison of biological neuron and mathematical model.png" alt="Comparison of biological neuron and mathematical model"></p>
+                    <p>The mathematical model of a neuron takes multiple inputs, applies weights to these inputs, sums them up (often with a bias term), and then passes the result through an activation function to produce an output. This can be represented mathematically as:</p>
+                    <p>\(a = g(w \cdot x + b)\)</p>
+                    <p>Where:</p>
+                    <ul>
+                        <li>a is the output (activation)</li>
+                        <li>g is the activation function (often sigmoid or ReLU)</li>
+                        <li>w is the weight vector</li>
+                        <li>x is the input vector</li>
+                        <li>b is the bias term</li>
+                    </ul>
+                </section>
+
+                <section id="architectures">
+                    <h3>Architectures and Applications</h3>
+                    <p>Neural networks can be structured in various ways to tackle different problems. A typical neural network consists of an input layer, one or more hidden layers, and an output layer.</p>
+
+                    <h4>Multi-layer Perceptrons</h4>
+                    <p>One of the simplest and most common architectures is the multi-layer perceptron (MLP). In an MLP, neurons are organized in layers, with each neuron in a layer connected to all neurons in the adjacent layers.</p>
+                    <p><img src="../images/AndrewML2/1-3-Diagram of multi-layer neural network.png" alt="Diagram of multi-layer neural network"></p>
+                    <p>For example, in a demand prediction model:</p>
+                    <pre><code>layer_1 = Dense(units=3, activation='sigmoid')
+layer_2 = Dense(units=1, activation='sigmoid')
+model = Sequential([layer_1, layer_2])</code></pre>
+                    <p>This creates a simple neural network with one hidden layer of 3 units and an output layer with a single unit, suitable for binary classification tasks like predicting whether a product will be a top seller.</p>
+
+                    <h4>Convolutional Neural Networks</h4>
+                    <p>For image-related tasks, Convolutional Neural Networks (CNNs) have proven exceptionally effective. CNNs use convolutional layers to automatically and adaptively learn spatial hierarchies of features from input images.</p>
+                    <p><img src="../images/AndrewML2/1-4-Visualization of CNN layers for face recognition.png" alt="Visualization of CNN layers for face recognition"></p>
+                </section>
+
+                <section id="forward-propagation">
+                    <h3>Forward Propagation: Making Predictions</h3>
+                    <p>The process of making predictions with a neural network is called forward propagation. It involves passing the input data through each layer of the network, applying the weights and activation functions at each step.</p>
+
+                    <h4>Mathematical Representation</h4>
+                    <p>For a single neuron in layer \(l\), the activation can be computed as:</p>
+                    <p>\(a^{[l]} = g(w^{[l]} \cdot a^{[l-1]} + b^{[l]})\)</p>
+                    <p>Where:</p>
+                    <ul>
+                        <li>a^{[l]} is the activation of the current layer</li>
+                        <li>a^{[l-1]} is the activation of the previous layer</li>
+                        <li>w^{[l]} and b^{[l]} are the weights and bias for the current layer</li>
+                        <li>g is the activation function</li>
+                    </ul>
+
+                    <h4>TensorFlow Implementation</h4>
+                    <p>TensorFlow provides a high-level API for building and training neural networks. Here's an example of how to create a simple neural network for binary classification:</p>
+                    <pre><code>model = tf.keras.Sequential([
+    tf.keras.layers.Dense(3, activation='sigmoid'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy')
+model.fit(X, y, epochs=100)</code></pre>
+                    <p>This code creates a model with one hidden layer of 3 units and an output layer with a single unit, both using sigmoid activation functions. It then compiles the model with the Adam optimizer and binary cross-entropy loss function, suitable for binary classification tasks.</p>
+                </section>
+
+                <section id="vectorization">
+                    <h3>Efficient Implementation with Vectorization</h3>
+                    <p>To make neural network computations efficient, especially for large datasets, we use vectorization. This involves replacing loops with matrix operations, which can be parallelized on modern hardware.</p>
+
+                    <h4>Matrix Multiplication</h4>
+                    <p>The core of vectorized neural network computations is matrix multiplication. For a layer with \(m\) input features and \(n\) neurons, we can compute the activations for all neurons simultaneously:</p>
+                    <p>\(Z^{[l]} = W^{[l]} \cdot A^{[l-1]} + b^{[l]}\)<br>
+                    \(A^{[l]} = g(Z^{[l]})\)</p>
+                    <p>Where:</p>
+                    <ul>
+                        <li>Z^{[l]} and A^{[l]} are matrices containing the pre-activation and activation values for all neurons in layer \(l\)</li>
+                        <li>W^{[l]} is a weight matrix of shape \((n, m)\)</li>
+                        <li>b^{[l]} is a bias vector of shape \((n, 1)\)</li>
+                    </ul>
+                    <p>In NumPy, this can be implemented efficiently:</p>
+                    <pre><code>def dense_layer(A_prev, W, b, activation):
+    Z = np.dot(W, A_prev) + b
+    A = activation(Z)
+    return A</code></pre>
+                    <p>This vectorized implementation is much faster than using loops, especially for large networks and datasets.</p>
+                </section>
+
+                <section id="training">
+                    <h3>Training Neural Networks</h3>
+                    <p>While we've focused on forward propagation for making predictions, training neural networks involves a process called backpropagation. This algorithm efficiently computes the gradient of the loss function with respect to the network's parameters, allowing us to update the weights and biases to minimize the prediction error.</p>
+                    <p>The training process typically involves:</p>
+                    <ol>
+                        <li>Forward propagation to compute predictions</li>
+                        <li>Calculating the loss (difference between predictions and true values)</li>
+                        <li>Backpropagation to compute gradients</li>
+                        <li>Updating weights and biases using an optimization algorithm (e.g., gradient descent)</li>
+                    </ol>
+                    <p>In TensorFlow, much of this complexity is abstracted away:</p>
+                    <pre><code>model.fit(X_train, y_train, epochs=100, validation_split=0.2)</code></pre>
+                    <p>This single line of code performs multiple epochs of training, automatically handling forward propagation, backpropagation, and parameter updates.</p>
+
+                    <h4>Key Takeaways</h4>
+                    <ul>
+                        <li>Neural networks are inspired by biological neurons but use simplified mathematical models for computation.</li>
+                        <li>The architecture of a neural network can be tailored to specific tasks, from simple MLPs for classification to complex CNNs for image processing.</li>
+                        <li>Forward propagation is the process of making predictions, involving matrix multiplications and activation functions.</li>
+                        <li>Vectorization is crucial for efficient implementation of neural networks, replacing loops with matrix operations.</li>
+                        <li>Training neural networks involves backpropagation and optimization algorithms to adjust weights and minimize prediction errors.</li>
+                    </ul>
+                </section>
+
+                <section id="advanced-training">
+                    <h3>Mastering Neural Network Training</h3>
+                    <h4>Introduction to Neural Network Training</h4>
+                    <p>Neural network training is a critical process in machine learning that involves optimizing the network's parameters to minimize prediction errors. This section delves into the intricacies of building and training neural networks using TensorFlow, covering everything from model architecture to advanced optimization techniques.</p>
+
+                    <h4>Building Neural Networks with TensorFlow</h4>
+                    <h5>Model Architecture</h5>
+                    <p>The first step in training a neural network is defining its architecture. TensorFlow provides a high-level API for constructing neural networks:</p>
+                    <pre><code>import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential([
+    Dense(units=25, activation='sigmoid'),
+    Dense(units=15, activation='sigmoid'),
+    Dense(units=1, activation='sigmoid')
+])</code></pre>
+                    <p>This code creates a neural network with three layers:</p>
+                    <ul>
+                        <li>An input layer with 25 units</li>
+                        <li>A hidden layer with 15 units</li>
+                        <li>An output layer with 1 unit (suitable for binary classification)</li>
+                    </ul>
+                    <p>Each layer uses the sigmoid activation function, which is defined mathematically as:</p>
+                    <p>\(g(z) = \frac{1}{1 + e^{-z}}\)</p>
+                    <p><img src="../images/AndrewML2/2-1-Diagram of neural network architecture.png" alt="Diagram of neural network architecture"></p>
+
+                    <h5>Compiling the Model</h5>
+                    <p>After defining the architecture, the model needs to be compiled. This step specifies the loss function and optimizer:</p>
+                    <pre><code>from tensorflow.keras.losses import BinaryCrossentropy
+
+model.compile(loss=BinaryCrossentropy())</code></pre>
+                    <p>For binary classification, we use Binary Cross-Entropy as the loss function. The mathematical representation of this loss function is:</p>
+                    <p>\(L(f(x), y) = -y \log(f(x)) - (1-y) \log(1-f(x))\)</p>
+                    <p>Where \(f(x)\) is the model's prediction and \(y\) is the true label.</p>
+
+                    <h5>Training the Model</h5>
+                    <p>With the model compiled, we can now train it on our data:</p>
+                    <pre><code>model.fit(X, y, epochs=100)</code></pre>
+                    <p>This command initiates the training process, which will run for 100 epochs (complete passes through the training dataset).</p>
+
+                    <h4>The Training Process: A Closer Look</h4>
+                    <h5>Gradient Descent</h5>
+                    <p>The core of neural network training is the gradient descent algorithm. It iteratively updates the model's parameters (weights and biases) to minimize the loss function:</p>
+                    <p>\(w_j = w_j - \alpha \frac{\partial}{\partial w_j} J(w,b)\)<br>
+                    \(b_j = b_j - \alpha \frac{\partial}{\partial b_j} J(w,b)\)</p>
+                    <p>Where \(\alpha\) is the learning rate, and \(J(w,b)\) is the cost function.</p>
+                    <p><img src="../images/AndrewML2/2-2-Visualization of gradient descent.png" alt="Visualization of gradient descent"></p>
+
+                    <h5>Adam Optimization</h5>
+                    <p>While gradient descent is effective, modern neural networks often use more sophisticated optimizers. The Adam (Adaptive Moment Estimation) algorithm is a popular choice:</p>
+                    <pre><code>model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))</code></pre>
+                    <p>Adam adapts the learning rate for each parameter individually, allowing for faster convergence and better performance on a wide range of problems.</p>
+                    <p><img src="../images/AndrewML2/2-3-Comparison of gradient descent and Adam.png" alt="Comparison of gradient descent and Adam"></p>
+
+                    <h5>Activation Functions: Beyond Sigmoid</h5>
+                    <p>While sigmoid activation functions are common, other options can be more suitable for certain tasks:</p>
+                    <h6>ReLU (Rectified Linear Unit)</h6>
+                    <p>\(g(z) = \max(0, z)\)</p>
+                    <p>ReLU is often preferred for hidden layers due to its computational efficiency and ability to mitigate the vanishing gradient problem.</p>
+                    <h6>Linear Activation</h6>
+                    <p>\(g(z) = z\)</p>
+                    <p>Linear activation is typically used in the output layer for regression tasks.</p>
+                    <h6>Softmax</h6>
+                    <p>For multiclass classification problems, the softmax activation function is used in the output layer:</p>
+                    <p>\(a_j = \frac{e^{z_j}}{\sum e^{z_k}}\)</p>
+                    <p>Where \(a_j\) represents the probability of the input belonging to class \(j\).</p>
+
+                    <h4>Advanced Topics in Neural Network Training</h4>
+                    <h5>Numerical Stability</h5>
+                    <p>To improve numerical stability and avoid issues with floating-point arithmetic, it's recommended to use the 'from_logits=True' option when compiling the model:</p>
+                    <pre><code>model.compile(loss=SparseCategoricalCrossentropy(from_logits=True))</code></pre>
+                    <p>This allows the model to work with unnormalized log probabilities (logits) internally, improving numerical stability.</p>
+
+                    <h5>Convolutional Layers</h5>
+                    <p>For certain types of data, such as images or time series, convolutional layers can be more effective than dense layers:</p>
+                    <pre><code>from tensorflow.keras.layers import Conv2D
+
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    # ... additional layers ...
+])</code></pre>
+                    <p>Convolutional layers have the advantage of parameter sharing and local connectivity, making them more efficient and less prone to overfitting on certain types of data.</p>
+
+                    <h4>Key Takeaways</h4>
+                    <ul>
+                        <li>TensorFlow provides a high-level API for building and training neural networks, abstracting away much of the low-level complexity.</li>
+                        <li>The choice of activation functions, loss functions, and optimizers can significantly impact a neural network's performance.</li>
+                        <li>Advanced optimization techniques like Adam can lead to faster convergence and better results compared to standard gradient descent.</li>
+                        <li>Consideration of numerical stability is crucial for robust neural network training.</li>
+                        <li>Specialized layer types, such as convolutional layers, can be more effective for certain types of data and problems.</li>
+                    </ul>
+                </section>
+
+                <section id="advanced-practices">
+                    <h3>Advanced Machine Learning Practices</h3>
+                    <h4>Introduction to Advanced Machine Learning Practices</h4>
+                    <p>This section delves into the critical aspects of applying machine learning effectively, covering topics from model selection and error analysis to addressing bias and ensuring ethical AI development. These advanced practices are essential for developing robust, efficient, and responsible machine learning systems.</p>
+
+                    <h4>Model Selection and Evaluation</h4>
+                    <h5>Train-Test-Validation Split</h5>
+                    <p>One of the fundamental practices in machine learning is properly splitting your data:</p>
+                    <ul>
+                        <li>Training set (60%): Used to train the model</li>
+                        <li>Cross-validation set (20%): Used for model selection and hyperparameter tuning</li>
+                        <li>Test set (20%): Used for final evaluation of the chosen model</li>
+                    </ul>
+                    <p>This split helps prevent overfitting and provides a more reliable estimate of the model's performance on unseen data.</p>
+                    <p><img src="../images/AndrewML2/3-1-Diagram of data split.png" alt="Diagram of data split"></p>
+
+                    <h5>Model Selection Process</h5>
+                    <p>When choosing between different models or hyperparameters:</p>
+                    <ol>
+                        <li>Train models on the training set</li>
+                        <li>Evaluate them on the cross-validation set</li>
+                        <li>Select the best performing model</li>
+                        <li>Evaluate the chosen model on the test set</li>
+                    </ol>
+                    <p>This process can be represented mathematically as:</p>
+                    <p>For model \(i\) with parameters \(w^{(i)}\) and \(b^{(i)}\):</p>
+                    <ol>
+                        <li>Train: \(\min_{w,b} J(w,b)\) on training set</li>
+                        <li>Compute cross-validation error: \(J_{cv}(w^{(i)}, b^{(i)})\)</li>
+                        <li>Choose model that minimizes \(J_{cv}(w^{(i)}, b^{(i)})\)</li>
+                        <li>Estimate generalization error using test set: \(J_{test}(w^{(i)}, b^{(i)})\)</li>
+                    </ol>
+
+                    <h4>Bias and Variance</h4>
+                    <p>Understanding the bias-variance tradeoff is crucial for improving model performance.</p>
+                    <h5>Diagnosing Bias and Variance</h5>
+                    <ul>
+                        <li>High bias (underfitting): Both \(J_{train}\) and \(J_{cv}\) are high, with \(J_{train} \approx J_{cv}\)</li>
+                        <li>High variance (overfitting): \(J_{cv} \gg J_{train}\), with \(J_{train}\) potentially low</li>
+                        <li>High bias and high variance: Both \(J_{train}\) and \(J_{cv}\) are high, with \(J_{cv} \gg J_{train}\)</li>
+                    </ul>
+                    <p><img src="../images/AndrewML2/3-2-Graph of bias-variance tradeoff.png" alt="Graph of bias-variance tradeoff"></p>
+
+                    <h5>Learning Curves</h5>
+                    <p>Learning curves plot training and cross-validation error against the training set size. They provide valuable insights into bias and variance issues:</p>
+                    <ul>
+                        <li>High bias: Both curves plateau at a high error rate</li>
+                        <li>High variance: Large gap between training and cross-validation error</li>
+                    </ul>
+                    <p><img src="../images/AndrewML2/3-3-Learning curves for high bias.png" alt="Learning curves for high bias"></p>
+                    <p><img src="../images/AndrewML2/3-4-Learning curves for high variance.png" alt="Learning curves for high variance"></p>
+
+                    <h4>Regularization and Model Complexity</h4>
+                    <p>Regularization is a key technique for managing the bias-variance tradeoff:</p>
+                    <p>\[J(w,b) = \frac{1}{2m} \sum (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum w_j^2\]</p>
+                    <p>Where \(\lambda\) is the regularization parameter. Larger \(\lambda\) values lead to simpler models (potentially increasing bias), while smaller values allow for more complex models (potentially increasing variance).</p>
+
+                    <h5>Choosing the Regularization Parameter</h5>
+                    <ul>
+                        <li>Try a range of \(\lambda\) values (e.g., 0, 0.01, 0.02, 0.04, ..., 10)</li>
+                        <li>Train models with each \(\lambda\) value</li>
+                        <li>Choose the \(\lambda\) that minimizes \(J_{cv}(w,b)\)</li>
+                    </ul>
+
+                    <h4>Error Analysis and Iterative Improvement</h4>
+                    <p>Error analysis involves manually examining misclassified examples to identify patterns and potential areas for improvement.</p>
+                    <h5>Example: Spam Classification</h5>
+                    <ol>
+                        <li>Implement a basic spam classifier</li>
+                        <li>Examine misclassified emails in the cross-validation set</li>
+                        <li>Categorize errors (e.g., pharma spam, misspellings, unusual routing)</li>
+                        <li>Focus on the most common error categories for improvement</li>
+                    </ol>
+                    <p><img src="../images/AndrewML2/3-5-Table of error categories.png" alt="Table of error categories"></p>
+
+                    <h4>Data-Centric AI Development</h4>
+                    <p>Shifting focus from model-centric to data-centric AI development can lead to significant improvements:</p>
+                    <ul>
+                        <li>Data augmentation: Modify existing training examples to create new ones
+                            <ul>
+                                <li>Example: Adding background noise to audio for speech recognition</li>
+                            </ul>
+                        </li>
+                        <li>Data synthesis: Generate entirely new, artificial training examples
+                            <ul>
+                                <li>Example: Rendering synthetic text for OCR training</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><img src="../images/AndrewML2/3-6-Examples of data augmentation and synthesis 1.png" alt="Examples of data augmentation and synthesis 1"></p>
+                    <p><img src="../images/AndrewML2/3-7-Examples of data augmentation and synthesis 2.png" alt="Examples of data augmentation and synthesis 2"></p>
+                    <p><img src="../images/AndrewML2/3-8-Examples of data augmentation and synthesis 3.png" alt="Examples of data augmentation and synthesis 3"></p>
+
+                    <h4>Transfer Learning</h4>
+                    <p>Transfer learning leverages knowledge from one task to improve performance on another:</p>
+                    <ol>
+                        <li>Pre-train a model on a large dataset (e.g., ImageNet)</li>
+                        <li>Fine-tune the model on your specific task with a smaller dataset</li>
+                    </ol>
+                    <p>This approach is particularly effective when:</p>
+                    <ul>
+                        <li>The input types are similar (e.g., both tasks use images)</li>
+                        <li>The pre-training task has more data than the target task</li>
+                        <li>Low-level features learned in the pre-training task are relevant to the target task</li>
+                    </ul>
+                    <p><img src="../images/AndrewML2/3-9-Transfer learning diagram.png" alt="Transfer learning diagram"></p>
+
+                    <h4>Deployment and MLOps</h4>
+                    <p>Deploying machine learning models involves more than just the model itself:</p>
+                    <ul>
+                        <li>Set up an inference server to handle API calls</li>
+                        <li>Implement logging and monitoring systems</li>
+                        <li>Develop strategies for model updates and maintenance</li>
+                        <li>Ensure scalability to handle varying loads</li>
+                    </ul>
+
+                    <h4>Fairness, Bias, and Ethics in AI</h4>
+                    <p>Ethical considerations are paramount in AI development:</p>
+                    <ul>
+                        <li>Identify potential biases in training data and model outputs</li>
+                        <li>Audit systems for possible harm, especially to vulnerable groups</li>
+                        <li>Develop mitigation plans for identified risks</li>
+                        <li>Continuously monitor deployed systems for unexpected harmful effects</li>
+                    </ul>
+
+                    <h4>Key Takeaways</h4>
+                    <ul>
+                        <li>Proper data splitting and model selection techniques are crucial for developing robust ML systems.</li>
+                        <li>Understanding and managing the bias-variance tradeoff is key to improving model performance.</li>
+                        <li>Error analysis and iterative improvement should guide development efforts.</li>
+                        <li>Data quality and quantity often have a more significant impact than model architecture.</li>
+                        <li>Transfer learning can dramatically improve performance on tasks with limited data.</li>
+                        <li>Ethical considerations should be integrated throughout the ML development process.</li>
+                    </ul>
+                </section>
+
+                <section id="decision-trees">
+                    <h3>Decision Trees and Ensemble Methods</h3>
+                    <h4>Introduction to Decision Trees</h4>
+                    <p>Decision trees are powerful and intuitive machine learning models that can be used for both classification and regression tasks. This section covers the fundamentals of decision trees, their learning process, and advanced ensemble methods like Random Forests and XGBoost.</p>
+
+                    <h4>Decision Tree Model</h4>
+                    <h5>Structure and Components</h5>
+                    <p>A decision tree consists of:</p>
+                    <ul>
+                        <li>Root node: The starting point of the tree</li>
+                        <li>Decision nodes: Internal nodes where a feature is tested</li>
+                        <li>Leaf nodes: Terminal nodes that provide the final prediction</li>
+                    </ul>
+                    <p><img src="../images/AndrewML2/4-1-Basic structure of a decision tree.png" alt="Basic structure of a decision tree"></p>
+
+                    <h5>Classification Example</h5>
+                    <p>For a cat classification problem, features might include:</p>
+                    <ul>
+                        <li>Ear shape (x₁): Pointy, Floppy</li>
+                        <li>Face shape (x₂): Round, Not round</li>
+                        <li>Whiskers (x₃): Present, Absent</li>
+                    </ul>
+                    <p>The decision tree makes predictions by traversing from the root to a leaf node based on the feature values of the input.</p>
+
+                    <h4>Learning Process</h4>
+                    <p>The process of building a decision tree involves:</p>
+                    <ol>
+                        <li>Choosing the best feature to split on at each node</li>
+                        <li>Determining when to stop splitting</li>
+                    </ol>
+
+                    <h5>Measuring Impurity</h4>
+                    <p>To choose the best feature for splitting, we use the concept of impurity. A common measure is entropy:</p>
+                    <p>\[H(p_1) = -p_1 \log_2(p_1) - (1-p_1) \log_2(1-p_1)\]</p>
+                    <p>Where \(p_1\) is the fraction of positive examples in a node.</p>
+
+                    <h5>Information Gain</h4>
+                    <p>The quality of a split is measured by information gain:</p>
+                    <p>\[\text{Information Gain} = H(p_{1_{\text{root}}}) - [w_{\text{left}} H(p_{1_{\text{left}}}) + w_{\text{right}} H(p_{1_{\text{right}}})]\]</p>
+                    <p>Where \(w_{\text{left}}\) and \(w_{\text{right}}\) are the fractions of examples going to the left and right child nodes respectively.</p>
+                    <p><img src="../images/AndrewML2/4-2-Calculation of information gain.png" alt="Calculation of information gain"></p>
+
+                    <h5>Stopping Criteria</h4>
+                    <p>Splitting stops when:</p>
+                    <ul>
+                        <li>A node is 100% one class</li>
+                        <li>The tree reaches a maximum depth</li>
+                        <li>The improvement in purity score is below a threshold</li>
+                        <li>The number of examples in a node is below a threshold</li>
+                    </ul>
+
+                    <h4>Handling Different Types of Features</h4>
+                    <h5>Categorical Features</h4>
+                    <p>For categorical features with more than two categories, one-hot encoding is used. This creates binary features for each category.</p>
+                    <p><img src="../images/AndrewML2/4-3-Example of one-hot encoding.png" alt="Example of one-hot encoding"></p>
+
+                    <h5>Continuous Features</h4>
+                    <p>For continuous features, the algorithm finds the best threshold for splitting. This is done by trying different thresholds and choosing the one with the highest information gain.</p>
+                    <p><img src="../images/AndrewML2/4-4-Splitting on a continuous variable.png" alt="Splitting on a continuous variable"></p>
+
+                    <h4>Regression Trees</h4>
+                    <p>Decision trees can also be used for regression tasks. Instead of predicting a class, leaf nodes predict a continuous value, typically the mean of the training examples in that leaf.</p>
+                    <p>The splitting criterion for regression trees is often the reduction in variance rather than information gain.</p>
+
+                    <h4>Tree Ensembles</h4>
+                    <p>While individual decision trees are prone to overfitting, ensemble methods combine multiple trees to create more robust and accurate models.</p>
+
+                    <h5>Random Forests</h5>
+                    <p>Random Forests use two key ideas:</p>
+                    <ol>
+                        <li>Bagging (Bootstrap Aggregating): Training each tree on a random subset of the training data, sampled with replacement.</li>
+                        <li>Feature randomization: At each node, only considering a random subset of features for splitting.</li>
+                    </ol>
+                    <p>The final prediction is made by averaging (for regression) or voting (for classification) across all trees.</p>
+                    <p><img src="../images/AndrewML2/4-5-Random Forest illustration.png" alt="Random Forest illustration"></p>
+
+                    <h5>XGBoost (eXtreme Gradient Boosting)</h5>
+                    <p>XGBoost is an advanced implementation of gradient boosted trees. Key features include:</p>
+                    <ul>
+                        <li>Sequential building of trees, where each new tree focuses on the errors of the previous ensemble</li>
+                        <li>Efficient implementation and good default parameters</li>
+                        <li>Built-in regularization to prevent overfitting</li>
+                    </ul>
+                    <pre><code>from xgboost import XGBClassifier
+
+model = XGBClassifier()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)</code></pre>
+
+                    <h4>When to Use Decision Trees</h5>
+                    <p>Decision trees and tree ensembles are particularly well-suited for:</p>
+                    <ul>
+                        <li>Tabular (structured) data</li>
+                        <li>Situations where fast training and inference are required</li>
+                        <li>Problems where interpretability is important (for small trees)</li>
+                    </ul>
+                    <p>They are less suitable for:</p>
+                    <ul>
+                        <li>Unstructured data (images, audio, text)</li>
+                        <li>Problems where transfer learning would be beneficial</li>
+                    </ul>
+                    <p>Neural networks, on the other hand, work well on all types of data but may be slower to train and less interpretable.</p>
+
+                    <h4>Key Takeaways</h4>
+                    <ul>
+                        <li>Decision trees make predictions by sequentially splitting the data based on feature values.</li>
+                        <li>The learning process involves choosing the best splits to maximize information gain or minimize impurity.</li>
+                        <li>Categorical features can be handled through one-hot encoding, while continuous features require finding optimal split thresholds.</li>
+                        <li>Tree ensembles like Random Forests and XGBoost significantly improve upon individual decision trees by reducing overfitting and increasing accuracy.</li>
+                        <li>Decision trees and their ensembles are particularly effective for structured data, offering fast training and inference times.</li>
+                    </ul>
+
+                    <h4 id="further-reading">Further Reading</h4>
+                    <ul>
+                        <li><a href="http://neuralnetworksanddeeplearning.com/index.html">Neural Networks and Deep Learning by Michael Nielsen (free online book)</a></li>
+                        <li><a href="https://www.tensorflow.org/tutorials">TensorFlow Documentation/Tutorial</a></li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Qingyu Meng. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+</html>
+
