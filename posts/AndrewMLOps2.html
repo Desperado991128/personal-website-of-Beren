@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLOps: The Cornerstones of Data Collection and Validation in Production ML Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">MLOps: The Cornerstones of Data Collection and Validation in Production ML Systems</h2>
+            <div class="post-meta">
+                <span class="date">August 3, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">MLOps Series</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#paradigm-shift">The Paradigm Shift: From ML Modeling to Production ML Systems</a></li>
+                    <ul>
+                        <li><a href="#expanded-scope">The Expanded Scope of Production ML</a></li>
+                        <li><a href="#ml-pipeline">The ML Pipeline: A Directed Acyclic Graph (DAG)</a></li>
+                    </ul>
+                    <li><a href="#data-imperative">The Data Imperative: Quality, Collection, and Preparation</a></li>
+                    <ul>
+                        <li><a href="#maximizing-predictive-content">Maximizing Predictive Content</a></li>
+                        <li><a href="#data-pipeline">The Data Pipeline</a></li>
+                        <li><a href="#responsible-data">Responsible Data Sourcing and Management</a></li>
+                    </ul>
+                    <li><a href="#labeling-conundrum">The Labeling Conundrum: Strategies for Effective Data Annotation</a></li>
+                    <ul>
+                        <li><a href="#process-feedback">Process Feedback (Direct Labeling)</a></li>
+                        <li><a href="#human-labeling">Human Labeling</a></li>
+                        <li><a href="#advanced-labeling">Advanced Labeling Techniques</a></li>
+                    </ul>
+                    <li><a href="#data-validation">Data Validation: Ensuring Ongoing Data Quality</a></li>
+                    <ul>
+                        <li><a href="#understanding-drift">Understanding Drift and Skew</a></li>
+                        <li><a href="#types-of-issues">Types of Data Issues</a></li>
+                        <li><a href="#tfdv">TensorFlow Data Validation (TFDV)</a></li>
+                    </ul>
+                    <li><a href="#feature-engineering">Feature Engineering: Maximizing Data Value in Machine Learning</a></li>
+                    <ul>
+                        <li><a href="#art-science">The Art and Science of Feature Engineering</a></li>
+                        <li><a href="#preprocessing-operations">Preprocessing Operations: From Raw Data to Feature Vectors</a></li>
+                        <li><a href="#techniques">Feature Engineering Techniques</a></li>
+                        <li><a href="#tf-transform">Preprocessing Data at Scale: TensorFlow Transform</a></li>
+                        <li><a href="#feature-selection">Feature Spaces and Selection</a></li>
+                    </ul>
+                    <li><a href="#data-journey">Data Journey and Storage in Machine Learning: From Raw Features to Enterprise Solutions</a></li>
+                    <ul>
+                        <li><a href="#transformation-traceability">Data Transformation and Traceability</a></li>
+                        <li><a href="#metadata">ML Metadata: Tracking Artifacts and Pipeline Changes</a></li>
+                        <li><a href="#evolving-data">Evolving Data: Schema Development and Environments</a></li>
+                        <li><a href="#storage-solutions">Enterprise Data Storage Solutions</a></li>
+                    </ul>
+                    <li><a href="#advanced-techniques">Advanced Techniques in Machine Learning: Labeling, Augmentation, and Preprocessing</a></li>
+                    <ul>
+                        <li><a href="#labeling-techniques">Advanced Labeling Techniques</a></li>
+                        <li><a href="#data-augmentation">Data Augmentation</a></li>
+                        <li><a href="#time-series-preprocessing">Preprocessing Time Series Data</a></li>
+                        <li><a href="#weather-data">Preprocessing Weather Time Series Data</a></li>
+                    </ul>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="paradigm-shift">
+                    <h3>The Paradigm Shift: From ML Modeling to Production ML Systems</h3>
+                    <p>In the realm of Machine Learning Engineering for Production (MLOps), the old adage "garbage in, garbage out" has never been more pertinent. As we go deeper in the intricacies of building robust ML systems, we quickly realize that the quality and management of data are paramount to success. This blog post explores the critical aspects of data collection, labeling, and validation in production ML systems.</p>
+                </section>
+
+                <section id="expanded-scope">
+                    <h3>The Expanded Scope of Production ML</h3>
+                    <p>Traditional machine learning often focuses on model development and optimization. However, production ML systems require a more holistic approach, encompassing the entire lifecycle of data and model management.</p>
+                    <p>Production ML systems extend far beyond mere model training. They incorporate:</p>
+                    <ul>
+                        <li>Configuration management</li>
+                        <li>Data verification</li>
+                        <li>Feature extraction</li>
+                        <li>Process management tools</li>
+                        <li>Analysis tools</li>
+                        <li>Machine resource management</li>
+                        <li>Serving infrastructure</li>
+                        <li>Monitoring</li>
+                        <li>Data collection pipelines</li>
+                    </ul>
+                    <p><img src="../images/AndrewMLOps2/1-Comparison of Traditional ML vs Production ML.png" alt="Comparison of Traditional ML vs Production ML"></p>
+                    <p>This expanded scope necessitates a shift in mindset from optimizing individual models to managing entire systems. As the Uber team aptly put it, "Data is the hardest part of ML and the most important piece to get right... Broken data is the most common cause of problems in production ML systems."</p>
+                </section>
+
+                <section id="ml-pipeline">
+                    <h3>The ML Pipeline: A Directed Acyclic Graph (DAG)</h3>
+                    <p>At the heart of production ML systems lies the concept of ML pipelines. These pipelines are typically represented as Directed Acyclic Graphs (DAGs), which define the sequencing of tasks based on their relationships and dependencies.</p>
+                    <pre><code>python
+# Pseudocode for a simple ML pipeline DAG
+def ml_pipeline():
+    data_ingestion()
+    data_validation()
+    feature_engineering()
+    model_training()
+    model_validation()
+    if model_is_good():
+        push_to_production()
+    serve_model()
+</code></pre>
+                    <p>Orchestration frameworks like Airflow, Argo, or Kubeflow help manage these complex pipelines, ensuring smooth automation and execution of ML workflows.</p>
+                </section>
+
+                <section id="data-imperative">
+                    <h3>The Data Imperative: Quality, Collection, and Preparation</h3>
+                    <p>In the world of production ML, data reigns supreme. The quality and relevance of your data can make or break your ML system's performance.</p>
+                </section>
+
+                <section id="maximizing-predictive-content">
+                    <h3>Maximizing Predictive Content</h3>
+                    <p>When collecting and preparing data, the goal is to:</p>
+                    <ul>
+                        <li>Maximize predictive content</li>
+                        <li>Remove non-informative data</li>
+                        <li>Ensure feature space coverage</li>
+                    </ul>
+                    <p>This process involves careful consideration of data sources, consistency checks, and monitoring for outliers and errors.</p>
+                </section>
+
+                <section id="data-pipeline">
+                    <h3>The Data Pipeline</h3>
+                    <p>A robust data pipeline typically includes:</p>
+                    <ul>
+                        <li>Data collection</li>
+                        <li>Data ingestion</li>
+                        <li>Data formatting</li>
+                        <li>Feature engineering</li>
+                        <li>Feature extraction</li>
+                    </ul>
+                    <p><img src="../images/AndrewMLOps2/2-ML pipelines.png" alt="ML pipelines"></p>
+                    <p>Each step in this pipeline must be carefully designed and monitored to ensure data quality and relevance.</p>
+                </section>
+
+                <section id="responsible-data">
+                    <h3>Responsible Data Sourcing and Management</h3>
+                    <p>In the age of data-driven decision making, responsible data practices are non-negotiable. This includes:</p>
+                    <ul>
+                        <li>Protecting user privacy and complying with regulations (e.g., GDPR)</li>
+                        <li>Ensuring data security</li>
+                        <li>Addressing biases in datasets</li>
+                        <li>Committing to fairness in ML systems</li>
+                    </ul>
+                    <p>Consider the following code snippet for anonymizing personally identifiable information (PII):</p>
+                    <pre><code>python
+def anonymize_data(data):
+    # Replace specific identifiers with hash values
+    data['user_id'] = data['user_id'].apply(hash)
+    # Aggregate sensitive numerical data
+    data['income'] = data['income'].apply(lambda x: round(x, -3))
+    return data
+</code></pre>
+                </section>
+
+                <section id="labeling-conundrum">
+                    <h3>The Labeling Conundrum: Strategies for Effective Data Annotation</h3>
+                    <p>Labeling is a critical yet often challenging aspect of supervised learning. Various approaches can be employed, each with its own set of advantages and considerations.</p>
+                </section>
+
+                <section id="process-feedback">
+                    <h3>Process Feedback (Direct Labeling)</h3>
+                    <p>Process feedback involves the continuous creation of training datasets using business or organizational data. It's particularly useful when ground truth changes rapidly.</p>
+                    <p>Advantages:</p>
+                    <ul>
+                        <li>Captures strong label signals</li>
+                        <li>Labels evolve quickly</li>
+                    </ul>
+                    <p>Disadvantages:</p>
+                    <ul>
+                        <li>Can be hindered by the inherent nature of the problem</li>
+                        <li>May fail to capture true ground truth</li>
+                    </ul>
+                </section>
+
+                <section id="human-labeling">
+                    <h3>Human Labeling</h3>
+                    <p>Human labeling involves employing people ("raters") to manually examine and label data.</p>
+                    <p>Advantages:</p>
+                    <ul>
+                        <li>Provides more labels</li>
+                        <li>Enables pure supervised learning</li>
+                    </ul>
+                    <p>Disadvantages:</p>
+                    <ul>
+                        <li>Can be slow and expensive</li>
+                        <li>Quality consistency can be an issue</li>
+                    </ul>
+                </section>
+
+                <section id="advanced-labeling">
+                    <h3>Advanced Labeling Techniques</h3>
+                    <p>For scenarios where traditional labeling methods fall short, advanced techniques can be employed:</p>
+                    <ul>
+                        <li>Semi-Supervised Labeling</li>
+                        <li>Active Learning</li>
+                        <li>Weak Supervision</li>
+                    </ul>
+                    <p>These methods aim to reduce the amount of labeled data required or to make the labeling process more efficient.</p>
+                </section>
+
+                <section id="data-validation">
+                    <h3>Data Validation: Ensuring Ongoing Data Quality</h3>
+                    <p>As ML systems evolve and new data streams in, maintaining data quality becomes an ongoing challenge. Data validation techniques help detect and address issues before they impact model performance.</p>
+                </section>
+
+                <section id="understanding-drift">
+                    <h3>Understanding Drift and Skew</h3>
+                    <p>Two key concepts in data validation are drift and skew:</p>
+                    <ul>
+                        <li>Drift: Changes in data over time (e.g., data collected daily)</li>
+                        <li>Skew: Differences between two static versions or sources (e.g., training set vs. serving set)</li>
+                    </ul>
+                </section>
+
+                <section id="types-of-issues">
+                    <h3>Types of Data Issues</h3>
+                    <ul>
+                        <li>Schema Skew: Training and serving data do not conform to the same schema</li>
+                        <li>Feature Skew: Feature values are modified between training and serving time</li>
+                        <li>Distribution Skew: The distribution of serving and training datasets is significantly different</li>
+                    </ul>
+                </section>
+
+                <section id="tfdv">
+                    <h3>TensorFlow Data Validation (TFDV)</h3>
+                    <p>TFDV is a powerful tool for understanding, validating, and monitoring ML data at scale. It offers capabilities such as:</p>
+                    <ul>
+                        <li>Generating data statistics and visualizations</li>
+                        <li>Inferring data schema</li>
+                        <li>Performing validity checks against schema</li>
+                        <li>Detecting training/serving skew</li>
+                    </ul>
+                    <p>Here's a simple example of using TFDV to compute and visualize statistics:</p>
+                    <pre><code>python
+import tensorflow_data_validation as tfdv
+
+# Generate statistics
+stats = tfdv.generate_statistics_from_dataframe(dataframe)
+
+# Visualize statistics
+tfdv.visualize_statistics(stats)
+</code></pre>
+                    <p><img src="../images/AndrewMLOps2/1-ML project lifecycle diagram.png" alt="ML project lifecycle diagram"></p>
+                </section>
+
+                <section id="feature-engineering">
+                    <h3>Feature Engineering: Maximizing Data Value in Machine Learning</h3>
+                    <p>In the realm of Machine Learning (ML), the adage "garbage in, garbage out" holds particularly true. This is where feature engineering comes into play, serving as a critical step in squeezing the most out of your data and setting the stage for successful model training.</p>
+                </section>
+
+                <section id="art-science">
+                    <h3>The Art and Science of Feature Engineering</h3>
+                    <p>Feature engineering is the process of transforming raw data into a format that better represents the underlying problem to the predictive models, resulting in improved model performance. As Andrew Ng aptly puts it, "Coming up with features is difficult, time-consuming, and requires expert knowledge. Applied machine learning often requires careful engineering of the features and dataset."</p>
+                    <p>Key Aspects of Feature Engineering:</p>
+                    <ul>
+                        <li>Data Representation: Transforming data into forms that help models learn more effectively.</li>
+                        <li>Predictive Quality: Increasing the predictive power of features.</li>
+                        <li>Dimensionality Reduction: Concentrating information in fewer features for more efficient compute resource usage.</li>
+                    </ul>
+                    <p>The feature engineering process typically involves:</p>
+                    <pre><code>python
+def feature_engineering_pipeline():
+    data_cleansing()
+    feature_tuning()
+    representation_transformation()
+    feature_extraction()
+    feature_construction()
+</code></pre>
+                </section>
+
+                <section id="preprocessing-operations">
+                    <h3>Preprocessing Operations: From Raw Data to Feature Vectors</h3>
+                    <p>Preprocessing is a crucial step in converting raw data into a format suitable for ML models. This process involves several key operations:</p>
+                </section>
+
+                <section id="techniques">
+                    <h3>Feature Engineering Techniques</h3>
+                    <p>Several techniques can be employed to engineer effective features:</p>
+                    <h4>Feature Scaling</h4>
+                    <p>Scaling ensures all features are on a similar scale, which is particularly important for many ML algorithms:</p>
+                    <pre><code>python
+def scale_image(image):
+    return (image - 127.5) / 127.5
+</code></pre>
+                    <h4>Normalization and Standardization</h4>
+                    <p>Normalization scales values to a fixed range (typically 0 to 1), while standardization transforms data to have zero mean and unit variance:</p>
+                    <pre><code>python
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+def normalize(data):
+    scaler = MinMaxScaler()
+    return scaler.fit_transform(data)
+
+def standardize(data):
+    scaler = StandardScaler()
+    return scaler.fit_transform(data)
+</code></pre>
+                    <h4>Bucketizing / Binning</h4>
+                    <p>Binning can be useful for handling continuous data:</p>
+                    <pre><code>python
+def bucketize(data, bins):
+    return pd.cut(data, bins=bins, labels=False)
+</code></pre>
+                </section>
+
+                <section id="tf-transform">
+                    <h3>Preprocessing Data at Scale: TensorFlow Transform</h3>
+                    <p>When dealing with large-scale data preprocessing, tools like TensorFlow Transform (tf.Transform) become invaluable. tf.Transform allows for consistent application of transformations across training and serving:</p>
+                    <pre><code>python
+import tensorflow_transform as tft
+
+def preprocessing_fn(inputs):
+    x = inputs['x']
+    y = inputs['y']
+    x_normalized = tft.scale_to_z_score(x)
+    y_normalized = tft.scale_to_0_1(y)
+    return {
+        'x_normalized': x_normalized,
+        'y_normalized': y_normalized
+    }
+</code></pre>
+                </section>
+
+                <section id="feature-selection">
+                    <h3>Feature Spaces and Selection</h3>
+                    <p>Understanding feature spaces is crucial for effective feature selection. Feature selection helps identify the most relevant features, reducing dimensionality and potentially improving model performance.</p>
+                    <h4>Filter Methods</h4>
+                    <p>These methods select features based on statistical measures:</p>
+                    <pre><code>python
+from sklearn.feature_selection import SelectKBest, f_classif
+
+def select_k_best_features(X, y, k):
+    selector = SelectKBest(score_func=f_classif, k=k)
+    return selector.fit_transform(X, y)
+</code></pre>
+                    <h4>Wrapper Methods</h4>
+                    <p>These methods use a model to score feature subsets:</p>
+                    <pre><code>python
+from sklearn.feature_selection import RFE
+from sklearn.ensemble import RandomForestClassifier
+
+def recursive_feature_elimination(X, y, n_features_to_select):
+    estimator = RandomForestClassifier()
+    selector = RFE(estimator, n_features_to_select=n_features_to_select)
+    return selector.fit_transform(X, y)
+</code></pre>
+                    <h4>Embedded Methods</h4>
+                    <p>These methods perform feature selection as part of the model training process:</p>
+                    <pre><code>python
+from sklearn.ensemble import RandomForestClassifier
+
+def feature_importance_selection(X, y, threshold):
+    model = RandomForestClassifier()
+    model.fit(X, y)
+    return X[:, model.feature_importances_ > threshold]
+</code></pre>
+                </section>
+
+                <section id="data-journey">
+                    <h3>Data Journey and Storage in Machine Learning: From Raw Features to Enterprise Solutions</h3>
+                    <p>In the realm of machine learning (ML), the journey of data from raw features to actionable insights is complex and multifaceted. This comprehensive guide explores the critical aspects of data management in ML, including data transformation, metadata tracking, schema evolution, and enterprise-level storage solutions.</p>
+                </section>
+
+                <section id="transformation-traceability">
+                    <h3>Data Transformation and Traceability</h3>
+                    <h4>Data Transformation</h4>
+                    <p>The data journey in ML begins with raw features and labels, which undergo various transformations to create an input-output map for the ML model to learn. Understanding these transformations is crucial for interpreting model results.</p>
+                    <pre><code>python
+def data_transformation_pipeline(raw_data):
+    preprocessed_data = preprocess(raw_data)
+    features = extract_features(preprocessed_data)
+    transformed_features = scale_and_normalize(features)
+    return transformed_features
+</code></pre>
+                    <h4>Data Provenance and Lineage</h4>
+                    <p>Data provenance refers to the chain of transformations that lead to the creation of a particular artifact. It's essential for:</p>
+                    <ul>
+                        <li>Debugging and understanding the ML pipeline</li>
+                        <li>Tracing back through training runs</li>
+                        <li>Comparing different training runs</li>
+                    </ul>
+                    <p>Data lineage is particularly important for regulatory compliance, especially when dealing with personal data.</p>
+                </section>
+
+                <section id="metadata">
+                    <h3>ML Metadata: Tracking Artifacts and Pipeline Changes</h3>
+                    <p>ML Metadata is a library that tracks metadata flowing between components in an ML pipeline. It supports multiple storage backends and uses the following key concepts:</p>
+                    <ul>
+                        <li>Artifacts: Data inputs or outputs of a component</li>
+                        <li>Executions: Records of pipeline component runs</li>
+                        <li>Contexts: Conceptual groupings of executions and artifacts</li>
+                    </ul>
+                    <p>Here's a basic example of using ML Metadata:</p>
+                    <pre><code>python
+from ml_metadata import metadata_store
+from ml_metadata.proto import metadata_store_pb2
+
+# Set up a connection to the metadata store
+connection_config = metadata_store_pb2.ConnectionConfig()
+connection_config.sqlite.filename_uri = 'ml_metadata.db'
+store = metadata_store.MetadataStore(connection_config)
+
+# Register an artifact type (e.g., DataSet)
+data_set_type = metadata_store_pb2.ArtifactType()
+data_set_type.name = "DataSet"
+data_set_type.properties["day"] = metadata_store_pb2.INT
+data_set_type.properties["split"] = metadata_store_pb2.STRING
+data_set_type_id = store.put_artifact_type(data_set_type)
+
+# Create an artifact of this type
+data_set = metadata_store_pb2.Artifact()
+data_set.type_id = data_set_type_id
+data_set.properties["day"].int_value = 1
+data_set.properties["split"].string_value = "train"
+data_set_id = store.put_artifacts([data_set])[0]
+
+print(f"Registered artifact with id: {data_set_id}")
+</code></pre>
+                </section>
+
+                <section id="evolving-data">
+                    <h3>Evolving Data: Schema Development and Environments</h3>
+                    <p>As data evolves, it's crucial to maintain and update schemas to ensure data quality and model performance.</p>
+                </section>
+
+                <section id="storage-solutions">
+                    <h3>Enterprise Data Storage Solutions</h3>
+                    <h4>Feature Stores</h4>
+                    <p>Feature stores are central repositories for storing documented, curated, and access-controlled features specifically for ML. They offer:</p>
+                    <ul>
+                        <li>Sharing and discovery of features across teams</li>
+                        <li>Consistent feature computation for training and serving</li>
+                        <li>Version control and access management</li>
+                    </ul>
+                    <h4>Data Warehouses</h4>
+                    <p>Data warehouses are subject-oriented repositories of structured data optimized for fast read access. Key characteristics include:</p>
+                    <ul>
+                        <li>Aggregation of data from multiple sources</li>
+                        <li>Optimization for complex queries and analysis</li>
+                        <li>Storage of historical and current data</li>
+                    </ul>
+                    <h4>Data Lakes</h4>
+                    <p>Data lakes are repositories that store raw, unprocessed data in its native format. They offer:</p>
+                    <ul>
+                        <li>Storage of structured and unstructured data</li>
+                        <li>Flexibility for future use cases</li>
+                        <li>Cost-effective storage for large volumes of data</li>
+                    </ul>
+                </section>
+
+                <section id="advanced-techniques">
+                    <h3>Advanced Techniques in Machine Learning: Labeling, Augmentation, and Preprocessing</h3>
+                    <p>In the ever-evolving field of machine learning, the quality and quantity of training data play a crucial role in model performance. This comprehensive guide explores advanced techniques in data labeling, augmentation, and preprocessing, with a special focus on time series data.</p>
+                </section>
+
+                <section id="labeling-techniques">
+                    <h3>Advanced Labeling Techniques</h3>
+                    <h4>Semi-Supervised Learning</h4>
+                    <p>Semi-supervised learning combines a small amount of labeled data with a large pool of unlabeled data to improve model accuracy.</p>
+                    <h4>Label Propagation</h4>
+                    <p>Label propagation is a graph-based semi-supervised algorithm that propagates labels to unlabeled points based on similarity or "community structure".</p>
+                    <pre><code>python
+from sklearn.semi_supervised import LabelPropagation
+
+# Assuming X is your feature matrix and y is your partially labeled target vector
+lp_model = LabelPropagation()
+lp_model.fit(X, y)
+
+# Propagate labels to unlabeled points
+y_pred = lp_model.predict(X_unlabeled)
+</code></pre>
+                    <h4>Active Learning</h4>
+                    <p>Active learning intelligently samples data points for labeling, focusing on the most informative examples for model training.</p>
+                    <h4>Margin Sampling</h4>
+                    <p>Margin sampling is an active learning strategy that selects points the current model is least confident in.</p>
+                    <pre><code>python
+def margin_sampling(model, unlabeled_pool, n_instances=1):
+    probas = model.predict_proba(unlabeled_pool)
+    uncertainties = np.sort(probas, axis=1)[:, -2] - np.sort(probas, axis=1)[:, -1]
+    return np.argsort(uncertainties)[:n_instances]
+</code></pre>
+                    <h4>Weak Supervision</h4>
+                    <p>Weak supervision leverages noisy or imprecise sources to generate large amounts of labeled data.</p>
+                    <h4>Snorkel</h4>
+                    <p>Snorkel is a framework for programmatically building and managing training datasets without manual labeling.</p>
+                    <pre><code>python
+from snorkel.labeling import labeling_function, LabelingFunction
+
+@labeling_function()
+def keyword_labeling(x):
+    return SPAM if "buy now" in x.text.lower() else ABSTAIN
+
+labeling_model = LabelModel(cardinality=2, verbose=True)
+labeling_model.fit(L_train)
+</code></pre>
+                </section>
+
+                <section id="data-augmentation">
+                    <h3>Data Augmentation</h3>
+                    <p>Data augmentation techniques artificially expand the dataset by creating modified versions of existing data.</p>
+                    <h4>Image Augmentation</h4>
+                    <p>For image datasets, common augmentation techniques include flips, rotations, and crops.</p>
+                    <pre><code>python
+def augment_image(image):
+    image = tf.image.random_flip_left_right(image)
+    image = tf.image.random_brightness(image, max_delta=0.1)
+    image = tf.image.random_contrast(image, lower=0.9, upper=1.1)
+    return image
+</code></pre>
+                    <h4>Advanced Augmentation Techniques</h4>
+                    <ul>
+                        <li>Semi-supervised data augmentation (e.g., UDA)</li>
+                        <li>Policy-based data augmentation (e.g., AutoAugment)</li>
+                    </ul>
+                </section>
+
+                <section id="time-series-preprocessing">
+                    <h3>Preprocessing Time Series Data</h3>
+                    <p>Time series data requires special preprocessing techniques to prepare it for model training.</p>
+                    <h4>Windowing Strategies</h4>
+                    <p>Windowing converts time series data to depend on past observations.</p>
+                    <pre><code>python
+def create_time_window(data, window_size, forecast_horizon):
+    return tf.data.Dataset.from_tensor_slices(data)\
+        .window(window_size + forecast_horizon, shift=1, drop_remainder=True)\
+        .flat_map(lambda w: w.batch(window_size + forecast_horizon))
+</code></pre>
+                    <h4>Handling Sensors and Signals</h4>
+                    <p>For human activity recognition (HAR) tasks, segmentation and transformation of raw sensor data are crucial.</p>
+                    <pre><code>python
+def segment_signal(data, window_size, step_size):
+    segments = []
+    for i in range(0, len(data) - window_size, step_size):
+        segment = data[i:i + window_size]
+        segments.append(segment)
+    return np.array(segments)
+</code></pre>
+                </section>
+
+                <section id="weather-data">
+                    <h3>Preprocessing Weather Time Series Data</h3>
+                    <p>Let's walk through a practical example of preprocessing weather time series data:</p>
+                    <h4>Data Cleaning and Feature Selection</h4>
+                    <pre><code>python
+def clean_weather_data(data):
+    # Remove extreme values
+    data = data[data['wv (m/s)'] != -9999.0]
+    data = data[data['max. wv (m/s)'] != -9999.0]
+
+    # Convert datetime to timestamp
+    data['timestamp'] = pd.to_datetime(data['Date Time'])
+
+    # Remove highly correlated features
+    features_to_remove = ['Tpot (K)', 'Tdew (degC)', 'VPact', 'H2OC', 'max. wv (m/s)']
+    data = data.drop(columns=features_to_remove)
+
+    return data
+</code></pre>
+                    <h4>Feature Engineering</h4>
+                    <pre><code>python
+def engineer_features(data):
+    # Convert wind direction and velocity to wind vector
+    data['wind_x'] = data['wv (m/s)'] * np.cos(np.radians(data['wd (deg)']))
+    data['wind_y'] = data['wv (m/s)'] * np.sin(np.radians(data['wd (deg)']))
+
+    # Convert timestamp to cyclical features
+    data['time_of_day'] = np.sin(2 * np.pi * data['timestamp'].dt.hour / 24)
+    data['time_of_year'] = np.sin(2 * np.pi * data['timestamp'].dt.dayofyear / 365)
+
+    return data
+</code></pre>
+                    <h4>Normalization</h4>
+                    <pre><code>python
+def normalize_features(data):
+    scaler = StandardScaler()
+    float_features = data.select_dtypes(include=['float64']).columns
+    data[float_features] = scaler.fit_transform(data[float_features])
+    return data
+</code></pre>
+                    <h4>Windowing</h4>
+                    <pre><code>python
+def create_windows(data, window_size, target_column):
+    X = []
+    y = []
+    for i in range(len(data) - window_size):
+        X.append(data.iloc[i:i+window_size].drop(columns=[target_column]).values)
+        y.append(data.iloc[i+window_size][target_column])
+    return np.array(X), np.array(y)
+</code></pre>
+                </section>
+
+                <section>
+                    <h3 id="further-reading">Further Reading</h3>
+                    <ul>
+                        <li><a href="https://www.deeplearning.ai/courses/machine-learning-in-production/">Machine Learning Engineering for Production (MLOps) Specialization</b> by Andrew Ng</a></li>
+                        <li><b>Machine Learning Yearning</b> by Andrew Ng</li>
+                        <li><a href="https://airflow.apache.org/docs/apache-airflow/stable/index.html">Official Apache Airflow Documentation</a></li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="container">
+            © 2024 Beren. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>
