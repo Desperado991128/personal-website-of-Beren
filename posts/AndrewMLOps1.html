@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Machine Learning Project Lifecycle: From Concept to Deployment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">The Machine Learning Project Lifecycle: From Concept to Deployment</h2>
+            <div class="post-meta">
+                <span class="date">August 3, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">MLOps Series</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#stages">The Stages of the Machine Learning Project Lifecycle</a>
+                        <ul>
+                            <li><a href="#scoping">1. Scoping</a></li>
+                            <li><a href="#data">2. Data</a></li>
+                            <li><a href="#modeling">3. Modeling</a></li>
+                            <li><a href="#deployment">4. Deployment</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#mlops">MLOps: Bridging the Gap Between Concept and Production</a></li>
+                    <li><a href="#challenges">Deployment Challenges and Strategies</a>
+                        <ul>
+                            <li><a href="#concept-drift">Concept Drift and Data Drift</a></li>
+                            <li><a href="#software-engineering">Software Engineering Considerations</a></li>
+                            <li><a href="#deployment-patterns">Deployment Patterns</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#monitoring">Monitoring and Maintenance</a>
+                        <ul>
+                            <li><a href="#monitoring-dashboards">Monitoring Dashboards</a></li>
+                            <li><a href="#model-maintenance">Model Maintenance</a></li>
+                            <li><a href="#pipeline-monitoring">Pipeline Monitoring</a></li>
+                            <li><a href="#takeaways">Key Takeaways</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#modeling-intro">Machine Learning Modeling: From Selection to Performance Auditing</a></li>
+                    <li><a href="#data-intro">Defining Data and Establishing Baselines in Machine Learning: A Comprehensive Guide</a></li>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="introduction">
+                    <h3>Introduction</h3>
+                    <p>In the rapidly evolving field of machine learning (ML), understanding the complete lifecycle of an ML project is crucial for successful implementation. We will delve into the intricacies of the ML project lifecycle, from initial conception to final deployment and maintenance, gaining insights into the challenges and best practices that define modern ML operations (MLOps).</p>
+                </section>
+
+                <section id="stages">
+                    <h3>The Stages of the Machine Learning Project Lifecycle</h3>
+                    <p><img src="../images/AndrewMLOps1/1-ML project lifecycle diagram.png" alt="ML project lifecycle diagram"></p>
+                    <p>The ML project lifecycle can be broadly categorized into four main stages:</p>
+                    <ol>
+                        <li>Scoping</li>
+                        <li>Data</li>
+                        <li>Modeling</li>
+                        <li>Deployment</li>
+                    </ol>
+                    <p>Let's examine each of these stages in detail.</p>
+                </section>
+
+                <section id="scoping">
+                    <h4>1. Scoping</h4>
+                    <p>The scoping stage is where the project's foundations are laid. Key activities include:</p>
+                    <ul>
+                        <li>Defining the project's objectives and scope</li>
+                        <li>Deciding on key metrics for success</li>
+                        <li>Estimating resources and timeline</li>
+                    </ul>
+                    <p>For instance, in a speech recognition project for voice search, the team would:</p>
+                    <ul>
+                        <li>Decide to focus on speech recognition specifically for voice search applications</li>
+                        <li>Establish key metrics such as accuracy, latency, and throughput</li>
+                        <li>Estimate the necessary resources (human, computational, and time) required for completion</li>
+                    </ul>
+                    <p>This initial stage is crucial for aligning the project with business goals and setting realistic expectations.</p>
+                </section>
+
+                <section id="data">
+                    <h4>2. Data</h4>
+                    <p>The data stage involves:</p>
+                    <ul>
+                        <li>Defining the data requirements</li>
+                        <li>Establishing a baseline</li>
+                        <li>Labeling and organizing the data</li>
+                    </ul>
+                    <p>In our speech recognition example, this stage would address questions such as:</p>
+                    <ul>
+                        <li>Ensuring consistent data labeling (e.g., handling filler words like "Um")</li>
+                        <li>Determining the appropriate amount of silence before and after each audio clip</li>
+                        <li>Deciding on volume normalization techniques</li>
+                    </ul>
+                    <p><img src="../images/AndrewMLOps1/2-Data labeling consistency example.png" alt="Data labeling consistency example"></p>
+                    <p>The quality and consistency of data at this stage can significantly impact the model's performance downstream.</p>
+                </section>
+
+                <section id="modeling">
+                    <h4>3. Modeling</h4>
+                    <p>The modeling stage is where the core ML work occurs:</p>
+                    <ul>
+                        <li>Selecting an appropriate model architecture</li>
+                        <li>Training the model on the prepared data</li>
+                        <li>Performing error analysis to refine the model</li>
+                    </ul>
+                    <p>This stage often involves an iterative process of experimentation and refinement. It's important to note the distinction between academic research and product development in this context:</p>
+                    <pre><code>Research/Academia focus:
+- Code (algorithm/model)
+- Hyperparameters
+- Data
+
+Product Team focus:
+- Integrating the ML Model into the product ecosystem</code></pre>
+                    <p><img src="../images/AndrewMLOps1/3-Modeling stage components.png" alt="Modeling stage components"></p>
+                </section>
+
+                <section id="deployment">
+                    <h4>4. Deployment</h4>
+                    <p>The final stage involves deploying the model in a production environment:</p>
+                    <ul>
+                        <li>Setting up the necessary infrastructure for serving predictions</li>
+                        <li>Monitoring the system's performance</li>
+                        <li>Maintaining and updating the model as needed</li>
+                    </ul>
+                    <p>In our speech recognition example, deployment might involve:</p>
+                    <pre><code>Mobile phone (edge device)
+|-- Local Software
+    |-- Microphone
+    |-- Frontend code
+    |-- VAD (Voice Activity Detection) module
+|
+|-- Prediction Server
+    |-- Speech API
+        |-- Transcript
+        |-- Search Results</code></pre>
+                    <p><img src="../images/AndrewMLOps1/4-Deployment architecture for speech recognition.png" alt="Deployment architecture for speech recognition"></p>
+                </section>
+
+                <section id="mlops">
+                    <h3>MLOps: Bridging the Gap Between Concept and Production</h3>
+                    <p>Machine Learning Operations (MLOps) is an emerging discipline that provides tools and principles to support the entire ML project lifecycle. It addresses the "POC to Production Gap" by considering the full spectrum of requirements surrounding ML infrastructure.</p>
+                    <p><img src="../images/AndrewMLOps1/5-MLOps infrastructure requirements.png" alt="MLOps infrastructure requirements"></p>
+                    <p>Key components of MLOps include:</p>
+                    <ul>
+                        <li>Configuration management</li>
+                        <li>Data verification</li>
+                        <li>Feature extraction</li>
+                        <li>Process management tools</li>
+                        <li>Analysis tools</li>
+                        <li>Machine resource management</li>
+                        <li>Serving infrastructure</li>
+                        <li>Monitoring</li>
+                        <li>Data collection</li>
+                    </ul>
+                </section>
+
+                <section id="challenges">
+                    <h3>Deployment Challenges and Strategies</h3>
+
+                    <section id="concept-drift">
+                        <h4>Concept Drift and Data Drift</h4>
+                        <p>One of the primary challenges in ML deployment is dealing with changes in data distribution over time. This can manifest as:</p>
+                        <ul>
+                            <li>Concept drift: Changes in the relationship between input features and target variable</li>
+                            <li>Data drift: Changes in the distribution of input features</li>
+                        </ul>
+                        <p>To address these issues, it's crucial to:</p>
+                        <ol>
+                            <li>Regularly update training data to reflect current conditions</li>
+                            <li>Monitor model performance on recent data</li>
+                            <li>Implement mechanisms for automatic or manual model retraining</li>
+                        </ol>
+                    </section>
+
+                    <section id="software-engineering">
+                        <h4>Software Engineering Considerations</h4>
+                        <p>When deploying ML models, several software engineering aspects need to be addressed:</p>
+                        <ul>
+                            <li>Deciding between real-time or batch prediction</li>
+                            <li>Choosing between cloud-based or edge/browser deployment</li>
+                            <li>Allocating compute resources (CPU/GPU/memory)</li>
+                            <li>Managing latency and throughput (Queries Per Second)</li>
+                            <li>Implementing logging mechanisms</li>
+                            <li>Ensuring security and privacy compliance</li>
+                        </ul>
+                    </section>
+
+                    <section id="deployment-patterns">
+                        <h4>Deployment Patterns</h4>
+                        <p>Several deployment patterns can be employed to mitigate risks:</p>
+                        <ol>
+                            <li><b>Shadow Mode</b>: The ML system runs in parallel with human operators, allowing for performance comparison without affecting decisions.</li>
+                            <li><b>Canary Deployment</b>: Gradually rolling out the ML system to a small fraction of traffic (e.g., 5%) and monitoring performance before full deployment.</li>
+                            <li><b>Blue-Green Deployment</b>: Maintaining two identical production environments (Blue and Green) to facilitate easy rollbacks if issues arise.</li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps1/6-Blue-green deployment diagram.png" alt="Blue-green deployment diagram"></p>
+                        <ol start="4">
+                            <li><b>Degrees of Automation</b>: Implementing a gradual transition from human-only operations to full automation, with intermediate stages of AI assistance and partial automation.</li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section id="monitoring">
+                    <h3>Monitoring and Maintenance</h3>
+
+                    <section id="monitoring-dashboards">
+                        <h4>Monitoring Dashboards</h4>
+                        <p>Effective monitoring is crucial for maintaining ML systems in production. Key aspects to monitor include:</p>
+                        <ol>
+                            <li>Software metrics: Memory usage, compute resources, latency, throughput, server load</li>
+                            <li>Input metrics: Average input length, number of missing values, input quality (e.g., image brightness, audio volume)</li>
+                            <li>Output metrics: Null output frequency, user behavior (e.g., search redo rate, click-through rate)</li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps1/7-Monitoring dashboard example.png" alt="Monitoring dashboard example"></p>
+                    </section>
+
+                    <section id="model-maintenance">
+                        <h4>Model Maintenance</h4>
+                        <p>Maintaining ML models in production involves:</p>
+                        <ol>
+                            <li><b>Automatic Retraining</b>: Implementing systems to automatically retrain models when performance degrades or new data becomes available.</li>
+                            <li><b>Manual Retraining</b>: Scheduling periodic model updates or retraining based on human-led performance analysis.</li>
+                        </ol>
+                    </section>
+
+                    <section id="pipeline-monitoring">
+                        <h4>Pipeline Monitoring</h4>
+                        <p>In complex ML systems, monitoring individual components of the pipeline is crucial. For example:</p>
+                        <ol>
+                            <li>In a speech recognition system, monitor both the Voice Activity Detection (VAD) module and the speech recognition model separately.</li>
+                            <li>In a recommendation system, track changes in user profile data and the recommendation model's performance independently.</li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section id="takeaways">
+                    <h3>Key Takeaways</h3>
+                    <ol>
+                        <li>The ML project lifecycle consists of four main stages: Scoping, Data, Modeling, and Deployment.</li>
+                        <li>MLOps provides tools and principles to bridge the gap between proof-of-concept and production-ready ML systems.</li>
+                        <li>Deployment challenges include concept drift, data drift, and various software engineering considerations.</li>
+                        <li>Effective monitoring and maintenance strategies are crucial for long-term success of ML systems in production.</li>
+                        <li>Understanding and implementing appropriate deployment patterns can significantly reduce risks associated with ML system rollouts.</li>
+                    </ol>
+                </section>
+
+                <section id="modeling-intro">
+                    <h3>Machine Learning Modeling: From Selection to Performance Auditing</h3>
+
+                    <section id="introduction">
+                        <h4>Introduction</h4>
+                        <p>In the machine learning project lifecycle, the modeling stage is where the core ML work occurs. This stage involves selecting and training models, performing error analysis, and auditing performance. This comprehensive overview delves into the key challenges, best practices, and iterative processes involved in developing effective ML models.</p>
+                    </section>
+
+                    <section id="challenges">
+                        <h4>Key Challenges in Model Development</h4>
+                        <p>The modeling process in machine learning is inherently iterative and faces several key challenges:</p>
+                        <ol>
+                            <li>Performing well on the training set (usually measured by average training error)</li>
+                            <li>Generalizing well to dev/test sets</li>
+                            <li>Meeting business metrics and project goals</li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps1/8-Iterative model development process.png" alt="Iterative model development process"></p>
+                        <p>It's crucial to understand that an AI system is a combination of code (algorithm/model) and data. The development process involves continually refining these components:</p>
+                        <pre><code>ML Model = Algorithm/Model + Hyperparameters + Data</code></pre>
+                        <p>This iterative process involves training, error analysis, and performance auditing.</p>
+                    </section>
+
+                    <section id="beyond-test-error">
+                        <h4>Beyond Low Average Test Error</h4>
+                        <p>While achieving a low average test error is important, it's not sufficient for a truly effective ML model. Several factors need to be considered:</p>
+                        <ol>
+                            <li><b>Performance on disproportionately important examples</b>: In web search, for instance, navigational queries (e.g., "YouTube", "Reddit") may be more critical than informational queries.</li>
+                            <li><b>Performance on key slices of the dataset</b>: Ensure fairness across protected attributes (e.g., ethnicity, gender) in applications like loan approval.</li>
+                            <li><b>Rare classes</b>: In medical diagnosis, accurately identifying rare conditions is crucial despite their infrequent occurrence in the dataset.</li>
+                        </ol>
+                    </section>
+
+                    <section id="baseline">
+                        <h4>Establishing a Baseline</h4>
+                        <p>Before diving into model development, it's essential to establish a baseline level of performance. This baseline provides an estimate of the irreducible error (Bayes error) and indicates what might be possible to achieve.</p>
+                        <p>Ways to establish a baseline include:</p>
+                        <ol>
+                            <li>Human-level performance (HLP)</li>
+                            <li>Performance of older systems</li>
+                            <li>Literature search for state-of-the-art results</li>
+                            <li>Open-source implementations</li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps1/9-Baseline performance example.png" alt="Baseline performance example"></p>
+                    </section>
+
+                    <section id="getting-started">
+                        <h4>Tips for Getting Started on Modeling</h4>
+                        <ol>
+                            <li>Conduct a literature search to understand what's possible in your domain.</li>
+                            <li>Leverage open-source implementations when available.</li>
+                            <li>Remember that a reasonable algorithm with good data often outperforms a great algorithm with subpar data.</li>
+                        </ol>
+                        <p><b>Sanity Check for Code and Algorithm</b></p>
+                        <p>Before training on a large dataset, it's advisable to try overfitting a small training dataset. This approach helps verify that your code and algorithm are working correctly. For example:</p>
+                        <ul>
+                            <li>In speech recognition: Overfit on a few audio-transcript pairs</li>
+                            <li>In image segmentation: Overfit on a handful of images</li>
+                            <li>In image classification: Overfit on a small subset of the training data</li>
+                        </ul>
+                    </section>
+
+                    <section id="error-analysis">
+                        <h4>Error Analysis and Performance Auditing</h4>
+                        <p>Error analysis is a critical step in improving model performance. It involves a systematic examination of the model's mistakes to identify patterns and areas for improvement.</p>
+
+                        <section id="error-process">
+                            <h5>Error Analysis Process</h5>
+                            <ol>
+                                <li>Propose tags for categorizing errors (e.g., specific class labels, image properties, metadata)</li>
+                                <li>Manually examine a sample of misclassified examples</li>
+                                <li>Count the frequency of each tag in the error set</li>
+                            </ol>
+                            <p><img src="../images/AndrewMLOps1/10-Error analysis example.png" alt="Error analysis example"></p>
+                            <p>Useful metrics for each tag include:</p>
+                            <ul>
+                                <li>Fraction of errors with that tag</li>
+                                <li>Fraction of data with that tag that is misclassified</li>
+                                <li>Fraction of all data that has that tag</li>
+                                <li>Potential for improvement in that category</li>
+                            </ul>
+                        </section>
+
+                        <section id="prioritizing-areas">
+                            <h5>Prioritizing Areas for Improvement</h5>
+                            <p>When deciding which categories to focus on, consider:</p>
+                            <ol>
+                                <li>Room for improvement (gap to human-level performance)</li>
+                                <li>Frequency of the category in the dataset</li>
+                                <li>Ease of improving accuracy in that category</li>
+                                <li>Importance of improving in that category</li>
+                            </ol>
+                            <p>For prioritized categories, consider:</p>
+                            <ul>
+                                <li>Collecting more data</li>
+                                <li>Improving label accuracy</li>
+                                <li>Using data augmentation techniques</li>
+                            </ul>
+                        </section>
+                    </section>
+
+                    <section id="skewed-datasets">
+                        <h4>Handling Skewed Datasets</h4>
+                        <p>Many real-world datasets are skewed, with some classes being much more prevalent than others. Examples include:</p>
+                        <ul>
+                            <li>Manufacturing defect detection (99.7% no defect, 0.3% defect)</li>
+                            <li>Wake word detection in speech recognition (96.7% no wake word)</li>
+                            <li>Medical diagnosis (98% of patients don't have a specific disease)</li>
+                        </ul>
+                        <p>In such cases, accuracy alone can be misleading. Instead, use metrics like precision, recall, and F1 score.</p>
+
+                        <section id="confusion-matrix">
+                            <h5>Confusion Matrix, Precision, and Recall</h5>
+                            <p><img src="../images/AndrewMLOps1/11-Confusion matrix.png" alt="Confusion matrix"></p>
+                            <p>Precision (P) and Recall (R) are defined as:</p>
+                            <p>\[P = \frac{TP}{TP + FP}\]</p>
+                            <p>\[R = \frac{TP}{TP + FN}\]</p>
+                            <p>The F1 score combines precision and recall:</p>
+                            <p>\[F1 = \frac{2}{\frac{1}{P} + \frac{1}{R}} = \frac{2PR}{P + R}\]</p>
+                            <p>For multi-class problems, calculate precision and recall for each class separately.</p>
+                        </section>
+                    </section>
+
+                    <section id="performance-auditing">
+                        <h4>Performance Auditing</h4>
+                        <p>Performance auditing goes beyond simple accuracy metrics to ensure the model meets business requirements and ethical standards. The auditing framework involves:</p>
+                        <ol>
+                            <li>Brainstorming potential failure modes</li>
+                            <li>Establishing metrics to assess performance against these issues</li>
+                            <li>Getting buy-in from business/product owners</li>
+                        </ol>
+                        <p>Key areas to audit include:</p>
+                        <ul>
+                            <li>Performance on subsets of data (e.g., different demographics)</li>
+                            <li>Prevalence of specific errors (e.g., false positives, false negatives)</li>
+                            <li>Performance on rare classes</li>
+                        </ul>
+                    </section>
+
+                    <section id="data-centric">
+                        <h4>Data-Centric AI Development</h4>
+                        <p>While traditional ML focuses on model-centric development, there's a growing emphasis on data-centric approaches. The data-centric view prioritizes data quality and consistency, allowing multiple models to perform well.</p>
+
+                        <section id="data-augmentation">
+                            <h5>Data Augmentation</h5>
+                            <p>Data augmentation is a powerful technique for improving model performance, especially in unstructured data problems. The goal is to create realistic examples that:</p>
+                            <ol>
+                                <li>The algorithm currently performs poorly on</li>
+                                <li>Humans (or other baselines) can handle well</li>
+                            </ol>
+                            <p>When adding augmented data, ensure:</p>
+                            <ul>
+                                <li>It sounds/looks realistic</li>
+                                <li>The input-output mapping is clear</li>
+                                <li>The algorithm is currently struggling with similar examples</li>
+                            </ul>
+                            <p><img src="../images/AndrewMLOps1/12-Data augmentation analogy.png" alt="Data augmentation analogy"></p>
+                        </section>
+
+                        <section id="adding-features">
+                            <h5>Adding Features</h5>
+                            <p>For structured data problems, adding relevant features can significantly improve performance. For example, in a restaurant recommendation system for vegetarians:</p>
+                            <ul>
+                                <li>Add a feature indicating if a person is vegetarian (based on past orders)</li>
+                                <li>Include information about vegetarian options in restaurants</li>
+                            </ul>
+                        </section>
+
+                        <section id="experiment-tracking">
+                            <h5>Experiment Tracking</h5>
+                            <p>Keeping track of experiments is crucial for reproducibility and iterative improvement. Key elements to track include:</p>
+                            <ul>
+                                <li>Algorithm/code version</li>
+                                <li>Dataset used</li>
+                                <li>Hyperparameters</li>
+                                <li>Results</li>
+                            </ul>
+                            <p>Consider using dedicated experiment tracking tools that offer features like resource monitoring, visualization, and model error analysis.</p>
+                        </section>
+                    </section>
+
+                    <section id="big-to-good-data">
+                        <h4>From Big Data to Good Data</h4>
+                        <p>The focus is shifting from simply having large amounts of data to ensuring data quality. Good data is characterized by:</p>
+                        <ul>
+                            <li>Coverage of important cases</li>
+                            <li>Consistent definitions (especially for labels)</li>
+                            <li>Timely feedback from production to address data drift and concept drift</li>
+                            <li>Appropriate sizing</li>
+                        </ul>
+                    </section>
+
+                    <section id="takeaways">
+                        <h3>Key Takeaways</h3>
+                        <ol>
+                            <li>ML model development is an iterative process involving continuous refinement of algorithms, hyperparameters, and data.</li>
+                            <li>Establishing a solid baseline and conducting thorough error analysis are crucial steps in model improvement.</li>
+                            <li>Performance auditing should go beyond accuracy to ensure fairness, robustness, and alignment with business goals.</li>
+                            <li>Data-centric AI development, focusing on data quality and augmentation, can often yield better results than solely focusing on model architecture.</li>
+                            <li>Systematic experiment tracking and a shift towards "good data" rather than just "big data" are essential for long-term success in ML projects.</li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section id="data-intro">
+                    <h3>Defining Data and Establishing Baselines in Machine Learning: A Comprehensive Guide</h3>
+
+                    <section id="introduction">
+                        <h4>Introduction</h4>
+                        <p>In the machine learning project lifecycle, the data stage is crucial for building effective models. We'll explore the intricacies of data labeling, the importance of consistency, and strategies for handling various data types and sizes.</p>
+                    </section>
+
+                    <section id="data-definition">
+                        <h4>The Challenges of Data Definition</h4>
+                        <p>Defining data for ML projects is often more complex than it initially appears. Consider these examples:</p>
+
+                        <section id="iguana-detection">
+                            <h5>Iguana Detection</h5>
+                            <p><img src="../images/AndrewMLOps1/13-Iguana detection example.png" alt="Iguana detection example"></p>
+                            <p>Labeling instructions like "Use bounding boxes to indicate the position of iguanas" can lead to inconsistent results due to ambiguity in how to draw the boxes.</p>
+                        </section>
+
+                        <section id="speech-recognition">
+                            <h5>Speech Recognition</h5>
+                            <pre><code>"Um, nearest gas station"
+"Umm, nearest gas station"
+"Nearest gas station [unintelligible]"</code></pre>
+                            <p>How should filler words and unintelligible parts be transcribed?</p>
+                        </section>
+
+                        <section id="user-id-merge">
+                            <h5>User ID Merge</h5>
+                            <p><img src="../images/AndrewMLOps1/14-User ID merge example.png" alt="User ID merge example"></p>
+                            <p>Determining whether two user profiles belong to the same person can be challenging when information is incomplete or inconsistent.</p>
+                        </section>
+
+                        <section id="key-questions">
+                            <h5>Key Data Definition Questions</h5>
+                            <p>When defining data for an ML project, consider:</p>
+                            <ol>
+                                <li>What is the input \(x\)?</li>
+                                <li>What is the target label \(y\)?</li>
+                                <li>How can we ensure labelers give consistent labels?</li>
+                                <li>What features need to be included?</li>
+                            </ol>
+                        </section>
+                    </section>
+
+                    <section id="data-problems">
+                        <h4>Major Types of Data Problems</h4>
+                        <p>ML problems can be categorized along two main axes:</p>
+                        <ol>
+                            <li>Unstructured vs. Structured Data</li>
+                            <li>Small Data vs. Big Data</li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps1/15-Data problem types matrix.png" alt="Data problem types matrix"></p>
+
+                        <section id="unstructured-vs-structured">
+                            <h5>Unstructured vs. Structured Data</h5>
+                            <p><b>Unstructured Data</b>:</p>
+                            <ul>
+                                <li>May have a large collection of unlabeled examples</li>
+                                <li>Humans can often label more data</li>
+                                <li>Data augmentation is more likely to be helpful</li>
+                                <li>Examples: Images, audio, text</li>
+                            </ul>
+                            <p><b>Structured Data</b>:</p>
+                            <ul>
+                                <li>Often comes in tabular format</li>
+                                <li>May be more difficult to obtain additional data</li>
+                                <li>Human labeling may not be possible in many cases</li>
+                                <li>Examples: User transaction data, sensor readings</li>
+                            </ul>
+                        </section>
+
+                        <section id="small-vs-big-data">
+                            <h5>Small Data vs. Big Data</h5>
+                            <p><b>Small Data</b>:</p>
+                            <ul>
+                                <li>Emphasis on data process and clean labels</li>
+                                <li>Can manually review and fix labels</li>
+                                <li>Easier to get all labelers to coordinate</li>
+                            </ul>
+                            <p><b>Big Data</b>:</p>
+                            <ul>
+                                <li>Focus on scalable solutions</li>
+                                <li>May have to deal with noisy labels</li>
+                                <li>Manual review of all data is impractical</li>
+                            </ul>
+                            <p>It's important to note that even big data problems can have small data challenges, especially when dealing with rare events or long-tail distributions.</p>
+                        </section>
+                    </section>
+
+                    <section id="label-consistency">
+                        <h4>Improving Label Consistency</h4>
+                        <p>Label consistency is crucial, especially in small data scenarios. Here are strategies to improve consistency:</p>
+                        <ol>
+                            <li>Have multiple labelers label the same examples</li>
+                            <li>When disagreements occur, discuss with subject matter experts (SMEs) to refine label definitions</li>
+                            <li>If \(x\) doesn't contain enough information, consider changing the input format</li>
+                            <li>Iterate until it's hard to significantly increase agreement</li>
+                        </ol>
+
+                        <section id="consistency-examples">
+                            <h5>Examples of Improving Consistency</h5>
+                            <p><b>Standardize Labels</b>:</p>
+                            <pre><code>"Um, nearest gas station" -> "Um, nearest gas station"
+"Umm, nearest gas station" -> "Um, nearest gas station"
+"Nearest gas station [unintelligible]" -> "Nearest gas station [unintelligible]"</code></pre>
+                            <p><b>Merge Classes</b>:</p>
+                            <pre><code>"Deep scratch" + "Shallow scratch" -> "Scratch"</code></pre>
+                            <p><b>Introduce Uncertainty Classes</b>:</p>
+                            <p>Instead of binary labels (0 or 1), use a scale: 0, Borderline, 1</p>
+                        </section>
+                    </section>
+
+                    <section id="hlp">
+                        <h4>Human Level Performance (HLP)</h4>
+                        <p>Measuring Human Level Performance is valuable for several reasons:</p>
+                        <ol>
+                            <li>Estimate Bayes error / irreducible error</li>
+                            <li>Establish benchmarks for academic research</li>
+                            <li>Set realistic accuracy targets for business applications</li>
+                            <li>Compare ML system performance to human performance</li>
+                        </ol>
+
+                        <section id="raising-hlp">
+                            <h5>Raising HLP</h5>
+                            <p>When ground truth is defined by human labels, a low HLP may indicate ambiguous labeling instructions. Improving label consistency can raise HLP, which in turn can lead to better ML performance.</p>
+                        </section>
+                    </section>
+
+                    <section id="data-acquisition">
+                        <h4>Obtaining and Organizing Data</h4>
+
+                        <section id="strategy">
+                            <h5>Data Acquisition Strategy</h5>
+                            <ol>
+                                <li>Get into the training-error analysis loop as quickly as possible</li>
+                                <li>Instead of asking "How long to obtain \(m\) examples?", ask "How much data can we obtain in \(k\) days?"</li>
+                                <li>Inventory potential data sources, considering factors like cost, quality, and regulatory constraints</li>
+                            </ol>
+                        </section>
+
+                        <section id="pipeline">
+                            <h5>Data Pipeline</h5>
+                            <p>A robust data pipeline is crucial for reproducible ML workflows:</p>
+                            <p><img src="../images/AndrewMLOps1/16-Data pipeline example.png" alt="Data pipeline example"></p>
+                            <p>Key considerations:</p>
+                            <ul>
+                                <li>Replicate preprocessing scripts between development and production environments</li>
+                                <li>Keep track of data provenance and lineage</li>
+                                <li>Use sophisticated tools for production pipelines (e.g., TensorFlow Transform, Apache Beam, Airflow)</li>
+                            </ul>
+                        </section>
+
+                        <section id="meta-data">
+                            <h5>Meta-data and Data Provenance</h5>
+                            <p>Maintain detailed meta-data for each dataset, including:</p>
+                            <ul>
+                                <li>Time of collection</li>
+                                <li>Source</li>
+                                <li>Preprocessing steps applied</li>
+                                <li>Labeler information</li>
+                            </ul>
+                            <p>This information is valuable for error analysis and tracking data lineage.</p>
+                        </section>
+                    </section>
+
+                    <section id="train-dev-test">
+                        <h4>Balanced Train/Dev/Test Splits</h4>
+                        <p>For small data problems, ensure balanced representation of classes in train, dev, and test sets. This is less critical for large datasets where random splits are usually sufficient.</p>
+                    </section>
+
+                    <section id="scoping">
+                        <h4>Scoping ML Projects</h4>
+                        <p>While not always part of the data scientist's role, understanding the scoping process can be valuable:</p>
+                        <ol>
+                            <li>Identify business problems (not AI problems)</li>
+                            <li>Brainstorm AI solutions</li>
+                            <li>Assess feasibility and value of potential solutions</li>
+                            <li>Determine milestones</li>
+                            <li>Budget for resources</li>
+                        </ol>
+
+                        <section id="feasibility">
+                            <h5>Feasibility Assessment</h5>
+                            <ul>
+                                <li>Use external benchmarks (literature, competitors)</li>
+                                <li>Consider Human Level Performance (HLP)</li>
+                                <li>Evaluate if predictive features are available</li>
+                            </ul>
+                        </section>
+
+                        <section id="value">
+                            <h5>Value Assessment</h5>
+                            <p>Align ML metrics with business metrics:</p>
+                            <pre><code>ML Metrics -> Business Metrics
+Word-level accuracy -> Query-level accuracy -> Search result quality -> User engagement -> Revenue</code></pre>
+                        </section>
+
+                        <section id="ethics">
+                            <h5>Ethical Considerations</h5>
+                            <p>Always consider:</p>
+                            <ol>
+                                <li>Is the project creating net positive societal value?</li>
+                                <li>Is it reasonably fair and free from bias?</li>
+                                <li>Have ethical concerns been openly discussed?</li>
+                            </ol>
+                        </section>
+                    </section>
+
+                    <section id="takeaways">
+                        <h3>Key Takeaways</h3>
+                        <ol>
+                            <li>Data definition and labeling consistency are crucial, especially for small data problems.</li>
+                            <li>Understanding the type of data problem (structured/unstructured, small/big data) guides the approach to data collection and preparation.</li>
+                            <li>Human Level Performance (HLP) serves as a valuable benchmark and guide for improving data quality.</li>
+                            <li>A well-designed data pipeline ensures reproducibility and scalability of ML projects.</li>
+                            <li>Scoping ML projects requires balancing technical feasibility with business value and ethical considerations.</li>
+                        </ol>
+                    </section>
+
+                    <section id="further-reading"">
+                        <h3>Further Reading</h3>
+                        <ol>
+                            <li><a href="https://www.deeplearning.ai/courses/machine-learning-in-production/">Machine Learning Engineering for Production (MLOps) Specialization</b> by Andrew Ng</a></li>
+                            <li><b>Machine Learning Powered Applications: Going from Idea to Product</b> by Emmanuel Ameisen</li>
+                            <li><a href="https://www.thoughtworks.com/what-we-do/data/cd4ml">Continuous Delivery for Machine Learning (CD4ML) by ThoughtWorks</a></li>
+                            <li><a href="https://www.kubeflow.org/docs/started/introduction/">Official Kubeflow Documentation</a></li>
+                        </ol>
+                    </section>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Qingyu Meng. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>
