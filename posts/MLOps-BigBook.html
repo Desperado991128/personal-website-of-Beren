@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Big Book of MLOps: A Comprehensive Guide to Machine Learning Operations</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">The Big Book of MLOps: A Comprehensive Guide to Machine Learning Operations</h2>
+            <div class="post-meta">
+                <span class="date">August 4, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">MLOps Series</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#foundations-of-mlops">The Foundations of MLOps</a></li>
+                    <ul>
+                        <li><a href="#data-centric-approach">The Data-Centric Approach</a></li>
+                    </ul>
+                    <li><a href="#mlops-environment-semantics">MLOps Environment Semantics</a></li>
+                    <li><a href="#ml-deployment-patterns">ML Deployment Patterns</a></li>
+                    <li><a href="#unity-catalog">Unity Catalog: Unified Governance for Data and AI</a></li>
+                    <li><a href="#model-serving">Model Serving: Streamlining Real-Time ML Deployment</a></li>
+                    <li><a href="#lakehouse-monitoring">Lakehouse Monitoring: Ensuring Long-Term ML Performance</a></li>
+                    <li><a href="#llmops">LLMOps: Adapting MLOps for Large Language Models</a></li>
+                    <li><a href="#implementing-mlops">Implementing MLOps on Databricks</a></li>
+                    <li><a href="#key-takeaways"">Key Takeaways</a></li>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="foundations-of-mlops">
+                    <h3>The Foundations of MLOps</h3>
+                    <p>The importance of MLOps (Machine Learning Operations) has become increasingly apparent in the field of machine learning. "The Big Book of MLOps" by Databricks provides an extensive and in-depth exploration of the principles, practices, and tools that form the backbone of successful ML deployments. This summary of the original report is an essential resource for data scientists, ML engineers, and AI practitioners looking to streamline their ML workflows and improve the efficiency of their AI systems.</p>
+                </section>
+
+                <section id="data-centric-approach">
+                    <h3>The Data-Centric Approach</h3>
+                    <p>A fundamental principle of MLOps is the data-centric approach to machine learning. This perspective views the core components of any ML project as interconnected data pipelines:</p>
+                    <ul>
+                        <li>Feature engineering: The process of selecting, transforming, and creating relevant features from raw data.</li>
+                        <li>Training: The iterative process of developing and refining ML models using prepared data.</li>
+                        <li>Model deployment: The process of making trained models available for use in production environments.</li>
+                        <li>Inference: The application of deployed models to make predictions on new, unseen data.</li>
+                        <li>Monitoring: Continuous observation of model performance and data characteristics to ensure ongoing effectiveness.</li>
+                    </ul>
+                    <p>By treating these components as interconnected data pipelines, organizations can more effectively manage and optimize their ML workflows. This approach is particularly powerful when combined with a unified platform like the Databricks Lakehouse, which allows for seamless integration of data and AI assets.</p>
+                    <p>The data-centric approach also emphasizes the importance of data quality and consistency throughout the ML lifecycle. It recognizes that improvements in data quality often lead to more significant performance gains than tweaks to model architectures or hyperparameters.</p>
+                </section>
+
+                <section id="mlops-environment-semantics">
+                    <h3>MLOps Environment Semantics</h3>
+                    <p>MLOps introduces a clear separation of environments for developing, testing, and deploying ML solutions. This separation is crucial for maintaining the integrity of production systems while allowing for experimentation and innovation. The three primary environments are:</p>
+                    <ul>
+                        <li>Development Environment:
+                            <ul>
+                                <li>Purpose: Open and exploratory environment for data scientists and ML engineers.</li>
+                                <li>Characteristics: Flexible access controls, ability to experiment with new algorithms and data sources.</li>
+                                <li>Activities: Exploratory data analysis, feature engineering, model prototyping, and initial training.</li>
+                            </ul>
+                        </li>
+                        <li>Staging Environment:
+                            <ul>
+                                <li>Purpose: Controlled environment for testing and quality assurance.</li>
+                                <li>Characteristics: Mimics production setup, restricted access, and standardized testing procedures.</li>
+                                <li>Activities: Integration testing, performance benchmarking, and validation of ML pipelines.</li>
+                            </ul>
+                        </li>
+                        <li>Production Environment:
+                            <ul>
+                                <li>Purpose: Locked-down environment for serving ML models to end-users or applications.</li>
+                                <li>Characteristics: Strict access controls, high availability requirements, and robust monitoring.</li>
+                                <li>Activities: Model inference, performance monitoring, and automated retraining.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>Each environment has distinct access controls and quality assurance processes, ensuring that only thoroughly tested and validated models make it to production. This separation allows organizations to maintain the stability of their production ML systems while still fostering innovation in the development environment.</p>
+                </section>
+
+                <section id="ml-deployment-patterns">
+                    <h3>ML Deployment Patterns</h3>
+                    <p>The guide discusses two primary deployment patterns in the MLOps framework, each with its own advantages and use cases:</p>
+                    <h4>1. Deploy Code Pattern</h4>
+                    <p>In the Deploy Code pattern, the focus is on moving the code through the environments, with model training and deployment occurring in the production environment. The process follows these steps:</p>
+                    <ul>
+                        <li>Code Development: Data scientists and ML engineers develop model training code, validation scripts, and deployment configurations in the development environment.</li>
+                        <li>Code Testing: The code is moved to the staging environment, where it undergoes rigorous testing, including unit tests and integration tests.</li>
+                        <li>Code Deployment: After successful testing, the code is deployed to the production environment.</li>
+                        <li>Model Training: The deployed code is used to train the model using production data.</li>
+                        <li>Model Validation and Deployment: The trained model is validated and, if it meets the required criteria, deployed for inference.</li>
+                    </ul>
+                    <p>Advantages of the Deploy Code pattern:</p>
+                    <ul>
+                        <li>Ensures that the exact code used in development is tested and deployed to production.</li>
+                        <li>Allows for consistent model training using the latest production data.</li>
+                        <li>Simplifies the management of model versions, as they are always generated in the production environment.</li>
+                    </ul>
+
+                    <h4>2. Deploy Models Pattern</h4>
+                    <p>The Deploy Models pattern focuses on moving the trained model artifacts through the environments. The process typically follows these steps:</p>
+                    <ul>
+                        <li>Model Training: Models are trained in the development environment using development or snapshot data.</li>
+                        <li>Model Validation: Trained models are moved to the staging environment for validation and testing.</li>
+                        <li>Model Deployment: Validated models are deployed to the production environment for inference.</li>
+                    </ul>
+                    <p>Advantages of the Deploy Models pattern:</p>
+                    <ul>
+                        <li>Allows for more controlled model versioning, as each environment can have specific model versions.</li>
+                        <li>Can be faster for deployment if model training is computationally expensive.</li>
+                        <li>Useful for scenarios where production data cannot be accessed in non-production environments due to security or privacy concerns.</li>
+                    </ul>
+                    <p>The guide recommends the "Deploy Code" approach for most use cases, as it allows for more robust testing and validation before production deployment. However, the choice between these patterns depends on specific organizational needs, data sensitivity, and computational resources available.</p>
+                </section>
+
+                <section id="unity-catalog">
+                    <h3>Unity Catalog: Unified Governance for Data and AI</h3>
+                    <p>Unity Catalog is a cornerstone of the Databricks MLOps solution, providing centralized access control, auditing, lineage, and data discovery capabilities across Databricks workspaces. It extends the concept of data governance to include AI assets, creating a unified system for managing both data and models.</p>
+                    <p>Key features of Unity Catalog include:</p>
+                    <ul>
+                        <li>Models in Unity Catalog: Extends MLflow Model Registry functionality to Unity Catalog, allowing for versioned model management within the same governance framework as data assets.</li>
+                        <li>Feature Engineering in Unity Catalog: Enables the use of Delta tables as feature sources, with automatic tracking of feature lineage and usage.</li>
+                        <li>Cross-workspace asset sharing: Facilitates collaboration and reuse of ML assets across different teams and projects within an organization.</li>
+                        <li>Unified access control: Allows administrators to set granular permissions on data and AI assets using a single, consistent interface.</li>
+                        <li>Audit logging: Provides detailed logs of all actions performed on data and AI assets, enhancing transparency and compliance.</li>
+                    </ul>
+                    <h4>Benefits of Unity Catalog in MLOps</h4>
+                    <ul>
+                        <li>Unified Governance: Apply consistent security policies to both data and models, simplifying compliance and reducing the risk of unauthorized access.</li>
+                        <li>Read Access to Production Assets: Enable data scientists to access production data and models securely from development environments, facilitating more accurate model development and testing.</li>
+                        <li>Lineage Tracking: Trace relationships between data sources, features, models, and downstream consumers, enhancing reproducibility and impact analysis.</li>
+                        <li>Enhanced Discoverability: Centralized location for all data and AI assets, making it easier for teams to find and reuse existing resources.</li>
+                        <li>Scalability: The unified structure allows organizations to manage a growing number of ML projects and assets without increasing complexity.</li>
+                    </ul>
+                    <h4>Organizing Data and AI Assets in Unity Catalog</h4>
+                    <p>Unity Catalog uses a three-level namespace hierarchy to organize assets:</p>
+                    <ul>
+                        <li>Catalog: The top-level container for all data and AI assets. Typically, organizations create separate catalogs for different environments (e.g., dev, staging, prod).</li>
+                        <li>Schema: A logical grouping of related assets within a catalog. Schemas can be used to separate assets by team, project, or data processing stage.</li>
+                        <li>Entity: Individual assets such as tables, models, or functions.</li>
+                    </ul>
+                    <p>A recommended organization structure might look like this:</p>
+                    <pre><code>
+dev/
+├── bronze/
+│   └── Tables: Raw, unprocessed data
+├── silver/
+│   └── Tables: Cleaned and standardized data
+├── gold/
+│   └── Tables: Aggregated, feature-ready data
+└── fraud_detection/
+    ├── Tables: Use case-specific tables
+    ├── Models: ML models for fraud detection
+    └── Functions: UDFs for feature computation
+                    </code></pre>
+                    <p>This structure is replicated across dev, staging, and prod catalogs to maintain consistency and enable effective governance. The use of a medallion architecture (bronze, silver, gold) for data processing stages helps ensure data quality and readiness for ML tasks.</p>
+                </section>
+
+                <section id="model-serving">
+                    <h3>Model Serving: Streamlining Real-Time ML Deployment</h3>
+                    <p>Databricks Model Serving provides a serverless solution for deploying ML models as APIs, simplifying the process of making models available for real-time inference. This service addresses many of the challenges associated with deploying and scaling ML models in production environments.</p>
+                    <h4>Key benefits of Databricks Model Serving include:</h4>
+                    <ul>
+                        <li>Lakehouse Native: Seamless integration with Unity Catalog and MLflow, allowing for easy deployment of models registered in the MLflow Model Registry.</li>
+                        <li>Simplified Deployment: Data scientists or ML engineers can easily create and manage serving endpoints without extensive infrastructure knowledge.</li>
+                        <li>High Availability and Scalability: Built for production use with low latency (p50 overhead latency of less than 10ms) and high throughput (QPS of greater than 25k), with automatic scaling based on demand.</li>
+                        <li>Online Evaluation: Supports A/B testing and gradual rollout strategies, enabling careful evaluation of new model versions in production.</li>
+                        <li>Security and Cost-Effectiveness: Models are deployed in a secure network boundary, and the serverless compute scales down to zero when not in use.</li>
+                    </ul>
+                    <h4>Pre-Deployment Testing for Model Serving</h4>
+                    <p>Before exposing a model to production traffic, thorough testing is crucial to ensure both model accuracy and system performance. The guide recommends the following types of tests:</p>
+                    <ul>
+                        <li>Deployment Readiness Checks: 
+                            <ul>
+                                <li>Validate that configuration scripts are correctly specified</li>
+                                <li>Ensure required dependencies are present</li>
+                                <li>Verify the correct input data structure is defined</li>
+                            </ul>
+                        </li>
+                        <li>Load Testing:
+                            <ul>
+                                <li>Latency: Ensure response times meet predefined SLAs, measuring both median latency and long-tail (95th or 99th percentile) scenarios</li>
+                                <li>Throughput: Measure the system's capacity to handle queries over time, typically gauged in queries per second (QPS)</li>
+                                <li>Standard Load Evaluation: Analyze system behavior under expected request volumes, scaling from regular to anticipated peak levels</li>
+                                <li>Stress Assessment: Deliberately overwhelm the system to observe its response to abnormal demands, looking for graceful failure and effective recovery</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>These tests help ensure that the model serving infrastructure can handle the expected load and maintain performance under various conditions.</p>
+                    <h4>Real-Time Model Deployment Patterns</h4>
+                    <p>When deploying models for real-time inference, several deployment patterns can be used to manage risk and evaluate performance:</p>
+                    <ul>
+                        <li>A/B Testing:
+                            <ul>
+                                <li>Deploy multiple model versions concurrently</li>
+                                <li>Distribute traffic among versions to test and evaluate performance</li>
+                                <li>Select the best-performing model based on predefined success criteria</li>
+                            </ul>
+                        </li>
+                        <li>Gradual Rollout (Canary Deployment):
+                            <ul>
+                                <li>Expose a new model version to a small segment of request traffic initially</li>
+                                <li>Gradually increase traffic to the new version if it meets defined success criteria</li>
+                                <li>Allows for continuous exposure to real traffic while maintaining a safety net</li>
+                            </ul>
+                        </li>
+                        <li>Shadow Deployment:
+                            <ul>
+                                <li>Run a new model version alongside the existing version without actively serving traffic</li>
+                                <li>Generate predictions from the new version for comparison purposes</li>
+                                <li>Offers a risk-free way to evaluate new models without affecting user experience</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>These deployment patterns can be implemented using Databricks Model Serving's traffic splitting functionality, allowing for careful management of model updates and performance evaluation.</p>
+                </section>
+
+                <section id="lakehouse-monitoring">
+                    <h3>Lakehouse Monitoring: Ensuring Long-Term ML Performance</h3>
+                    <p>Lakehouse Monitoring is a data-centric monitoring solution designed to ensure the quality, accuracy, and reliability of both data and AI assets. Built on top of Unity Catalog, it provides a unified approach to monitoring that maintains lineage between data and AI assets.</p>
+                    <h4>Key features of Lakehouse Monitoring include:</h4>
+                    <ul>
+                        <li>Automatic metric table generation in Unity Catalog: Computed metrics are stored in Delta tables, making them easily accessible for analysis and reporting.</li>
+                        <li>Integration with Model Serving: Allows monitoring of inference tables produced by Model Serving endpoints, enabling comprehensive performance tracking of deployed models.</li>
+                        <li>Custom metric definition: Users can introduce metrics based on specific business needs, including aggregates or drift metrics that adhere to custom logic.</li>
+                        <li>Automated dashboard generation: Lakehouse Monitoring automatically creates Databricks SQL dashboards for visualizing computed monitoring metrics.</li>
+                        <li>Alerting capabilities: Alerts can be set up to notify teams when quality or performance indicators deviate from expectations.</li>
+                    </ul>
+                    <h4>Monitoring Workflow</h4>
+                    <p>The typical monitoring workflow in Lakehouse Monitoring consists of the following steps:</p>
+                    <ul>
+                        <li>Data Ingestion: 
+                            <ul>
+                                <li>Read logs from batch, streaming, or online inference processes</li>
+                                <li>Collect relevant data for analysis, including model inputs, outputs, and performance metrics</li>
+                            </ul>
+                        </li>
+                        <li>Check Accuracy and Data Drift:
+                            <ul>
+                                <li>Compute metrics about input data, model predictions, and infrastructure performance</li>
+                                <li>Use statistical methods to detect shifts in data distributions or model behavior</li>
+                                <li>Apply custom metrics defined by data scientists or domain experts</li>
+                            </ul>
+                        </li>
+                        <li>Publish Metrics and Setup Alerts:
+                            <ul>
+                                <li>Write computed metrics to Lakehouse tables in the prod catalog</li>
+                                <li>Create and update monitoring dashboards using tools like Databricks SQL</li>
+                                <li>Configure notifications for when health metrics surpass defined thresholds</li>
+                            </ul>
+                        </li>
+                        <li>Trigger Model Retraining:
+                            <ul>
+                                <li>When monitoring metrics indicate performance issues or data drift, initiate the model retraining process</li>
+                                <li>This can be done manually based on alerts or automated using predefined criteria</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                </section>
+
+                <section id="llmops">
+                    <h3>LLMOps: Adapting MLOps for Large Language Models</h3>
+                    <p>The rise of Large Language Models (LLMs) has introduced new considerations to the MLOps landscape. LLMOps, or MLOps for LLMs, builds on traditional MLOps practices while addressing the unique challenges and opportunities presented by these powerful, generative AI models.</p>
+                    <h4>Key aspects of LLMOps include:</h4>
+                    <h5>Prompt Engineering</h5>
+                    <p>Prompt engineering is the practice of designing and refining text prompts to elicit desired responses from LLMs. It has become a crucial part of the development process for LLM-powered applications. Best practices for prompt engineering include:</p>
+                    <ul>
+                        <li>Using clear, concise prompts with specific instructions</li>
+                        <li>Providing examples in the prompt (few-shot learning) to guide the model's output</li>
+                        <li>Iteratively refining prompts based on model responses</li>
+                        <li>Considering the use of automated prompt optimization techniques</li>
+                    </ul>
+                    <h5>Retrieval Augmented Generation (RAG)</h5>
+                    <p>RAG is a technique that combines LLMs with external knowledge retrieval, allowing models to access up-to-date information beyond their training data. The typical RAG workflow includes:</p>
+                    <ol>
+                        <li>User prompt processing</li>
+                        <li>Embedding conversion</li>
+                        <li>Information retrieval from external sources (often using vector databases)</li>
+                        <li>Context augmentation of the original prompt</li>
+                        <li>Response generation by the LLM</li>
+                    </ol>
+                    <p>RAG offers benefits such as reducing hallucinations, enabling domain-specific contextualization, and providing a cost-effective alternative to full model fine-tuning for many use cases.</p>
+                    <h5>Vector Databases</h5>
+                    <p>Vector databases have become an essential component of many LLM applications, particularly those implementing RAG. They offer efficient storage and retrieval of high-dimensional embeddings, which are crucial for semantic search and similarity matching. Key benefits of vector databases in LLMOps include:</p>
+                    <ul>
+                        <li>Holistic data management of both embeddings and original data objects</li>
+                        <li>Advanced filtering capabilities for precise information retrieval</li>
+                        <li>Dynamic updates without requiring complete index rebuilds</li>
+                        <li>Scalability to handle vast amounts of data</li>
+                    </ul>
+                    <h5>Fine-tuning vs. Pre-training</h5>
+                    <p>When adapting LLMs for specific tasks or domains, organizations must choose between fine-tuning existing models or pre-training new ones from scratch:</p>
+                    <p>Fine-tuning:</p>
+                    <ul>
+                        <li>Adapts a pre-trained LLM on a smaller, task-specific dataset</li>
+                        <li>Requires less computational resources and data than pre-training</li>
+                        <li>Useful for specializing models for particular domains or tasks</li>
+                    </ul>
+                    <p>Pre-training:</p>
+                    <ul>
+                        <li>Involves training a new LLM from scratch on a large corpus of data</li>
+                        <li>Offers maximum control over the model's knowledge and capabilities</li>
+                        <li>Requires significant computational resources and vast amounts of data</li>
+                    </ul>
+                    <p>The choice between these approaches depends on factors such as available data, computational resources, and the specificity of the target application.</p>
+                    <h5>LLM Inference Strategies</h5>
+                    <p>LLMOps introduces new considerations for model inference, particularly due to the large size of these models:</p>
+                    <h6>Real-Time Inference:</h6>
+                    <ul>
+                        <li>Third-party LLM API with pre/post-processing: Suitable for applications that can leverage existing cloud-based LLM services. This approach often requires only CPU resources for the pre/post-processing logic.</li>
+                        <li>Self-hosted fine-tuned models: Typically requires GPU resources for optimal performance. This approach offers more control over the model and can be necessary for applications with specific privacy or latency requirements.</li>
+                    </ul>
+                    <h6>Batch Inference:</h6>
+                    <ul>
+                        <li>Suitable for scenarios where immediate responses are not critical (e.g., offline text summarization or content generation).</li>
+                        <li>Leverages distributed computing frameworks like Apache Spark to process large volumes of data efficiently.</li>
+                        <li>Can be more cost-effective for high-throughput, lower-latency use cases.</li>
+                    </ul>
+                    <p>For both real-time and batch inference, handling large models that exceed single GPU memory capacity is a common challenge. Strategies to address this include:</p>
+                    <ul>
+                        <li>Distributing inference across multiple GPUs</li>
+                        <li>Using model quantization techniques (e.g., 8-bit or 4-bit precision) to reduce memory requirements</li>
+                        <li>Implementing model parallelism or pipeline parallelism for very large models</li>
+                    </ul>
+                    <h5>Managing Cost/Performance Trade-offs in LLMOps</h5>
+                    <p>Given the computational intensity of LLMs, managing cost/performance trade-offs becomes crucial in LLMOps. The guide offers several strategies:</p>
+                    <ul>
+                        <li>Start Simple, Plan for Scaling:
+                            <ul>
+                                <li>Begin with existing APIs for rapid development and prototyping</li>
+                                <li>Collect usage data to inform future optimization decisions</li>
+                                <li>Consider fine-tuning or self-hosting as the application matures and usage patterns become clear</li>
+                            </ul>
+                        </li>
+                        <li>Scope Costs:
+                            <ul>
+                                <li>Estimate query volumes and patterns (e.g., steady stream vs. bursty traffic)</li>
+                                <li>Calculate per-query costs for different model sizes and hosting options</li>
+                                <li>Use these estimates to inform decisions about model selection and hosting strategies</li>
+                            </ul>
+                        </li>
+                        <li>Optimize Model and Query Efficiency:
+                            <ul>
+                                <li>Use smaller model variants when possible (e.g., distilled models)</li>
+                                <li>Implement efficient prompting strategies to reduce input token count</li>
+                                <li>Leverage caching for common queries to reduce redundant computations</li>
+                            </ul>
+                        </li>
+                        <li>Consider Hybrid Approaches:
+                            <ul>
+                                <li>Use simpler, cheaper models for low-complexity tasks</li>
+                                <li>Reserve more powerful (and expensive) models for complex queries or high-value interactions</li>
+                            </ul>
+                        </li>
+                        <li>Continuous Monitoring and Optimization:
+                            <ul>
+                                <li>Implement robust monitoring to track usage patterns, costs, and performance metrics</li>
+                                <li>Regularly review and optimize based on real-world usage data</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h5>Human Feedback in LLM Evaluation and Improvement</h5>
+                    <p>While traditional ML models often have clear evaluation metrics, LLMs present unique challenges in assessment due to the open-ended nature of their outputs. Human feedback becomes essential in this context:</p>
+                    <h6>Evaluation:</h6>
+                    <ul>
+                        <li>Use human raters to assess the quality, relevance, and appropriateness of LLM outputs</li>
+                        <li>Implement user feedback mechanisms in user-facing applications (e.g., thumbs up/down buttons, follow-up questions)</li>
+                    </ul>
+                    <h6>Fine-tuning:</h6>
+                    <ul>
+                        <li>Collect human feedback to create datasets for further fine-tuning</li>
+                        <li>Use techniques like Reinforcement Learning from Human Feedback (RLHF) to align model outputs with human preferences</li>
+                    </ul>
+                    <h6>Prompt Refinement:</h6>
+                    <ul>
+                        <li>Leverage human insights to iteratively improve prompt engineering</li>
+                        <li>Use A/B testing with human evaluation to compare different prompting strategies</li>
+                    </ul>
+                    <h6>Bias and Safety Checks:</h6>
+                    <ul>
+                        <li>Employ diverse groups of human evaluators to identify potential biases or unsafe outputs</li>
+                        <li>Use human feedback to develop and refine content filtering systems</li>
+                    </ul>
+                    <h5>LLMOps Reference Architectures</h5>
+                    <p>The guide presents two reference architectures for LLM-powered applications:</p>
+                    <h6>RAG with Third-party LLM API:</h6>
+                    <ul>
+                        <li>Utilizes external LLM services (e.g., OpenAI, Anthropic) via MLflow AI Gateway</li>
+                        <li>Implements a vector database for efficient information retrieval</li>
+                        <li>Uses Databricks Model Serving to deploy the RAG pipeline</li>
+                    </ul>
+                    <h6>RAG with Fine-tuned Open Source Model:</h6>
+                    <ul>
+                        <li>Starts with a base model from an external model hub</li>
+                        <li>Implements fine-tuning pipeline in the production environment</li>
+                        <li>Deploys the fine-tuned model using Databricks Model Serving</li>
+                    </ul>
+                    <p>Both architectures leverage Unity Catalog for data and model management, and incorporate Lakehouse Monitoring for ongoing performance tracking.</p>
+                </section>
+
+                <section id="implementing-mlops">
+                    <h3>Implementing MLOps on Databricks</h3>
+                    <p>The guide introduces the MLOps Stack, a customizable template for implementing MLOps workflows on Databricks. Key components include:</p>
+                    <ul>
+                        <li>CI/CD Pipelines: Automated workflows for testing and deploying ML code and models</li>
+                        <li>Example ML Pipelines: Ready-to-use templates for common ML tasks (e.g., model training, deployment, batch inference)</li>
+                        <li>Databricks Asset Bundles: A mechanism for managing and deploying Databricks resources programmatically</li>
+                    </ul>
+                    <p>The MLOps Stack aims to accelerate the adoption of MLOps best practices by providing a structured starting point for new ML projects on the Databricks platform.</p>
+                </section>
+
+                <section id="key-takeaways">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>The importance of a data-centric approach to ML, treating all stages of the ML lifecycle as interconnected data pipelines</li>
+                        <li>The need for clear separation of development, staging, and production environments in MLOps workflows</li>
+                        <li>The value of unified governance for both data and AI assets, as exemplified by Unity Catalog</li>
+                        <li>The benefits of serverless, scalable model serving solutions for real-time inference</li>
+                        <li>The emerging field of LLMOps and its unique considerations, from prompt engineering to cost management</li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Qingyu Meng. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>
