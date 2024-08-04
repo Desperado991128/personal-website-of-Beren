@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Serving: A Comprehensive Guide for Machine Learning Practitioners</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Model Serving: A Comprehensive Guide for Machine Learning Practitioners</h2>
+            <div class="post-meta">
+                <span class="date">July 31, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">MLOps Series</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#understanding-model-serving">Understanding Model Serving</a></li>
+                    <ul>
+                        <li><a href="#what-is-model-serving">What is Model Serving?</a></li>
+                        <li><a href="#types-of-model-serving">Types of Model Serving</a></li>
+                        <li><a href="#key-metrics">Key Metrics in Model Serving</a></li>
+                        <ul>
+                            <li><a href="#latency">Latency</a></li>
+                            <li><a href="#throughput">Throughput</a></li>
+                            <li><a href="#cost">Cost</a></li>
+                        </ul>
+                        <li><a href="#optimizing-models">Optimizing Models for Serving</a></li>
+                        <ul>
+                            <li><a href="#model-complexity-vs-cost">Model Complexity vs. Cost</a></li>
+                            <li><a href="#optimizing-satisficing-metrics">Optimizing and Satisficing Metrics</a></li>
+                            <li><a href="#hardware-choices">Hardware Choices in Serving Infrastructure</a></li>
+                        </ul>
+                    </ul>
+
+                    <li><a href="#input-feature-lookup">Input Feature Lookup and Caching</a></li>
+                    <li><a href="#model-deployments">Model Deployments: From Data Centers to Edge Devices</a></li>
+                    <ul>
+                        <li><a href="#running-in-data-centers">Running in Large Data Centers</a></li>
+                        <li><a href="#constrained-environments">Constrained Environments: Mobile and Embedded
+                                Devices</a></li>
+                    </ul>
+                    <li><a href="#model-optimization-strategies">Strategies for Model Optimization</a></li>
+                    <li><a href="#serving-models">Serving Models: Web Applications vs. Serving Systems</a></li>
+                    <ul>
+                        <li><a href="#web-applications">Web Applications for Users</a></li>
+                        <li><a href="#dedicated-serving-systems">Dedicated Serving Systems</a></li>
+                    </ul>
+                    <li><a href="#tensorflow-serving">Hands-on with TensorFlow Serving</a></li>
+                    <ul>
+                        <li><a href="#installing-tensorflow-serving">Installing TensorFlow Serving</a></li>
+                        <li><a href="#building-saving-model">Building and Saving a Model</a></li>
+                        <li><a href="#launching-tensorflow-serving">Launching TensorFlow Serving</a></li>
+                        <li><a href="#sending-inference-requests">Sending Inference Requests</a></li>
+                    </ul>
+                    <li><a href="#key-takeaways">Key Takeaways</a></li>
+
+                    <li><a href="#introduction-to-model-serving">Introduction to Model Serving</a></li>
+                    <li><a href="#ml-infrastructure">ML Infrastructure: On-Premise vs. Cloud</a>
+                        <ul>
+                            <li><a href="#on-premise-infrastructure">On-Premise Infrastructure</a></li>
+                            <li><a href="#cloud-infrastructure">Cloud Infrastructure</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#model-servers">Model Servers: Simplifying Deployment at Scale</a>
+                        <ul>
+                            <li><a href="#tensorflow-serving">TensorFlow Serving</a></li>
+                            <li><a href="#nvidia-triton">NVIDIA Triton Inference Server</a></li>
+                            <li><a href="#torchserve">TorchServe</a></li>
+                            <li><a href="#kfserving">KFServing</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#scaling-infrastructure">Scaling Infrastructure</a>
+                        <ul>
+                            <li><a href="#vertical-vs-horizontal-scaling">Vertical vs. Horizontal Scaling</a></li>
+                            <li><a href="#virtualization-containerization">Virtualization and Containerization</a></li>
+                            <li><a href="#container-orchestration">Container Orchestration</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#online-inference">Online Inference</a>
+                        <ul>
+                            <li><a href="#metrics-to-optimize">Metrics to Optimize</a></li>
+                            <li><a href="#optimization-strategies">Optimization Strategies</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#data-preprocessing">Data Preprocessing for Inference</a></li>
+                    <li><a href="#batch-inference">Batch Inference</a>
+                        <ul>
+                            <li><a href="#advantages">Advantages</a></li>
+                            <li><a href="#limitations">Limitations</a></li>
+                            <li><a href="#optimization-focus">Optimization Focus</a></li>
+                            <li><a href="#use-cases">Use Cases</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#etl-pipelines">ETL Pipelines for Batch and Stream Processing</a>
+                        <ul>
+                            <li><a href="#batch-processing">Batch Processing</a></li>
+                            <li><a href="#stream-processing">Stream Processing</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#introduction-to-model-management">Introduction to Model Management and Delivery</a>
+                    </li>
+                    <li><a href="#experiment-tracking">Experiment Tracking</a>
+                        <ul>
+                            <li><a href="#importance">The Importance of Experiment Tracking</a></li>
+                            <li><a href="#tools-techniques">Tools and Techniques for Experiment Tracking</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#mlops-introduction">Introduction to MLOps</a>
+                        <ul>
+                            <li><a href="#bridging-gap">Bridging the Gap: Data Scientists vs. Software Engineers</a>
+                            </li>
+                            <li><a href="#components">Key Components of MLOps</a></li>
+                            <li><a href="#maturity-levels">MLOps Maturity Levels</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#developing-components">Developing Components for Orchestrated Workflows</a>
+                        <ul>
+                            <li><a href="#tfx-components">TFX (TensorFlow Extended) Components</a></li>
+                            <li><a href="#custom-components">Types of Custom TFX Components</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#model-versions">Managing Model Versions</a>
+                        <ul>
+                            <li><a href="#versioning-strategies">Model Versioning Strategies</a></li>
+                            <li><a href="#model-registries">Model Registries</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#cd">Continuous Delivery (CD) for ML</a>
+                        <ul>
+                            <li><a href="#ci-cd-infrastructure">CI/CD Infrastructure for ML</a></li>
+                            <li><a href="#unit-testing">Unit Testing in CI for ML</a></li>
+                            <li><a href="#infrastructure-validation">Infrastructure Validation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#progressive-delivery">Progressive Delivery Strategies</a>
+                        <ul>
+                            <li><a href="#blue-green-deployment">Blue/Green Deployment</a></li>
+                            <li><a href="#canary-deployment">Canary Deployment</a></li>
+                            <li><a href="#live-experimentation">Live Experimentation</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#introduction-to-monitoring">Introduction to Model Monitoring</a></li>
+                    <li><a href="#why-monitoring-matters">Why Monitoring Matters</a></li>
+                    <li><a href="#observability">Observability in ML</a></li>
+                    <li><a href="#monitoring-targets">Monitoring Targets in ML</a>
+                        <ul>
+                            <li><a href="#input-output-monitoring">Input and Output Monitoring</a></li>
+                            <li><a href="#prediction-monitoring">Prediction Monitoring</a></li>
+                            <li><a href="#operational-monitoring">Operational Monitoring</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#logging">Logging for ML Monitoring</a></li>
+                    <li><a href="#tracing">Tracing for ML Systems</a></li>
+                    <li><a href="#model-decay">Model Decay</a>
+                        <ul>
+                            <li><a href="#data-concept-drift">Data Drift (Feature Drift) and Concept Drift</a></li>
+                            <li><a href="#detecting-mitigating-decay">Detecting and Mitigating Model Decay</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#responsible-ai">Responsible AI Practices</a>
+                        <ul>
+                            <li><a href="#considerations">Key Considerations</a></li>
+                            <li><a href="#human-centered-design">Human-Centered Design</a></li>
+                            <li><a href="#multiple-metrics">Multiple Metrics</a></li>
+                            <li><a href="#data-analysis">Data Analysis</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#legal-requirements">Legal Requirements for Secure & Private AI</a>
+                        <ul>
+                            <li><a href="#gdpr-ccpa">GDPR and CCPA</a></li>
+                            <li><a href="#security-privacy-measures">Security and Privacy Measures</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#challenges">Challenges in Implementing Responsible AI</a></li>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="introduction">
+                    <h3>Introduction</h3>
+                    <p>In the realm of machine learning, the journey doesn't end with training a model. The true value
+                        of a model is realized when it's made available to end-users, a process known as model serving.
+                        This crucial step bridges the gap between development and real-world application, transforming
+                        your trained model into a functional service or application.</p>
+                </section>
+
+                <section id="understanding-model-serving">
+                    <h3>Understanding Model Serving</h3>
+                </section>
+
+                <section id="what-is-model-serving">
+                    <h4>What is Model Serving?</h4>
+                    <p>Model serving is the process of making a trained machine learning model available to end-users
+                        through a service or application. It's the vital link that allows your model to interact with
+                        the real world, providing predictions or insights based on input data.</p>
+                    <p><img src="../images/AndrewMLOps4/1-Diagram showing model, interpreter, and input data.png" alt="Diagram showing model, interpreter, and input data"></p>
+                    <p>At its core, model serving consists of three primary components:</p>
+                    <ul>
+                        <li>A trained model</li>
+                        <li>An interpreter to process inputs and outputs</li>
+                        <li>Input data for prediction</li>
+                    </ul>
+                </section>
+
+                <section id="types-of-model-serving">
+                    <h4>Types of Model Serving</h4>
+                    <p>Model serving can be broadly categorized into two types:</p>
+                    <ol>
+                        <li><strong>Batch Inference</strong>: This involves processing a large amount of data at once,
+                            typically used for offline predictions or periodic updates.</li>
+                        <li><strong>Real-time Inference</strong>: This type of serving provides immediate predictions
+                            for individual requests, crucial for applications requiring instant responses.</li>
+                    </ol>
+                    <p>The choice between batch and real-time inference depends on the specific requirements of your
+                        application, such as latency constraints and data volume.</p>
+                </section>
+
+                <section id="key-metrics">
+                    <h3>Key Metrics in Model Serving</h3>
+                    <p>When deploying models, three critical metrics need to be optimized:</p>
+                </section>
+
+                <section id="latency">
+                    <h4>Latency</h4>
+                    <p>Latency refers to the delay between a user's action and the application's response. In the
+                        context of model serving, it encompasses the entire process from sending data to the server,
+                        performing inference, and returning the response.</p>
+                    <p>$$ \text{Total Latency} = \text{Network Latency} + \text{Inference Latency} $$</p>
+                    <p>For example, if network latency is 100ms and inference latency is 200ms, the total latency would
+                        be 300ms.</p>
+                    <p>Minimizing latency is crucial for maintaining user satisfaction, especially in real-time
+                        applications.</p>
+                </section>
+
+                <section id="throughput">
+                    <h4>Throughput</h4>
+                    <p>Throughput is defined as the number of successful requests served per unit time, typically
+                        measured per second. It's particularly important in applications that handle a high volume of
+                        requests simultaneously.</p>
+                    <p>$$ \text{Throughput} = \frac{\text{Number of Successful Requests}}{\text{Time Unit}} $$</p>
+                    <p>In some scenarios, optimizing for throughput may be more critical than minimizing latency,
+                        depending on the application's requirements.</p>
+                </section>
+
+                <section id="cost">
+                    <h4>Cost</h4>
+                    <p>The cost associated with each inference is a crucial consideration, especially at scale. Key
+                        factors contributing to cost include:</p>
+                    <ul>
+                        <li>CPU usage</li>
+                        <li>Hardware accelerators (e.g., GPUs, TPUs)</li>
+                        <li>Caching infrastructure for faster data retrieval</li>
+                    </ul>
+                    <p>Balancing these metrics is often a challenge. For instance, an airline recommendation service
+                        might prioritize minimizing latency for user satisfaction while also needing to handle a high
+                        throughput of requests during peak times. The goal is to find the optimal balance between these
+                        metrics within the constraints of your infrastructure and budget.</p>
+                </section>
+
+                <section id="optimizing-models">
+                    <h3>Optimizing Models for Serving</h3>
+                </section>
+
+                <section id="model-complexity-vs-cost">
+                    <h4>Model Complexity vs. Cost</h4>
+                    <p>As model complexity increases, so does the cost of serving. More complex models often require
+                        more powerful hardware like GPUs or TPUs, increasing infrastructure costs. The challenge for ML
+                        practitioners is to balance complexity and cost effectively.</p>
+                    <p><img src="../images/AndrewMLOps4/2-Graph showing relationship between model complexity and cost.png" alt="Graph showing relationship between model complexity and cost"></p>
+                </section>
+
+                <section id="optimizing-satisficing-metrics">
+                    <h4>Optimizing and Satisficing Metrics</h4>
+                    <p>When deploying models, it's essential to distinguish between optimizing and satisficing (gating)
+                        metrics:</p>
+                    <ul>
+                        <li><strong>Optimizing Metrics</strong>: These are the primary performance indicators you're
+                            trying to improve, such as accuracy, precision, or recall.</li>
+                        <li><strong>Satisficing (Gating) Metrics</strong>: These are threshold metrics that must be met
+                            for the model to be considered acceptable, such as latency, model size, or GPU load.</li>
+                    </ul>
+                    <p>The process of model deployment often involves iteratively increasing model complexity to improve
+                        predictive power while ensuring that gating metrics are still met.</p>
+                </section>
+
+                <section id="hardware-choices">
+                    <h4>Hardware Choices in Serving Infrastructure</h4>
+                    <p>The choice of hardware significantly impacts both performance and cost:</p>
+                    <ul>
+                        <li><strong>GPUs</strong>: Ideal for parallel processing, enhancing throughput.</li>
+                        <li><strong>TPUs</strong>: Suitable for complex models and large batch processing.</li>
+                    </ul>
+                    <p>These choices are often made at an organizational level, balancing the need for computational
+                        power with budget constraints.</p>
+                </section>
+
+                <section id="input-feature-lookup">
+                    <h3>Input Feature Lookup and Caching</h3>
+                    <p>In many real-world scenarios, the prediction request might not include all necessary features.
+                        For instance, a food delivery time estimation model might need to access additional features
+                        like:</p>
+                    <ul>
+                        <li>Incoming orders (not included in the request)</li>
+                        <li>Outstanding orders per minute in the past hour</li>
+                    </ul>
+                    <p>To handle this, pre-computed or aggregated features are often read in real-time from a data
+                        store. This introduces an additional cost factor in the form of maintaining this data store.</p>
+                    <p>Several NoSQL databases are commonly used for this purpose:</p>
+                    <ol>
+                        <li><strong>Google Cloud Bigtable</strong>: Scalable, handles dynamically changing data with
+                            millisecond read latency.</li>
+                        <li><strong>Google Cloud Firestore</strong>: Suitable for slowly changing data, also with
+                            millisecond read latency.</li>
+                        <li><strong>Amazon DynamoDB</strong>: Offers single-digit millisecond read latency with an
+                            in-memory cache option.</li>
+                        <li><strong>Google Cloud Memorystore</strong>: An in-memory cache with sub-millisecond read
+                            latency.</li>
+                    </ol>
+                    <p>While these solutions are powerful, they can be expensive. It's crucial to carefully consider
+                        caching requirements to optimize costs.</p>
+                </section>
+
+                <section id="model-deployments">
+                    <h3>Model Deployments: From Data Centers to Edge Devices</h3>
+                </section>
+
+                <section id="running-in-data-centers">
+                    <h4>Running in Large Data Centers</h4>
+                    <p>In data center deployments, the focus is often on optimizing resource utilization to reduce costs
+                        while maintaining performance.</p>
+                </section>
+
+                <section id="constrained-environments">
+                    <h4>Constrained Environments: Mobile and Embedded Devices</h4>
+                    <p>Deploying models to edge devices introduces unique challenges:</p>
+                    <ul>
+                        <li>Limited storage (e.g., average Android app size ≈ 11MB)</li>
+                        <li>Restricted GPU memory (often < 4GB on mobile devices)</li>
+                        <li>Strict latency requirements (crucial for applications like autonomous vehicles)</li>
+                    </ul>
+                    <p>These constraints often rule out large, complex models for edge deployments. Instead, model
+                        efficiency becomes paramount, necessitating techniques like model compression or quantization.
+                    </p>
+                </section>
+
+                <section id="model-optimization-strategies">
+                    <h3>Strategies for Model Optimization</h3>
+                    <p>To meet the challenges of various deployment scenarios, several optimization strategies can be
+                        employed:</p>
+                    <ol>
+                        <li><strong>Profile and Benchmark</strong>: Analyze your model's performance to identify
+                            bottlenecks.</li>
+                        <li><strong>Optimize Operators</strong>: Improve the efficiency of individual operations within
+                            your model.</li>
+                        <li><strong>Optimize Model Architecture</strong>: Redesign the model structure for better
+                            efficiency without sacrificing accuracy.</li>
+                        <li><strong>Thread Optimization</strong>: Fine-tune thread usage for optimal performance on the
+                            target hardware.</li>
+                    </ol>
+                </section>
+
+                <section id="serving-models">
+                    <h3>Serving Models: Web Applications vs. Serving Systems</h3>
+                </section>
+
+                <section id="web-applications">
+                    <h4>Web Applications for Users</h4>
+                    <p>Traditional web frameworks like FastAPI, Flask, or Django (Python), and Spring or Apache Tomcat
+                        (Java) can be used to wrap models as API services. Users interact with these services through
+                        web applications.</p>
+                </section>
+
+                <section id="dedicated-serving-systems">
+                    <h4>Dedicated Serving Systems</h4>
+                    <p>Specialized serving systems offer advantages over custom web applications:</p>
+                    <ul>
+                        <li>Centralized model deployment</li>
+                        <li>Predictions as a service</li>
+                        <li>Easy deployment and rollback</li>
+                        <li>Built-in cluster and resource management</li>
+                    </ul>
+                    <p>Two popular serving systems are:</p>
+                    <ol>
+                        <li><strong>Clipper</strong>: An open-source project from UC Berkeley
+                            <ul>
+                                <li>Supports multiple modeling frameworks</li>
+                                <li>Provides a RESTful API</li>
+                                <li>Offers cluster and resource management</li>
+                                <li>Allows settings for reliable latency</li>
+                            </ul>
+                        </li>
+                        <li><strong>TensorFlow Serving</strong>: An open-source project from Google
+                            <ul>
+                                <li>Optimized for serving TensorFlow models</li>
+                                <li>Extensible to other model types</li>
+                                <li>Uses REST and gRPC protocols</li>
+                                <li>Includes a version manager for easy model updates</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="tensorflow-serving">
+                    <h3>Hands-on with TensorFlow Serving</h3>
+                    <p>Let's walk through a practical example of setting up and using TensorFlow Serving with a simple
+                        MNIST digit recognition model.</p>
+                </section>
+
+                <section id="installing-tensorflow-serving">
+                    <h4>Installing TensorFlow Serving</h4>
+                    <p>TensorFlow Serving can be installed via Docker, which is the easiest and most recommended method,
+                        especially for GPU support:</p>
+                    <pre><code>bash
+docker pull tensorflow/serving
+docker pull tensorflow/serving:latest-gpu
+</code></pre>
+                    <p>Alternatively, it can be installed using package managers or built from source for more specific
+                        requirements.</p>
+                </section>
+
+                <section id="building-saving-model">
+                    <h4>Building and Saving a Model</h4>
+                    <p>Here's a brief example of building, training, and saving a simple CNN model for MNIST digit
+                        recognition using TensorFlow:</p>
+                    <pre><code>python
+import tensorflow as tf
+
+# Load and preprocess MNIST data
+mnist = tf.keras.datasets.mnist
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+train_images = train_images.reshape(train_images.shape[0], 28, 28, 1) / 255.0
+test_images = test_images.reshape(test_images.shape[0], 28, 28, 1) / 255.0
+
+# Build the model
+model = tf.keras.Sequential([
+    tf.keras.layers.Conv2D(8, 3, activation='relu', input_shape=(28,28,1)),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(10, activation='softmax')
+])
+
+# Compile and train
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(train_images, train_labels, epochs=5)
+
+# Save the model
+model.save('/tmp/mnist_model/1/')
+</code></pre>
+                </section>
+
+                <section id="launching-tensorflow-serving">
+                    <h4>Launching TensorFlow Serving</h4>
+                    <p>Once the model is saved, you can launch TensorFlow Serving to serve your model:</p>
+                    <pre><code>bash
+tensorflow_model_server \
+    --rest_api_port=8501 \
+    --model_name=mnist_model \
+    --model_base_path=/tmp/mnist_model/
+</code></pre>
+                </section>
+
+                <section id="sending-inference-requests">
+                    <h4>Sending Inference Requests</h4>
+                    <p>With the server running, you can send inference requests using HTTP POST requests:</p>
+                    <pre><code>python
+import requests
+import json
+import numpy as np
+
+# Prepare the data
+test_image = test_images[0:1].tolist()
+data = json.dumps({"instances": test_image})
+
+# Send the request
+headers = {"content-type": "application/json"}
+json_response = requests.post('http://localhost:8501/v1/models/mnist_model:predict', data=data, headers=headers)
+predictions = json.loads(json_response.text)['predictions']
+
+print(f"Predicted digit: {np.argmax(predictions[0])}")
+</code></pre>
+                    <p>This example demonstrates the end-to-end process of training a model, serving it with TensorFlow
+                        Serving, and making predictions using the served model.</p>
+                </section>
+
+                <section id="key-takeaways">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>Model serving is the crucial step that brings ML models from development to real-world
+                            application, involving the model, an interpreter, and input data.</li>
+                        <li>Key metrics in model serving include latency, throughput, and cost, which need to be
+                            balanced based on the specific requirements of the application.</li>
+                        <li>Optimizing models for serving involves balancing model complexity with infrastructure costs,
+                            and considering both optimizing and satisficing metrics.</li>
+                        <li>The choice of serving infrastructure, from large data centers to edge devices, significantly
+                            impacts the approach to model optimization and deployment.</li>
+                        <li>Specialized serving systems like Clipper and TensorFlow Serving offer advantages in terms of
+                            ease of deployment, scalability, and management compared to custom web applications.</li>
+                    </ul>
+                </section>
+
+                <section id="introduction-to-model-serving">
+                    <h3>Introduction to Model Serving</h3>
+                    <p>The ability to effectively serve models is as
+                        crucial as developing them in machine learning. We'll navigate through the landscape of
+                        on-premise and cloud solutions, examine
+                        popular model servers, and discuss the nuances of scaling and inference optimization.</p>
+                </section>
+
+                <section id="ml-infrastructure">
+                    <h3>ML Infrastructure: On-Premise vs. Cloud</h3>
+                    <p>The foundation of any model serving strategy begins with the choice of infrastructure. Two
+                        primary options exist:</p>
+
+                    <section id="on-premise-infrastructure">
+                        <h4>On-Premise Infrastructure</h4>
+                        <ul>
+                            <li>Involves training and deploying on your own hardware infrastructure</li>
+                            <li>Requires manual procurement of hardware (GPUs, CPUs, etc.)</li>
+                            <li>Profitable for large companies running long-term ML projects</li>
+                            <li>Can utilize open-source, pre-built servers like TF-Serving, KF-Serving, and NVIDIA
+                                Triton</li>
+                        </ul>
+                    </section>
+
+                    <section id="cloud-infrastructure">
+                        <h4>Cloud Infrastructure</h4>
+                        <ul>
+                            <li>Allows training and deployment on cloud platforms (e.g., AWS, Google Cloud Platform,
+                                Microsoft Azure)</li>
+                            <li>Offers the option to create VMs and use open-source pre-built servers</li>
+                            <li>Provides managed ML workflows</li>
+                        </ul>
+                        <p>The choice between on-premise and cloud depends on factors such as project scale, duration,
+                            and resource availability.</p>
+                    </section>
+                </section>
+
+                <section id="model-servers">
+                    <h3>Model Servers: Simplifying Deployment at Scale</h3>
+                    <p>Model servers are crucial components that simplify the deployment of machine learning models at
+                        scale. They handle tasks such as scaling, performance optimization, and some aspects of model
+                        lifecycle management.</p>
+                    <p><img src="../images/AndrewMLOps4/3-Diagram of Model Server architecture.png" alt="Diagram of Model Server architecture"></p>
+                    <p>Key features of model servers include:</p>
+                    <ul>
+                        <li>Handling REST/gRPC endpoints</li>
+                        <li>Managing model files</li>
+                        <li>Scaling to meet demand</li>
+                    </ul>
+
+                    <section id="tensorflow-serving">
+                        <h4>TensorFlow Serving</h4>
+                        <ul>
+                            <li>Out-of-the-box integration with TensorFlow models</li>
+                            <li>Supports batch and real-time inference</li>
+                            <li>Offers multi-model serving</li>
+                            <li>Exposes gRPC and REST endpoints</li>
+                            <li>Supports various "servables" including TF models, non-TF models, word embeddings, and
+                                feature transformations</li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/4-TensorFlow Serving Architecture.png" alt="TensorFlow Serving Architecture">
+                        </p>
+                    </section>
+
+                    <section id="nvidia-triton">
+                        <h4>NVIDIA Triton Inference Server</h4>
+                        <ul>
+                            <li>Open-source inference serving software</li>
+                            <li>Supports models from various frameworks (TensorFlow, PyTorch, ONNX Runtime, etc.)</li>
+                            <li>Allows model storage on local storage, AWS S3, GCP</li>
+                            <li>Supports single GPU for multiple models and multi-GPU for the same model</li>
+                            <li>Integrates with KubeFlow pipelines for end-to-end AI workflow</li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/5-NVIDIA Triton Inference Server Architecture.png" alt="NVIDIA Triton Inference Server Architecture">
+                        </p>
+                    </section>
+
+                    <section id="torchserve">
+                        <h4>TorchServe</h4>
+                        <ul>
+                            <li>Model serving framework for PyTorch models</li>
+                            <li>Supports batch and real-time inference</li>
+                            <li>Offers multi-model serving</li>
+                            <li>Provides default handlers for common tasks (e.g., image classification, object
+                                detection)</li>
+                            <li>Enables A/B testing</li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/6-TorchServe Architecture.png" alt="TorchServe Architecture">
+                        </p>
+                    </section>
+
+                    <section id="kfserving">
+                        <h4>KFServing</h4>
+                        <ul>
+                            <li>Enables serverless inferencing on Kubernetes</li>
+                            <li>Provides high-abstraction interfaces for common ML frameworks</li>
+                            <li>Integrates with Kubernetes, Istio, and Knative</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="scaling-infrastructure">
+                    <h3>Scaling Infrastructure</h3>
+                    <p>Scaling is a critical aspect of model serving, ensuring that your infrastructure can handle
+                        increasing loads efficiently.</p>
+
+                    <section id="vertical-vs-horizontal-scaling">
+                        <h4>Vertical vs. Horizontal Scaling</h4>
+                        <p>While vertical scaling (increasing the power of a single server) is straightforward,
+                            horizontal scaling (adding more servers) offers several advantages:</p>
+                        <ul>
+                            <li>Elasticity: Ability to grow or shrink the number of nodes based on load</li>
+                            <li>Continuous availability: No need to take existing servers offline for scaling</li>
+                            <li>Unlimited capacity: Can add more nodes at any time</li>
+                        </ul>
+                    </section>
+
+                    <section id="virtualization-containerization">
+                        <h4>Virtualization and Containerization</h4>
+                        <p>Two key technologies enable efficient scaling:</p>
+                        <ul>
+                            <li><b>Virtual Machines (VMs)</b>
+                                <ul>
+                                    <li>Allow multiple operating systems on a single physical machine</li>
+                                    <li>Managed by a hypervisor</li>
+                                </ul>
+                            </li>
+                            <li><b>Containers</b>
+                                <ul>
+                                    <li>Lightweight, standalone executable packages</li>
+                                    <li>Include everything needed to run an application</li>
+                                    <li>Offer advantages like reduced OS requirements and easier deployment</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/7-Comparison of VM and Container architectures.png" alt="Comparison of VM and Container architectures">
+                        </p>
+                    </section>
+
+                    <section id="container-orchestration">
+                        <h4>Container Orchestration</h4>
+                        <p>To manage containers at scale, container orchestration tools are essential. Popular options
+                            include:</p>
+                        <ul>
+                            <li>Kubernetes</li>
+                            <li>Docker Swarm</li>
+                        </ul>
+                        <p>These tools manage the lifecycle of containers, handle scaling, ensure reliability, and
+                            distribute resources effectively.</p>
+                    </section>
+                </section>
+
+                <section id="online-inference">
+                    <h3>Online Inference</h3>
+                    <p>Online inference involves generating machine learning predictions in real-time upon request. Key
+                        considerations include:</p>
+
+                    <section id="metrics-to-optimize">
+                        <h4>Metrics to Optimize</h4>
+                        <ul>
+                            <li>Latency: Minimize delay between request and response</li>
+                            <li>Throughput: Maximize the number of predictions per unit time</li>
+                            <li>Cost: Optimize resource usage for cost-effectiveness</li>
+                        </ul>
+                    </section>
+
+                    <section id="optimization-strategies">
+                        <h4>Optimization Strategies</h4>
+                        <ul>
+                            <li><b>Infrastructure Optimization</b>
+                                <ul>
+                                    <li>Use appropriate hardware (CPUs, GPUs, TPUs)</li>
+                                    <li>Implement efficient networking</li>
+                                </ul>
+                            </li>
+                            <li><b>Model Architecture Optimization</b>
+                                <ul>
+                                    <li>Choose appropriate model complexity</li>
+                                    <li>Consider model compression techniques</li>
+                                </ul>
+                            </li>
+                            <li><b>Model Compilation</b>
+                                <ul>
+                                    <li>Use techniques like quantization</li>
+                                    <li>Employ model-specific optimizers</li>
+                                </ul>
+                            </li>
+                            <li><b>Data Store and Caching</b>
+                                <ul>
+                                    <li>Implement efficient data retrieval systems</li>
+                                    <li>Use caching for frequently accessed data</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Popular NoSQL databases for caching and feature lookup include:</p>
+                        <ul>
+                            <li>Amazon DynamoDB</li>
+                            <li>Google Cloud Memorystore</li>
+                            <li>Google Cloud Bigtable</li>
+                            <li>Google Cloud Firestore</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="data-preprocessing">
+                    <h3>Data Preprocessing for Inference</h3>
+                    <p>Effective data preprocessing is crucial for accurate and efficient inference. Key preprocessing
+                        steps include:</p>
+                    <ul>
+                        <li><b>Data Cleansing</b>
+                            <ul>
+                                <li>Correct invalid values in incoming data</li>
+                            </ul>
+                        </li>
+                        <li><b>Feature Tuning</b>
+                            <ul>
+                                <li>Normalize data</li>
+                                <li>Clip outliers</li>
+                                <li>Impute missing values</li>
+                            </ul>
+                        </li>
+                        <li><b>Feature Construction</b>
+                            <ul>
+                                <li>Combine inputs</li>
+                                <li>Perform feature crossing</li>
+                                <li>Apply polynomial expansion</li>
+                            </ul>
+                        </li>
+                        <li><b>Representation Transformation</b>
+                            <ul>
+                                <li>Change data format for the model</li>
+                                <li>Apply one-hot encoding</li>
+                                <li>Perform vectorization</li>
+                            </ul>
+                        </li>
+                        <li><b>Feature Selection</b>
+                            <ul>
+                                <li>Apply the same feature selection done during training</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="batch-inference">
+                    <h3>Batch Inference</h3>
+                    <p>Batch inference involves generating predictions on a batch of observations, often on a recurring
+                        schedule. Key aspects include:</p>
+
+                    <section id="advantages">
+                        <h4>Advantages</h4>
+                        <ul>
+                            <li>Reduced cost of ML system</li>
+                            <li>Ability to use complex models for improved accuracy</li>
+                            <li>No need for real-time caching</li>
+                        </ul>
+                    </section>
+
+                    <section id="limitations">
+                        <h4>Limitations</h4>
+                        <ul>
+                            <li>Long update latency</li>
+                            <li>Predictions based on older data</li>
+                        </ul>
+                    </section>
+
+                    <section id="optimization-focus">
+                        <h4>Optimization Focus</h4>
+                        <p>The primary metric to optimize in batch inference is throughput. Strategies to increase
+                            throughput include:</p>
+                        <ul>
+                            <li>Using hardware accelerators (GPUs, TPUs)</li>
+                            <li>Increasing the number of servers/workers</li>
+                            <li>Loading multiple instances of the model on different workers</li>
+                        </ul>
+                    </section>
+
+                    <section id="use-cases">
+                        <h4>Use Cases</h4>
+                        <ul>
+                            <li>E-commerce product recommendations</li>
+                            <li>Sentiment analysis of customer reviews</li>
+                            <li>Demand forecasting for inventory optimization</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="etl-pipelines">
+                    <h3>ETL Pipelines for Batch and Stream Processing</h3>
+                    <p>Effective data processing is crucial for both batch and stream inference. ETL (Extract,
+                        Transform, Load) pipelines play a vital role in preparing data for ML models:</p>
+
+                    <section id="batch-processing">
+                        <h4>Batch Processing</h4>
+                        <ul>
+                            <li>Handles large volumes of data from sources like CSV files, APIs, and data lakes</li>
+                            <li>Uses distributed processing for higher throughput</li>
+                            <li>Typically employs tools like Apache Spark or Google Cloud Dataflow</li>
+                        </ul>
+                    </section>
+
+                    <section id="stream-processing">
+                        <h4>Stream Processing</h4>
+                        <ul>
+                            <li>Processes real-time data from sources like sensors or log streams</li>
+                            <li>Requires continuous data ingestion and processing</li>
+                            <li>Often uses tools like Apache Kafka or Google Cloud Pub/Sub for data ingestion, and
+                                Apache Flink or Google Cloud Dataflow for processing</li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/8-ETL Pipeline components for Batch and Stream Processing.png" alt="ETL Pipeline components for Batch and Stream Processing">
+                        </p>
+                    </section>
+                </section>
+
+                <section id="introduction-to-model-management">
+                    <h3>Introduction to Model Management and Delivery</h3>
+                    <p>Effective model management
+                        and delivery are crucial for successful deployment and maintenance of ML systems. We'll explore
+                        the key aspects of MLOps, including experiment tracking, model
+                        versioning, continuous delivery, and progressive delivery strategies.</p>
+                </section>
+
+                <section id="experiment-tracking">
+                    <h3>Experiment Tracking</h3>
+
+                    <section id="importance">
+                        <h4>The Importance of Experiment Tracking</h4>
+                        <p>Machine learning projects are characterized by extensive experimentation, where small changes
+                            can lead to significant variations in model performance and resource requirements. Effective
+                            experiment tracking is essential for several reasons:</p>
+                        <ul>
+                            <li>Reproducibility of results</li>
+                            <li>Meaningful comparison between experiments</li>
+                            <li>Management of code/data versions, hyperparameters, and environments</li>
+                            <li>Organization and collaboration within teams</li>
+                        </ul>
+                    </section>
+
+                    <section id="tools-techniques">
+                        <h4>Tools and Techniques for Experiment Tracking</h4>
+                        <ul>
+                            <li><b>Notebooks and Associated Tools</b>
+                                <ul>
+                                    <li>Jupyter Notebooks with extensions like nbconvert, nbdime, jupytext, and
+                                        neptune-notebooks</li>
+                                    <li>Smoke testing for notebooks:
+                                        <pre><code>jupyter nbconvert --to script train_model.ipynb
+                python train_model.py</code></pre>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Modular Code Organization</b>
+                                <ul>
+                                    <li>Use version-controlled collections of interdependent files</li>
+                                    <li>Employ directory hierarchies or monorepos</li>
+                                </ul>
+                            </li>
+                            <li><b>Runtime Parameter Tracking</b>
+                                <ul>
+                                    <li>Use config files (e.g., YAML)</li>
+                                    <li>Implement command-line arguments</li>
+                                    <li>Log parameters programmatically:
+                                        <pre><code>parser = argparse.ArgumentParser()
+                parser.add_argument('--number_trees')
+                parser.add_argument('--learning_rate')
+                args = parser.parse_args()
+                neptune.create_experiment(params=vars(args))</code></pre>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Data Versioning</b>
+                                <ul>
+                                    <li>Tools: Neptune, Pachyderm, Delta Lake, Git LFS, DoIt, lakeFS, DVC, ML-Metadata
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Metric Logging</b>
+                                <ul>
+                                    <li>Example using TensorBoard:
+                                        <pre><code>logdir = "logs/image/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+                tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir, histogram_freq=1)
+                cm_callback = keras.callbacks.LambdaCallback(on_epoch_end=log_confusion_matrix)
+                model.fit(... callbacks=[tensorboard_callback, cm_callback])</code></pre>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>Experiment Organization and Visualization</b>
+                                <ul>
+                                    <li>Use tools like Vertex TensorBoard for enterprise-grade experiment dashboards
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="mlops-introduction">
+                    <h3>Introduction to MLOps</h3>
+
+                    <section id="bridging-gap">
+                        <h4>Bridging the Gap: Data Scientists vs. Software Engineers</h4>
+                        <p>MLOps aims to bridge the gap between data scientists and software engineers, addressing the
+                            following challenges:</p>
+                        <ul>
+                            <li>Data scientists often focus on model metrics and prototyping</li>
+                            <li>Software engineers concentrate on product scalability, performance, and long-term
+                                maintenance</li>
+                            <li>The need to integrate ML models into production systems efficiently</li>
+                        </ul>
+                    </section>
+
+                    <section id="components">
+                        <h4>Key Components of MLOps</h4>
+                        <ul>
+                            <li><b>Continuous Integration (CI)</b>: Testing and validating code, components, data, and
+                                models</li>
+                            <li><b>Continuous Delivery (CD)</b>: Automating the deployment of model prediction services
+                            </li>
+                            <li><b>Continuous Training (CT)</b>: Automatically retraining candidate models for testing
+                                and serving</li>
+                            <li><b>Continuous Monitoring (CM)</b>: Catching errors and monitoring production inference
+                                data and model performance metrics</li>
+                        </ul>
+                    </section>
+
+                    <section id="maturity-levels">
+                        <h4>MLOps Maturity Levels</h4>
+                        <ol>
+                            <li><b>MLOps Level 0: Manual Process</b>
+                                <ul>
+                                    <li>Characterized by manual, script-driven workflows</li>
+                                    <li>Disconnection between ML development and operations</li>
+                                    <li>Infrequent releases and lack of active performance monitoring</li>
+                                </ul>
+                            </li>
+                            <li><b>MLOps Level 1: ML Pipeline Automation</b>
+                                <ul>
+                                    <li>Introduces automated ML pipelines</li>
+                                    <li>Implements continuous delivery of models</li>
+                                    <li>Incorporates data and model validation</li>
+                                </ul>
+                            </li>
+                            <li><b>MLOps Level 2: CI/CD Pipeline Automation</b>
+                                <ul>
+                                    <li>Adds CI/CD for the ML pipeline itself</li>
+                                    <li>Enables rapid experimentation and deployment</li>
+                                    <li>Integrates feature stores and metadata management</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><img src="../images/AndrewMLOps4/9-MLOps Level 2 Architecture.png" alt="MLOps Level 2 Architecture"></p>
+                    </section>
+                </section>
+
+                <section id="developing-components">
+                    <h3>Developing Components for Orchestrated Workflows</h3>
+
+                    <section id="tfx-components">
+                        <h4>TFX (TensorFlow Extended) Components</h4>
+                        <p>TFX provides a framework for creating modular, reusable components for ML workflows:</p>
+                        <ul>
+                            <li><b>Component Specification</b>: Defines input and output contracts</li>
+                            <li><b>Executor Class</b>: Implements the component's processing logic</li>
+                            <li><b>Component Class</b>: Combines the specification with the executor</li>
+                        </ul>
+                    </section>
+
+                    <section id="custom-components">
+                        <h4>Types of Custom TFX Components</h4>
+                        <ul>
+                            <li><b>Fully Custom Components</b>: Combine specification with executor</li>
+                            <li><b>Python Function-Based Components</b>: Use decorators and argument annotations
+                                <pre><code>@component
+                def MyValidationComponent(
+                model: InputArtifact[Model],
+                blessing: OutputArtifact[Model],
+                accuracy_threshold: Parameter[int] = 10,
+                ) -> OutputDict(accuracy=float):
+                '''My simple custom model validation component.'''
+                accuracy = evaluate_model(model)
+                if accuracy >= accuracy_threshold:
+                write_output_blessing(blessing)
+                return {'accuracy': accuracy}</code></pre>
+                            </li>
+                            <li><b>Container-Based Components</b>: Wrap components inside Docker containers</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="model-versions">
+                    <h3>Managing Model Versions</h3>
+
+                    <section id="versioning-strategies">
+                        <h4>Model Versioning Strategies</h4>
+                        <ul>
+                            <li><b>Proposed Versioning Schema</b>: MAJOR.MINOR.PIPELINE
+                                <ul>
+                                    <li><b>MAJOR</b>: Incompatibility in data or target variable</li>
+                                    <li><b>MINOR</b>: Model performance improvement</li>
+                                    <li><b>PIPELINE</b>: Changes in the model training pipeline</li>
+                                </ul>
+                            </li>
+                            <li><b>Model Lineage</b>: Tracking artifacts (code, data, config, model) needed to recreate
+                                the model</li>
+                        </ul>
+                    </section>
+
+                    <section id="model-registries">
+                        <h4>Model Registries</h4>
+                        <p>Model registries serve as central repositories for storing trained ML models, providing:</p>
+                        <ul>
+                            <li>Version management</li>
+                            <li>Metadata storage</li>
+                            <li>Model discovery and understanding</li>
+                            <li>Governance and approval workflows</li>
+                            <li>Streamlined deployments</li>
+                            <li>Continuous evaluation and monitoring</li>
+                        </ul>
+                        <p>Examples of model registries include Azure ML Model Registry, MLflow Model Registry, and
+                            Google AI Platform.</p>
+                    </section>
+                </section>
+
+                <section id="cd">
+                    <h3>Continuous Delivery (CD) for ML</h3>
+
+                    <section id="ci-cd-infrastructure">
+                        <h4>CI/CD Infrastructure for ML</h4>
+                        <p><img src="../images/AndrewMLOps4/10-CI and CD Infrastructure for ML.png" alt="CI and CD Infrastructure for ML"></p>
+                        <p>Key components of CI/CD for ML include:</p>
+                        <ul>
+                            <li><b>Continuous Integration</b>:
+                                <ul>
+                                    <li>Triggered by new code pushes</li>
+                                    <li>Performs unit and integration tests</li>
+                                    <li>Builds packages and container images</li>
+                                </ul>
+                            </li>
+                            <li><b>Continuous Delivery</b>:
+                                <ul>
+                                    <li>Deploys new code and trained models</li>
+                                    <li>Checks prediction service performance</li>
+                                    <li>Ensures compatibility with the target environment</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="unit-testing">
+                        <h4>Unit Testing in CI for ML</h4>
+                        <ul>
+                            <li><b>Input Data Testing</b>:
+                                <ul>
+                                    <li>Test feature engineering logic</li>
+                                    <li>Validate data formats</li>
+                                </ul>
+                            </li>
+                            <li><b>Model Performance Testing</b>:
+                                <ul>
+                                    <li>Test model methods</li>
+                                    <li>Validate performance metrics</li>
+                                    <li>Check for biases and data anomalies</li>
+                                </ul>
+                            </li>
+                            <li><b>ML-Specific Considerations</b>:
+                                <ul>
+                                    <li>Use mocked datasets covering edge cases</li>
+                                    <li>Ensure data coverage in tests</li>
+                                    <li>Implement code coverage checks</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="infrastructure-validation">
+                        <h4>Infrastructure Validation</h4>
+                        <p>TFX InfraValidator can be used to:</p>
+                        <ul>
+                            <li>Launch sandboxed model servers</li>
+                            <li>Verify model loading and querying</li>
+                            <li>Validate deployment readiness</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="progressive-delivery">
+                    <h3>Progressive Delivery Strategies</h3>
+
+                    <section id="blue-green-deployment">
+                        <h4>Blue/Green Deployment</h4>
+                        <ul>
+                            <li>Maintain two identical production environments</li>
+                            <li>Switch traffic between versions for zero-downtime deployments</li>
+                        </ul>
+                    </section>
+
+                    <section id="canary-deployment">
+                        <h4>Canary Deployment</h4>
+                        <ul>
+                            <li>Gradually route traffic to the new version</li>
+                            <li>Monitor performance and roll back if issues arise</li>
+                        </ul>
+                    </section>
+
+                    <section id="live-experimentation">
+                        <h4>Live Experimentation</h4>
+                        <ul>
+                            <li><b>A/B Testing</b>: Compare two versions with randomized user groups</li>
+                            <li><b>Multi-Armed Bandit (MAB)</b>: Dynamically route traffic based on performance</li>
+                            <li><b>Contextual Bandit</b>: Consider request context when routing traffic</li>
+                        </ul>
+                        <p><img src="../images/AndrewMLOps4/11-Canary Deployment Stages.png" alt="Canary Deployment Stages"></p>
+                    </section>
+                </section>
+
+                <section id="introduction-to-model-monitoring">
+                    <h3>Introduction to Model Monitoring</h3>
+                    <p>Model monitoring plays a
+                        crucial role in ensuring the continued performance, reliability, and ethical implementation of
+                        ML systems in MLOps. We'll dive into the key aspects of model monitoring, including
+                        observability, logging, tracing, model decay detection, and the principles of responsible AI.</p>
+                </section>
+
+                <section id="why-monitoring-matters">
+                    <h3>Why Monitoring Matters</h3>
+                    <p>Monitoring is essential in ML systems for several reasons:</p>
+                    <ul>
+                        <li><b>Immediate Data Skews</b>: Training data may become unrepresentative of live data.</li>
+                        <li><b>Negative Feedback Loops</b>: Model predictions can influence future inputs, creating
+                            biased feedback.</li>
+                        <li><b>Model Staleness</b>: Environmental shifts, consumer behavior changes, or adversarial
+                            scenarios can degrade model performance.</li>
+                    </ul>
+                    <p>ML monitoring encompasses both functional (ML-specific) and non-functional (system) aspects:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ML Monitoring (Functional)</th>
+                                <th>System Monitoring (Non-functional)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Predictive performance</td>
+                                <td>System performance</td>
+                            </tr>
+                            <tr>
+                                <td>Training metrics</td>
+                                <td>System reliability</td>
+                            </tr>
+                            <tr>
+                                <td>Serving data changes</td>
+                                <td>System status</td>
+                            </tr>
+                            <tr>
+                                <td>Feature characteristics</td>
+                                <td>Resource management</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="observability">
+                    <h3>Observability in ML</h3>
+                    <p>Observability in ML goes beyond traditional system monitoring, aiming to infer the internal
+                        states of a system from its inputs and outputs. Key aspects include:</p>
+                    <ul>
+                        <li><b>Deep Observability</b>: Not just top-level metrics, but domain-specific insights.</li>
+                        <li><b>Goals of ML Observability</b>:
+                            <ul>
+                                <li>Alertable: Metrics and thresholds designed to make failures obvious.</li>
+                                <li>Actionable: Clear identification of root causes.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="monitoring-targets">
+                    <h3>Monitoring Targets in ML</h3>
+
+                    <section id="input-output-monitoring">
+                        <h4>Input and Output Monitoring</h4>
+                        <ul>
+                            <li><b>Input Monitoring</b>:
+                                <ul>
+                                    <li>Check for errors (values within allowed ranges)</li>
+                                    <li>Detect distribution changes</li>
+                                    <li>Monitor per slice (e.g., demographic categories)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="prediction-monitoring">
+                        <h4>Prediction Monitoring</h4>
+                        <ul>
+                            <li>Unsupervised: Compare model prediction distributions using statistical tests</li>
+                            <li>Supervised: Evaluate against available labels</li>
+                        </ul>
+                    </section>
+
+                    <section id="operational-monitoring">
+                        <h4>Operational Monitoring</h4>
+                        <ul>
+                            <li>Latency</li>
+                            <li>System reliability (uptime)</li>
+                            <li>I/O, memory, and disk utilization</li>
+                            <li>Auditability</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="logging">
+                    <h3>Logging for ML Monitoring</h3>
+                    <p>Effective logging is crucial for building observability in ML systems:</p>
+                    <ul>
+                        <li><b>Steps for Building Observability</b>:
+                            <ul>
+                                <li>Start with out-of-the-box logs, metrics, and dashboards</li>
+                                <li>Add agents to collect additional data</li>
+                                <li>Create custom metrics and alerts</li>
+                                <li>Centralize logs and monitoring</li>
+                            </ul>
+                        </li>
+                        <li><b>Tools for Observability</b>:
+                            <ul>
+                                <li>Google Cloud Monitoring</li>
+                                <li>Amazon CloudWatch</li>
+                                <li>Azure Monitor</li>
+                            </ul>
+                        </li>
+                        <li><b>ML-Specific Logging</b>:
+                            <ul>
+                                <li>Track model inputs and predictions</li>
+                                <li>Monitor for feature unavailability</li>
+                                <li>Detect shifts in distributions</li>
+                                <li>Identify model-specific patterns</li>
+                            </ul>
+                        </li>
+                        <li><b>Storing Log Data for Analysis</b>:
+                            <ul>
+                                <li>Parse and store in queryable formats</li>
+                                <li>Enable automated reporting, dashboards, and alerting</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="tracing">
+                    <h3>Tracing for ML Systems</h3>
+                    <p>Distributed tracing is essential for understanding the flow of requests through complex,
+                        distributed ML systems:</p>
+                    <ul>
+                        <li><b>Tools for Distributed Tracing</b>:
+                            <ul>
+                                <li>Dapper</li>
+                                <li>Zipkin</li>
+                                <li>Jaeger</li>
+                            </ul>
+                        </li>
+                        <li><b>Dapper-Style Tracing</b>:
+                            <ul>
+                                <li>Propagate trace between services</li>
+                                <li>Represent traces as call trees composed of spans</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="model-decay">
+                    <h3>Model Decay</h3>
+                    <p>Model decay occurs when production ML models operate in dynamic environments where the ground
+                        truth changes over time. Two main types of decay:</p>
+
+                    <section id="data-concept-drift">
+                        <h4>Data Drift (Feature Drift) and Concept Drift</h4>
+                        <ul>
+                            <li><b>Data Drift (Feature Drift)</b>:
+                                <ul>
+                                    <li>Statistical properties of input changes</li>
+                                    <li>E.g., changes in the distribution of demographic data</li>
+                                </ul>
+                            </li>
+                            <li><b>Concept Drift</b>:
+                                <ul>
+                                    <li>Relationship between features and labels changes</li>
+                                    <li>The meaning of what you're trying to predict shifts</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="detecting-mitigating-decay">
+                        <h4>Detecting and Mitigating Model Decay</h4>
+                        <ul>
+                            <li><b>Detection Methods</b>:
+                                <ul>
+                                    <li>Log predictions and ground truth (when available)</li>
+                                    <li>Deploy dashboards to visualize statistical properties over time</li>
+                                    <li>Use specialized libraries like TensorFlow Data Validation (TFDV) or
+                                        Scikit-multiflow</li>
+                                </ul>
+                            </li>
+                            <li><b>Mitigation Strategies</b>:
+                                <ul>
+                                    <li>Update training data: Keep good data, discard bad, add new data</li>
+                                    <li>Fine-tune or retrain the model</li>
+                                    <li>Redesign data processing steps and model architecture</li>
+                                </ul>
+                            </li>
+                            <li><b>Model Re-Training Policies</b>:
+                                <ul>
+                                    <li>On-demand</li>
+                                    <li>On a schedule</li>
+                                    <li>Based on data drift or performance degradation</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="responsible-ai">
+                    <h3>Responsible AI Practices</h3>
+
+                    <section id="considerations">
+                        <h4>Key Considerations</h4>
+                        <ul>
+                            <li>Fairness</li>
+                            <li>Interpretability</li>
+                            <li>Privacy</li>
+                            <li>Security</li>
+                        </ul>
+                    </section>
+
+                    <section id="human-centered-design">
+                        <h4>Human-Centered Design</h4>
+                        <ul>
+                            <li>Design features with appropriate disclosures</li>
+                            <li>Consider augmentation and assistance</li>
+                            <li>Engage with diverse users and use-case scenarios</li>
+                        </ul>
+                    </section>
+
+                    <section id="multiple-metrics">
+                        <h4>Multiple Metrics</h4>
+                        <ul>
+                            <li>Use several metrics to understand tradeoffs</li>
+                            <li>Include user feedback and system performance metrics</li>
+                        </ul>
+                    </section>
+
+                    <section id="data-analysis">
+                        <h4>Data Analysis</h4>
+                        <ul>
+                            <li>Respect privacy for sensitive data</li>
+                            <li>Ensure data representativeness</li>
+                            <li>Be cautious with proxy labels</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="legal-requirements">
+                    <h3>Legal Requirements for Secure & Private AI</h3>
+
+                    <section id="gdpr-ccpa">
+                        <h4>GDPR and CCPA</h4>
+                        <p>Organizations must comply with data privacy protection laws such as:</p>
+                        <ul>
+                            <li>General Data Protection Regulation (GDPR)</li>
+                            <li>California Consumer Privacy Act (CCPA)</li>
+                        </ul>
+                    </section>
+
+                    <section id="security-privacy-measures">
+                        <h4>Security and Privacy Measures</h4>
+                        <ul>
+                            <li><b>Cryptography</b>:
+                                <ul>
+                                    <li>Secure Multi-Party Computation (SMPC)</li>
+                                    <li>Fully Homomorphic Encryption (FHE)</li>
+                                </ul>
+                            </li>
+                            <li><b>Differential Privacy</b>:
+                                <ul>
+                                    <li>Differentially-Private Stochastic Gradient Descent (DP-SGD)</li>
+                                    <li>Private Aggregation of Teacher Ensembles (PATE)</li>
+                                    <li>Confidential and Private Collaborative Learning (CaPC)</li>
+                                </ul>
+                            </li>
+                            <li><b>Data Anonymization and Pseudonymisation</b>:
+                                <ul>
+                                    <li>Anonymization: Irreversible, impossible to identify individuals</li>
+                                    <li>Pseudonymisation: Replace identifiers with aliases</li>
+                                </ul>
+                            </li>
+                            <li><b>Right to Be Forgotten</b>:
+                                <ul>
+                                    <li>Implement data erasure mechanisms</li>
+                                    <li>Consider hard delete vs. anonymization</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="challenges">
+                    <h3>Challenges in Implementing Responsible AI</h3>
+                    <ul>
+                        <li>Identifying data privacy violations</li>
+                        <li>Deleting personal data from multiple backups</li>
+                        <li>Organizational changes for enforcing privacy regulations</li>
+                    </ul>
+                </section>
+
+                <section id="further-reading"">
+                    <h3>Further Reading</h3>
+                    <ul>
+                        <li><a href=" https://www.deeplearning.ai/courses/machine-learning-in-production/">Machine
+                    Learning Engineering for Production (MLOps) Specialization</b> by Andrew Ng</a></li>
+                    <li><b>Kubernetes Up & Running</b> by Kelsey Hightower, Brendan Burns, and Joe Beda</li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Beren. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>
