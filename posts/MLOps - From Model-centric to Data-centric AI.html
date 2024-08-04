@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLOps: From Model-centric to Data-centric AI</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-blog.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../gallery.html">Gallery</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">MLOps: From Model-centric to Data-centric AI</h2>
+            <div class="post-meta">
+                <span class="date">August 4, 2024</span>
+                <span class="author">by Qingyu Meng</span>
+                <span class="label">MLOps Series</span>
+            </div>
+
+            <div id="table-of-contents">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#fundamental-equation">Fundamental Equation of AI Systems</a></li>
+                    <li><a href="#case-study">Case Study: Steel Defect Detection</a></li>
+                    <li><a href="#data-as-food">Data as Food for AI</a></li>
+                    <li><a href="#lifecycle">Lifecycle of an ML Project</a></li>
+                    <li><a href="#data-centric-approaches">Data-Centric Approaches in MLOps</a></li>
+                    <ul>
+                        <li><a href="#consistent-data-labeling">Consistent Data Labeling</a></li>
+                        <li><a href="#systematic-approach">Systematic Approach to Data Quality</a></li>
+                        <li><a href="#model-centric-vs-data-centric">Model-Centric vs. Data-Centric Views</a></li>
+                    </ul>
+                    <li><a href="#small-data">Small Data and Label Consistency</a></li>
+                    <li><a href="#practical-example">Practical Example: Clean vs. Noisy Data</a></li>
+                    <li><a href="#ensuring-quality">MLOps: Ensuring Consistently High-Quality Data</a></li>
+                    <li><a href="#key-takeaways">Key Takeaways</a></li>
+                </ol>
+            </div>
+
+            <div class="post-content">
+                <section id="introduction">
+                    <h3>Introduction</h3>
+                    <p>Andrew Ng's presentation on MLOps emphasizes a paradigm shift in artificial intelligence (AI) development: moving from a model-centric approach to a data-centric one. This shift is crucial for improving AI system performance and reliability, especially in real-world applications where data quality often outweighs model sophistication.</p>
+                </section>
+
+                <section id="fundamental-equation">
+                    <h3>Fundamental Equation of AI Systems</h3>
+                    <p>Ng presents a fundamental equation for AI systems:</p>
+                    <pre><code>
+AI system = Code + Data
+                    </code></pre>
+                    <p>This equation underscores the dual importance of both the algorithmic component (code) and the data used to train and operate the system. Traditionally, much focus has been on improving the code (model architecture, hyperparameters), but Ng argues for increased attention to data quality and management.</p>
+                </section>
+
+                <section id="case-study">
+                    <h3>Case Study: Steel Defect Detection</h3>
+                    <p>To illustrate the importance of data quality, Ng presents a case study on steel defect detection:</p>
+                    <ul>
+                        <li>Baseline system accuracy: 76.2%</li>
+                        <li>Target accuracy: 90.0%</li>
+                    </ul>
+                    <p>The audience is polled on whether to improve the code or the data to reach the target. The results highlight a critical insight:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Approach</th>
+                                <th>Steel defect detection</th>
+                                <th>Solar panel inspection</th>
+                                <th>Surface inspection</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baseline</td>
+                                <td>76.2%</td>
+                                <td>75.68%</td>
+                                <td>85.05%</td>
+                            </tr>
+                            <tr>
+                                <td>Model-centric</td>
+                                <td>+0% (76.2%)</td>
+                                <td>+0.04% (75.72%)</td>
+                                <td>+0.00% (85.05%)</td>
+                            </tr>
+                            <tr>
+                                <td>Data-centric</td>
+                                <td>+16.9% (93.1%)</td>
+                                <td>+3.06% (78.74%)</td>
+                                <td>+0.4% (85.45%)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>This table demonstrates that focusing on improving data quality led to significant performance gains across different applications, while model improvements yielded minimal or no improvements.</p>
+                </section>
+
+                <section id="data-as-food">
+                    <h3>Data as Food for AI</h3>
+                    <p>Ng draws an analogy between data in AI and ingredients in cooking:</p>
+                    <pre><code>
+80% PREP | 20% ACTION
+Source and prepare high-quality ingredients | Cook a meal
+Source and prepare high-quality data | Train a model
+                    </code></pre>
+                    <p>This analogy emphasizes that, like in cooking, the quality of the input (data) is crucial for the quality of the output (AI model performance). Ng suggests that while approximately 99% of AI research focuses on the model (cooking), only about 1% focuses on data preparation and quality, indicating a significant opportunity for improvement in the field.</p>
+                </section>
+
+                <section id="lifecycle">
+                    <h3>Lifecycle of an ML Project</h3>
+                    <p>Ng outlines the lifecycle of a machine learning project:</p>
+                    <ol>
+                        <li>Define project (Scope project)</li>
+                        <li>Define and collect data (Collect data)</li>
+                        <li>Training, error analysis & iterative improvement (Train model)</li>
+                        <li>Deploy, monitor and maintain system (Deploy in production)</li>
+                    </ol>
+                    <p>This lifecycle emphasizes the iterative nature of ML development and the importance of data throughout the process.</p>
+                </section>
+
+                <section id="data-centric-approaches">
+                    <h3>Data-Centric Approaches in MLOps</h3>
+
+                    <section id="consistent-data-labeling">
+                        <h4>Consistent Data Labeling</h4>
+                        <p>Using a speech recognition example, Ng demonstrates the importance of consistent data labeling:</p>
+                        <ul>
+                            <li>Inconsistent labels: "Um, today's weather" vs. "Um... today's weather" vs. "Today's weather"</li>
+                            <li>Such inconsistencies can significantly impact model performance</li>
+                        </ul>
+                    </section>
+
+                    <section id="systematic-approach">
+                        <h4>Systematic Approach to Data Quality</h4>
+                        <p>Ng proposes a systematic approach to ensure data quality:</p>
+                        <ol>
+                            <li>Ask two independent labelers to label a sample of images</li>
+                            <li>Measure consistency between labelers to identify disagreements</li>
+                            <li>For classes where labelers disagree, revise labeling instructions until they become consistent</li>
+                        </ol>
+                        <p>This approach helps in creating a more reliable and consistent dataset, which is crucial for model performance.</p>
+                    </section>
+
+                    <section id="model-centric-vs-data-centric">
+                        <h4>Model-Centric vs. Data-Centric Views</h4>
+                        <p>Ng contrasts two perspectives in AI development:</p>
+                        <h5>Model-centric view:</h5>
+                        <ul>
+                            <li>Collect whatever data is available</li>
+                            <li>Develop a model good enough to handle noise in the data</li>
+                            <li>Hold the data fixed and iteratively improve the code/model</li>
+                        </ul>
+                        <h5>Data-centric view:</h5>
+                        <ul>
+                            <li>Prioritize data consistency</li>
+                            <li>Use tools to improve data quality</li>
+                            <li>Hold the code fixed and iteratively improve the data</li>
+                            <li>This approach often allows multiple models to perform well</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="small-data">
+                    <h3>Small Data and Label Consistency</h3>
+                    <p>Ng emphasizes the importance of data quality, especially in small data scenarios:</p>
+                    <ul>
+                        <li>Small datasets with clean, consistent labels often outperform larger datasets with noisy labels</li>
+                        <li>In problems with <10,000 examples, there's significant room for improvement through data-centric approaches</li>
+                    </ul>
+                    <p>Ng presents a theoretical comparison:</p>
+                    <pre><code>
+Given 500 examples with 12% noisy (incorrectly or inconsistently labeled) data:
+- Cleaning up the noise
+- Collecting another 500 new examples (doubling the training set)
+
+These approaches are roughly equally effective in improving model performance.
+                    </code></pre>
+                    <p>This insight is particularly valuable for real-world applications where large datasets may not be available or are costly to obtain.</p>
+                </section>
+
+                <section id="practical-example">
+                    <h3>Practical Example: Clean vs. Noisy Data</h3>
+                    <p>Ng provides a graph showing the relationship between accuracy (mAP) and the number of training examples for clean and noisy datasets:</p>
+                    <p><img src="../images/AndrewMLOps-talk/1-Graph showing accuracy vs. number of training examples for clean and noisy data.png" alt="Graph showing accuracy vs. number of training examples for clean and noisy data"></p>
+                    <p>Key observations:</p>
+                    <ul>
+                        <li>Clean data consistently outperforms noisy data across different dataset sizes</li>
+                        <li>The performance gap between clean and noisy data is more pronounced with smaller datasets</li>
+                        <li>Even with larger datasets, clean data maintains a significant advantage</li>
+                    </ul>
+                    <p>Ng notes that many real-world "big data" problems, such as web search, self-driving cars, and recommender systems, often involve a long tail of rare events, effectively making them small data problems for those crucial edge cases.</p>
+                </section>
+
+                <section id="ensuring-quality">
+                    <h3>MLOps: Ensuring Consistently High-Quality Data</h3>
+                    <p>Ng emphasizes that the most important task in MLOps is to ensure consistently high-quality data throughout all phases of the ML project lifecycle. He defines good data as:</p>
+                    <ul>
+                        <li>Consistently defined (unambiguous label definitions)</li>
+                        <li>Covering important cases (good coverage of input space)</li>
+                        <li>Timely feedback from production data (addressing data drift and concept drift)</li>
+                        <li>Appropriately sized</li>
+                    </ul>
+                </section>
+
+                <section id="key-takeaways">
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>The shift from model-centric to data-centric AI is crucial for improving AI system performance.</li>
+                        <li>Data quality often has a more significant impact on model performance than model architecture improvements, especially in real-world applications.</li>
+                        <li>Consistent data labeling and systematic approaches to data quality are essential components of MLOps.</li>
+                        <li>Small, clean datasets can outperform larger, noisy datasets, highlighting the importance of data quality over quantity.</li>
+                        <li>MLOps should focus on ensuring high-quality data throughout the entire ML project lifecycle.</li>
+                        <li>There's a significant opportunity for developing MLOps tools that make data-centric AI an efficient and systematic process.</li>
+                    </ul>
+                </section>
+
+                <h3 id="further-reading">Further Reading</h3>
+                <ul>
+                    <li><a href="https://www.deeplearning.ai/resources/#other-resources">Andrew Ng's Original Talk on MLOps</a></li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2024 Qingyu Meng. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>
