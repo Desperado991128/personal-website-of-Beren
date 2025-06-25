@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Qualitative Probabilistic Networks</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Thoughts on Qualitative Probabilistic Networks</h2>
+            <div class="post-meta">
+                <span class="date">June 25, 2025</span>
+                <span class="author">Knowledge Notes</span>
+                <span class="label">Graph Networks & Probabilistic Reasoning</span>
+            </div>
+
+
+            <div class="post-content">
+                <p>
+                    <strong>Qualitative Probabilistic Networks represent a fundamental insight about reasoning under uncertainty: we often care more about the direction of influence than its precise magnitude.</strong> Developed by Michael Wellman in the early 1990s, QPNs occupy a unique position in the landscape of probabilistic reasoning, bridging the gap between symbolic AI and modern probabilistic methods. The core intuition is elegant. When a physician considers treatment options, they rarely think in terms of exact probabilities. Instead, they reason qualitatively: "This medication will likely improve the patient's condition" or "Higher doses increase both efficacy and toxicity risk." QPNs formalize this natural mode of reasoning while maintaining computational tractability. Traditional expert systems relied on deterministic rules that proved brittle in practice. Bayesian networks offered principled uncertainty handling but demanded precise probability specifications that domain experts struggled to provide. On the other hand, QPNs found a middle path by encoding only the directional relationships between variables while preserving sound inference mechanisms.
+                </p>
+
+                <p>
+                    Formally, a QPN is a pair \( G = (V, Q) \) where \( V \) represents variables and \( Q \) contains qualitative relationships. Unlike standard probabilistic graphical models, these relationships are constraints on the joint probability distribution rather than exact conditional probabilities. The key insight is that these constraints, while insufficient to determine exact probabilities, enable a useful class of relative likelihood conclusions.
+                </p>
+
+                <h3 id="mathematical-foundations">Mathematical Foundations</h3>
+
+                <p>
+                    The mathematical elegance of QPNs lies in their grounding in stochastic dominance theory. A positive qualitative influence \( S^+(a, b, G) \) means that for all contexts \( x \), higher values of \( a \) make higher values of \( b \) more likely in the sense of first-order stochastic dominance.
+                </p>
+
+                <p>
+                    For the binary case, this translates to:
+                    \[ P(B | A, x) \geq P(B | \bar{A}, x) \]
+                    for all possible contexts \( x \). The general case requires the Monotone Likelihood Ratio Property (MLRP):
+                    \[ \frac{f_b(a_1 | b_1, x)}{f_b(a_1 | b_2, x)} \geq \frac{f_b(a_2 | b_1, x)}{f_b(a_2 | b_2, x)} \]
+                    whenever \( a_1 \geq a_2 \) and \( b_1 \geq b_2 \).
+                </p>
+
+                <p>
+                    Qualitative synergies capture interaction effects. When variables \( a \) and \( b \) exhibit positive synergy on \( c \), written \( Y^+(\{a, b\}, c, G) \), the influence of \( a \) on \( c \) is enhanced when \( b \) takes higher values:
+                    \[ F_c(c_0 | a_1, b_1, x) - F_c(c_0 | a_2, b_1, x) \leq_{FSD} F_c(c_0 | a_1, b_2, x) - F_c(c_0 | a_2, b_2, x) \]
+                    where \( \leq_{FSD} \) denotes first-order stochastic dominance.
+                </p>
+
+                <h3 id="digitalis-therapy">A Classical Example</h3>
+
+                <p>
+                    Wellman's digitalis therapy advisor exemplifies QPN's practical value. The system models relationships between drug dosage, patient calcium levels, heart rate, and clinical outcomes without requiring precise probability estimates. The key insight emerges from synergy relationships: calcium and digitalis interact synergistically in affecting cardiac automaticity.
+                </p>
+
+                <p>
+                    This synergy implies that patients with elevated calcium levels require lower digitalis doses to achieve therapeutic effects while avoiding toxicity. The QPN derives this clinically relevant conclusion through purely qualitative reasoning, demonstrating how abstract mathematical relationships translate to actionable medical knowledge.
+                </p>
+
+                <p>
+                    The elegance becomes apparent when considering the alternative approaches. Rule-based systems would require explicit rules for every combination of calcium levels and dosages. Fully quantitative Bayesian networks would demand precise probability estimates that may not be available or reliable. QPNs capture the essential causal structure with minimal assumptions.
+                </p>
+
+
+                <p>
+                    QPNs offer significant computational advantages over their quantitative counterparts. Influence propagation operates in polynomial time, with variable reduction completing in \( O(|V|^2) \) operations. This efficiency stems from the qualitative nature of the reasoning: we propagate signs rather than exact probabilities. The inference mechanisms are both sound and complete within their domain. When QPNs encounter conflicting influences of opposite signs, they correctly report indeterminacy rather than fabricating false precision. This honest handling of uncertainty often proves more valuable than seemingly precise but potentially misleading quantitative estimates.
+                </p>
+
+                <h3 id="comparative-analysis">Connections</h3>
+
+                <p>
+                    QPNs share structural similarities with Structural Equation Models (SEM), both using directed acyclic graphs to represent causal relationships. However, SEM requires precise parameter estimation and statistical assumptions, while QPNs operate with coarser but more robust qualitative constraints. This difference proves crucial in domains where data is scarce or model assumptions questionable.
+                </p>
+
+                <p>
+                    When serving as interpreters for deep learning models, QPNs offer distinct advantages over methods like LIME and SHAP. While these techniques excel at identifying important features, they primarily capture statistical associations rather than causal relationships. QPNs, by contrast, attempt to reconstruct the causal structure implicit in learned models. This distinction matters for practical applications. LIME might reveal that "feature X strongly correlates with prediction Y in this local region," but QPNs can potentially support statements like "increasing X will likely improve Y." The latter enables actionable insights for intervention and decision-making.
+                </p>
+
+                <p>
+                    The causality question requires careful consideration. QPNs do embody causal thinking through their influence relationships and support interventional reasoning. However, their causal validity depends entirely on the correctness of the specified relationships. QPNs cannot discover causal structure from data alone but can effectively encode and reason with domain expert's causal knowledge.
+                </p>
+
+
+                <p>
+                    Contemporary AI faces an interpretability crisis as models grow increasingly complex. QPNs offer a path toward explanations that align with human causal intuitions while maintaining mathematical specifications. Their role as intermediaries between expert knowledge and quantitative models becomes especially valuable as we seek to integrate domain expertise with data-driven learning. Perhaps most importantly, QPNs demonstrate that useful reasoning about uncertainty doesn't always require precise probability estimates. In a world where we're often forced to make decisions with incomplete information, this insight remains profoundly relevant. The future of AI may well depend on our ability to reason effectively with partial knowledge, making QPNs not just a historical curiosity but a continuing source of insights for modern research.
+                </p>
+
+
+                <hr>
+
+                <h3 id="references">References and Further Reading</h3>
+                <ul>
+                    <li>Wellman, M. P. (1990). <em>Fundamental concepts of qualitative probabilistic networks</em>. Artificial Intelligence, 44(3), 257-303.</li>
+                    <li>Henrion, M., & Druzdzel, M. J. (1991). <em>Qualitative propagation and scenario-based approaches to explanation in probabilistic reasoning</em>. Uncertainty in Artificial Intelligence, 6, 17-32.</li>
+                    <li>Parsons, S. (1995). <em>Refining reasoning in qualitative probabilistic networks</em>. Proceedings of the Eleventh Conference on Uncertainty in Artificial Intelligence, 427-434.</li>
+                    <li>Renooij, S. (2001). <em>Probability elicitation for belief networks: issues to consider</em>. Knowledge Engineering Review, 16(3), 255-269.</li>
+                </ul>
+                
+                
+      
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Beren Meng</p>
+        </div>
+    </footer>
+</body>
+</html>
