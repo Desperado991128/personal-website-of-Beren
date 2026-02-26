@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-02-26</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">February 26, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年02月26日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Recurrent vs parallel computation</h2>
+                <p><strong>1. 概念定义</strong><br>
+循环计算是指操作步骤之间存在严格的顺序依赖关系，即当前步骤的输出必须作为下一步的输入。并行计算是指多个独立的计算任务同时执行，从而利用硬件架构优势最大化计算吞吐量。</p>
+
+<p><strong>2. 核心原理</strong><br>
+循环计算的核心在于状态的时间依赖性，其状态更新通常遵循 \( h_t = f(h_{t-1}, x_t) \) 的形式。这种串行特性意味着必须等待前一步计算完成，无法在时间维度上充分利用硬件并行能力。并行计算则打破这种依赖，例如通过注意力机制同时处理整个序列 \( \{x_1, x_2, ..., x_T\} \)。这种方法将计算转化为大规模矩阵运算，能够充分发挥GPU等硬件的并行计算优势。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在混合专家模型研究中，并行计算使得不同的专家网络能够同时处理不同的Token，从而在扩大模型参数量的同时保持推理速度。在机器遗忘领域，并行架构相比循环架构更容易定位和移除特定数据的影响，因为信息不会像在循环网络中那样被深度纠缠在隐藏状态中。对于KAN网络，研究者正致力于将其样条函数计算并行化，以解决其相比传统MLP计算效率较低的问题。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+循环计算擅长捕捉序列依赖但受限于训练速度，而并行计算通过牺牲显式的时序归纳偏置换取了极致的训练效率。现代架构设计的核心趋势往往是如何将本质上的序列问题转化为可并行计算的形式。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22055v1" target="_blank">Physics-Informed Machine Learning for Vessel Shaft Power and Fuel Consumption Prediction: Interpretable KAN-based Approach</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Hamza Haruna Mohammed, Dusica Marijan, Arnbjørn Maressa<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22055v1" target="_blank">2602.22055v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决船舶轴功率和燃油消耗预测中，传统物理模型难以适应现实数据变异性，而纯数据驱动模型缺乏物理可解释性的矛盾。核心问题是如何构建一个既能保证预测精度又能维持物理一致性的混合模型。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位介于传统物理建模与纯数据驱动方法之间，填补了高精度与可解释性难以兼得的空白。它针对现有方法在处理复杂海洋环境数据时的不足，提出了一种融合领域知识的深度学习方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献是提出了物理信息柯尔莫哥洛夫-阿诺德网络（PI-KAN），这是一种结合了可解释特征变换与物理约束损失函数的混合架构。该模型在预测精度（MAE, RMSE, \(R^2\)）上全面超越基线模型，并成功重新发现了符合物理规律的变量依赖关系。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法利用KAN网络特有的单变量特征变换能力，结合物理信息损失函数进行约束，构建了无泄漏的链式预测管道。模型通过学习五艘货船的运行与环境数据，实现了对轴转速、功率及油耗的准确预测。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管摘要未明确列出局限，但KAN架构通常比传统神经网络训练更慢且更难收敛。此外，研究仅基于五艘货船的数据，模型在更广泛船型或极端工况下的泛化能力可能需要进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将新兴的KAN架构引入船舶能耗预测领域，有效平衡了模型性能与可解释性。其重新发现物理规律（如速度与功率的类三次方关系）的能力令人印象深刻，为工业应用中的决策支持提供了值得信赖的工具。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21917v1" target="_blank">Scan Clusters, Not Pixels: A Cluster-Centric Paradigm for Efficient Ultra-high-definition Image Restoration</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chen Wu, Ling Wang, Zhuoran Zheng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21917v1" target="_blank">2602.21917v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有超高清(UHD)图像修复模型受限于像素级操作，导致计算成本过高且难以持续扩展。即便是具有线性复杂度的Mamba模型，其像素串行扫描机制在处理超高清图像的海量像素时，依然面临严重的效率瓶颈。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究位于超高清图像修复与状态空间模型(SSM)效率优化的交叉前沿，旨在突破现有模型在处理大规模像素时的算力限制。它挑战了计算机视觉中必须逐像素处理图像的传统假设，填补了超高清场景下高效全局建模方法的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了\(C^2SSM\)模型，首创了从像素串行扫描到聚类串行扫描的范式转变。该方法在大幅降低计算成本的同时，在五个UHD修复任务上建立了新的最先进结果，为高效大规模视觉处理指明了新方向。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出一种基于视觉状态空间模型的方法，利用神经参数化混合模型将丰富的图像特征蒸馏为稀疏的语义质心。该方法设计了一个双路径过程，首先扫描并推理少量聚类中心，随后通过相似度分布将全局上下文扩散回所有像素，并辅以轻量级调制器以保留精细细节。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管使用了轻量级调制器，基于聚类的处理方式仍可能在聚类边界处丢失部分像素级的精细纹理细节。该方法对语义质心提取的质量有较高依赖，若聚类效果不佳可能会影响最终的修复性能。此外，引入神经参数化混合模型也增加了模型结构的复杂性。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具创新性，成功地将计算复杂度从像素数量级解耦，为解决超高清视觉任务的可扩展性危机提供了极具启发性的思路。其“扫描聚类而非像素”的理念不仅显著提升了效率，也证明了语义层面的稀疏表示在图像修复中的巨大潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21773v1" target="_blank">Easy to Learn, Yet Hard to Forget: Towards Robust Unlearning Under Bias</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> JuneHyoung Kwon, MiHyeon Kim, Eunju Lee et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21773v1" target="_blank">2602.21773v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决现实场景中，当模型因数据中的虚假相关性而习得非预期偏差时，机器遗忘效果严重受损的问题。核心研究问题是如何克服模型倾向于遗忘偏差属性而非类别属性的“捷径遗忘”现象。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了现有机器遗忘研究在处理偏差模型方面的空白。现有文献多关注理想情况下的遗忘，而本文聚焦于真实世界中模型受虚假相关性影响时的遗忘难题，拓展了机器遗忘鲁棒性的研究边界。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于识别并定义了“捷径遗忘”现象，即模型难以遗忘那些容易学习且与偏差一致的样本。提出了名为CUPID的新框架，通过利用损失景观锐度差异来区分样本类型并解耦模型参数，实现了高效的定向遗忘。</p>
+
+<p><strong>4. 方法概述</strong><br>
+CUPID框架首先根据样本的损失景观锐度将遗忘集划分为因果近似子集和偏差近似子集。随后将模型参数解耦为因果路径和偏差路径，最后通过将提炼后的梯度路由至各自的路径来实现定向更新。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖于损失景观锐度来划分样本，这一过程可能增加计算开销且对划分阈值敏感。参数解耦过程可能需要特定的架构调整或复杂的优化策略，在极大规模模型上的适用性仍有待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的现实意义，深刻揭示了偏差如何干扰遗忘过程。通过损失景观锐度来区分样本并解耦参数的思路十分巧妙，为解决真实场景下的数据隐私和模型可靠性问题提供了有效的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21798v1" target="_blank">Excitation: Momentum For Experts</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Sagi Shaier<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21798v1" target="_blank">2602.21798v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+传统优化器在处理稀疏架构如混合专家模型时，因对所有参数一视同仁而效率低下。论文旨在解决深度MoE中出现的“结构混淆”现象，即标准优化器无法建立有效信号路径导致训练停滞的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于优化算法与稀疏模型架构的交叉领域，填补了针对条件计算进行动态更新调节的研究空白。它挑战了传统优化器对参数均匀处理的方式，提出了一种专为MoE特化路由设计的优化框架。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Excitation优化框架，通过引入基于专家利用率的竞争性更新动态，有效锐化了路由特化。研究首次识别并解决了深度MoE中的“结构混淆”现象，使原本无法训练的模型得以收敛。该方法无需额外内存开销，具有高度的通用性和易集成性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+Excitation利用批次级专家利用率动态调节参数更新幅度。它通过竞争机制放大高利用率专家的更新，同时选择性抑制低利用率专家，从而作为一种特化催化剂加速学习。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确提及局限性，但动态抑制低利用率专家可能导致部分专家永久“死亡”。该方法的有效性可能依赖于准确的批次级利用率统计，在极小批量设置下可能引入噪声。此外，引入竞争机制可能增加路由分布不均衡的风险。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具实用价值，因为它在不增加内存负担的前提下，显著提升了MoE模型的训练效率和稳定性。其“即插即用”的特性使其易于在现有系统中推广，为解决稀疏模型训练难题提供了新视角。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2602.22055v1" target="_blank">Physics-Informed Machine Learning for Vessel Shaft Power and Fuel Consumption Prediction: Interpretable KAN-based Approach</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.21917v1" target="_blank">Scan Clusters, Not Pixels: A Cluster-Centric Paradigm for Efficient Ultra-high-definition Image Restoration</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.21773v1" target="_blank">Easy to Learn, Yet Hard to Forget: Towards Robust Unlearning Under Bias</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.21798v1" target="_blank">Excitation: Momentum For Experts</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
