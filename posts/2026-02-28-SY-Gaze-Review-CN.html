@@ -272,20 +272,110 @@
 
                 <h2 id="daily-concept">每日概念: Eye tracking in multimodal AI</h2>
                 <p><strong>1. 概念定义</strong><br>
-这指的是将眼动追踪数据作为一种显式的模态信号整合到多模态大语言模型中。通过捕捉用户的注视点、注视时长和眼动轨迹，模型能够获得人类注意力分布的真实标签，从而增强对视觉场景或文本信息的理解与推理能力。</p>
+这是指将眼动数据作为一种生物信号模态集成到多模态人工智能系统中，以模拟或增强模型对视觉信息的处理能力。通过引入注视点、眼跳轨迹和瞳孔直径等数据，AI系统能够获得类似人类的视觉注意力机制，从而优化对图像和文本信息的理解与交互。</p>
 
 <p><strong>2. 核心原理</strong><br>
-核心机制在于利用眼动数据引导模型的注意力机制或特征选择过程。在Transformer架构中，标准的自注意力权重是隐式学习得到的，而眼动数据提供了人类认知注意力的显式先验。这通常通过将注视坐标和时间特征编码为向量，并与文本或图像特征进行融合或交叉注意力计算来实现。数学上，可以通过最小化模型注意力图与人类注视分布之间的差异来优化模型，例如使用KL散度损失函数 \(\mathcal{L}_{gaze} = D_{KL}(P_{human} \| P_{model})\)。</p>
+核心机制在于将眼动信号转化为注意力先验，并以此指导模型对视觉或文本特征的加权处理。在典型的多模态模型中，眼动数据通常被编码为空间权重图，用于调制视觉特征提取过程。数学上，这可以表示为特征图 \( V \) 与注视概率图 \( G \) 的加权融合，即 \( V' = V \odot G \)，其中 \( \odot \) 代表逐元素乘法。这种方法利用人类的认知显著性来抑制背景噪声，使模型聚焦于关键信息区域。</p>
 
 <p><strong>3. 研究意义</strong><br>
-这一交叉领域的研究对于提升多模态大模型的可解释性和效率至关重要。它能够解决模型注意力与人类注意力不对齐的问题，从而减少模型在视觉问答或文档理解任务中的幻觉现象。此外，它为构建更符合人类认知习惯的AI系统提供了生理学依据，推动了认知科学与深度学习的深度融合。</p>
+在眼动与LLM的交叉研究中，这一技术为解决长上下文注意力分散问题提供了生物学启发，能够显著降低模型的计算开销并提升推理性能。它不仅让LLM具备了模拟人类阅读模式的能力，还能通过眼动数据作为隐式反馈信号来优化文本生成质量。此外，这种融合有助于构建更符合人类认知习惯的可解释AI系统。</p>
 
 <p><strong>4. 关键洞见</strong><br>
-眼动数据本质上是人类认知过程的“地面真值”标签，它将生物学的注意力机制映射到了Transformer的计算注意力机制中。</p>
+眼动数据提供了人类认知过程的“地面实况”，它将生物注意力机制直接转化为模型可学习的先验知识，从而在机器智能与人类认知之间架起了一座桥梁。</p>
 
                 <h2 id="papers">论文摘要</h2>
 
                 <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Maryam Ansarifard, Mohit K. Sharma, Kishor C. Joshi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22774v1" target="_blank">2602.22774v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决多用户上行非正交多址接入网络中的信息年龄最小化问题。核心挑战在于如何处理用户异构性，包括任务大小、AoI阈值和惩罚敏感度的差异，同时满足严格的NOMA调度约束。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于深度强化学习与下一代无线通信资源管理的交叉领域。它填补了现有研究在处理复杂用户异构性和系统可扩展性方面的空白，特别是引入了源自大语言模型领域的Transformer架构来解决无线资源分配问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一种基于近端策略优化的深度强化学习框架，并创新性地集成了Transformer编码器。主要贡献在于利用注意力机制捕捉用户间的依赖关系，并通过注意力图的演变分析，证明了模型能够自主学习并优先关注高重要性的用户。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法构建了一个基于Transformer编码器的Actor-Critic网络架构。通过自注意力机制，智能体能够动态聚焦于关键用户状态并捕捉用户间的隐式关联，从而在复杂的NOMA约束下输出更优的资源分配策略。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管仿真结果积极，但在实际部署中，Transformer架构较高的计算复杂度可能对实时性要求极高的URLLC系统构成挑战。此外，研究主要基于仿真环境，模型在真实物理信道衰落和突发干扰下的鲁棒性仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作展示了大语言模型中的Transformer技术在通信资源分配领域的巨大潜力，证明了注意力机制在捕捉系统状态依赖性方面的有效性。文中对注意力权重演变的分析类似于眼动追踪研究中的注视点分析，早期均匀分布到后期聚焦关键目标的模式，为理解AI决策逻辑提供了类似视觉认知的直观解释。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiahao Zhang, Yifan Zhang, Kevin Leach et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22368v1" target="_blank">2602.22368v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了如何将人类在代码理解过程中的专业知识引入大语言模型。核心研究问题是，人类的眼动注意力模式能否作为先验知识，有效增强LLM在代码摘要任务中的表现。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于代码摘要与人机交互研究的交叉领域。现有研究主要关注模型架构优化或大规模预训练，较少探索人类认知信号对模型注意力的指导作用。本文填补了这一空白，提出了一种将人类视觉注意力无缝集成到LLM推理过程中的轻量级方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了EyeLayer模块，这是一种轻量级的注意力增强机制，能够将人类眼动数据转化为可学习的注意力先验。该工作的创新在于利用多模态高斯混合模型重新分配Token嵌入，在不破坏原有模型结构的前提下实现了显著性能提升，BLEU-4指标最高提升了13.17%。</p>
+
+<p><strong>4. 方法概述</strong><br>
+EyeLayer通过多模态高斯混合模型对人类阅读代码时的眼动轨迹进行建模，捕捉开发者关注的焦点位置和强度。该方法利用学习到的参数 \((\mu_i, \sigma_i^2)\) 对Token嵌入进行重新分配和加权，从而将人类注意力模式无缝注入到LLM的表示层中。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该研究依赖于高质量的眼动追踪数据，这可能限制了其在缺乏此类数据的新编程语言或特定场景中的应用。此外，虽然方法具有通用性，但实验主要集中在代码摘要任务，其在代码生成或错误检测等其他下游任务中的效果尚需验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项极具启发性的工作，成功搭建了认知科学与深度学习之间的桥梁。其优点在于方法设计轻量且通用，能够跨不同架构的模型(如LLaMA和CodeBERT)生效。然而，眼动数据的采集成本较高，未来研究可能需要探索如何利用合成数据来降低对真实眼动数据的依赖。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jingchao Wei, Jingkai Qin, Yuxiao Cao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21983v1" target="_blank">2602.21983v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决仿人机器人在非受限人机交互中难以产生自然且符合情境的视线转移问题。核心挑战在于如何将认知注意力机制与仿生运动生成进行有效耦合。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于填补认知建模与运动生成之间脱节的空白。现有研究往往孤立处理这两个环节，而本文通过统一框架实现了从多模态感知到类人动作输出的闭环。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于提出了RGS框架，利用视觉语言模型(VLM)实现符合人类规律的目标选择。同时引入条件VQ-VAE模型生成多样化的眼头协调动作，显著提升了交互的自然度。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法分为两个阶段。首先通过VLM处理视听线索推理出合理的注视目标。接着利用条件VQ-VAE模型生成眼头协调的运动轨迹，模拟人类多样的视线转移行为。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+潜在局限可能包括VLM推理带来的计算延迟，影响实时交互体验。此外，运动生成模型的效果可能受限于训练数据的覆盖范围，难以泛化至所有极端交互场景。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项将大模型语义理解能力与眼动追踪技术深度融合的优秀工作。它突破了传统规则驱动方法的局限，为具身智能中的自然人机交互提供了极具启发性的解决方案。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
                     <h3 class="paper-title">
                         <a href="https://arxiv.org/pdf/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a>
                     </h3>
@@ -297,96 +387,35 @@
                     </div>
 
                     <h4>摘要</h4>
-                    <p>以下是针对技术博客读者的结构化中文总结：</p>
+                    <p>以下是针对论文《Examining and Addressing Barriers to Diversity in LLM-Generated Ideas》的结构化中文总结。</p>
 
 <p>1. <strong>研究问题</strong><br>
-这篇论文旨在解决大语言模型(LLM)生成的想法多样性低于人类样本，可能导致社会创新同质化的问题。核心研究问题在于识别导致LLM想法多样性缺失的认知机制，并验证相应的干预手段。</p>
+这篇论文旨在解决大语言模型(LLM)生成的想法多样性低于人类独立样本的问题，探讨这种同质化趋势是否会损害社会层面的创新能力。核心研究问题是识别导致LLM想法多样性受限的认知机制，并寻找能够有效提升多样性的干预方法。</p>
 
 <p>2. <strong>研究定位</strong><br>
-该研究将认知心理学理论引入LLM生成领域，填补了理解AI创意生成局限性的理论空白。它不仅量化了LLM在多样性上的劣势，还从个体和群体两个维度解释了其背后的认知机制，为优化人机协作提供了理论依据。</p>
+这项工作位于认知心理学与大语言模型研究的交叉领域，填补了关于LLM想法生成机制的理论空白。它将人类的认知固着和知识分区概念引入AI研究，解释了为何LLM在群体层面倾向于产生同质化内容，从而扩展了对AI创新能力的理解。</p>
 
 <p>3. <strong>核心贡献</strong><br>
-论文的主要贡献在于从理论和实证角度识别了阻碍多样性的两大机制，即个体层面的“固着效应”和集体层面的“知识聚合”。创新之处在于发现思维链提示能缓解固着，而普通角色设定能模拟人类的知识分区，两者结合后的多样性表现甚至超越了人类。</p>
+论文的主要贡献在于从理论和实证角度识别了阻碍LLM多样性的两个机制，即个体层面的认知固着和集体层面的知识聚合。创新之处在于提出了针对性的提示工程解决方案，即利用思维链缓解固着，利用普通人设优化知识分区，成功使LLM生成的想法多样性超越了人类基准。</p>
 
 <p>4. <strong>方法概述</strong><br>
-论文通过四个研究提出了针对性的提示工程方法。一是利用思维链提示鼓励结构化推理以打破固着，二是使用普通人物设定替代名人设定，作为多样化的采样线索引导模型探索不同的语义空间。</p>
+研究通过四个实验研究，分别测试了思维链提示和普通人设提示对想法多样性的影响。思维链提示通过结构化推理减少早期输出对后续生成的约束，而普通人设则作为多样的采样线索，引导模型锚定语义空间的不同区域。</p>
 
 <p>5. <strong>局限与不足</strong><br>
-尽管摘要未详述局限，但潜在不足可能包括这些提示策略在不同任务领域或模型规模上的泛化性有待验证。此外，思维链提示仅在LLM上有效而在人类上无效，这提示我们在设计人机协作流程时需要区分对待AI与人类的认知差异。</p>
+虽然摘要未明确列出局限，但潜在的不足可能包括思维链提示带来的计算成本增加，以及普通人设选择对生成结果的敏感性。此外，该方法在不同领域或任务类型中的泛化能力仍需进一步验证。</p>
 
 <p>6. <strong>评价与思考</strong><br>
-这项工作极具启发性，它巧妙地利用心理学原理解决了AI生成中的关键痛点。优点在于提供了低成本且有效的解决方案，缺点可能在于对“普通角色”的定义和选择可能仍存在主观性，未来研究可进一步探索如何自动生成最优的角色分布。</p>
-                </div>
-                <div class="paper-entry" id="paper-2">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.23335v1" target="_blank">Understanding Usage and Engagement in AI-Powered Scientific Research Tools: The Asta Interaction Dataset</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>作者:</strong> Dany Haddad, Dan Bareket, Joseph Chee Chang et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.23335v1" target="_blank">2602.23335v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>摘要</h4>
-                    <p><strong>1. 研究问题</strong><br>
-这篇论文旨在解决AI科研工具在真实研究场景中缺乏使用行为数据的问题。核心研究问题是如何理解研究人员与LLM驱动的科研助手交互的模式、参与度以及随经验积累的使用演变。</p>
-
-<p><strong>2. 研究定位</strong><br>
-这项工作填补了AI辅助科研领域在真实世界大规模交互数据方面的空白。它超越了传统的搜索日志分析，专注于LLM时代的检索增强生成(RAG)平台，为理解人机协作研究提供了实证基础。</p>
-
-<p><strong>3. 核心贡献</strong><br>
-论文的主要贡献是发布了Asta交互数据集，包含超过20万条用户查询和交互日志。研究构建了一个新的查询意图分类体系，揭示了用户将AI视为协作伙伴而非单纯搜索引擎的行为模式。</p>
-
-<p><strong>4. 方法概述</strong><br>
-研究者收集并分析了来自两个已部署工具(文献发现和科学问答界面)的大规模交互日志。通过定量分析和定性编码，研究刻画了查询复杂度、用户参与度以及引用交互的非线性特征。</p>
-
-<p><strong>5. 局限与不足</strong><br>
-数据集仅限于特定的RAG平台，可能无法完全推广到所有AI科研工具。缺乏眼动追踪等生理数据，限制了对用户注意力分配和认知负荷的深层洞察，仅能通过点击和查询行为进行间接推断。</p>
-
-<p><strong>6. 评价与思考</strong><br>
-这项工作为设计下一代AI科研助手提供了宝贵的数据支持，特别是在理解用户如何处理生成内容和引用证据方面。从眼动追踪研究的角度看，该数据集中的非线性导航模式为未来结合眼动追踪技术深入探究用户在LLM生成内容上的视觉注意力分配提供了重要的假设基础。</p>
-                </div>
-                <div class="paper-entry" id="paper-3">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.23193v1" target="_blank">ESAA: Event Sourcing for Autonomous Agents in LLM-Based Software Engineering</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>作者:</strong> Elzo Brito dos Santos Filho<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.23193v1" target="_blank">2602.23193v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>摘要</h4>
-                    <p>以下是针对论文《ESAA. Event Sourcing for Autonomous Agents in LLM-Based Software Engineering》的结构化中文总结。</p>
-
-<p>1. <strong>研究问题</strong><br>
-这篇论文旨在解决基于LLM的自主智能体面临的结构性限制，即缺乏原生状态管理，长上下文导致的信息衰减，以及概率性生成与确定性执行需求之间的鸿沟。</p>
-
-<p>2. <strong>研究定位</strong><br>
-该工作位于软件工程架构与LLM智能体研究的交叉点。它填补了现有智能体系统在状态管理和执行可靠性方面的空白，将智能体从单纯的反应式助手转变为具有可审计性和可追溯性的工程化系统。</p>
-
-<p>3. <strong>核心贡献</strong><br>
-论文提出了ESAA架构，创新性地将事件溯源模式引入LLM智能体，将认知意图与项目状态变更解耦。其核心贡献还包括引入边界契约和哈希重放验证机制，确保了任务执行的不可变性和取证可追溯性。</p>
-
-<p>4. <strong>方法概述</strong><br>
-ESAA架构要求智能体仅输出结构化的意图JSON文件，由确定性编排器进行验证并持久化到仅追加日志中。系统随后应用文件写入效应并生成可验证的物化视图，同时利用元提示和哈希验证来保障流程的严谨性。</p>
-
-<p>5. <strong>局限与不足</strong><br>
-尽管论文通过案例研究验证了架构，但样本量相对较小，可能不足以完全证明其在更广泛复杂场景下的通用性。引入事件溯源和确定性编排增加了系统的复杂度和开销，可能对轻量级任务的执行效率产生影响。</p>
-
-<p>6. <strong>评价与思考</strong><br>
-该工作为解决LLM生成的不确定性问题提供了优雅的工程化方案，通过借鉴成熟的软件架构模式提升了智能体的可靠性。这种将认知与执行分离的思路对于构建大规模、多智能体协作系统具有重要的参考价值，尽管其实际部署的复杂性仍需进一步评估。</p>
+这项工作极具价值，因为它将认知心理学中的“固着”概念（这一概念常通过眼动追踪研究视觉注意力锁定）应用于LLM的生成过程分析。优点在于理论框架扎实且解决方案实用，为构建健康的AI辅助创新生态系统提供了重要指导，避免了单纯追求效率而牺牲创新所需的多样性。</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">参考链接</h3>
                 <ul>
+                    <li><a href="https://arxiv.org/abs/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a></li>
                     <li><a href="https://arxiv.org/abs/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.23335v1" target="_blank">Understanding Usage and Engagement in AI-Powered Scientific Research Tools: The Asta Interaction Dataset</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.23193v1" target="_blank">ESAA: Event Sourcing for Autonomous Agents in LLM-Based Software Engineering</a></li>
                 </ul>
 
                 <p><em>欢迎讨论和反馈。感谢阅读!</em></p>

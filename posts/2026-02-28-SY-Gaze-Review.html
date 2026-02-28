@@ -272,20 +272,100 @@
 
                 <h2 id="daily-concept">Daily Concept: Eye tracking in multimodal AI</h2>
                 <p><strong>1. What is it?</strong><br>
-Eye tracking in multimodal AI refers to the integration of gaze data as a distinct input signal within models that process text and images. By capturing where a user looks, these systems leverage human visual attention to guide model processing or to align visual and linguistic representations. This approach treats gaze not just as a biological metric but as an informative prior for artificial systems.</p>
+Eye tracking in multimodal AI involves integrating human gaze data, such as fixation locations and scanpaths, as a supplementary input signal alongside traditional modalities like text and images. This technique treats visual attention as a distinct data modality that guides the model toward semantically relevant regions. It effectively bridges human cognitive processes with machine learning architectures.</p>
 
 <p><strong>2. How does it work?</strong><br>
-The process typically involves encoding gaze coordinates into feature vectors that align with the embedding space of the multimodal model. A gaze encoder transforms raw fixation points into attention maps or token embeddings, which are then fused with visual features extracted by a vision encoder. Mathematically, the model optimizes a conditional generation objective where the probability of an output token depends on text, image, and gaze inputs, expressed as \( P(y_t | y_{<t}, I, G) \). This allows the model to prioritize specific image regions indicated by high gaze density during the inference process.</p>
+The process begins by converting raw gaze coordinates into structured inputs like spatial heatmaps or sequential token embeddings. These representations are projected into a shared latent space and fused with visual and textual features, often through cross-attention mechanisms or concatenation. For instance, the combined input representation \( H \) for a multimodal transformer might be formulated as \( H = f(E_{text}, E_{image}, E_{gaze}) \), where \( E_{gaze} \) represents the encoded gaze embeddings. The model then learns to weigh specific visual features based on where humans focused during data collection.</p>
 
 <p><strong>3. Why does it matter?</strong><br>
-Integrating gaze data provides a strong inductive bias that helps models resolve ambiguity in visual scenes by focusing on relevant regions, similar to human cognitive processing. This significantly improves performance on tasks requiring fine-grained visual reasoning, such as visual question answering or medical image analysis. Furthermore, it opens avenues for developing collaborative AI agents that understand user intent through implicit behavioral signals.</p>
+Incorporating gaze provides a strong inductive bias that mimics human selectivity, allowing models to ignore irrelevant noise and focus on salient features. This leads to improved performance and faster convergence in tasks requiring fine-grained visual understanding, such as visual question answering or medical image analysis. It also enhances model interpretability by offering a human-grounded reference for evaluating machine attention mechanisms.</p>
 
 <p><strong>4. Key insight</strong><br>
-Gaze data acts as a natural attention mechanism that bridges the gap between high-level language semantics and low-level visual features. It effectively guides the model to prioritize relevant visual information, reducing the computational search space for complex reasoning tasks.</p>
+Gaze data acts as a supervisory signal that teaches models not just what to process, but where to look, effectively distilling human cognitive priorities into machine learning pipelines.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
                 <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Maryam Ansarifard, Mohit K. Sharma, Kishor C. Joshi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22774v1" target="_blank">2602.22774v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>Here is a structured summary of the research paper.</p>
+
+<p>### 1. Research Question. The paper aims to solve the problem of minimizing the Age of Information (AoI) in multi-user uplink wireless networks that use non-orthogonal multiple access (NOMA). The core research question asks how an intelligent agent can effectively schedule heterogeneous users with different task sizes and urgency levels to ensure information freshness while adhering to strict wireless transmission constraints.</p>
+
+<p>### 2. Positioning. This work positions itself at the intersection of deep reinforcement learning (DRL) and wireless communications, specifically addressing the limitations of traditional DRL methods in handling complex, large-scale state spaces. It fills a gap in the literature by moving beyond standard neural networks, which often struggle with user heterogeneity and inter-dependencies, by adopting architectures typically used in sequence modeling. The paper argues that existing methods lack the scalability and focus required for dynamic priority-aware resource allocation.</p>
+
+<p>### 3. Key Contribution. The main contribution is a Proximal Policy Optimization (PPO) framework enhanced with a Transformer encoder, designed to optimize resource allocation for AoI minimization. The novel integration of the attention mechanism allows the model to dynamically weigh the importance of different users, effectively capturing inter-user dependencies that simpler architectures miss. Furthermore, the paper provides an interpretability analysis, demonstrating that the model learns to "gaze" at high-priority users, evolving from uniform attention to structured, priority-based focus.</p>
+
+<p>### 4. Methodology. The authors model the wireless scheduling problem as a Markov Decision Process (MDP) and solve it using a Transformer-based Actor-Critic network. The architecture leverages self-attention mechanisms to process the system state, allowing the agent to identify critical users and schedule transmissions under NOMA constraints. This approach treats the set of user states as an input sequence, where the attention weights act similarly to a visual gaze, filtering out less relevant information to focus on users with high penalty sensitivity or aging data.</p>
+
+<p>### 5. Limitations. While the abstract highlights successful simulations, the approach likely incurs higher computational overhead compared to simpler baseline models due to the complexity of the Transformer architecture. The evaluation is conducted in a simulated environment, which may not fully capture the unpredictable noise and hardware constraints of real-world wireless channels. Additionally, the reliance on specific NOMA constraints might limit the direct applicability of the model to other multiple access technologies without significant retraining or structural changes.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling demonstration of how attention mechanisms, foundational to Large Language Models (LLMs), can be repurposed for decision-making in wireless networks. The primary strength lies in the interpretability of the results, as the visualization of attention weights provides clear insight into the model's scheduling logic, analogous to analyzing eye-tracking data to understand human focus. However, the practical deployment of such models in real-time systems remains a challenge, as the latency introduced by Transformer inference could potentially counteract the gains achieved in information freshness.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiahao Zhang, Yifan Zhang, Kevin Leach et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22368v1" target="_blank">2602.22368v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper investigates whether human eye-gaze patterns can be integrated into Large Language Models (LLMs) to improve the quality of automated code summarization. It specifically asks if human attention priors can serve as a proxy for expertise to enhance the semantic focus of these models.</p>
+
+<p>### 2. Positioning. While LLMs have achieved high performance in code understanding, they typically rely solely on data-driven attention mechanisms without explicit guidance from human cognitive processes. This work positions itself at the intersection of software engineering and cognitive computing, filling the gap by treating eye-tracking data as a source of human expertise that can complement standard model training.</p>
+
+<p>### 3. Key Contribution. The primary contribution is EyeLayer, a lightweight module designed to inject human gaze information into various model architectures without disrupting their pre-trained representations. It demonstrates that human attention signals are highly transferable, successfully improving performance across distinct model families including LLaMA-3.2, Qwen3, and CodeBERT.</p>
+
+<p>### 4. Methodology. EyeLayer models human attention using a Multimodal Gaussian Mixture, parameterized by learned means \(\mu_i\) and variances \(\sigma_i^2\) to capture the location and intensity of developer focus. This mechanism redistributes token embeddings based on these gaze parameters, effectively creating an attention prior that guides the model to focus on code elements humans find most important.</p>
+
+<p>### 5. Limitations. The approach relies on the availability of high-quality eye-tracking data, which is expensive to collect and much scarcer than standard code corpora. Additionally, the effectiveness of the learned gaze priors may vary depending on how well the eye-tracking participants' coding expertise aligns with the specific code summarization tasks.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling fusion of cognitive science and deep learning, providing a novel pathway to improve model interpretability and performance through human-centric signals. The reported BLEU-4 gains of up to 13.17% are significant, though the practical scalability of the method depends on overcoming the logistical hurdles associated with large-scale gaze data collection.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jingchao Wei, Jingkai Qin, Yuxiao Cao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21983v1" target="_blank">2602.21983v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of enabling humanoid robots to perform natural and context-appropriate gaze shifts during unconstrained human-robot interaction. It asks how to effectively unify cognitive attention mechanisms, which determine where to look, with biomimetic motion generation, which determines how to move the eyes and head.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing research often treats gaze target selection and motion generation as separate problems, resulting in mechanical or contextually disjointed behaviors in robots. This work positions itself at the intersection of cognitive robotics and generative motion synthesis, filling a critical gap by integrating semantic understanding with physical motor control.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the Robot Gaze-Shift (RGS) framework, a unified pipeline that bridges the divide between gaze intent and physical action. The paper introduces two novel components. First, it uses a Vision-Language Model (VLM) for semantic gaze reasoning. Second, it employs a conditional VQ-VAE for generating diverse, human-like eye-head coordination.</p>
+
+<p><strong>4. Methodology</strong><br>
+The RGS framework operates in two distinct stages. First, a VLM-based pipeline processes multimodal inputs to infer gaze targets that align with human social norms. Second, a conditional Vector Quantized-Variational Autoencoder (VQ-VAE) generates the actual motion trajectories, coordinating the robot's eyes and head to produce realistic movements.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract validates the framework's effectiveness, potential limitations include the computational latency of VLMs, which could affect real-time responsiveness during fast-paced interactions. Additionally, the diversity of the generated motions is inherently constrained by the data used to train the VQ-VAE, potentially limiting generalization to highly novel social contexts.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a compelling integration of high-level semantic reasoning and low-level motion generation, marking a significant advance in social robotics. The use of generative models like VQ-VAE to introduce motion diversity is a particular strength, as it avoids the repetitive stiffness often seen in traditional robotic control systems. However, the practical success of this system will ultimately depend on its ability to execute these complex models with low latency in noisy, real-world environments.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
                     <h3 class="paper-title">
                         <a href="https://arxiv.org/pdf/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a>
                     </h3>
@@ -298,93 +378,32 @@ Gaze data acts as a natural attention mechanism that bridges the gap between hig
 
                     <h4>Summary</h4>
                     <p>1. <strong>Research Question</strong><br>
- The paper investigates why ideas generated by Large Language Models (LLMs) lack diversity compared to those generated by independent groups of humans. It asks how cognitive mechanisms like fixation and knowledge partitioning contribute to this homogenization and whether prompting strategies can mitigate these issues.</p>
+ The paper investigates why Large Language Models (LLMs) generate less diverse ideas compared to independent groups of humans. It asks whether cognitive mechanisms like fixation and knowledge aggregation limit LLM diversity and if targeted prompting interventions can mitigate these issues.</p>
 
 <p>2. <strong>Positioning</strong><br>
- This work situates itself at the intersection of cognitive psychology and generative AI, applying human cognitive theory to explain LLM behavioral patterns. It addresses a critical gap in the literature regarding the societal risks of AI reliance, specifically moving beyond output quality to examine the structural diversity of the idea space.</p>
+ This research positions itself at the intersection of cognitive psychology and generative AI. It addresses a gap in the literature regarding the specific mechanisms causing homogenization in LLM outputs. By applying theories of human cognition to artificial systems, the authors move beyond observing low diversity to explaining its theoretical roots.</p>
 
 <p>3. <strong>Key Contribution</strong><br>
- The primary contribution is the identification of two specific barriers to diversity, individual fixation and collective knowledge aggregation, alongside a practical framework to resolve them. The authors demonstrate that combining Chain-of-Thought prompting with ordinary personas allows LLMs to generate ideas with greater diversity than human groups.</p>
+ The main contribution is the identification of two specific barriers to diversity, fixation and knowledge aggregation, alongside a practical prompting framework to solve them. The authors demonstrate that combining Chain-of-Thought prompting with "ordinary" personas significantly increases idea diversity. This combined approach allows LLMs to outperform human baselines in generating diverse concepts.</p>
 
 <p>4. <strong>Methodology</strong><br>
- The researchers conducted four studies involving LLMs and human participants to test targeted interventions for idea generation. They employed Chain-of-Thought prompting to reduce individual fixation and assigned distinct ordinary personas to simulate the knowledge partitioning observed in human populations.</p>
+ The researchers conducted four studies to empirically test the effects of different prompting strategies on idea generation. They used Chain-of-Thought prompting to reduce individual fixation and assigned distinct ordinary personas to simulate the knowledge partitioning found in human populations. They then measured the semantic distance between generated ideas to quantify diversity.</p>
 
 <p>5. <strong>Limitations</strong><br>
- While the interventions proved effective, the study acknowledges that Chain-of-Thought prompting improves diversity only in LLMs and does not translate to human cognition. Additionally, the reliance on specific prompting strategies suggests that diversity gains may be sensitive to prompt engineering and might not generalize across all model architectures or task types.</p>
+ The study relies on semantic similarity metrics to measure diversity, which may not fully capture the practical utility or quality of the generated ideas. The effectiveness of persona-based prompting depends heavily on the specific training data and biases inherent in the model used. Additionally, the findings are specific to text-based ideation tasks and may not generalize to other creative domains.</p>
 
 <p>6. <strong>Critical Evaluation</strong><br>
- This paper offers a compelling theoretical framework by successfully mapping concepts like cognitive fixation onto LLM behaviors, providing a deeper understanding of model limitations. However, the reliance on prompt engineering to solve diversity issues implies a need for continuous manual intervention, which may not scale effortlessly in fully automated systems.</p>
-                </div>
-                <div class="paper-entry" id="paper-2">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.23335v1" target="_blank">Understanding Usage and Engagement in AI-Powered Scientific Research Tools: The Asta Interaction Dataset</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>Authors:</strong> Dany Haddad, Dan Bareket, Joseph Chee Chang et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.23335v1" target="_blank">2602.23335v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>Summary</h4>
-                    <p><strong>1. Research Question</strong><br>
-The paper addresses the lack of insight into how researchers utilize AI-powered scientific tools in real-world settings. It aims to characterize user interaction patterns, engagement behaviors, and how these behaviors evolve as users gain experience with LLM-based retrieval systems.</p>
-
-<p><strong>2. Positioning</strong><br>
-This work positions itself at the intersection of scientific information retrieval and human-computer interaction. It fills a critical gap by moving beyond controlled lab studies or traditional search log analysis to provide a large-scale, ecologically valid view of user behavior in deployed LLM-powered research platforms.</p>
-
-<p><strong>3. Key Contribution</strong><br>
-The primary contribution is the release of the Asta Interaction Dataset, a large-scale resource containing over 200,000 anonymized queries and interaction logs. The paper also provides a comprehensive analysis of user behavior and a novel query intent taxonomy to guide the future design of AI research assistants.</p>
-
-<p><strong>4. Methodology</strong><br>
-The authors collected and analyzed interaction logs from two deployed tools, a literature discovery interface and a scientific question-answering interface, within an LLM-powered retrieval-augmented generation platform. They performed quantitative and qualitative analyses to identify query patterns, navigation habits, and the evolution of user strategies over time.</p>
-
-<p><strong>5. Limitations</strong><br>
-The study is limited by its focus on a specific set of tools and a particular user demographic, which may restrict the generalizability of the findings to other domains or casual users. Additionally, the analysis relies solely on interaction logs, which lack explicit feedback mechanisms and cannot capture nuanced cognitive processes or visual attention that eye-tracking methods might reveal.</p>
-
-<p><strong>6. Critical Evaluation</strong><br>
-This work provides a valuable resource for the community by offering a realistic benchmark for evaluating scientific AI assistants. While the dataset is robust, the exclusive reliance on log-based data misses the deeper cognitive context of user engagement. Future work could benefit significantly from integrating gaze-tracking to understand how users visually validate generated evidence and citations.</p>
-                </div>
-                <div class="paper-entry" id="paper-3">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.23193v1" target="_blank">ESAA: Event Sourcing for Autonomous Agents in LLM-Based Software Engineering</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>Authors:</strong> Elzo Brito dos Santos Filho<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.23193v1" target="_blank">2602.23193v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>Summary</h4>
-                    <p>Here is a structured summary of the research paper.</p>
-
-<p><strong>1. Research Question</strong><br>
-This paper addresses the structural instability of Large Language Model (LLM) autonomous agents in software engineering. It investigates how to bridge the gap between probabilistic generation and deterministic execution while preventing context degradation over long horizons.</p>
-
-<p><strong>2. Positioning</strong><br>
-The work positions itself at the intersection of software engineering architecture and autonomous AI systems. It addresses the limitations of current reactive agent models by introducing patterns from distributed systems, specifically aiming to solve the lack of native state management and vulnerability to context loss in existing literature.</p>
-
-<p><strong>3. Key Contribution</strong><br>
-The primary contribution is the ESAA architecture, which adapts the Event Sourcing pattern for AI agents. This approach separates the agent's cognitive intention from the actual state mutation of the project, introducing an immutable event log that ensures forensic traceability and verifiable execution.</p>
-
-<p><strong>4. Methodology</strong><br>
-The proposed architecture requires agents to emit structured JSON intentions rather than direct code modifications. A deterministic orchestrator validates these intentions, persists them in an append-only log (<code>activity. jsonl</code>), applies file-writing effects, and generates a verifiable materialized view (<code>roadmap. json</code>). The system enforces boundary contracts and uses hashing to ensure the immutability of completed tasks.</p>
-
-<p><strong>5. Limitations</strong><br>
-The reliance on strict JSON output places a significant burden on the LLM's ability to generate syntactically correct code, which can be a point of failure for less capable models. Additionally, the complexity of maintaining an orchestrator and boundary contracts may introduce overhead that limits the architecture's applicability to smaller, simpler software tasks.</p>
-
-<p><strong>6. Critical Evaluation</strong><br>
-This work offers a rigorous engineering solution to the "black box" problem of autonomous agents, providing a clear mechanism for accountability through event logs. However, the specific model names cited in the case studies (e. g., GPT-5, Claude Sonnet 4.6) appear futuristic or hypothetical, which raises questions about the current empirical validity of the results.</p>
+ The strength of this work lies in its theoretical grounding, offering a robust explanation for LLM homogenization rather than treating the model as a black box. The finding that "ordinary" personas outperform famous "creative" archetypes is a counter-intuitive and valuable insight for prompt engineers. However, the approach relies on simulating diversity through statistical cues rather than achieving genuine cognitive independence, which may still lead to systemic biases over time.</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">References</h3>
                 <ul>
+                    <li><a href="https://arxiv.org/abs/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a></li>
                     <li><a href="https://arxiv.org/abs/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.23335v1" target="_blank">Understanding Usage and Engagement in AI-Powered Scientific Research Tools: The Asta Interaction Dataset</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.23193v1" target="_blank">ESAA: Event Sourcing for Autonomous Agents in LLM-Based Software Engineering</a></li>
                 </ul>
 
                 <p><em>Feel free to reach out for discussion. Thanks for reading!</em></p>
