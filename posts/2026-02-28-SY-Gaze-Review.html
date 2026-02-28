@@ -272,138 +272,117 @@
 
                 <h2 id="daily-concept">Daily Concept: Eye tracking in multimodal AI</h2>
                 <p><strong>1. What is it?</strong><br>
-Eye tracking in multimodal AI involves integrating human gaze data, such as fixation locations and scanpaths, as a supplementary input signal alongside traditional modalities like text and images. This technique treats visual attention as a distinct data modality that guides the model toward semantically relevant regions. It effectively bridges human cognitive processes with machine learning architectures.</p>
+Eye tracking in multimodal AI involves integrating gaze data as a supplementary input modality alongside text and images to enhance model performance. It treats human visual attention as a supervisory signal that guides the model to focus on relevant regions within a scene or text. This integration bridges the gap between human cognitive processes and machine perception.</p>
 
 <p><strong>2. How does it work?</strong><br>
-The process begins by converting raw gaze coordinates into structured inputs like spatial heatmaps or sequential token embeddings. These representations are projected into a shared latent space and fused with visual and textual features, often through cross-attention mechanisms or concatenation. For instance, the combined input representation \( H \) for a multimodal transformer might be formulated as \( H = f(E_{text}, E_{image}, E_{gaze}) \), where \( E_{gaze} \) represents the encoded gaze embeddings. The model then learns to weigh specific visual features based on where humans focused during data collection.</p>
+The process typically encodes raw gaze coordinates into spatial features, such as heatmaps or fixation sequences, which are then fused with visual or textual embeddings using transformer architectures. Models often employ a gaze-guided attention mechanism where the model's attention weights are regularized to align with human fixation distributions. This alignment is frequently achieved by minimizing a divergence loss between the model's learned attention map \( A_{model} \) and the ground truth gaze map \( A_{gaze} \). For example, the optimization objective may include a term like \( \mathcal{L}_{gaze} = D_{KL}(A_{gaze} \parallel A_{model}) \) to force the model to attend to specific regions.</p>
 
 <p><strong>3. Why does it matter?</strong><br>
-Incorporating gaze provides a strong inductive bias that mimics human selectivity, allowing models to ignore irrelevant noise and focus on salient features. This leads to improved performance and faster convergence in tasks requiring fine-grained visual understanding, such as visual question answering or medical image analysis. It also enhances model interpretability by offering a human-grounded reference for evaluating machine attention mechanisms.</p>
+Integrating gaze data provides a strong inductive bias that helps models distinguish signal from noise, leading to faster convergence and improved accuracy in tasks like Visual Question Answering. It enhances interpretability by forcing the model to align its internal attention mechanisms with human reasoning patterns. Furthermore, this approach enables the development of more responsive AI systems that can adapt to user intent in real time based on where they are looking.</p>
 
 <p><strong>4. Key insight</strong><br>
-Gaze data acts as a supervisory signal that teaches models not just what to process, but where to look, effectively distilling human cognitive priorities into machine learning pipelines.</p>
+Human gaze serves as a low-cost, implicit supervision signal that teaches AI systems not just what to process, but what to ignore. This biological prior allows large language models to mimic human-like efficiency in visual and textual processing tasks.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
                 <div class="paper-entry" id="paper-1">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a>
+                        <a href="https://arxiv.org/pdf/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Maryam Ansarifard, Mohit K. Sharma, Kishor C. Joshi et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22774v1" target="_blank">2602.22774v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>Summary</h4>
-                    <p>Here is a structured summary of the research paper.</p>
-
-<p>### 1. Research Question. The paper aims to solve the problem of minimizing the Age of Information (AoI) in multi-user uplink wireless networks that use non-orthogonal multiple access (NOMA). The core research question asks how an intelligent agent can effectively schedule heterogeneous users with different task sizes and urgency levels to ensure information freshness while adhering to strict wireless transmission constraints.</p>
-
-<p>### 2. Positioning. This work positions itself at the intersection of deep reinforcement learning (DRL) and wireless communications, specifically addressing the limitations of traditional DRL methods in handling complex, large-scale state spaces. It fills a gap in the literature by moving beyond standard neural networks, which often struggle with user heterogeneity and inter-dependencies, by adopting architectures typically used in sequence modeling. The paper argues that existing methods lack the scalability and focus required for dynamic priority-aware resource allocation.</p>
-
-<p>### 3. Key Contribution. The main contribution is a Proximal Policy Optimization (PPO) framework enhanced with a Transformer encoder, designed to optimize resource allocation for AoI minimization. The novel integration of the attention mechanism allows the model to dynamically weigh the importance of different users, effectively capturing inter-user dependencies that simpler architectures miss. Furthermore, the paper provides an interpretability analysis, demonstrating that the model learns to "gaze" at high-priority users, evolving from uniform attention to structured, priority-based focus.</p>
-
-<p>### 4. Methodology. The authors model the wireless scheduling problem as a Markov Decision Process (MDP) and solve it using a Transformer-based Actor-Critic network. The architecture leverages self-attention mechanisms to process the system state, allowing the agent to identify critical users and schedule transmissions under NOMA constraints. This approach treats the set of user states as an input sequence, where the attention weights act similarly to a visual gaze, filtering out less relevant information to focus on users with high penalty sensitivity or aging data.</p>
-
-<p>### 5. Limitations. While the abstract highlights successful simulations, the approach likely incurs higher computational overhead compared to simpler baseline models due to the complexity of the Transformer architecture. The evaluation is conducted in a simulated environment, which may not fully capture the unpredictable noise and hardware constraints of real-world wireless channels. Additionally, the reliance on specific NOMA constraints might limit the direct applicability of the model to other multiple access technologies without significant retraining or structural changes.</p>
-
-<p>### 6. Critical Evaluation. This work offers a compelling demonstration of how attention mechanisms, foundational to Large Language Models (LLMs), can be repurposed for decision-making in wireless networks. The primary strength lies in the interpretability of the results, as the visualization of attention weights provides clear insight into the model's scheduling logic, analogous to analyzing eye-tracking data to understand human focus. However, the practical deployment of such models in real-time systems remains a challenge, as the latency introduced by Transformer inference could potentially counteract the gains achieved in information freshness.</p>
-                </div>
-                <div class="paper-entry" id="paper-2">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>Authors:</strong> Jiahao Zhang, Yifan Zhang, Kevin Leach et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22368v1" target="_blank">2602.22368v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>Summary</h4>
-                    <p>### 1. Research Question. The paper investigates whether human eye-gaze patterns can be integrated into Large Language Models (LLMs) to improve the quality of automated code summarization. It specifically asks if human attention priors can serve as a proxy for expertise to enhance the semantic focus of these models.</p>
-
-<p>### 2. Positioning. While LLMs have achieved high performance in code understanding, they typically rely solely on data-driven attention mechanisms without explicit guidance from human cognitive processes. This work positions itself at the intersection of software engineering and cognitive computing, filling the gap by treating eye-tracking data as a source of human expertise that can complement standard model training.</p>
-
-<p>### 3. Key Contribution. The primary contribution is EyeLayer, a lightweight module designed to inject human gaze information into various model architectures without disrupting their pre-trained representations. It demonstrates that human attention signals are highly transferable, successfully improving performance across distinct model families including LLaMA-3.2, Qwen3, and CodeBERT.</p>
-
-<p>### 4. Methodology. EyeLayer models human attention using a Multimodal Gaussian Mixture, parameterized by learned means \(\mu_i\) and variances \(\sigma_i^2\) to capture the location and intensity of developer focus. This mechanism redistributes token embeddings based on these gaze parameters, effectively creating an attention prior that guides the model to focus on code elements humans find most important.</p>
-
-<p>### 5. Limitations. The approach relies on the availability of high-quality eye-tracking data, which is expensive to collect and much scarcer than standard code corpora. Additionally, the effectiveness of the learned gaze priors may vary depending on how well the eye-tracking participants' coding expertise aligns with the specific code summarization tasks.</p>
-
-<p>### 6. Critical Evaluation. This work offers a compelling fusion of cognitive science and deep learning, providing a novel pathway to improve model interpretability and performance through human-centric signals. The reported BLEU-4 gains of up to 13.17% are significant, though the practical scalability of the method depends on overcoming the logistical hurdles associated with large-scale gaze data collection.</p>
-                </div>
-                <div class="paper-entry" id="paper-3">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>Authors:</strong> Jingchao Wei, Jingkai Qin, Yuxiao Cao et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21983v1" target="_blank">2602.21983v1</a>
+                        <strong>Authors:</strong> Parsa Madinei, Srijita Karmakar, Russell Cohen Hoffing et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.16138v1" target="_blank">2602.16138v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper addresses the challenge of enabling humanoid robots to perform natural and context-appropriate gaze shifts during unconstrained human-robot interaction. It asks how to effectively unify cognitive attention mechanisms, which determine where to look, with biomimetic motion generation, which determines how to move the eyes and head.</p>
+The paper addresses the challenge of ambiguity in open-ended Visual Question Answering (VQA). It investigates whether real-time eye-tracking data can resolve user intent and significantly improve the accuracy of Large Vision-Language Models (VLMs) on ambiguous queries without requiring model retraining.</p>
 
 <p><strong>2. Positioning</strong><br>
-Existing research often treats gaze target selection and motion generation as separate problems, resulting in mechanical or contextually disjointed behaviors in robots. This work positions itself at the intersection of cognitive robotics and generative motion synthesis, filling a critical gap by integrating semantic understanding with physical motor control.</p>
+This work positions itself at the intersection of cognitive science and multimodal AI, addressing the limitations of current VLMs that struggle with underspecified textual prompts. It fills a gap in the literature by moving beyond static image-text pairs, proposing a novel interactive protocol where implicit behavioral signals (gaze) augment the model's understanding during inference.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The primary contribution is the Robot Gaze-Shift (RGS) framework, a unified pipeline that bridges the divide between gaze intent and physical action. The paper introduces two novel components. First, it uses a Vision-Language Model (VLM) for semantic gaze reasoning. Second, it employs a conditional VQ-VAE for generating diverse, human-like eye-head coordination.</p>
+The primary contribution is IRIS, a training-free inference method that leverages human fixations to disambiguate visual questions. The authors demonstrate that fixations occurring closest to the start of a verbal question are the most informative, more than doubling accuracy on ambiguous questions (from 35.2% to 77.2%). They also release a new benchmark dataset and evaluation suite to standardize gaze-augmented VQA research.</p>
 
 <p><strong>4. Methodology</strong><br>
-The RGS framework operates in two distinct stages. First, a VLM-based pipeline processes multimodal inputs to infer gaze targets that align with human social norms. Second, a conditional Vector Quantized-Variational Autoencoder (VQ-VAE) generates the actual motion trajectories, coordinating the robot's eyes and head to produce realistic movements.</p>
+IRIS operates by capturing user eye-tracking data in real-time as they view an image and ask a question. The method isolates specific gaze fixations synchronized with the onset of the verbal query to identify the user's region of interest. The VLM then uses this gaze-augmented input to focus its attention on relevant image regions, effectively filtering out irrelevant visual noise to answer the question.</p>
 
 <p><strong>5. Limitations</strong><br>
-While the abstract validates the framework's effectiveness, potential limitations include the computational latency of VLMs, which could affect real-time responsiveness during fast-paced interactions. Additionally, the diversity of the generated motions is inherently constrained by the data used to train the VQ-VAE, potentially limiting generalization to highly novel social contexts.</p>
+A primary limitation is the dependency on specialized eye-tracking hardware, which restricts the method's accessibility compared to standard webcam-based interactions. The approach also relies on precise timing synchronization between the gaze data and speech onset, which may be difficult to achieve in noisy or uncontrolled real-world environments. Additionally, the user study size of 500 image-question pairs may not capture the full diversity of ambiguous scenarios encountered in broader applications.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This work offers a compelling integration of high-level semantic reasoning and low-level motion generation, marking a significant advance in social robotics. The use of generative models like VQ-VAE to introduce motion diversity is a particular strength, as it avoids the repetitive stiffness often seen in traditional robotic control systems. However, the practical success of this system will ultimately depend on its ability to execute these complex models with low latency in noisy, real-world environments.</p>
+This research offers a compelling proof-of-concept that implicit human signals can serve as a powerful interface for refining LLM outputs. The reported accuracy gains are substantial, and the training-free approach makes the method immediately applicable to state-of-the-art models. However, the practical deployment is currently hindered by hardware requirements, suggesting that future work must focus on making the gaze-input mechanism more accessible or software-based.</p>
                 </div>
-                <div class="paper-entry" id="paper-4">
+                <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a>
+                        <a href="https://arxiv.org/pdf/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Yuting Deng, Melanie Brucks, Olivier Toubia<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20408v1" target="_blank">2602.20408v1</a>
+                        <strong>Authors:</strong> Jia Li, Wenjie Zhao, Shijian Deng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.05132v1" target="_blank">2602.05132v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
-                    <p>1. <strong>Research Question</strong><br>
- The paper investigates why Large Language Models (LLMs) generate less diverse ideas compared to independent groups of humans. It asks whether cognitive mechanisms like fixation and knowledge aggregation limit LLM diversity and if targeted prompting interventions can mitigate these issues.</p>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of online egocentric gaze estimation, aiming to predict where a camera wearer is looking using only current and past video frames. The core question is how to effectively model gaze in real-time scenarios where explicit eye or head signals are unavailable and future context is inaccessible.</p>
 
-<p>2. <strong>Positioning</strong><br>
- This research positions itself at the intersection of cognitive psychology and generative AI. It addresses a gap in the literature regarding the specific mechanisms causing homogenization in LLM outputs. By applying theories of human cognition to artificial systems, the authors move beyond observing low diversity to explaining its theoretical roots.</p>
+<p><strong>2. Positioning</strong><br>
+This work distinguishes itself from third-person gaze estimation methods that rely on clear images of the eyes or head pose. It targets the "online" setting required for augmented reality applications, filling a gap in utilizing temporal dependencies for gaze prediction without access to future frames.</p>
 
-<p>3. <strong>Key Contribution</strong><br>
- The main contribution is the identification of two specific barriers to diversity, fixation and knowledge aggregation, alongside a practical prompting framework to solve them. The authors demonstrate that combining Chain-of-Thought prompting with "ordinary" personas significantly increases idea diversity. This combined approach allows LLMs to outperform human baselines in generating diverse concepts.</p>
+<p><strong>3. Key Contribution</strong><br>
+The main contribution is ARGaze, a framework that reformulates gaze estimation as an autoregressive sequence prediction task similar to decoding in large language models. The authors introduce a Gaze Context Window mechanism that conditions current predictions on a fixed history of recent gaze estimates, demonstrating that this temporal prior significantly boosts performance.</p>
 
-<p>4. <strong>Methodology</strong><br>
- The researchers conducted four studies to empirically test the effects of different prompting strategies on idea generation. They used Chain-of-Thought prompting to reduce individual fixation and assigned distinct ordinary personas to simulate the knowledge partitioning found in human populations. They then measured the semantic distance between generated ideas to quantify diversity.</p>
+<p><strong>4. Methodology</strong><br>
+The proposed method uses a transformer decoder that functions autoregressively, taking two main inputs at each timestep. These inputs are the current visual features extracted from the video frame and a fixed-length buffer of past gaze predictions. This architecture enforces causality, ensuring the model relies strictly on available history to predict the current gaze target.</p>
 
-<p>5. <strong>Limitations</strong><br>
- The study relies on semantic similarity metrics to measure diversity, which may not fully capture the practical utility or quality of the generated ideas. The effectiveness of persona-based prompting depends heavily on the specific training data and biases inherent in the model used. Additionally, the findings are specific to text-based ideation tasks and may not generalize to other creative domains.</p>
+<p><strong>5. Limitations</strong><br>
+A potential limitation inherent in the autoregressive design is the risk of error propagation, where incorrect predictions from previous timesteps could negatively influence future estimates. Additionally, the reliance on a fixed-length context window may restrict the model's ability to capture longer-term behavioral patterns that extend beyond the defined history limit.</p>
 
-<p>6. <strong>Critical Evaluation</strong><br>
- The strength of this work lies in its theoretical grounding, offering a robust explanation for LLM homogenization rather than treating the model as a black box. The finding that "ordinary" personas outperform famous "creative" archetypes is a counter-intuitive and valuable insight for prompt engineers. However, the approach relies on simulating diversity through statistical cues rather than achieving genuine cognitive independence, which may still lead to systemic biases over time.</p>
+<p><strong>6. Critical Evaluation</strong><br>
+This work provides a strong conceptual bridge between natural language processing techniques and computer vision by successfully applying autoregressive decoding to gaze estimation. The approach is highly practical for real-world deployment due to its bounded resource usage and state-of-the-art performance, offering a robust solution for streaming applications in augmented reality.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Cassandra L. Jacobs, Morgan Grobol<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.17848v1" target="_blank">2602.17848v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates how the scale of Large Language Models (LLMs) influences their ability to predict human reading behavior. It specifically asks why larger models align better with human cloze data and what mechanistic changes occur as model size increases.</p>
+
+<p><strong>2. Positioning</strong><br>
+This research builds upon previous studies linking LLM performance to eye-tracking and reading time data. It fills a gap in the literature by explaining the specific mechanisms that drive improved prediction in larger models, distinguishing between semantic alignment and low-level statistical sensitivity.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors demonstrate that larger models generate superior next-token estimates in cloze tasks because they prioritize semantic appropriateness over raw lexical co-occurrence statistics. They argue that the increased memorization capacity of these models helps identify contextually correct words, though this simultaneously reduces sensitivity to low-level cues used in human word recognition.</p>
+
+<p><strong>4. Methodology</strong><br>
+The study compares human cloze responses with next-token predictions from language models of varying sizes. It evaluates how model scale affects the balance between semantic alignment with human responses and reliance on lexical co-occurrence statistics.</p>
+
+<p><strong>5. Limitations</strong><br>
+A primary limitation acknowledged is that even the largest models still under-allocate probability mass to human responses compared to actual human data. Furthermore, the reduced sensitivity to low-level lexical information in larger models may limit their ability to fully simulate the nuances of human word recognition processes.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This paper provides valuable insight into the trade-offs inherent in scaling language models for psycholinguistic modeling. It successfully identifies that better semantic guessing does not necessarily equate to a faithful simulation of human cognitive processing during reading, highlighting a critical divergence between model size and cognitive plausibility.</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">References</h3>
                 <ul>
-                    <li><a href="https://arxiv.org/abs/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a></li>
                 </ul>
 
                 <p><em>Feel free to reach out for discussion. Thanks for reading!</em></p>

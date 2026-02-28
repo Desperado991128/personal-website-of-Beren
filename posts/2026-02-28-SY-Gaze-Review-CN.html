@@ -271,151 +271,118 @@
                 <p>以下是 2026年02月28日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
 
                 <h2 id="daily-concept">每日概念: Eye tracking in multimodal AI</h2>
-                <p><strong>1. 概念定义</strong><br>
-这是指将眼动数据作为一种生物信号模态集成到多模态人工智能系统中，以模拟或增强模型对视觉信息的处理能力。通过引入注视点、眼跳轨迹和瞳孔直径等数据，AI系统能够获得类似人类的视觉注意力机制，从而优化对图像和文本信息的理解与交互。</p>
+                <p><strong>概念定义</strong><br>
+多模态AI中的眼动追踪是指将人类眼球运动数据作为一种模态输入或监督信号整合到深度学习模型中。这种方法利用注视点和眼跳轨迹等生理信号来指导模型关注关键信息区域，从而模拟人类的视觉注意力机制。</p>
 
-<p><strong>2. 核心原理</strong><br>
-核心机制在于将眼动信号转化为注意力先验，并以此指导模型对视觉或文本特征的加权处理。在典型的多模态模型中，眼动数据通常被编码为空间权重图，用于调制视觉特征提取过程。数学上，这可以表示为特征图 \( V \) 与注视概率图 \( G \) 的加权融合，即 \( V' = V \odot G \)，其中 \( \odot \) 代表逐元素乘法。这种方法利用人类的认知显著性来抑制背景噪声，使模型聚焦于关键信息区域。</p>
+<p><strong>核心原理</strong><br>
+核心机制是将离散的眼动注视点转化为连续的注意力权重图，并将其与视觉或文本特征进行融合。具体而言，离散的注视点坐标通常通过高斯核函数转化为连续的显著图 \( S \)，公式为 \( S(x,y) = \sum_{i=1}^{N} \exp\left(-\frac{(x-x_i)^2 + (y-y_i)^2}{2\sigma^2}\right) \)。在训练阶段，模型通过最小化预测注意力分布与真实眼动数据之间的KL散度来对齐机器与人类的注意力机制。</p>
 
-<p><strong>3. 研究意义</strong><br>
-在眼动与LLM的交叉研究中，这一技术为解决长上下文注意力分散问题提供了生物学启发，能够显著降低模型的计算开销并提升推理性能。它不仅让LLM具备了模拟人类阅读模式的能力，还能通过眼动数据作为隐式反馈信号来优化文本生成质量。此外，这种融合有助于构建更符合人类认知习惯的可解释AI系统。</p>
+<p><strong>研究意义</strong><br>
+在眼动追踪与LLM的交叉研究中，眼动数据提供了稀缺且高质量的人类先验知识，能够有效引导大模型对齐人类的认知过程。这种跨模态融合不仅提升了模型在视觉问答和阅读理解任务中的性能，还为解决大模型幻觉问题提供了基于人类注意力的纠偏机制。</p>
 
-<p><strong>4. 关键洞见</strong><br>
-眼动数据提供了人类认知过程的“地面实况”，它将生物注意力机制直接转化为模型可学习的先验知识，从而在机器智能与人类认知之间架起了一座桥梁。</p>
+<p><strong>关键洞见</strong><br>
+眼动追踪将隐性的认知过程显性化，为AI模型提供了超越传统文本标签的细粒度监督信号。</p>
 
                 <h2 id="papers">论文摘要</h2>
 
                 <div class="paper-entry" id="paper-1">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a>
+                        <a href="https://arxiv.org/pdf/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Maryam Ansarifard, Mohit K. Sharma, Kishor C. Joshi et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22774v1" target="_blank">2602.22774v1</a>
+                        <strong>作者:</strong> Parsa Madinei, Srijita Karmakar, Russell Cohen Hoffing et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.16138v1" target="_blank">2602.16138v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
                     <p><strong>1. 研究问题</strong><br>
-这篇论文旨在解决多用户上行非正交多址接入网络中的信息年龄最小化问题。核心挑战在于如何处理用户异构性，包括任务大小、AoI阈值和惩罚敏感度的差异，同时满足严格的NOMA调度约束。</p>
+这篇论文旨在解决大型视觉语言模型在开放式视觉问答中因问题歧义而导致的回答不准确问题。核心研究问题是如何利用人类实时的眼动注视数据来消除用户意图的不确定性，从而提升模型对模糊问题的理解能力。</p>
 
 <p><strong>2. 研究定位</strong><br>
-这项工作位于深度强化学习与下一代无线通信资源管理的交叉领域。它填补了现有研究在处理复杂用户异构性和系统可扩展性方面的空白，特别是引入了源自大语言模型领域的Transformer架构来解决无线资源分配问题。</p>
+这项工作填补了人机交互中实时眼动信号与多模态大模型推理相结合的空白。它不同于以往依赖静态图像特征或需额外训练的方法，提出了一种无需训练的推理时干预策略。该研究将认知科学中的眼动机制引入VLM推理流程，拓展了多模态交互的研究边界。</p>
 
 <p><strong>3. 核心贡献</strong><br>
-论文提出了一种基于近端策略优化的深度强化学习框架，并创新性地集成了Transformer编码器。主要贡献在于利用注意力机制捕捉用户间的依赖关系，并通过注意力图的演变分析，证明了模型能够自主学习并优先关注高重要性的用户。</p>
+论文提出了IRIS框架，这是一种无需训练的方法，通过实时眼动追踪显著提升了VLM处理歧义问题的能力。研究发现提问开始时刻附近的注视点最具信息量，能将歧义问题的准确率从35.2%大幅提升至77.2%。此外，团队发布了包含眼动数据的消歧VQA基准数据集及实时交互协议。</p>
 
 <p><strong>4. 方法概述</strong><br>
-该方法构建了一个基于Transformer编码器的Actor-Critic网络架构。通过自注意力机制，智能体能够动态聚焦于关键用户状态并捕捉用户间的隐式关联，从而在复杂的NOMA约束下输出更优的资源分配策略。</p>
+IRIS采用一种推理时扫视机制，在模型推理阶段实时捕获用户的眼动数据。系统筛选出用户开始提问时刻附近的注视点，将其作为视觉提示输入到VLM中。这种方法无需修改模型参数，直接利用眼动信号引导模型关注图像中的相关区域，从而解析用户意图。</p>
 
 <p><strong>5. 局限与不足</strong><br>
-尽管仿真结果积极，但在实际部署中，Transformer架构较高的计算复杂度可能对实时性要求极高的URLLC系统构成挑战。此外，研究主要基于仿真环境，模型在真实物理信道衰落和突发干扰下的鲁棒性仍需进一步验证。</p>
+该方法高度依赖专业的眼动追踪硬件，可能限制了其在普通消费级设备上的普及应用。用户研究虽然有效，但在更复杂的动态视频场景下的泛化能力尚待验证。实时眼动数据的质量受个体差异和环境因素影响，可能引入额外的噪声干扰模型判断。</p>
 
 <p><strong>6. 评价与思考</strong><br>
-这项工作展示了大语言模型中的Transformer技术在通信资源分配领域的巨大潜力，证明了注意力机制在捕捉系统状态依赖性方面的有效性。文中对注意力权重演变的分析类似于眼动追踪研究中的注视点分析，早期均匀分布到后期聚焦关键目标的模式，为理解AI决策逻辑提供了类似视觉认知的直观解释。</p>
+这是一项极具创新性的跨学科研究，巧妙地利用人类认知过程中的眼动信号来弥补模型在意图理解上的缺陷。其免训练的特性降低了应用门槛，展示了推理时干预策略的巨大潜力。未来的关键挑战在于如何将这种依赖专业硬件的方案转化为基于普通摄像头的低成本应用。</p>
                 </div>
                 <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a>
+                        <a href="https://arxiv.org/pdf/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Jiahao Zhang, Yifan Zhang, Kevin Leach et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22368v1" target="_blank">2602.22368v1</a>
+                        <strong>作者:</strong> Jia Li, Wenjie Zhao, Shijian Deng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.05132v1" target="_blank">2602.05132v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
-                    <p><strong>1. 研究问题</strong><br>
-这篇论文探讨了如何将人类在代码理解过程中的专业知识引入大语言模型。核心研究问题是，人类的眼动注意力模式能否作为先验知识，有效增强LLM在代码摘要任务中的表现。</p>
+                    <p>### 1. 研究问题<br>
+这篇论文旨在解决在线自我中心眼动追踪问题，即仅利用过去和当前的帧来预测相机佩戴者的注视点。核心挑战在于缺乏显式的头部或眼部信号，模型必须从稀疏线索中推断当前的视觉注意力。</p>
 
-<p><strong>2. 研究定位</strong><br>
-该工作位于代码摘要与人机交互研究的交叉领域。现有研究主要关注模型架构优化或大规模预训练，较少探索人类认知信号对模型注意力的指导作用。本文填补了这一空白，提出了一种将人类视觉注意力无缝集成到LLM推理过程中的轻量级方案。</p>
+<p>### 2. 研究定位<br>
+该研究定位于在线自我中心眼动追踪领域，区别于可使用未来帧的离线方法，它更符合增强现实(AR)和辅助技术的实时应用需求。它填补了利用时序依赖性进行在线预测的空白，将眼动追踪从单帧预测扩展到了序列预测问题。</p>
 
-<p><strong>3. 核心贡献</strong><br>
-论文提出了EyeLayer模块，这是一种轻量级的注意力增强机制，能够将人类眼动数据转化为可学习的注意力先验。该工作的创新在于利用多模态高斯混合模型重新分配Token嵌入，在不破坏原有模型结构的前提下实现了显著性能提升，BLEU-4指标最高提升了13.17%。</p>
+<p>### 3. 核心贡献<br>
+论文提出了ARGaze模型，将眼动追踪重构为序列预测任务，借鉴了视觉语言模型中的自回归解码思想。主要创新在于引入了注视上下文窗口机制，利用历史注视信息作为先验，显著提升了在线场景下的预测精度并达到了最先进水平。</p>
 
-<p><strong>4. 方法概述</strong><br>
-EyeLayer通过多模态高斯混合模型对人类阅读代码时的眼动轨迹进行建模，捕捉开发者关注的焦点位置和强度。该方法利用学习到的参数 \((\mu_i, \sigma_i^2)\) 对Token嵌入进行重新分配和加权，从而将人类注意力模式无缝注入到LLM的表示层中。</p>
+<p>### 4. 方法概述<br>
+ARGaze采用Transformer解码器架构，在每个时间步联合处理当前视觉特征与固定长度的历史注视上下文窗口。这种自回归设计强制了因果性约束，确保模型仅依赖过去信息进行预测，适合资源受限的流式推理。</p>
 
-<p><strong>5. 局限与不足</strong><br>
-该研究依赖于高质量的眼动追踪数据，这可能限制了其在缺乏此类数据的新编程语言或特定场景中的应用。此外，虽然方法具有通用性，但实验主要集中在代码摘要任务，其在代码生成或错误检测等其他下游任务中的效果尚需验证。</p>
+<p>### 5. 局限与不足<br>
+由于采用自回归机制，模型可能存在误差累积的问题，即早期的错误预测可能影响后续结果。此外，固定长度的注视上下文窗口可能无法适应所有动态变化的任务场景，且对初始帧的预测可能因缺乏历史信息而精度较低。</p>
 
-<p><strong>6. 评价与思考</strong><br>
-这是一项极具启发性的工作，成功搭建了认知科学与深度学习之间的桥梁。其优点在于方法设计轻量且通用，能够跨不同架构的模型(如LLaMA和CodeBERT)生效。然而，眼动数据的采集成本较高，未来研究可能需要探索如何利用合成数据来降低对真实眼动数据的依赖。</p>
+<p>### 6. 评价与思考<br>
+这项工作巧妙地将大语言模型中的自回归生成范式迁移至眼动追踪领域，利用了注视行为的时序连续性先验，具有很强的借鉴意义。虽然方法有效，但如何平衡上下文窗口长度与计算效率，以及如何缓解自回归带来的误差传播，值得进一步探讨。</p>
                 </div>
                 <div class="paper-entry" id="paper-3">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a>
+                        <a href="https://arxiv.org/pdf/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Jingchao Wei, Jingkai Qin, Yuxiao Cao et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21983v1" target="_blank">2602.21983v1</a>
+                        <strong>作者:</strong> Cassandra L. Jacobs, Morgan Grobol<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.17848v1" target="_blank">2602.17848v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
                     <p><strong>1. 研究问题</strong><br>
-这篇论文旨在解决仿人机器人在非受限人机交互中难以产生自然且符合情境的视线转移问题。核心挑战在于如何将认知注意力机制与仿生运动生成进行有效耦合。</p>
+这篇论文旨在探究语言模型规模增大如何影响其对人类阅读行为(如眼动追踪和阅读时间)的预测能力。核心问题在于揭示大模型在填空任务中表现更优的具体机制及其与人类认知处理的异同。</p>
 
 <p><strong>2. 研究定位</strong><br>
-该工作定位于填补认知建模与运动生成之间脱节的空白。现有研究往往孤立处理这两个环节，而本文通过统一框架实现了从多模态感知到类人动作输出的闭环。</p>
+这项工作位于心理语言学与大语言模型研究的交叉领域，延续了利用计算模型模拟人类阅读行为的传统。它填补了关于模型规模如何具体影响其对人类填空概率预测质量的认知空白，特别是区分了统计共现与语义理解的作用。</p>
 
 <p><strong>3. 核心贡献</strong><br>
-论文主要贡献在于提出了RGS框架，利用视觉语言模型(VLM)实现符合人类规律的目标选择。同时引入条件VQ-VAE模型生成多样化的眼头协调动作，显著提升了交互的自然度。</p>
+论文发现大模型虽然对人类反应的概率质量分配仍不足，但能提供更高质量的下一词元预测。核心贡献在于揭示了大模型通过更强的记忆能力提升语义匹配度，从而在填空任务中优于小模型，但同时也降低了对低级词汇统计信息的敏感度。</p>
 
 <p><strong>4. 方法概述</strong><br>
-方法分为两个阶段。首先通过VLM处理视听线索推理出合理的注视目标。接着利用条件VQ-VAE模型生成眼头协调的运动轨迹，模拟人类多样的视线转移行为。</p>
+研究通过对比不同规模语言模型的下一词元预测概率与人类填空概率，分析了二者的相关性。研究重点考察了模型预测与人类反应在语义一致性及词汇共现统计特征上的差异，以此解释模型缩放带来的性能变化。</p>
 
 <p><strong>5. 局限与不足</strong><br>
-潜在局限可能包括VLM推理带来的计算延迟，影响实时交互体验。此外，运动生成模型的效果可能受限于训练数据的覆盖范围，难以泛化至所有极端交互场景。</p>
+研究指出即使是最优模型也未能给人类反应分配足够的概率质量，表明模型与人类认知过程仍存在显著差距。此外，大模型对低级词汇识别信息的敏感度降低，可能限制了其在某些精细阅读任务中的模拟精度。</p>
 
 <p><strong>6. 评价与思考</strong><br>
-这是一项将大模型语义理解能力与眼动追踪技术深度融合的优秀工作。它突破了传统规则驱动方法的局限，为具身智能中的自然人机交互提供了极具启发性的解决方案。</p>
-                </div>
-                <div class="paper-entry" id="paper-4">
-                    <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a>
-                    </h3>
-                    <div class="paper-meta">
-                        <strong>作者:</strong> Yuting Deng, Melanie Brucks, Olivier Toubia<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20408v1" target="_blank">2602.20408v1</a>
-                    </div>
-                    <div class="paper-topics">
-                    </div>
-
-                    <h4>摘要</h4>
-                    <p>以下是针对论文《Examining and Addressing Barriers to Diversity in LLM-Generated Ideas》的结构化中文总结。</p>
-
-<p>1. <strong>研究问题</strong><br>
-这篇论文旨在解决大语言模型(LLM)生成的想法多样性低于人类独立样本的问题，探讨这种同质化趋势是否会损害社会层面的创新能力。核心研究问题是识别导致LLM想法多样性受限的认知机制，并寻找能够有效提升多样性的干预方法。</p>
-
-<p>2. <strong>研究定位</strong><br>
-这项工作位于认知心理学与大语言模型研究的交叉领域，填补了关于LLM想法生成机制的理论空白。它将人类的认知固着和知识分区概念引入AI研究，解释了为何LLM在群体层面倾向于产生同质化内容，从而扩展了对AI创新能力的理解。</p>
-
-<p>3. <strong>核心贡献</strong><br>
-论文的主要贡献在于从理论和实证角度识别了阻碍LLM多样性的两个机制，即个体层面的认知固着和集体层面的知识聚合。创新之处在于提出了针对性的提示工程解决方案，即利用思维链缓解固着，利用普通人设优化知识分区，成功使LLM生成的想法多样性超越了人类基准。</p>
-
-<p>4. <strong>方法概述</strong><br>
-研究通过四个实验研究，分别测试了思维链提示和普通人设提示对想法多样性的影响。思维链提示通过结构化推理减少早期输出对后续生成的约束，而普通人设则作为多样的采样线索，引导模型锚定语义空间的不同区域。</p>
-
-<p>5. <strong>局限与不足</strong><br>
-虽然摘要未明确列出局限，但潜在的不足可能包括思维链提示带来的计算成本增加，以及普通人设选择对生成结果的敏感性。此外，该方法在不同领域或任务类型中的泛化能力仍需进一步验证。</p>
-
-<p>6. <strong>评价与思考</strong><br>
-这项工作极具价值，因为它将认知心理学中的“固着”概念（这一概念常通过眼动追踪研究视觉注意力锁定）应用于LLM的生成过程分析。优点在于理论框架扎实且解决方案实用，为构建健康的AI辅助创新生态系统提供了重要指导，避免了单纯追求效率而牺牲创新所需的多样性。</p>
+这项工作为理解大语言模型的认知机制提供了重要视角，特别是区分了记忆容量与统计敏感度对阅读预测的影响。它提示我们在利用LLM模拟人类眼动追踪时，需要权衡模型规模带来的语义收益与低级特征丢失之间的矛盾。</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">参考链接</h3>
                 <ul>
-                    <li><a href="https://arxiv.org/abs/2602.22774v1" target="_blank">Transformer Actor-Critic for Efficient Freshness-Aware Resource Allocation</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.21983v1" target="_blank">Humanizing Robot Gaze Shifts: A Framework for Natural Gaze Shifts in Humanoid Robots</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.20408v1" target="_blank">Examining and Addressing Barriers to Diversity in LLM-Generated Ideas</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a></li>
                 </ul>
 
                 <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
