@@ -271,118 +271,186 @@
                 <p>以下是 2026年02月28日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
 
                 <h2 id="daily-concept">每日概念: Eye tracking in multimodal AI</h2>
-                <p><strong>概念定义</strong><br>
-多模态AI中的眼动追踪是指将人类眼球运动数据作为一种模态输入或监督信号整合到深度学习模型中。这种方法利用注视点和眼跳轨迹等生理信号来指导模型关注关键信息区域，从而模拟人类的视觉注意力机制。</p>
+                <p><strong>1. 概念定义</strong><br>
+多模态AI中的眼动追踪是指将眼动数据作为输入信号整合到AI模型中，通常与图像或文本数据协同处理。它利用人类视觉注意力机制作为监督信号或辅助特征，增强模型对场景理解或文本阅读的认知能力。这种方法将人类实时的认知过程转化为机器可学习的表征。</p>
 
-<p><strong>核心原理</strong><br>
-核心机制是将离散的眼动注视点转化为连续的注意力权重图，并将其与视觉或文本特征进行融合。具体而言，离散的注视点坐标通常通过高斯核函数转化为连续的显著图 \( S \)，公式为 \( S(x,y) = \sum_{i=1}^{N} \exp\left(-\frac{(x-x_i)^2 + (y-y_i)^2}{2\sigma^2}\right) \)。在训练阶段，模型通过最小化预测注意力分布与真实眼动数据之间的KL散度来对齐机器与人类的注意力机制。</p>
+<p><strong>2. 核心原理</strong><br>
+核心机制是将眼动数据转化为注意力先验，引导模型关注图像或文本中的关键区域。在多模态融合过程中，眼动特征通常被编码为额外的嵌入向量，用于调制视觉编码器或文本编码器的注意力权重。数学上，修正后的注意力权重 \(\alpha'\) 可以通过结合原始注意力分数与注视分布 \(G\) 来计算。<br>
+\[ \alpha'_i = \text{Softmax}(f_{attn}(x) + \lambda \cdot \log G_i) \]<br>
+其中 \(G_i\) 代表区域 \(i\) 被注视的概率，\(\lambda\) 是调节参数。</p>
 
-<p><strong>研究意义</strong><br>
-在眼动追踪与LLM的交叉研究中，眼动数据提供了稀缺且高质量的人类先验知识，能够有效引导大模型对齐人类的认知过程。这种跨模态融合不仅提升了模型在视觉问答和阅读理解任务中的性能，还为解决大模型幻觉问题提供了基于人类注意力的纠偏机制。</p>
+<p><strong>3. 研究意义</strong><br>
+这一领域的研究架起了人类认知与机器学习之间的桥梁，使模型能够模仿人类的高效信息筛选机制。在LLM研究中，眼动数据提供了细粒度的阅读行为信号，有助于模型理解人类阅读时的词元处理模式，从而提升机器阅读理解或文本生成的质量。它还能显著增强视觉语言模型的可解释性，揭示模型决策背后的注意力来源。</p>
 
-<p><strong>关键洞见</strong><br>
-眼动追踪将隐性的认知过程显性化，为AI模型提供了超越传统文本标签的细粒度监督信号。</p>
+<p><strong>4. 关键洞见</strong><br>
+眼动追踪不仅仅是生物特征数据，更是人类注意力的显式表征，能够为AI模型提供宝贵的归纳偏置。</p>
 
                 <h2 id="papers">论文摘要</h2>
 
                 <div class="paper-entry" id="paper-1">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a>
+                        <a href="https://arxiv.org/pdf/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Parsa Madinei, Srijita Karmakar, Russell Cohen Hoffing et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.16138v1" target="_blank">2602.16138v1</a>
+                        <strong>作者:</strong> Haoyu Huang, Yoichi Sato<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11669v1" target="_blank">2602.11669v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
-                    <p><strong>1. 研究问题</strong><br>
-这篇论文旨在解决大型视觉语言模型在开放式视觉问答中因问题歧义而导致的回答不准确问题。核心研究问题是如何利用人类实时的眼动注视数据来消除用户意图的不确定性，从而提升模型对模糊问题的理解能力。</p>
+                    <p>以下是针对论文《Egocentric Gaze Estimation via Neck-Mounted Camera》的结构化中文总结：</p>
 
-<p><strong>2. 研究定位</strong><br>
-这项工作填补了人机交互中实时眼动信号与多模态大模型推理相结合的空白。它不同于以往依赖静态图像特征或需额外训练的方法，提出了一种无需训练的推理时干预策略。该研究将认知科学中的眼动机制引入VLM推理流程，拓展了多模态交互的研究边界。</p>
+<p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决从颈挂式摄像头视角进行自我中心视线估计的问题。核心研究问题是如何在非传统的颈部佩戴视角下，克服视野限制并准确预测用户在相机画面中的视线落点。</p>
 
-<p><strong>3. 核心贡献</strong><br>
-论文提出了IRIS框架，这是一种无需训练的方法，通过实时眼动追踪显著提升了VLM处理歧义问题的能力。研究发现提问开始时刻附近的注视点最具信息量，能将歧义问题的准确率从35.2%大幅提升至77.2%。此外，团队发布了包含眼动数据的消歧VQA基准数据集及实时交互协议。</p>
+<p>2. <strong>研究定位</strong><br>
+现有的自我中心视线估计研究主要集中在头戴式摄像头，对于其他佩戴视角的探索相对匮乏。该工作填补了这一空白，首次将研究视角从头部延伸至颈部，探索了这种更具日常适用性的设备形态下的视线估计任务。</p>
 
-<p><strong>4. 方法概述</strong><br>
-IRIS采用一种推理时扫视机制，在模型推理阶段实时捕获用户的眼动数据。系统筛选出用户开始提问时刻附近的注视点，将其作为视觉提示输入到VLM中。这种方法无需修改模型参数，直接利用眼动信号引导模型关注图像中的相关区域，从而解析用户意图。</p>
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献是构建了首个颈挂式视角视线估计数据集，包含8名参与者在日常活动中收集的约4小时视频数据。创新之处在于提出了辅助视线越界分类任务，并尝试通过多视图协同学习框架结合头部视角的先验知识。</p>
 
-<p><strong>5. 局限与不足</strong><br>
-该方法高度依赖专业的眼动追踪硬件，可能限制了其在普通消费级设备上的普及应用。用户研究虽然有效，但在更复杂的动态视频场景下的泛化能力尚待验证。实时眼动数据的质量受个体差异和环境因素影响，可能引入额外的噪声干扰模型判断。</p>
+<p>4. <strong>方法概述</strong><br>
+论文评估了基于Transformer的GLC模型，并引入辅助视线越界分类任务来区分视线是否位于相机视野内。研究还提出了多视图协同学习方法，试图利用几何感知辅助损失函数联合训练头视图与颈视图模型以提升性能。</p>
 
-<p><strong>6. 评价与思考</strong><br>
-这是一项极具创新性的跨学科研究，巧妙地利用人类认知过程中的眼动信号来弥补模型在意图理解上的缺陷。其免训练的特性降低了应用门槛，展示了推理时干预策略的巨大潜力。未来的关键挑战在于如何将这种依赖专业硬件的方案转化为基于普通摄像头的低成本应用。</p>
+<p>5. <strong>局限与不足</strong><br>
+收集的数据集规模相对较小，仅包含约4小时的数据，可能限制模型的泛化能力。实验结果显示多视图协同学习方法并未带来性能提升，表明颈部视角与头部视角之间存在较大的特征差异，简单的几何联合训练难以有效迁移。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作为可穿戴视线估计提供了新的硬件形态参考，颈挂式设备相比头戴式设备在社交接受度上可能更具优势。虽然多视图协同学习未达预期，但对视线越界分类有效性的验证为处理非典型视角的视野限制问题提供了重要启示。</p>
                 </div>
                 <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a>
+                        <a href="https://arxiv.org/pdf/2602.11648v1" target="_blank">Human-Like Gaze Behavior in Social Robots: A Deep Learning Approach Integrating Human and Non-Human Stimuli</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Jia Li, Wenjie Zhao, Shijian Deng et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.05132v1" target="_blank">2602.05132v1</a>
+                        <strong>作者:</strong> Faezeh Vahedi, Morteza Memari, Ramtin Tabatabaei et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11648v1" target="_blank">2602.11648v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
-                    <p>### 1. 研究问题<br>
-这篇论文旨在解决在线自我中心眼动追踪问题，即仅利用过去和当前的帧来预测相机佩戴者的注视点。核心挑战在于缺乏显式的头部或眼部信号，模型必须从稀疏线索中推断当前的视觉注意力。</p>
+                    <p>以下是该论文的结构化总结：</p>
 
-<p>### 2. 研究定位<br>
-该研究定位于在线自我中心眼动追踪领域，区别于可使用未来帧的离线方法，它更符合增强现实(AR)和辅助技术的实时应用需求。它填补了利用时序依赖性进行在线预测的空白，将眼动追踪从单帧预测扩展到了序列预测问题。</p>
+<p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决社交机器人在复杂交互场景中缺乏自然注视行为的问题。核心研究问题是如何让机器人根据人类活动及非人类环境刺激（如开门、物体掉落）动态调整注视方向，从而实现类人的非语言交流。</p>
 
-<p>### 3. 核心贡献<br>
-论文提出了ARGaze模型，将眼动追踪重构为序列预测任务，借鉴了视觉语言模型中的自回归解码思想。主要创新在于引入了注视上下文窗口机制，利用历史注视信息作为先验，显著提升了在线场景下的预测精度并达到了最先进水平。</p>
+<p>2. <strong>研究定位</strong><br>
+该工作定位于社交机器人的人机交互研究，填补了现有文献大多只关注人际互动线索而忽视环境非人类刺激的空白。它扩展了注视行为的研究范围，将环境动态变化纳入考量，使机器人能更全面地理解并融入复杂的社交场景。</p>
 
-<p>### 4. 方法概述<br>
-ARGaze采用Transformer解码器架构，在每个时间步联合处理当前视觉特征与固定长度的历史注视上下文窗口。这种自回归设计强制了因果性约束，确保模型仅依赖过去信息进行预测，适合资源受限的流式推理。</p>
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献是构建了一个包含人类与非人类刺激的多样化注视数据集，并开发了高精度的注视预测模型。创新之处在于成功将深度学习模型部署于NAO机器人，实现了对环境突发事件的自然注视响应，且在实际交互中获得了用户的高度评价。</p>
 
-<p>### 5. 局限与不足<br>
-由于采用自回归机制，模型可能存在误差累积的问题，即早期的错误预测可能影响后续结果。此外，固定长度的注视上下文窗口可能无法适应所有动态变化的任务场景，且对初始帧的预测可能因缺乏历史信息而精度较低。</p>
+<p>4. <strong>方法概述</strong><br>
+研究通过Unity 3D动画和360度真实视频模拟社交场景，利用VR设备采集了41名参与者的眼动追踪数据。团队训练了LSTM和Transformer两种神经网络模型来预测注视方向，其中Transformer模型在动画场景中达到了 \(70.4\%\) 的预测准确率。</p>
 
-<p>### 6. 评价与思考<br>
-这项工作巧妙地将大语言模型中的自回归生成范式迁移至眼动追踪领域，利用了注视行为的时序连续性先验，具有很强的借鉴意义。虽然方法有效，但如何平衡上下文窗口长度与计算效率，以及如何缓解自回归带来的误差传播，值得进一步探讨。</p>
+<p>5. <strong>局限与不足</strong><br>
+尽管模型表现优异，但个体间注视模式的差异给模型的泛化能力带来了挑战。数据采集主要依赖VR环境，可能与真实物理世界的交互存在一定的现实鸿沟。此外，研究虽采用了Transformer架构，但未涉及大语言模型（LLM）的高层语义理解，限制了机器人在复杂语言交互中的注视推理能力。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作巧妙利用眼动追踪数据和深度学习技术，显著提升了机器人的社交自然度，证明了注意力机制在处理时序注视数据上的有效性。虽然未直接应用大语言模型，但该方法为未来结合LLM实现语义驱动的多模态交互提供了极具潜力的技术路径，特别是在处理非语言环境线索方面具有重要参考价值。</p>
                 </div>
                 <div class="paper-entry" id="paper-3">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a>
+                        <a href="https://arxiv.org/pdf/2602.10946v1" target="_blank">Developing Neural Network-Based Gaze Control Systems for Social Robots</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>作者:</strong> Cassandra L. Jacobs, Morgan Grobol<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.17848v1" target="_blank">2602.17848v1</a>
+                        <strong>作者:</strong> Ramtin Tabatabaei, Alireza Taheri<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.10946v1" target="_blank">2602.10946v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>摘要</h4>
                     <p><strong>1. 研究问题</strong><br>
-这篇论文旨在探究语言模型规模增大如何影响其对人类阅读行为(如眼动追踪和阅读时间)的预测能力。核心问题在于揭示大模型在填空任务中表现更优的具体机制及其与人类认知处理的异同。</p>
+这篇论文旨在解决社交机器人在多人交互场景中如何生成恰当注视行为的问题。核心研究是如何利用深度学习模型预测人类在不同社交情境下的注视方向。</p>
 
 <p><strong>2. 研究定位</strong><br>
-这项工作位于心理语言学与大语言模型研究的交叉领域，延续了利用计算模型模拟人类阅读行为的传统。它填补了关于模型规模如何具体影响其对人类填空概率预测质量的认知空白，特别是区分了统计共现与语义理解的作用。</p>
+该工作位于社交机器人非语言交互研究的交叉领域，填补了从人类注视数据到机器人实时控制系统之间的空白。它尝试将传统的注视研究扩展到虚拟现实（VR）环境，并验证了数据驱动方法在实际机器人部署中的有效性。</p>
 
 <p><strong>3. 核心贡献</strong><br>
-论文发现大模型虽然对人类反应的概率质量分配仍不足，但能提供更高质量的下一词元预测。核心贡献在于揭示了大模型通过更强的记忆能力提升语义匹配度，从而在填空任务中优于小模型，但同时也降低了对低级词汇统计信息的敏感度。</p>
+论文构建了包含多种社交场景（如进入、离开、交谈）的眼动数据集，并基于此训练了LSTM和Transformer模型。其创新之处在于将理论模型部署到实体Nao机器人上，并通过用户反馈验证了基于神经网络的注视控制系统能提升交互的自然度。</p>
 
 <p><strong>4. 方法概述</strong><br>
-研究通过对比不同规模语言模型的下一词元预测概率与人类填空概率，分析了二者的相关性。研究重点考察了模型预测与人类反应在语义一致性及词汇共现统计特征上的差异，以此解释模型缩放带来的性能变化。</p>
+研究团队分别使用眼动仪和Oculus Quest 1 VR头显采集了30名参与者的注视数据。通过长短期记忆网络（LSTM）和Transformer架构对时间序列数据进行建模与预测。最终将训练好的模型集成至机器人控制系统，由36名新参与者进行交互评估。</p>
 
 <p><strong>5. 局限与不足</strong><br>
-研究指出即使是最优模型也未能给人类反应分配足够的概率质量，表明模型与人类认知过程仍存在显著差距。此外，大模型对低级词汇识别信息的敏感度降低，可能限制了其在某些精细阅读任务中的模拟精度。</p>
+模型在2D和3D动画场景中的预测准确率分别为60%和65%，对于需要高精度的实时交互而言仍有提升空间。样本量较小（仅30人训练，36人评估）可能影响模型的泛化能力。此外用户评价显示，有机器人经验的参与者评分更高，这可能暗示系统对普通用户而言仍有改进余地。</p>
 
 <p><strong>6. 评价与思考</strong><br>
-这项工作为理解大语言模型的认知机制提供了重要视角，特别是区分了记忆容量与统计敏感度对阅读预测的影响。它提示我们在利用LLM模拟人类眼动追踪时，需要权衡模型规模带来的语义收益与低级特征丢失之间的矛盾。</p>
+该研究成功展示了Transformer架构在处理时序眼动数据方面的潜力，为社交机器人的视线控制提供了端到端的解决方案。尽管准确率属于中等水平，但其将VR数据采集与实体机器人验证相结合的闭环流程非常扎实。未来工作可考虑引入更大规模的数据集或更先进的注意力机制来优化预测性能。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.04584v1" target="_blank">SalFormer360: a transformer-based saliency estimation model for 360-degree videos</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Mahmoud Z. A. Wahba, Francesco Barbato, Sara Baldoni et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.04584v1" target="_blank">2602.04584v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决360度全景视频中的显著性估计问题，即如何准确预测用户在沉浸式环境中的视觉注意力分布。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于360度视频处理与视觉注意力建模的交叉领域。它填补了将高效Transformer架构应用于全景视频显著性预测的空白，旨在超越基于CNN或传统方法的现有模型。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了SalFormer360模型，创新性地将用于2D分割的SegFormer架构迁移至360度视频领域，并设计了定制化解码器。模型引入了观看中心偏置机制以模拟用户行为，在三个大型数据集上显著超越了现有最优方法。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法采用Transformer架构，利用SegFormer作为编码器提取特征，并结合自定义解码器生成显著性图。为了适应全景视频特性，模型融合了观看中心偏置，以更准确地反映用户在360度环境下的注意力分布。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管性能优异，但Transformer架构通常伴随着较高的计算成本，可能影响在资源受限设备上的实时处理能力。此外，观看中心偏置假设可能在用户交互模式高度自由的场景下存在泛化性问题，且论文摘要未详细阐述对复杂动态时序信息的处理机制。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作展示了Transformer在视觉注意力建模中的强大潜力，证明了将语义分割模型迁移至眼动追踪任务的可行性。其在VR-EyeTracking数据集上高达18.6%的性能提升尤为亮眼，表明该模型能更有效地捕捉全景环境下的视觉特征，对沉浸式内容优化具有重要参考价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.04489v1" target="_blank">Deconstructing sentence disambiguation by joint latent modeling of reading paradigms: LLM surprisal is not enough</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Dario Paape, Tal Linzen, Shravan Vasishth<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.04489v1" target="_blank">2602.04489v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在探究人类如何处理暂时性歧义句子(如园径句)，并解决现有语言模型惊异度指标无法完全解释人类阅读行为的问题。核心研究问题是能否通过联合建模多种阅读范式来分离不同的认知处理成本，从而更准确地理解句子消歧机制。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于心理语言学与大语言模型认知建模的交叉领域。它挑战了单纯依赖LLM惊异度预测阅读时间的传统观点，填补了跨多种阅读范式(眼动追踪, 自定步调阅读, Maze任务)联合建模认知过程的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一个潜在过程混合模型，成功区分了园径概率, 园径代价和重分析代价这三个独立的认知维度。研究证明该模型在预测人类阅读模式和任务表现上优于基于GPT-2惊异度的模型，明确指出LLM惊异度不足以解释人类阅读中的消歧过程。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者构建了一个潜在过程混合模型，联合分析了眼动追踪, 单向和双向自定步调阅读以及Maze任务四种范式的数据。该模型引入潜在变量来区分专注阅读与不专注阅读试次，并据此估算不同的处理成本，而非简单使用模型的 \(Surprisal\) 值进行回归预测。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然模型在预测拟合上表现优异，但其计算复杂度可能高于简单的惊异度回归模型。研究主要关注特定类型的园径句，模型在更广泛的自然语言场景中的泛化能力仍需进一步验证。此外，仅对比GPT-2可能不足以涵盖最新LLM的特性。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作非常有价值，它通过精细的认知建模揭示了人类阅读过程的复杂性，打破了将LLM惊异度等同于人类处理难度的简化假设。这对于开发更符合人类认知机制的可解释AI模型具有重要意义，同时也为眼动追踪研究提供了更严谨的数据分析方法。</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">参考链接</h3>
                 <ul>
-                    <li><a href="https://arxiv.org/abs/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.11648v1" target="_blank">Human-Like Gaze Behavior in Social Robots: A Deep Learning Approach Integrating Human and Non-Human Stimuli</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.10946v1" target="_blank">Developing Neural Network-Based Gaze Control Systems for Social Robots</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.04584v1" target="_blank">SalFormer360: a transformer-based saliency estimation model for 360-degree videos</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.04489v1" target="_blank">Deconstructing sentence disambiguation by joint latent modeling of reading paradigms: LLM surprisal is not enough</a></li>
                 </ul>
 
                 <p><em>欢迎讨论和反馈。感谢阅读!</em></p>

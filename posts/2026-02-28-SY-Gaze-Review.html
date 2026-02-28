@@ -271,118 +271,179 @@
                 <p>Here are selected research papers at the intersection of gaze/eye-tracking and LLMs for February 28, 2026.</p>
 
                 <h2 id="daily-concept">Daily Concept: Eye tracking in multimodal AI</h2>
-                <p><strong>1. What is it?</strong><br>
-Eye tracking in multimodal AI involves integrating gaze data as a supplementary input modality alongside text and images to enhance model performance. It treats human visual attention as a supervisory signal that guides the model to focus on relevant regions within a scene or text. This integration bridges the gap between human cognitive processes and machine perception.</p>
+                <p>### 1. What is it?<br>
+Eye tracking in multimodal AI involves integrating human gaze data as an explicit input signal or supervisory signal within models that process visual and textual information. It treats gaze patterns as a proxy for human attention, guiding the model to focus on specific regions of an image that are semantically relevant to the accompanying text. This approach creates a bridge between human cognitive processes and machine attention mechanisms.</p>
 
-<p><strong>2. How does it work?</strong><br>
-The process typically encodes raw gaze coordinates into spatial features, such as heatmaps or fixation sequences, which are then fused with visual or textual embeddings using transformer architectures. Models often employ a gaze-guided attention mechanism where the model's attention weights are regularized to align with human fixation distributions. This alignment is frequently achieved by minimizing a divergence loss between the model's learned attention map \( A_{model} \) and the ground truth gaze map \( A_{gaze} \). For example, the optimization objective may include a term like \( \mathcal{L}_{gaze} = D_{KL}(A_{gaze} \parallel A_{model}) \) to force the model to attend to specific regions.</p>
+<p>### 2. How does it work?<br>
+The core mechanism involves encoding gaze coordinates into spatial heatmaps or feature maps that align with the visual input dimensions. These gaze maps are fused with visual embeddings, often by modulating the attention weights in a Transformer architecture to prioritize attended regions. Mathematically, the standard attention score \( e_{ij} \) is often biased by a gaze prior \( g_{ij} \), resulting in a modulated weight:<br>
+\[ \alpha_{ij} = \frac{\exp(e_{ij} + \lambda g_{ij})}{\sum_{k=1}^{N} \exp(e_{ik} + \lambda g_{ik})} \]<br>
+Here, \( \lambda \) controls the influence of the gaze signal on the model's learned attention distribution.</p>
 
-<p><strong>3. Why does it matter?</strong><br>
-Integrating gaze data provides a strong inductive bias that helps models distinguish signal from noise, leading to faster convergence and improved accuracy in tasks like Visual Question Answering. It enhances interpretability by forcing the model to align its internal attention mechanisms with human reasoning patterns. Furthermore, this approach enables the development of more responsive AI systems that can adapt to user intent in real time based on where they are looking.</p>
+<p>### 3. Why does it matter?<br>
+This integration matters because human gaze provides a strong prior for visual saliency and relevance, which helps models distinguish signal from noise in complex visual scenes. It significantly improves performance on tasks requiring fine grained visual understanding, such as Visual Question Answering (VQA) and image captioning, by reducing hallucination. Furthermore, it enhances model interpretability by aligning machine attention maps with human cognitive patterns.</p>
 
-<p><strong>4. Key insight</strong><br>
-Human gaze serves as a low-cost, implicit supervision signal that teaches AI systems not just what to process, but what to ignore. This biological prior allows large language models to mimic human-like efficiency in visual and textual processing tasks.</p>
+<p>### 4. Key insight. Gaze data acts as a cognitive shortcut that distills human intent directly into the model's attention mechanism. By learning where humans look, the model implicitly learns what is semantically meaningful.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
                 <div class="paper-entry" id="paper-1">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a>
+                        <a href="https://arxiv.org/pdf/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Parsa Madinei, Srijita Karmakar, Russell Cohen Hoffing et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.16138v1" target="_blank">2602.16138v1</a>
+                        <strong>Authors:</strong> Haoyu Huang, Yoichi Sato<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11669v1" target="_blank">2602.11669v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
-                    <p><strong>1. Research Question</strong><br>
-The paper addresses the challenge of ambiguity in open-ended Visual Question Answering (VQA). It investigates whether real-time eye-tracking data can resolve user intent and significantly improve the accuracy of Large Vision-Language Models (VLMs) on ambiguous queries without requiring model retraining.</p>
+                    <p>Here is a structured summary of the research paper.</p>
+
+<p><strong>1. Research Question</strong><br>
+The paper investigates whether it is possible to accurately estimate a device wearer's gaze using a camera mounted on the neck rather than on the head. It explores how this alternative, under-explored viewpoint compares to traditional head-mounted setups and what modeling techniques are effective for this new context.</p>
 
 <p><strong>2. Positioning</strong><br>
-This work positions itself at the intersection of cognitive science and multimodal AI, addressing the limitations of current VLMs that struggle with underspecified textual prompts. It fills a gap in the literature by moving beyond static image-text pairs, proposing a novel interactive protocol where implicit behavioral signals (gaze) augment the model's understanding during inference.</p>
+Prior research in egocentric gaze estimation has focused almost exclusively on head-mounted cameras, leaving the potential of other body placements largely unexplored. This work positions itself as the first major exploration into neck-mounted gaze estimation. It fills a significant gap by providing the necessary data resources and baseline evaluations to legitimize this new viewpoint in the wearable technology space.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The primary contribution is IRIS, a training-free inference method that leverages human fixations to disambiguate visual questions. The authors demonstrate that fixations occurring closest to the start of a verbal question are the most informative, more than doubling accuracy on ambiguous questions (from 35.2% to 77.2%). They also release a new benchmark dataset and evaluation suite to standardize gaze-augmented VQA research.</p>
+The authors introduce the first public dataset for neck-mounted gaze estimation, comprising roughly 4 hours of video from 8 participants performing daily activities. They also adapt a transformer-based model (GLC) for this task and propose two specific extensions. These extensions include an auxiliary task for classifying out-of-bound gaze and a geometry-aware multi-view co-learning strategy.</p>
 
 <p><strong>4. Methodology</strong><br>
-IRIS operates by capturing user eye-tracking data in real-time as they view an image and ask a question. The method isolates specific gaze fixations synchronized with the onset of the verbal query to identify the user's region of interest. The VLM then uses this gaze-augmented input to focus its attention on relevant image regions, effectively filtering out irrelevant visual noise to answer the question.</p>
+The researchers utilize a transformer-based architecture known as GLC to process the video data and predict gaze coordinates. They augment this baseline with an auxiliary classification head to determine if the user is looking outside the camera's field of view. Additionally, they experiment with a multi-view co-learning approach that attempts to leverage head-mounted camera data during training using a geometry-aware loss function.</p>
 
 <p><strong>5. Limitations</strong><br>
-A primary limitation is the dependency on specialized eye-tracking hardware, which restricts the method's accessibility compared to standard webcam-based interactions. The approach also relies on precise timing synchronization between the gaze data and speech onset, which may be difficult to achieve in noisy or uncontrolled real-world environments. Additionally, the user study size of 500 image-question pairs may not capture the full diversity of ambiguous scenarios encountered in broader applications.</p>
+The study acknowledges that the proposed multi-view co-learning approach failed to improve performance, suggesting that transferring knowledge between head and neck views is non-trivial. The dataset is also relatively small, consisting of only 8 participants, which may limit the generalizability of the findings across diverse populations and lighting conditions.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This research offers a compelling proof-of-concept that implicit human signals can serve as a powerful interface for refining LLM outputs. The reported accuracy gains are substantial, and the training-free approach makes the method immediately applicable to state-of-the-art models. However, the practical deployment is currently hindered by hardware requirements, suggesting that future work must focus on making the gaze-input mechanism more accessible or software-based.</p>
+This work is a bold initial step into a novel area of wearable gaze estimation that could eventually enable less obtrusive devices than bulky head-mounted rigs. However, the failure of the co-learning approach indicates a significant domain shift between head and neck views that current geometric methods struggle to bridge. The relatively small dataset size is a weakness, but the successful application of out-of-bound classification offers a practical and immediate technical improvement for future research.</p>
                 </div>
                 <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a>
+                        <a href="https://arxiv.org/pdf/2602.11648v1" target="_blank">Human-Like Gaze Behavior in Social Robots: A Deep Learning Approach Integrating Human and Non-Human Stimuli</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Jia Li, Wenjie Zhao, Shijian Deng et al.<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.05132v1" target="_blank">2602.05132v1</a>
+                        <strong>Authors:</strong> Faezeh Vahedi, Morteza Memari, Ramtin Tabatabaei et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11648v1" target="_blank">2602.11648v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper addresses the challenge of online egocentric gaze estimation, aiming to predict where a camera wearer is looking using only current and past video frames. The core question is how to effectively model gaze in real-time scenarios where explicit eye or head signals are unavailable and future context is inaccessible.</p>
+The paper addresses the challenge of creating naturalistic gaze behavior in social robots. It specifically asks how robots can dynamically adapt their gaze to respond to both human social cues and non-human environmental events, such as object drops or door openings.</p>
 
 <p><strong>2. Positioning</strong><br>
-This work distinguishes itself from third-person gaze estimation methods that rely on clear images of the eyes or head pose. It targets the "online" setting required for augmented reality applications, filling a gap in utilizing temporal dependencies for gaze prediction without access to future frames.</p>
+Current literature on robotic gaze focuses heavily on human-to-human interaction cues, often neglecting environmental distractions. This work fills that gap by explicitly modeling gaze responses to non-human stimuli, which is a critical yet underexplored aspect of seamless communication. By integrating these external factors, the authors position their approach as a significant advancement over existing models that struggle with complex, dynamic contexts.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The main contribution is ARGaze, a framework that reformulates gaze estimation as an autoregressive sequence prediction task similar to decoding in large language models. The authors introduce a Gaze Context Window mechanism that conditions current predictions on a fixed history of recent gaze estimates, demonstrating that this temporal prior significantly boosts performance.</p>
+The primary contribution is a deep learning framework that predicts gaze behavior by integrating both social and non-social stimuli. The study demonstrates that Transformer and LSTM models can effectively learn these patterns from human data, achieving superior accuracy compared to previous methods. Furthermore, the authors validate their approach by deploying the model on a NAO robot, showing high user satisfaction in a large-scale evaluation.</p>
 
 <p><strong>4. Methodology</strong><br>
-The proposed method uses a transformer decoder that functions autoregressively, taking two main inputs at each timestep. These inputs are the current visual features extracted from the video frame and a fixed-length buffer of past gaze predictions. This architecture enforces causality, ensuring the model relies strictly on available history to predict the current gaze target.</p>
+The researchers collected gaze data from 41 participants using VR headsets while they viewed 3D animations and 360-degree real-world videos. This data trained two neural network architectures, specifically LSTM and Transformer models, to predict gaze direction. The trained models were then deployed on a NAO robot to evaluate real-time interaction performance with human participants.</p>
 
 <p><strong>5. Limitations</strong><br>
-A potential limitation inherent in the autoregressive design is the risk of error propagation, where incorrect predictions from previous timesteps could negatively influence future estimates. Additionally, the reliance on a fixed-length context window may restrict the model's ability to capture longer-term behavioral patterns that extend beyond the defined history limit.</p>
+While the abstract does not explicitly list limitations, the reported prediction accuracies, ranging from roughly 67% to 72%, suggest there is room for improvement in modeling complex human attention. Additionally, training on VR-simulated environments may introduce a "reality gap," where models struggle to generalize to the full complexity of physical world interactions not captured in the dataset.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This work provides a strong conceptual bridge between natural language processing techniques and computer vision by successfully applying autoregressive decoding to gaze estimation. The approach is highly practical for real-world deployment due to its bounded resource usage and state-of-the-art performance, offering a robust solution for streaming applications in augmented reality.</p>
+This work provides a valuable contribution by expanding the scope of robotic gaze research to include environmental stimuli, making the behavior feel more authentic. The combination of technical prediction benchmarks with a large user study involving 275 participants offers a robust validation of the system's efficacy. However, the reliance on VR data collection is a potential weakness, as it may not fully replicate the visual and auditory dynamics of real-world scenarios.</p>
                 </div>
                 <div class="paper-entry" id="paper-3">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a>
+                        <a href="https://arxiv.org/pdf/2602.10946v1" target="_blank">Developing Neural Network-Based Gaze Control Systems for Social Robots</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Cassandra L. Jacobs, Morgan Grobol<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.17848v1" target="_blank">2602.17848v1</a>
+                        <strong>Authors:</strong> Ramtin Tabatabaei, Alireza Taheri<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.10946v1" target="_blank">2602.10946v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper investigates how the scale of Large Language Models (LLMs) influences their ability to predict human reading behavior. It specifically asks why larger models align better with human cloze data and what mechanistic changes occur as model size increases.</p>
+This paper aims to solve the challenge of generating natural and contextually appropriate gaze behavior for social robots during multi-party interactions. The core research question asks whether deep neural networks can effectively model and predict human gaze patterns in specific social scenarios to control a robot's attention.</p>
 
 <p><strong>2. Positioning</strong><br>
-This research builds upon previous studies linking LLM performance to eye-tracking and reading time data. It fills a gap in the literature by explaining the specific mechanisms that drive improved prediction in larger models, distinguishing between semantic alignment and low-level statistical sensitivity.</p>
+The work positions itself at the intersection of social robotics and deep learning, addressing the need for robots to understand social context beyond simple object tracking. It fills a gap in the literature by moving from theoretical gaze models to an empirical, data-driven approach that maps specific social actions like waving or talking to precise motion-time patterns.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The authors demonstrate that larger models generate superior next-token estimates in cloze tasks because they prioritize semantic appropriateness over raw lexical co-occurrence statistics. They argue that the increased memorization capacity of these models helps identify contextually correct words, though this simultaneously reduces sensitivity to low-level cues used in human word recognition.</p>
+The primary contribution is the development of a complete pipeline that uses deep learning to translate human gaze data into executable robot control commands. The study provides a comparative analysis of data collected from both standard screen-based eye-trackers and Virtual Reality (VR) headsets, successfully deploying the resulting model on a physical Nao robot.</p>
 
 <p><strong>4. Methodology</strong><br>
-The study compares human cloze responses with next-token predictions from language models of varying sizes. It evaluates how model scale affects the balance between semantic alignment with human responses and reliance on lexical co-occurrence statistics.</p>
+The researchers collected gaze data from 30 participants who watched video clips of various social scenarios on 2D screens and VR headsets. They employed Long Short-Term Memory (LSTM) networks and Transformer architectures to learn the temporal dynamics of gaze behavior. The best performing model was then integrated into a Nao robot to actuate the predicted gaze patterns.</p>
 
 <p><strong>5. Limitations</strong><br>
-A primary limitation acknowledged is that even the largest models still under-allocate probability mass to human responses compared to actual human data. Furthermore, the reduced sensitivity to low-level lexical information in larger models may limit their ability to fully simulate the nuances of human word recognition processes.</p>
+The prediction accuracy reached only 60% for 2D animations and 65% for 3D animations, indicating significant room for improvement in modeling social intent. The study also relied on a limited set of pre-defined social scenarios, which may not fully capture the complexity and unpredictability of natural, real-world human interactions.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This paper provides valuable insight into the trade-offs inherent in scaling language models for psycholinguistic modeling. It successfully identifies that better semantic guessing does not necessarily equate to a faithful simulation of human cognitive processing during reading, highlighting a critical divergence between model size and cognitive plausibility.</p>
+The application of Transformer architectures to model the sequential dependencies of social gaze is a logical and promising approach, leveraging the strengths of attention mechanisms for temporal data. While the moderate accuracy highlights the difficulty of predicting human intent, the successful user evaluation on the physical robot demonstrates that the model captures enough nuance to be perceived as socially competent.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.04584v1" target="_blank">SalFormer360: a transformer-based saliency estimation model for 360-degree videos</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Mahmoud Z. A. Wahba, Francesco Barbato, Sara Baldoni et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.04584v1" target="_blank">2602.04584v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>Here is a structured summary of the research paper.</p>
+
+<p><strong>1. Research Question</strong><br>
+The paper aims to solve the problem of accurately predicting visual saliency in 360-degree videos. It addresses the need for better models to optimize immersive content and predict user viewports in virtual reality environments.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself as an evolution of saliency estimation techniques, moving beyond traditional methods to leverage transformer architectures. It fills a gap by adapting powerful 2D segmentation models, specifically SegFormer, to the unique spatial requirements of 360-degree video content.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is SalFormer360, a novel architecture that combines a fine-tuned SegFormer encoder with a custom decoder. The authors also introduce the integration of Viewing Center Bias to specifically address user attention patterns inherent to 360-degree environments.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed method utilizes a transformer-based encoder-decoder structure where the encoder is adapted from SegFormer for spherical content. The authors explicitly incorporate Viewing Center Bias to account for how users distribute their attention in a virtual reality setting. They validate the model by comparing its performance against state-of-the-art methods on three major benchmark datasets.</p>
+
+<p><strong>5. Limitations</strong><br>
+The provided abstract does not explicitly list limitations. However, potential limitations common to this approach include the computational overhead associated with transformer models and the challenges inherent in adapting 2D architectures to spherical projections without losing spatial fidelity.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+The work demonstrates significant performance improvements, most notably an \(18.6\%\) increase in the Pearson Correlation Coefficient on the VR-EyeTracking dataset. The approach is a strong technical contribution that effectively bridges the gap between 2D vision transformers and 360-degree multimedia analysis. While the results are compelling, the reliance on adapting 2D models suggests there is still room for developing native spherical processing techniques.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.04489v1" target="_blank">Deconstructing sentence disambiguation by joint latent modeling of reading paradigms: LLM surprisal is not enough</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Dario Paape, Tal Linzen, Shravan Vasishth<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.04489v1" target="_blank">2602.04489v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper investigates whether LLM-derived surprisal values alone are sufficient to explain human sentence processing difficulties, specifically focusing on "garden-path" sentences where temporary ambiguity occurs. It asks if a more nuanced model is required to separate distinct cognitive costs, such as the probability of misinterpretation versus the effort of reanalysis, while accounting for inattentive reading.</p>
+
+<p>### 2. Positioning. This work positions itself against the prevailing trend in computational psycholinguistics that relies heavily on language model surprisal as a proxy for human processing effort. It fills a critical gap by arguing that surprisal is a monolithic metric that fails to capture the underlying latent processes of reading, such as the distinction between initial parsing errors and subsequent recovery. By integrating data from four different reading paradigms, the authors challenge the sufficiency of standard predictive metrics derived from models like GPT-2.</p>
+
+<p>### 3. Key Contribution. The primary contribution is a latent-process mixture model that successfully disentangles three specific components of reading difficulty, namely garden-path probability, garden-path cost, and reanalysis cost. The model also accounts for inattentive reading trials, which refines the accuracy of processing cost estimates. The authors demonstrate that this approach outperforms a baseline model based on GPT-2 surprisal in predicting human reading patterns and task performance.</p>
+
+<p>### 4. Methodology. The researchers utilized temporarily ambiguous garden-path sentences and collected human behavioral data across four paradigms, including eye tracking, uni- and bidirectional self-paced reading, and the Maze task. They developed a mixture model that treats the underlying reading strategy as a latent variable to distinguish between attentive processing and inattentive "skimming" states. This model was then evaluated through cross-validation against empirical data and compared against predictions generated from GPT-2 surprisal values.</p>
+
+<p>### 5. Limitations. The study focuses specifically on garden-path sentences, which may limit the generalizability of the findings to the broader spectrum of syntactic processing and unambiguous texts. Additionally, the comparison relies on GPT-2, an older language model architecture, leaving open the question of whether newer, more powerful LLMs might capture these latent processes more effectively without the need for complex mixture modeling. The complexity of the proposed model could also pose challenges for widespread adoption as a standard evaluation metric.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a robust critique of the "surprisal is everything" hypothesis by providing a mechanistic explanation for *why* and *how* reading breaks down during ambiguity. The inclusion of eye-tracking data alongside other paradigms provides a high-fidelity validation of their latent variable approach. However, the strong claim that "LLM surprisal is not enough" rests on a comparison with GPT-2, and the field would benefit significantly from future work testing this framework against state-of-the-art models like GPT-4 or Llama.</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">References</h3>
                 <ul>
-                    <li><a href="https://arxiv.org/abs/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a></li>
-                    <li><a href="https://arxiv.org/abs/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.11648v1" target="_blank">Human-Like Gaze Behavior in Social Robots: A Deep Learning Approach Integrating Human and Non-Human Stimuli</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.10946v1" target="_blank">Developing Neural Network-Based Gaze Control Systems for Social Robots</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.04584v1" target="_blank">SalFormer360: a transformer-based saliency estimation model for 360-degree videos</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.04489v1" target="_blank">Deconstructing sentence disambiguation by joint latent modeling of reading paradigms: LLM surprisal is not enough</a></li>
                 </ul>
 
                 <p><em>Feel free to reach out for discussion. Thanks for reading!</em></p>
