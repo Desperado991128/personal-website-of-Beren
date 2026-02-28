@@ -272,16 +272,16 @@
 
                 <h2 id="daily-concept">Daily Concept: Eye tracking in multimodal AI</h2>
                 <p><strong>1. What is it?</strong><br>
-Eye tracking in multimodal AI involves integrating human gaze data as an explicit input modality alongside text and images within models like Vision-Language Models (VLMs). This approach treats eye movements not just as a behavioral metric, but as a supervisory signal to guide model attention or as a feature to predict user intent. It effectively bridges the gap between human visual cognition and artificial attention mechanisms.</p>
+Eye tracking in multimodal AI involves integrating gaze data as a distinct input modality alongside text and images within large language models. This approach allows models to leverage human attention mechanisms, such as fixation points and scanpaths, to ground visual processing in user intent. It transforms the eye tracker from a passive recording device into an active signal for model training or inference.</p>
 
 <p><strong>2. How does it work?</strong><br>
-The process typically begins by encoding raw gaze coordinates into a spatial heatmap or a sequence of fixation embeddings. These gaze features are fused with visual features extracted by a vision encoder, effectively weighting regions of interest that humans find salient. Mathematically, the visual feature map \( V \) is often modulated by a gaze density map \( G \) to produce a gaze-weighted representation \( V' = V \odot G \), which is then processed by the language model. Alternatively, models may predict gaze patterns as an auxiliary task to force the artificial attention heads to align with human attention.</p>
+The process typically involves encoding raw gaze coordinates into feature embeddings compatible with the LLM's vector space. Models often project gaze points onto visual feature maps to create attention masks or heatmaps that highlight salient image regions. Mathematically, if \( V \) represents visual features and \( G \) represents the gaze density map, the attended feature representation \( V' \) can be formulated as an element-wise multiplication \( V' = V \odot G \). These gaze-weighted features are then concatenated with text embeddings and processed by the transformer architecture to predict the next token.</p>
 
 <p><strong>3. Why does it matter?</strong><br>
-Integrating gaze signals allows models to prioritize relevant visual information, mimicking the efficiency of human visual processing. This leads to improved performance on tasks requiring detailed visual reasoning, such as visual question answering, by reducing the search space for the model. Furthermore, it enhances interpretability by aligning the model focus with human attention, making AI decision processes more transparent.</p>
+This integration is significant because gaze provides a strong implicit signal for resolving ambiguity in visual question answering and referential communication. It enables models to align visual inputs with linguistic intent more efficiently by focusing computational resources on task-relevant regions. Furthermore, it opens pathways for accessibility tools and adaptive interfaces that respond to user attention in real time.</p>
 
 <p><strong>4. Key insight</strong><br>
-Eye tracking provides a unique form of implicit supervision that teaches AI systems not just what to look at, but how to look, effectively aligning artificial attention mechanisms with biological visual cognition.</p>
+Gaze data acts as a natural bridge between vision and language, providing a direct mechanism for models to prioritize visual information exactly where humans focus their attention.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
@@ -300,22 +300,22 @@ Eye tracking provides a unique form of implicit supervision that teaches AI syst
                     <p>Here is a structured summary of the research paper.</p>
 
 <p><strong>1. Research Question</strong><br>
-The paper aims to solve the problem of minimizing the Age of Information (AoI) in multi-user wireless networks that use non-orthogonal multiple access (NOMA). It specifically asks how a learning agent can effectively schedule users with diverse data requirements and constraints to ensure information freshness.</p>
+The paper investigates how to minimize the Age of Information (AoI) in multi-user wireless networks that use non-orthogonal multiple access (NOMA). It specifically asks how a learning agent can effectively schedule users with heterogeneous needs and strict latency constraints to maintain data freshness.</p>
 
 <p><strong>2. Positioning</strong><br>
-This work positions itself at the intersection of wireless resource allocation and deep reinforcement learning. It addresses the limitations of traditional methods that struggle with the high complexity and dynamic nature of user heterogeneity in next-generation networks. By integrating advanced neural architectures, the authors fill a gap in applying attention mechanisms to handle inter-user dependencies in communication scheduling.</p>
+This work positions itself at the intersection of deep reinforcement learning and next-generation wireless networking. It addresses the limitations of traditional DRL methods which often struggle with scalability and interpreting inter-user dependencies in complex NOMA environments. By adopting architectures common in Natural Language Processing (LLMs), the authors fill a gap in creating intelligent, priority-aware resource allocation mechanisms.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The primary contribution is a novel Proximal Policy Optimization (PPO) framework that incorporates a Transformer encoder to manage scheduling decisions. This approach leverages the attention mechanism to dynamically prioritize users based on their urgency and constraint sensitivity. The paper also provides an interpretability analysis, demonstrating that the model learns to focus its attention on high-priority users much like a human focuses on relevant visual stimuli.</p>
+The primary contribution is a Proximal Policy Optimization (PPO) framework enhanced with a Transformer encoder for the actor-critic network. This approach uniquely leverages the self-attention mechanism to capture inter-user dependencies and focus on critical states, resulting in reduced average AoI compared to baseline methods.</p>
 
 <p><strong>4. Methodology</strong><br>
-The authors model the uplink network environment as a Markov Decision Process (MDP) where the agent observes user states and allocates power resources. They replace standard neural network layers in the actor-critic model with a Transformer encoder, allowing the system to weigh the importance of different user inputs simultaneously. This architecture captures the complex relationships between users while adhering to the specific power constraints of NOMA systems.</p>
+The authors model the uplink scheduling problem as a Markov Decision Process (MDP) and solve it using a Deep Reinforcement Learning agent. They utilize a Transformer encoder within the neural network architecture, allowing the model to weigh the importance of different user states dynamically rather than treating all inputs uniformly.</p>
 
 <p><strong>5. Limitations</strong><br>
-While the simulations demonstrate performance gains, the study relies on modeled environments which may not capture all the unpredictability of physical wireless channels. The use of Transformer architectures introduces higher computational overhead and parameter counts compared to simpler baseline models, potentially challenging real-time deployment on edge hardware. Additionally, the analysis focuses primarily on average AoI reduction, potentially overlooking worst-case latency scenarios.</p>
+The abstract does not explicitly discuss the computational overhead or inference latency introduced by the Transformer architecture, which is a critical factor for ultra-reliable low-latency communication (URLLC) systems. Furthermore, the evaluation relies on simulations, and the transition to real-world hardware implementation may face challenges regarding the processing speed of attention mechanisms.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This research offers a compelling translation of Transformer architecture from Natural Language Processing (NLP) to wireless optimization. The use of attention weights provides a form of "digital gaze," allowing researchers to visually interpret the model's decision-making process and verify that it aligns with logical scheduling priorities. While the approach effectively handles scalability, the practical adoption of such computationally intensive models in ultra-low-latency systems remains an open challenge.</p>
+This paper provides a strong demonstration of how attention mechanisms, the building blocks of Large Language Models, can be repurposed for wireless resource allocation to improve interpretability. The visualization of attention weights offers a "gaze" into the model's decision-making process, showing it learns to prioritize high-importance users much like human visual attention. However, the practical deployment of Transformer-based models in energy-constrained or ultra-low-latency edge devices remains a significant challenge that requires further investigation.</p>
                 </div>
                 <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
@@ -330,22 +330,22 @@ This research offers a compelling translation of Transformer architecture from N
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper investigates whether human eye-gaze patterns can serve as a proxy for developer expertise to improve the performance of Large Language Models (LLMs) on code summarization tasks. It specifically asks if integrating biological attention signals into LLMs can enhance their semantic focus and generate more accurate natural language descriptions of source code.</p>
+The paper investigates whether human eye-gaze patterns can serve as a proxy for expertise to guide and improve the performance of Large Language Models (LLMs) on the task of code summarization. It asks if integrating human attention signals into LLMs can enhance their semantic focus compared to standard fine-tuning approaches.</p>
 
 <p><strong>2. Positioning</strong><br>
-While LLMs have achieved state-of-the-art results in code summarization, current methods rely solely on data-driven attention mechanisms that may miss the intuitive focus points used by human developers. This work positions itself at the intersection of software engineering and cognitive computing, filling a gap by incorporating human cognitive signals as explicit attention priors to guide model reasoning.</p>
+While LLMs have advanced significantly in code summarization, they typically rely on data-driven attention mechanisms that may not align with how human experts actually read and comprehend code. This work positions itself at the intersection of software engineering and cognitive modeling, filling the gap by using biological attention data to explicitly guide model attention rather than relying solely on learned statistical patterns.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The primary contribution is EyeLayer, a lightweight module that seamlessly integrates human gaze data into diverse LLM architectures without disrupting their pre-trained representations. The authors demonstrate that this biologically-inspired approach consistently outperforms standard fine-tuning baselines, achieving up to a 13.17% improvement in BLEU-4 scores across multiple model families.</p>
+The primary contribution is EyeLayer, a lightweight, plug-and-play module that integrates human gaze data into various LLM architectures without disrupting their existing representations. The paper demonstrates that this gaze-augmented approach consistently outperforms strong baselines across multiple model families, achieving up to a 13.17% improvement in BLEU-4 scores.</p>
 
 <p><strong>4. Methodology</strong><br>
-EyeLayer models human attention using a Multimodal Gaussian Mixture to capture where and how intensively developers focus on code tokens. This mechanism redistributes token embeddings based on learned parameters \((\mu_i, \sigma_i^2)\), effectively creating an attention prior that augments the standard self-attention mechanism in models like LLaMA-3.2 and CodeBERT.</p>
+EyeLayer models human attention using a Multimodal Gaussian Mixture, learning parameters \((\mu_i, \sigma_i^2)\) to capture the location and intensity of developer focus. This mechanism redistributes token embeddings based on these learned gaze priors, effectively forcing the model to attend to specific code tokens similar to a human reader.</p>
 
 <p><strong>5. Limitations</strong><br>
-Although the abstract highlights strong performance, a potential limitation is the dependency on high-quality eye-tracking datasets, which are often scarce and expensive to collect compared to standard code corpora. Additionally, the approach assumes that the gaze patterns of the study participants generalize effectively to the broader population of developers and diverse coding styles.</p>
+The approach relies on the availability and quality of eye-tracking data, which is often scarce and expensive to collect compared to standard code corpora. Furthermore, the method assumes that the gaze patterns of the specific participants in the dataset represent a universal "expert" standard for reading code, which may not hold true across different developer demographics or coding styles.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This work offers a novel perspective by treating eye-tracking data as a learnable mathematical prior rather than just an external feature, suggesting that human attention encodes structural semantics that LLMs alone may overlook. The reported gains across different architectures are compelling, though the practical adoption of this method will depend on the cost and availability of gaze data for new programming languages or domains.</p>
+This work presents a strong interdisciplinary approach by successfully bridging cognitive science insights with modern LLM techniques. The architecture-agnostic design of EyeLayer is a significant strength, though the practical dependency on gaze data availability remains a hurdle for widespread adoption in resource-constrained environments.</p>
                 </div>
                 <div class="paper-entry" id="paper-3">
                     <h3 class="paper-title">
@@ -359,17 +359,23 @@ This work offers a novel perspective by treating eye-tracking data as a learnabl
                     </div>
 
                     <h4>Summary</h4>
-                    <p>### 1. Research Question. The paper addresses the challenge of generating natural gaze shifts in humanoid robots during unconstrained human robot interaction. It asks how to unify cognitive attention mechanisms for target selection with biomimetic motion generation for realistic movement.</p>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of enabling humanoid robots to perform natural and context-appropriate gaze shifts during unconstrained human-robot interaction. It specifically asks how to unify cognitive attention mechanisms, which decide where to look, with biomimetic motion generation, which decides how to move.</p>
 
-<p>### 2. Positioning. This work positions itself at the intersection of cognitive robotics and motion generation. It addresses a gap in existing literature where gaze targets are often predetermined or motion generation lacks contextual awareness. The authors argue that current methods fail to fully integrate multimodal attention cues with the biological mechanics of eye head coordination in open ended interactions.</p>
+<p><strong>2. Positioning</strong><br>
+Existing literature often treats gaze target selection and motion generation as separate problems, leading to robotic behaviors that lack fluidity or social awareness. This work positions itself at the intersection of social robotics and generative AI, filling the gap between high-level semantic understanding and low-level physical actuation.</p>
 
-<p>### 3. Key Contribution. The primary contribution is the Robot Gaze Shift (RGS) framework which unifies gaze reasoning and motion generation into a single pipeline. The authors introduce a Vision Language Model (VLM) approach to determine socially appropriate gaze targets. They also contribute a conditional Vector Quantized Variational Autoencoder (VQ VAE) model that produces diverse and human like eye head coordinated movements.</p>
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the Robot Gaze-Shift (RGS) framework, a unified pipeline that bridges the gap between reasoning and acting. It introduces a novel combination of a Vision-Language Model (VLM) for semantic gaze reasoning and a conditional VQ-VAE for generating diverse, human-like eye and head movements.</p>
 
-<p>### 4. Methodology. The methodology consists of two distinct stages. First, a VLM analyzes multimodal inputs to infer gaze targets that align with human social norms. Second, a conditional VQ VAE model generates the actual motion trajectories, ensuring that the robot's eye and head movements are coordinated and natural rather than robotic or rigid.</p>
+<p><strong>4. Methodology</strong><br>
+The methodology consists of two distinct stages. First, the system uses a VLM to process multimodal inputs, such as audio and vision, to infer context-appropriate gaze targets. Second, it employs a conditional Vector Quantized-Variational Autoencoder (VQ-VAE) to generate coordinated eye and head movements that shift the robot's gaze toward the selected target.</p>
 
-<p>### 5. Limitations. The abstract does not explicitly list limitations, but potential constraints are inherent to the chosen architectures. The reliance on VLMs may introduce latency issues in real time interaction loops or reasoning errors in complex scenes. Additionally, the diversity of the generated motion is bounded by the training data of the VQ VAE, which might not cover all possible nuances of human idiosyncratic gaze behavior.</p>
+<p><strong>5. Limitations</strong><br>
+While the abstract validates the framework's effectiveness, potential limitations include the computational latency inherent in running VLMs, which could delay reactions in real-time interactions. Additionally, the quality and diversity of the generated motion are strictly bounded by the datasets used to train the VQ-VAE, potentially limiting generalization to highly novel scenarios.</p>
 
-<p>### 6. Critical Evaluation. This work offers a compelling integration of modern generative AI techniques with classical robotics problems. The application of VLMs to gaze reasoning is a logical and powerful step forward for social robotics. However, the real world viability depends heavily on the inference speed of the VLM and the smoothness of the VQ VAE outputs on physical hardware.</p>
+<p><strong>6. Critical Evaluation</strong><br>
+This work represents a significant advancement in humanizing robot behavior by successfully leveraging modern generative AI techniques for social interaction. The integration of VLMs for gaze reasoning is a particular strength, offering a scalable way to handle complex social cues, though the system's real-world utility will ultimately depend on its ability to operate with low latency on physical hardware.</p>
                 </div>
 
                 <hr>
