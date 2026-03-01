@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-03-01</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">March 01, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月01日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Gaze patterns in human-AI interaction</h2>
+                <p><strong>概念定义</strong><br>
+在人机交互场景下，眼动模式指的是用户在与AI系统协作或评估AI输出时表现出的注视点轨迹、停留时长及瞳孔变化等时空特征。这些模式客观反映了用户的认知负荷、注意力分配策略以及对AI生成内容的实时处理过程。</p>
+
+<p><strong>核心原理</strong><br>
+核心原理在于将眼动数据序列与文本Token序列进行对齐，量化人类注意力与模型注意力机制之间的差异。通过计算注视时长和扫视路径，研究者可以构建模型来预测用户的阅读理解状态或检测内容异常。例如，可以使用条件概率 \( P(y | x, G) \) 来表示结合眼动特征序列 \( G \) 和文本输入 \( x \) 预测用户意图 \( y \) 的过程。这种方法揭示了人类在处理AI生成文本时的认知加工路径。</p>
+
+<p><strong>研究意义</strong><br>
+这一概念对于评估大语言模型的生成质量至关重要，能够提供超越显式评分的隐式用户反馈。在LLM研究中，眼动模式被用于检测模型幻觉或优化人机协作流程，使模型能够根据用户的实时认知状态调整输出策略。它连接了认知科学与自然语言处理，为构建更符合人类直觉的AI系统提供了量化依据。</p>
+
+<p><strong>关键洞见</strong><br>
+眼动模式作为一种隐式的生理信号，能够实时揭示用户对AI内容的信任度与认知负荷，是实现人机对齐的高价值数据源。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.01452v1" target="_blank">Cross-Paradigm Evaluation of Gaze-Based Semantic Object Identification for Intelligent Vehicles</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Penghao Deng, Jidong J. Yang, Jiachen Bian<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.01452v1" target="_blank">2602.01452v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在解决智能车辆中驾驶员注视点的语义物体识别问题，即利用车辆前视摄像头捕捉的道路场景，准确判断驾驶员正在关注的具体物体。核心研究问题是如何有效地将驾驶员的眼动数据与场景语义进行匹配，以提升高级驾驶辅助系统的安全性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了眼动追踪领域中不同视觉识别范式系统性对比的空白，特别是将最新的视觉语言模型引入到驾驶员注视语义理解任务中。它通过跨范式评估，探讨了传统视觉方法与大模型在真实驾驶场景下的性能差异与适用边界。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于全面评估了直接目标检测、分割辅助分类和视觉语言模型三种范式，发现YOLOv13和Qwen2.5-VL-32b均实现了超过0.84的Macro F1分数。研究特别指出大型VLM在夜间及交通信号灯等小物体识别上具有卓越的鲁棒性，同时揭示了分割方法存在的语义鸿沟缺陷。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文构建了一个将驾驶员眼动数据与视觉算法相结合的评估框架。该框架对比了三种技术路线，包括基于YOLOv13的直接目标检测，结合SAM2与EfficientNetV2的分割辅助分类，以及基于Qwen2.5-VL系列的视觉语言模型查询方法。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究指出了传统检测器的高效性与大型VLM的强鲁棒性之间存在难以调和的权衡。分割辅助范式因“部分与整体”的语义差异导致召回率大幅下降。此外，大型VLM虽然性能优越，但其巨大的计算成本可能限制其在实时车载系统中的直接部署。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该研究紧跟技术前沿，成功验证了VLM在解决复杂驾驶场景语义理解问题上的巨大潜力，尤其是在恶劣环境下的表现令人印象深刻。然而，如何在保证高精度的同时满足车规级实时性要求，将是后续研究需要重点攻克的方向。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2602.01452v1" target="_blank">Cross-Paradigm Evaluation of Gaze-Based Semantic Object Identification for Intelligent Vehicles</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
