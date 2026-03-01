@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-01</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 01, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 01, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Recurrent vs parallel computation</h2>
+                <p>### 1. What is it?<br>
+Recurrent computation processes data sequentially, where the operation at the current time step depends on the output of the previous step. Parallel computation executes multiple operations simultaneously, allowing the model to process an entire sequence at once rather than step by step. This distinction defines the architectural difference between traditional models like RNNs and modern models like Transformers.</p>
+
+<p>### 2. How does it work?<br>
+In recurrent architectures, the hidden state updates via a loop where the current state \( h_t \) is a function of the previous state \( h_{t-1} \) and the current input \( x_t \), described by \( h_t = f(h_{t-1}, x_t) \). This dependency creates a bottleneck because the calculation for step \( t \) cannot begin until step \( t-1 \) is complete. In contrast, parallel architectures like Transformers utilize self-attention mechanisms to compute relationships between all tokens simultaneously. This allows the model to process a sequence using matrix multiplications such as \( \text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V \), enabling full utilization of GPU hardware.</p>
+
+<p>### 3. Why does it matter?<br>
+The shift from recurrent to parallel computation enabled the training of massive LLMs by drastically reducing training time and allowing hardware to operate at peak efficiency. However, recurrent approaches are seeing a resurgence in new architectures like RWKV or Mamba because they offer constant memory usage during inference, which is crucial for long contexts. This trade-off is particularly relevant for deploying models in low-resource settings or analyzing long mental health transcripts where memory efficiency is paramount.</p>
+
+<p>### 4. Key insight. Parallelism unlocks the speed necessary for training large models, while recurrence offers the memory efficiency required for long-sequence inference.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21374v1" target="_blank">Small Language Models for Privacy-Preserving Clinical Information Extraction in Low-Resource Languages</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Mohammadreza Ghaffarzadeh-Esfahani, Nahid Yousefian, Ebrahim Heidari-Farsani et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21374v1" target="_blank">2602.21374v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. Can open-source small language models (SLMs) effectively extract clinical information from low-resource language transcripts while maintaining privacy? The paper specifically investigates whether translating Persian clinical text to English improves extraction performance for various SLM sizes.</p>
+
+<p>### 2. Positioning. Clinical NLP research typically focuses on high-resource languages or relies on large, cloud-based models that pose privacy risks. This work positions itself as a privacy-preserving alternative for low-resource languages like Persian. It fills a critical gap by evaluating deployable, open-source models suitable for local infrastructure where data cannot leave the facility.</p>
+
+<p>### 3. Key Contribution. The main contribution is a benchmark of five open-source SLMs on a Persian clinical dataset using a translation-first pipeline. The study demonstrates that translating text to English improves sensitivity and reduces missing outputs for SLMs compared to direct Persian processing. It offers a practical blueprint for deploying NLP in low-resource environments without the need for resource-intensive fine-tuning.</p>
+
+<p>### 4. Methodology. The authors utilize a two-step pipeline involving translation with Aya-expanse-8B followed by feature extraction using SLMs like Llama and Qwen. They employ few-shot prompting to extract 13 binary clinical features from 1,221 anonymized transcripts. Performance is measured using macro-F1 and Matthews Correlation Coefficient (MCC) to manage class imbalance.</p>
+
+<p>### 5. Limitations. The evaluation is restricted to binary extraction of specific features, which may not capture the full complexity of clinical narratives. The pipeline depends on machine translation quality, risking information loss during the Persian-to-English conversion. Furthermore, the dataset is specific to palliative care, potentially limiting broader applicability to other medical fields.</p>
+
+<p>### 6. Critical Evaluation. This research provides a valuable, pragmatic approach for healthcare NLP in settings where data privacy and computational resources are primary constraints. The insight that translation aids SLM performance is particularly useful for low-resource language development. A weakness is the trade-off noted between sensitivity and specificity when using translation, which requires careful consideration for clinical safety applications.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18993v1" target="_blank">SeaCache: Spectral-Evolution-Aware Cache for Accelerating Diffusion Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiwoo Chung, Sangeek Hyun, MinKyu Lee et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18993v1" target="_blank">2602.18993v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper aims to solve the slow inference speeds of diffusion models caused by their sequential denoising process. It specifically investigates how to design a caching strategy that accurately identifies when intermediate outputs can be reused without degrading image quality.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself as an improvement over existing caching methods that reuse features based on raw feature distances. It addresses the limitation that raw differences entangle content and noise, proposing instead that acceleration strategies should respect the spectral priors where low-frequency structures emerge before high-frequency details.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is SeaCache, a training-free caching schedule that uses spectral analysis to decide when to reuse computations. The authors introduce a Spectral-Evolution-Aware (SEA) filter that separates content from noise, enabling more accurate redundancy detection. This approach achieves state-of-the-art trade-offs between generation latency and image quality.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors analyze the spectral evolution of the denoising process and design a filter to isolate content-relevant components. They use these filtered features to estimate redundancy between timesteps, creating a dynamic schedule that reuses cached outputs when the spectral content remains stable. This method avoids retraining and can be applied directly to existing models.</p>
+
+<p><strong>5. Limitations</strong><br>
+The provided text does not explicitly list specific limitations. However, potential limitations inherent to this approach include the computational overhead of applying the spectral filter during inference. There may also be challenges in generalizing the spectral priors across vastly different model architectures or generation tasks.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a strong theoretical insight by linking caching efficiency to the frequency domain characteristics of diffusion. The training-free nature of the method makes it highly practical for immediate deployment. However, the actual performance gain depends on ensuring that the computation saved by caching exceeds the cost of the spectral filtering operations.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.19424v2" target="_blank">Hepato-LLaVA: An Expert MLLM with Sparse Topo-Pack Attention for Hepatocellular Pathology Analysis on Whole Slide Images</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yuxuan Yang, Zhonghao Yan, Yi Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.19424v2" target="_blank">2602.19424v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of accurately diagnosing Hepatocellular Carcinoma using gigapixel Whole Slide Images. It specifically asks how to analyze these massive images without losing critical diagnostic details or generating excessive redundant data.</p>
+
+<p>### 2. Positioning. Current computational methods struggle with the massive scale of pathology slides, often relying on fixed-resolution processing that leads to information loss. This work positions itself as a specialized solution that bridges the gap between general Multi-modal Large Language Models and the specific demands of fine-grained hepatocellular pathology analysis.</p>
+
+<p>### 3. Key Contribution. The authors introduce Hepato-LLaVA, a specialized model featuring a novel Sparse Topo-Pack Attention mechanism to efficiently handle image topology. They also contribute HepatoPathoVQA, a new dataset containing 33,000 hierarchically structured question-answer pairs validated by expert pathologists to address data scarcity.</p>
+
+<p>### 4. Methodology. The methodology employs a novel Sparse Topo-Pack Attention mechanism to model 2D tissue topology explicitly. This technique aggregates local diagnostic evidence into semantic summary tokens, enabling the model to process high-resolution inputs while preserving global context.</p>
+
+<p>### 5. Limitations. Although the model achieves state-of-the-art results, its specialization in hepatocellular pathology might limit its direct applicability to other tissue types without additional training. Furthermore, the computational cost of handling gigapixel images, despite efficiency improvements, remains a potential barrier for resource-constrained environments.</p>
+
+<p>### 6. Critical Evaluation. This research offers a robust solution to the data scarcity and processing inefficiencies prevalent in digital pathology. The combination of a novel attention mechanism and a curated expert dataset sets a strong benchmark for future developments in medical image analysis.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20981v2" target="_blank">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Christian Simon, Masato Ishii, Wei-Yao Wang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20981v2" target="_blank">2602.20981v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates whether video-to-audio generation models trained on short video clips can effectively generalize to generate audio for much longer videos during inference. It aims to solve the problem of length generalization without requiring scarce long-form training data.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing state-of-the-art video-to-audio models struggle to generate audio for long durations, typically failing to extend beyond the length of sequences seen during training. This work fills a critical gap by addressing the scalability issues in multimodal alignment, proposing a method to bridge the divide between short training instances and long inference requirements.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the introduction of Multimodal Hierarchical Networks (MMHNet), which enables the generation of coherent audio for videos longer than five minutes. The authors demonstrate that it is possible to train on short durations and successfully test on long ones, significantly outperforming existing methods on long-video benchmarks.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose an enhanced architecture that integrates a hierarchical processing method with a non-causal Mamba structure. This approach allows the model to manage long-range temporal dependencies effectively, extending the capabilities of current video-to-audio frameworks without modifying the training data duration.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract highlights the success of the "train short, test long" approach, potential limitations may exist regarding the model's ability to maintain semantic consistency across complex scene changes in very long videos. Additionally, the reliance on hierarchical processing might introduce computational overhead or latency compared to simpler, short-form models.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a significant practical advancement by removing the need for expensive long-form video-audio datasets to achieve long-form generation. The integration of non-causal Mamba appears to be a robust technical choice for temporal modeling, though the real-world robustness of the generated audio over such extended durations remains the key factor for its adoption.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18283v1" target="_blank">HyTRec: A Hybrid Temporal-Aware Attention Architecture for Long Behavior Sequential Recommendation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Lei Xin, Yuhao Zheng, Ke Cheng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18283v1" target="_blank">2602.18283v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the core challenge of modeling long user behavior sequences in recommendation systems. Specifically, it asks how to balance the need for computational efficiency with the need for precise retrieval when processing industrial-scale interaction histories containing up to ten thousand items.</p>
+
+<p>### 2. Positioning. This work positions itself as a solution to the efficiency-accuracy dilemma in existing sequential recommendation models. It bridges the gap between linear attention mechanisms, which are fast but lack state capacity for precise retrieval, and softmax attention mechanisms, which are accurate but computationally too expensive for long sequences. HyTRec fills this gap by proposing a hybrid approach suitable for industrial deployment.</p>
+
+<p>### 3. Key Contribution. The primary contribution is a Hybrid Attention architecture that decouples user preferences into long-term stable interests and short-term intent spikes. The paper also introduces the Temporal-Aware Delta Network (TADN), a novel component designed to dynamically upweight fresh behavioral signals while suppressing noise in the linear attention branch. Together, these contributions allow the model to outperform strong baselines by over 8% in Hit Rate for ultra-long sequences while maintaining linear inference speed.</p>
+
+<p>### 4. Methodology. HyTRec utilizes a dual-branch structure where a linear attention branch processes massive historical sequences and a specialized softmax attention branch handles recent interactions. To address the "lag" or memory issues typical of linear attention, the authors implement the Temporal-Aware Delta Network (TADN). This mechanism modifies the linear layer updates to prioritize new interactions, ensuring that rapid shifts in user interest are captured immediately without retraining the entire history.</p>
+
+<p>### 5. Limitations. While the abstract highlights significant performance gains, it does not address the potential increase in architectural complexity or training overhead associated with maintaining two distinct attention branches. Additionally, the approach likely introduces hyperparameters regarding the threshold between "recent" and "historical" interactions, which may require careful tuning for different industrial scenarios.</p>
+
+<p>### 6. Critical Evaluation. This research offers a pragmatic and effective engineering solution to a persistent problem in large-scale recommendation systems. The strength of the work lies in its clear recognition that different temporal scales require different modeling strategies, combining the speed of linear models with the precision of softmax attention. However, the reliance on a specific decoupling strategy implies that the model's performance might be sensitive to how "short-term" versus "long-term" behaviors are defined and separated.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22479v1" target="_blank">Efficient Continual Learning in Language Models via Thalamically Routed Cortical Columns</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Afshin Khadangi<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22479v1" target="_blank">2602.22479v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. How can we design language model architectures that support continuous learning from non-stationary data without suffering from catastrophic forgetting or excessive computational overhead? The paper seeks to resolve the stability-plasticity dilemma where models either fail to adapt to new data or forget previously learned information.</p>
+
+<p>### 2. Positioning. Standard fine-tuning pipelines struggle with streaming data because they tend to be brittle and prone to forgetting. Existing solutions that improve stability often incur penalties in latency, memory, or computation that hinder scalability. This work positions itself as an architectural solution rather than an optimization trick, filling the gap for efficient, structural continual learning.</p>
+
+<p>### 3. Key Contribution. The main contribution is the introduction of TRC\(^{2}\), a decoder-only backbone that mimics biological brain structures to handle continual learning natively. This architecture combines sparse thalamic routing with cortical columns to achieve a better stability-plasticity tradeoff at comparable compute costs. It offers a way to perform rapid online adaptation without destabilizing the core knowledge stored in slower parameters.</p>
+
+<p>### 4. Methodology. The authors propose a block design that utilizes sparse thalamic routing to direct information through specialized cortical columns. This system integrates mechanisms for modulation, prediction, memory, and feedback, alongside a fast corrective pathway for quick adaptation. The architecture is designed to be chunk-parallel and sparse, enabling efficient training and inference while keeping subsystems distinct for clean ablations.</p>
+
+<p>### 5. Limitations. The abstract does not list specific limitations, but the complexity of the proposed architecture suggests potential challenges in implementation and hyperparameter tuning compared to standard transformers. Additionally, the reliance on specific routing mechanisms may introduce difficulties when scaling to extremely large parameter counts or highly diverse data distributions.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling bio-inspired approach to a critical problem in deployed AI systems. The strength of the paper lies in its ability to improve adaptation capabilities without increasing computational demands. However, the practical adoption of such complex, modular architectures may be slow due to the engineering overhead required to replace standard, well-understood transformer blocks.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22437v1" target="_blank">veScale-FSDP: Flexible and High-Performance FSDP at Scale</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Zezhou Wang, Youjie Li, Zhiqi Lin et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22437v1" target="_blank">2602.22437v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the inability of current Fully Sharded Data Parallel (FSDP) systems to handle structure-aware training methods and scale efficiently to tens of thousands of GPUs. It seeks to resolve the conflict between fixed sharding formats and the block-structured computations required by advanced optimizers and quantization techniques.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing FSDP implementations are limited by rigid element- or row-wise sharding formats that clash with the block-structured computations found in cutting-edge models. This work bridges the gap between standard distributed training techniques and the specific data placement needs of structure-aware methods like block-wise quantization and non-element-wise optimizers such as Shampoo and Muon.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The main contribution is the veScale-FSDP system, which introduces a flexible sharding format called RaggedShard. This approach allows for structure-aware planning that enables efficient support for advanced optimizers and quantization methods. The system achieves up to 66% higher throughput and 30% lower memory usage compared to existing solutions.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors utilize a flexible sharding format, RaggedShard, combined with a structure-aware planning algorithm to align data distribution with computational requirements. This design ensures efficient data placement for FSDP operations, accommodating block-wise computations without the constraints of fixed sharding. The system optimizes communication and memory usage to support scaling across massive GPU clusters.</p>
+
+<p><strong>5. Limitations</strong><br>
+The abstract does not explicitly detail specific limitations of the proposed method. Potential limitations could involve the engineering complexity required to implement the structure-aware planning for diverse model architectures. Furthermore, the benefits of such a complex system might be less pronounced on smaller clusters compared to the massive scales discussed.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a compelling solution to a critical bottleneck in training large language models, particularly regarding the integration of advanced optimizers. The performance metrics provided suggest a robust improvement over current standards. However, the practical adoption will depend on the ease with which developers can integrate the RaggedShard mechanism into existing workflows without significant code refactoring.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20423v1" target="_blank">MedCLIPSeg: Probabilistic Vision-Language Adaptation for Data-Efficient and Generalizable Medical Image Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Taha Koleilat, Hojat Asgariandehkordi, Omid Nejati Manzari et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20423v1" target="_blank">2602.20423v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper aims to solve the persistent challenges in medical image segmentation, specifically the scarcity of annotated training data and the issue of domain shifts across different medical facilities. It investigates how vision-language models like CLIP can be effectively adapted for dense, text-guided segmentation tasks that are both data-efficient and robust.</p>
+
+<p>### 2. Positioning. While vision-language models have demonstrated strong performance in general cross-modal representation learning, their application to dense medical image segmentation remains underexplored. This work positions itself at the intersection of foundation models and medical imaging, filling a critical gap by adapting these models to handle ambiguous anatomical features and limited annotations. It moves beyond simple classification to address the need for generalizable, pixel-level understanding in healthcare.</p>
+
+<p>### 3. Key Contribution. The primary contribution is MedCLIPSeg, a novel framework that adapts CLIP for uncertainty-aware medical image segmentation. The paper introduces a probabilistic cross-modal attention mechanism that enables bidirectional interaction between image patches and text tokens while explicitly modeling predictive uncertainty. Additionally, the authors propose a soft patch-level contrastive loss to encourage more nuanced semantic learning from diverse textual prompts.</p>
+
+<p>### 4. Methodology. The methodology involves extracting patch-level embeddings from images using the CLIP vision encoder and processing them through a probabilistic cross-modal attention module. This module facilitates bidirectional information flow between image and text tokens, allowing the model to quantify uncertainty in its predictions. The system is trained using a soft patch-level contrastive loss, which aligns visual features with textual descriptions to improve semantic segmentation performance.</p>
+
+<p>### 5. Limitations. A potential limitation is the model's reliance on the quality and specificity of the textual prompts provided by the user, which may introduce variability in results. The performance could also be constrained by the inherent domain gap between the natural images used to pre-train CLIP and the specific characteristics of medical imaging data. Furthermore, the probabilistic attention mechanism likely adds computational overhead compared to standard deterministic segmentation models.</p>
+
+<p>### 6. Critical Evaluation. This work presents a significant advancement by successfully bridging the gap between general-purpose vision-language models and specialized medical imaging tasks. The inclusion of uncertainty mapping is a major strength, offering clinicians interpretable insights into the reliability of the segmentation results. However, the practical deployment of the model may depend heavily on the careful engineering of text prompts to achieve optimal performance across diverse clinical scenarios.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18964v1" target="_blank">Yor-Sarc: A gold-standard dataset for sarcasm detection in a low-resource African language</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Toheeb Aduramomi Jimoh, Tabea De Wille, Nikola S. Nikolov<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18964v1" target="_blank">2602.18964v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the critical lack of annotated resources for sarcasm detection in low-resource African languages. It specifically investigates how to construct a reliable, gold-standard dataset for Yorùbá that accounts for cultural nuances in semantic interpretation.</p>
+
+<p>### 2. Positioning. Current sarcasm detection research focuses heavily on high-resource languages like English, leaving African languages largely unexplored. This work positions itself as a pioneering effort by providing the first benchmark dataset for Yorùbá, a major tonal language. It fills a significant gap by demonstrating that culturally informed annotation protocols can achieve high agreement levels in low-resource settings.</p>
+
+<p>### 3. Key Contribution. The primary contribution is Yor-Sarc, the first gold-standard dataset for sarcasm detection in Yorùbá, containing 436 annotated instances. The authors also introduce a novel annotation protocol tailored to Yorùbá culture and dialects, which facilitates high inter-annotator agreement. Additionally, the release includes soft labels for ambiguous cases to support uncertainty-aware modeling.</p>
+
+<p>### 4. Methodology. The researchers developed a context-sensitive annotation protocol guided by community-informed cultural guidelines. Three native speakers from diverse dialectal backgrounds annotated the dataset, with agreement measured using Fleiss' \(\kappa\) and pairwise Cohen's \(\kappa\). The process resulted in high consensus, achieving a Fleiss' \(\kappa\) of \(0.7660\) and preserving majority-vote cases as soft labels for nuanced modeling.</p>
+
+<p>### 5. Limitations. The dataset size is relatively small at 436 instances, which may restrict the training of large-scale deep learning models. While the protocol is designed for replication, its direct applicability to other African languages requires further validation. The presence of soft labels for roughly 16.7% of the data also highlights the inherent subjectivity and difficulty of sarcasm detection even among native speakers.</p>
+
+<p>### 6. Critical Evaluation. This work represents a significant step toward inclusive NLP by providing a high-quality resource for a demographic often ignored in computational semantics. The strong inter-annotator agreement validates the effectiveness of their culturally grounded methodology. However, the limited size of the dataset means it serves better as a benchmark or few-shot learning resource than a standalone training corpus for large models.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20300v1" target="_blank">What Makes a Good Query? Measuring the Impact of Human-Confusing Linguistic Features on LLM Performance</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> William Watson, Nicole Cho, Sumitra Ganesh et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20300v1" target="_blank">2602.20300v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper investigates whether specific linguistic features in user queries correlate with higher rates of LLM hallucinations. It asks if the structural form of a prompt, independent of the model's architecture, can predict the likelihood of generating factually incorrect information.</p>
+
+<p>### 2. Positioning. Most existing research attributes hallucinations solely to internal model defects or decoding strategies. This work shifts the focus to the input side, applying classical linguistic theory to argue that query quality significantly impacts model reliability. It fills a gap by systematically analyzing how features known to confuse humans also degrade LLM performance.</p>
+
+<p>### 3. Key Contribution. The authors identify a consistent "risk landscape" where specific query features, such as deep clause nesting and underspecification, correlate with higher hallucination rates. They introduce a novel 22-dimension feature vector to quantify these linguistic risks, providing an empirical foundation for developing automated query rewriting tools.</p>
+
+<p>### 4. Methodology. The researchers constructed a comprehensive 22-dimension feature vector covering syntax, lexicon, and semantics. They applied this framework to a dataset of 369,837 real-world queries to statistically measure the relationship between specific linguistic traits and the likelihood of hallucination.</p>
+
+<p>### 5. Limitations. The study acknowledges that some features, such as domain specificity, produce inconsistent results that vary depending on the dataset and model used. Additionally, the observational nature of the analysis establishes correlation rather than causation, requiring future interventional studies to confirm the mechanisms.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a valuable perspective shift by treating hallucination risk as a function of the prompt rather than just the model. The primary strength lies in translating complex linguistic theory into actionable metrics for AI practitioners. However, the dependency on specific datasets suggests that the "risk landscape" may not be universally applicable across all emerging model architectures.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2602.21374v1" target="_blank">Small Language Models for Privacy-Preserving Clinical Information Extraction in Low-Resource Languages</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18993v1" target="_blank">SeaCache: Spectral-Evolution-Aware Cache for Accelerating Diffusion Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.19424v2" target="_blank">Hepato-LLaVA: An Expert MLLM with Sparse Topo-Pack Attention for Hepatocellular Pathology Analysis on Whole Slide Images</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20981v2" target="_blank">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18283v1" target="_blank">HyTRec: A Hybrid Temporal-Aware Attention Architecture for Long Behavior Sequential Recommendation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22479v1" target="_blank">Efficient Continual Learning in Language Models via Thalamically Routed Cortical Columns</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22437v1" target="_blank">veScale-FSDP: Flexible and High-Performance FSDP at Scale</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20423v1" target="_blank">MedCLIPSeg: Probabilistic Vision-Language Adaptation for Data-Efficient and Generalizable Medical Image Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18964v1" target="_blank">Yor-Sarc: A gold-standard dataset for sarcasm detection in a low-resource African language</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20300v1" target="_blank">What Makes a Good Query? Measuring the Impact of Human-Confusing Linguistic Features on LLM Performance</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

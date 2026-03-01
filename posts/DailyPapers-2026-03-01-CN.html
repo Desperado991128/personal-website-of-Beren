@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-03-01</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">March 01, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月01日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Recurrent vs parallel computation</h2>
+                <p><strong>1. 概念定义</strong><br>
+循环计算指按时间顺序逐步处理数据，当前步骤的计算依赖于前一步骤的输出结果。并行计算则允许同时处理序列中的多个数据单元，各个计算步骤之间不存在严格的顺序依赖关系。这两种模式直接影响模型的训练速度和推理效率。</p>
+
+<p><strong>2. 核心原理</strong><br>
+在循环架构中，隐藏状态 \(h_t\) 必须等待前一个时刻的状态 \(h_{t-1}\) 计算完成，遵循 \(h_t = f(h_{t-1}, x_t)\) 的递归关系。这种串行依赖限制了硬件并行计算能力的发挥。并行架构如Transformer通过自注意力机制让模型能够同时看到整个序列，使得计算可以高度并行化。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在新LLM架构研究中，如何结合并行训练的高效性与循环推理的长距离依赖建模能力是一个核心议题。对于低资源语言，并行计算能显著降低训练时间和硬件成本，促进技术普及。在心理健康应用中，高效的并行推理支持了实时响应需求，这对于情感计算和即时干预至关重要。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+并行计算是大模型规模化训练的基石，而循环计算在处理无限长序列或流式数据时具有内存优势。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.21374v1" target="_blank">Small Language Models for Privacy-Preserving Clinical Information Extraction in Low-Resource Languages</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Mohammadreza Ghaffarzadeh-Esfahani, Nahid Yousefian, Ebrahim Heidari-Farsani et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.21374v1" target="_blank">2602.21374v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在解决低资源语言(波斯语)医疗转录文本中临床信息提取的难题，重点探索在有限标注数据和计算资源下，如何利用开源小模型实现隐私保护的自动化信息提取。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有医疗NLP研究多集中于英语等高资源语言，且常依赖大规模模型或昂贵的微调过程。该工作填补了低资源语言环境下，利用轻量级开源模型进行临床信息提取的空白，特别关注隐私保护与低基础设施限制的实际应用场景。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出并验证了一种无需微调的两阶段流水线，发现将波斯语翻译为英语后再提取能显著提升模型灵敏度。研究证实了参数规模在7B至8B的模型在处理类别不平衡时表现最佳，并确立了在受限资源下部署多语言医疗NLP系统的实用方案。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究采用两步流程，首先使用Aya-expanse-8B模型将波斯语临床转录文本翻译为英语。随后通过少样本提示策略，驱动五个开源小语言模型(如Qwen2.5-7B和Llama-3.1-8B)对13个临床特征进行二元提取，并使用宏平均F1分数和MCC等指标进行评估。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+模型在提取心理主诉、行政请求及复杂躯体特征时表现较弱，显示了对复杂语义理解的不足。虽然翻译策略提升了灵敏度，但导致特异度和精确度略有下降。此外实验数据仅来源于单一癌症姑息治疗中心，模型在其他医疗场景的泛化能力需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具工程参考价值，证明了在资源受限环境中，通过合理的流程设计(如翻译中介)而非单纯增加模型规模，也能取得良好的临床提取效果。它为医疗机构在保护数据隐私的前提下利用开源模型处理小语种任务提供了清晰的实践蓝图。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18993v1" target="_blank">SeaCache: Spectral-Evolution-Aware Cache for Accelerating Diffusion Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiwoo Chung, Sangeek Hyun, MinKyu Lee et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18993v1" target="_blank">2602.18993v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+扩散模型固有的顺序去噪过程导致推理速度缓慢，而现有的缓存加速方法基于原始特征差异进行判断，忽视了生成过程中的频谱演化特性，导致无法有效区分内容与噪声。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于扩散模型推理加速领域，针对现有免训练缓存策略忽视频域先验的问题提出了改进方案。它填补了如何利用扩散过程“低频结构先出现，高频细节后完善”这一频谱演化规律来优化特征复用决策的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于提出了SeaCache，一种免训练的频谱演化感知缓存调度策略。其创新点包括推导出能够保留内容并抑制噪声的频谱演化感知(SEA)滤波器，以及基于此滤波特征实现的动态缓存调度，显著提升了延迟与质量的平衡。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法首先设计了一个SEA滤波器，通过保留低频内容分量并抑制高频噪声来净化输入特征。随后利用这些净化后的特征来评估相邻时间步之间的冗余度，从而动态决定是否复用缓存的特征，以此减少不必要的计算。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法虽然免训练，但SEA滤波器的引入增加了少量额外的计算开销，可能影响极端加速场景下的收益。此外，固定的频谱先验假设可能无法完美适配所有类型的生成模型或极端的生成任务，存在一定的适用性边界。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作巧妙地将频域分析引入缓存策略设计，理论扎实且实用性强，为扩散模型加速提供了新的物理可解释视角。优点是无需训练且效果显著，缺点在于滤波操作本身的计算成本需要被仔细优化，以免抵消缓存带来的加速收益。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.19424v2" target="_blank">Hepato-LLaVA: An Expert MLLM with Sparse Topo-Pack Attention for Hepatocellular Pathology Analysis on Whole Slide Images</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yuxuan Yang, Zhonghao Yan, Yi Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.19424v2" target="_blank">2602.19424v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决肝细胞癌诊断中吉像素级全切片图像分析面临的固定分辨率处理限制和低效特征聚合问题，这些问题通常导致严重的信息丢失或高特征冗余。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于将多模态大语言模型应用于病理学领域，填补了现有计算方法在处理吉像素级全切片图像时难以兼顾全局上下文与局部细粒度特征的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献包括提出了专门用于肝细胞病理分析的Hepato-LLaVA模型，设计了能够显式建模2D组织拓扑的稀疏拓扑打包注意力机制，并构建了包含33K专家验证问答对的HepatoPathoVQA数据集。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法引入稀疏拓扑打包注意力机制，通过显式建模2D组织拓扑结构，将局部诊断证据有效聚合为语义摘要Token，从而在保留全局上下文的同时实现了高效的特征提取。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文在肝癌诊断上表现出色，但模型主要针对肝细胞癌这一特定任务设计，泛化到其他病理类型的能力可能受限。此外，构建的HepatoPathoVQA数据集规模为33K，相较于通用领域的视觉问答数据集仍显较小，可能限制模型学习更广泛的病理知识。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将大语言模型与病理图像分析结合，其提出的拓扑感知注意力机制有效解决了高分辨率图像处理的效率瓶颈。构建的高质量专家验证数据集不仅支撑了本研究，也为后续病理AI研究提供了宝贵资源，具有重要的临床应用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20981v2" target="_blank">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Christian Simon, Masato Ishii, Wei-Yao Wang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20981v2" target="_blank">2602.20981v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+该论文旨在解决视频到音频生成任务中的长度泛化难题，核心探究模型能否仅利用短视频数据进行训练，却在推理阶段成功生成高质量的长时长音频。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究多集中于短视频生成，受限于数据稀缺和模态对齐困难，难以处理长视频内容。该工作填补了长视频音频生成的空白，证明了无需昂贵的长视频训练数据即可突破生成长度限制的可能性。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于提出了MMHNet模型，实现了超过5分钟的长音频生成，并验证了“短训练长测试”范式的有效性。该方法在长视频音频生成基准测试中击败了现有工作，显著提升了模型在长时长生成任务上的性能上限。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者提出了多模态分层网络MMHNet，这是对现有先进视频转音频模型的一种增强扩展。该方法结合了分层处理机制与非因果Mamba模块，能够有效捕捉长视频中的时间依赖关系，从而支持连贯的长音频合成。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管模型在长度泛化上表现优异，但在极长或高度动态的视频中，音频与视频细节的同步精度可能仍有提升空间。此外，非因果机制在处理超长序列时可能面临显存占用较高或计算效率下降的挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地避开了长视频数据稀缺的痛点，通过架构创新实现了高效的长度泛化，具有很强的实用价值。不过在实际部署中，需要关注其在超长序列下的推理效率以及对复杂场景变化的适应性。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18283v1" target="_blank">HyTRec: A Hybrid Temporal-Aware Attention Architecture for Long Behavior Sequential Recommendation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Lei Xin, Yuhao Zheng, Ke Cheng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18283v1" target="_blank">2602.18283v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决长序列用户行为建模中计算效率与检索精度难以兼得的问题。核心挑战在于如何在处理万级交互序列时，平衡线性注意力机制状态容量有限导致的精度损失与Softmax注意力机制高昂的计算开销。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于生成式推荐系统中的长序列行为建模领域，填补了现有方法在工业级大规模场景下无法同时兼顾推理速度与预测精度的空白。它针对超长序列推荐任务，提出了一种能够融合不同注意力机制优势的混合架构方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了HyTRec模型，通过混合注意力架构显式解耦了用户的长期稳定偏好与短期意图峰值。主要创新在于设计了时间感知增量网络(TADN)来动态增强新鲜行为信号，并在保持线性推理速度的同时，实现了超长序列用户命中率超过8%的显著提升。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法采用双分支架构，将海量历史序列分配给线性注意力分支处理，并为近期交互保留专门的Softmax注意力分支以恢复精准检索能力。此外，模型引入时间感知增量网络(TADN)来缓解线性层捕捉兴趣漂移的滞后性，通过动态加权新鲜信号并抑制历史噪声来优化效果。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管模型在工业数据集上表现优异，但双分支架构增加了系统的复杂度和工程维护成本。同时，长期历史行为与短期近期行为的划分界限可能需要针对不同业务场景进行细致调优，且时间感知机制的有效性可能高度依赖于数据的时间分布特征。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项具有很高工业应用价值的研究，巧妙地结合了线性注意力的效率优势与Softmax注意力的精度优势。其通过解耦长短时偏好并引入时间动态加权机制的做法，为解决推荐系统中“长尾历史”与“即时意图”的矛盾提供了切实可行的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22479v1" target="_blank">Efficient Continual Learning in Language Models via Thalamically Routed Cortical Columns</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Afshin Khadangi<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22479v1" target="_blank">2602.22479v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决语言模型在非平稳数据流中进行持续学习时面临的灾难性遗忘问题，同时克服现有方法在推理延迟、内存占用和计算成本上难以扩展的瓶颈。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位为从模型架构层面解决持续学习问题，区别于主要关注训练策略或正则化方法的现有研究。它填补了如何在保持模型高效推理和低资源占用的同时，实现长期记忆保持与快速适应这一关键空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了名为TRC$^{2}$的新型解码器架构，通过模拟大脑皮层柱和丘脑路由机制实现高效的持续学习。其创新点在于设计了稀疏路由与快速纠正通路，在不破坏旧知识的前提下实现快速适应，并提供了可复现的持续学习评估基准。</p>
+
+<p><strong>4. 方法概述</strong><br>
+TRC$^{2}$架构结合了基于皮层柱的稀疏丘脑路由机制，集成了调制、预测、记忆和反馈子系统。该方法引入了一条快速纠正通路，允许模型快速适应新数据而不干扰长期存储的慢速参数，从而实现高效的分块并行训练与推理。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管该方法在持续学习上表现优异，但其架构相比标准Transformer更为复杂，可能增加了实现和调试的难度。此外，该架构在超大规模语言模型上的扩展性以及在更多样化真实场景下的表现仍有待进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地借鉴了神经科学原理，在稳定性与可塑性的权衡上取得了显著进展。其架构级解决方案为构建能够终身学习的AI系统提供了新思路，具有较高的工程应用价值，但复杂的模块化设计也可能带来维护成本。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22437v1" target="_blank">veScale-FSDP: Flexible and High-Performance FSDP at Scale</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Zezhou Wang, Youjie Li, Zhiqi Lin et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22437v1" target="_blank">2602.22437v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的FSDP系统难以支持结构感知训练方法（如分块量化）和非逐元素优化器（如Shampoo），且在扩展至数万GPU时面临通信与内存效率瓶颈。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于解决现有FSDP系统与前沿模型训练需求之间的不匹配问题。它填补了在大规模分布式训练场景下，支持复杂计算结构与高效硬件扩展的技术空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了veScale-FSDP系统，引入了灵活的RaggedShard分片格式与结构感知规划算法。该系统在保证灵活性的同时显著提升了性能，实现了吞吐量提升5%至66%以及内存使用降低16%至30%。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文设计了名为RaggedShard的灵活分片格式，打破了传统固定分片模式的限制。结合结构感知规划算法，系统能够原生支持高效数据放置，从而适配分块结构计算与非逐元素优化器。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管系统性能提升显著，但引入新的分片格式与规划算法可能增加了系统实现的复杂度。此外，针对特定非逐元素优化器的适配可能需要额外的工程投入。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作通过解耦分片格式与计算结构，有效解决了FSDP在应对前沿模型时的刚性限制。其兼顾灵活性与高性能的设计思路，为大规模模型训练系统的演进提供了重要参考。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20423v1" target="_blank">MedCLIPSeg: Probabilistic Vision-Language Adaptation for Data-Efficient and Generalizable Medical Image Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Taha Koleilat, Hojat Asgariandehkordi, Omid Nejati Manzari et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20423v1" target="_blank">2602.20423v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+医学图像分割面临标注数据稀缺、解剖特征模糊以及跨设备域偏移的挑战。现有视觉语言模型如CLIP在密集预测任务中的潜力尚未得到充分挖掘，本文旨在解决如何将其有效适配于医学图像分割的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于医学图像分割与视觉语言模型的交叉领域。它填补了将CLIP模型从图像级理解迁移至像素级密集预测的空白，特别针对医学场景下的数据效率和域泛化难题提出了解决方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MedCLIPSeg框架，创新性地引入概率跨模态注意力机制和软块级对比损失。该方法不仅实现了图文特征的双向交互，还显式建模了预测不确定性，在提升分割精度的同时提供了结果可靠性的解释。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法利用概率跨模态注意力机制处理块级CLIP嵌入，建立图像与文本Token之间的双向交互，并显式输出预测的不确定性。配合软块级对比损失，模型能够学习跨文本提示的细粒度语义特征，从而实现数据高效且鲁棒的分割。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确列出局限，但此类方法通常对文本提示的质量和具体措辞较为敏感。引入概率建模和注意力机制可能会增加计算开销，且模型性能上限受限于预训练CLIP模型在医学领域的表征能力。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作成功地将不确定性估计融入视觉语言分割模型，极大增强了医学AI系统的可信度和实用性。其在16个数据集上的广泛验证证明了方法的鲁棒性，为解决医学图像标注难题提供了极具价值的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.18964v1" target="_blank">Yor-Sarc: A gold-standard dataset for sarcasm detection in a low-resource African language</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Toheeb Aduramomi Jimoh, Tabea De Wille, Nikola S. Nikolov<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.18964v1" target="_blank">2602.18964v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决低资源语言中反讽检测数据集稀缺的问题，核心挑战在于如何弥合字面意义与意图意义之间的差异。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有反讽检测研究主要集中在英语等高资源语言，这项工作填补了非洲低资源语言的空白。它为约鲁巴语这一使用者众多的尼日尔-刚果语系语言提供了首个黄金标准数据集。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献是发布了包含436个实例的Yor-Sarc数据集，并设计了结合文化背景的标注协议。创新点在于保留了未达成一致意见的软标签以支持不确定性建模，且标注质量超越了部分英语基准。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究人员邀请了三位不同方言背景的母语者进行人工标注，采用了结合语境解释和社区共识的标注协议。通过Fleiss' \(\kappa\) 和 Cohen's \(\kappa\) 等指标分析，结果显示标注者之间达成了实质性甚至近乎完美的一致性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+数据集规模相对较小，仅包含436个实例，可能限制大规模预训练模型的应用效果。研究仅针对单一语言，跨语言泛化能力有待验证。此外，部分数据未达成一致意见，反映了反讽检测任务固有的主观性难点。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作在低资源语言NLP领域具有重要价值，证明了文化适应的标注协议能显著提高数据质量。它不仅提供了数据资源，还为其他非洲语言的语义数据集构建提供了可复制的方法论参考。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.20300v1" target="_blank">What Makes a Good Query? Measuring the Impact of Human-Confusing Linguistic Features on LLM Performance</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> William Watson, Nicole Cho, Sumitra Ganesh et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.20300v1" target="_blank">2602.20300v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了查询的语言形式如何影响大语言模型的幻觉现象。核心研究问题是，是否存在特定的查询语言特征会增加模型产生幻觉的风险。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究通常将幻觉归因于模型自身的缺陷或解码策略。本文引入经典语言学视角，填补了关于查询输入形式如何影响模型输出质量的研究空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文构建了一个涵盖从句复杂度、词汇罕见度和意图依据等22个维度的查询特征向量。通过大规模分析揭示了幻觉风险的“风险地形”，确立了查询特征与幻觉发生率之间的实证关联。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者基于经典语言学理论构建了一个包含22个维度的查询特征向量，涵盖从句嵌套和指代消解等要素。研究在369,837个真实世界查询上进行了大规模分析，量化了不同特征与幻觉倾向的相关性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究发现某些特征如领域特异性表现出混合效应，结论可能依赖于特定数据集和模型。此外，该研究主要建立了特征与幻觉的相关性，具体的因果机制仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的实用价值，将研究视角从单纯改进模型转向优化输入质量。它为通过查询重写来减少幻觉提供了坚实的理论基础和量化指标。这种跨学科视角为提升LLM可靠性提供了新的解决思路。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2602.21374v1" target="_blank">Small Language Models for Privacy-Preserving Clinical Information Extraction in Low-Resource Languages</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18993v1" target="_blank">SeaCache: Spectral-Evolution-Aware Cache for Accelerating Diffusion Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.19424v2" target="_blank">Hepato-LLaVA: An Expert MLLM with Sparse Topo-Pack Attention for Hepatocellular Pathology Analysis on Whole Slide Images</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20981v2" target="_blank">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18283v1" target="_blank">HyTRec: A Hybrid Temporal-Aware Attention Architecture for Long Behavior Sequential Recommendation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22479v1" target="_blank">Efficient Continual Learning in Language Models via Thalamically Routed Cortical Columns</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22437v1" target="_blank">veScale-FSDP: Flexible and High-Performance FSDP at Scale</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20423v1" target="_blank">MedCLIPSeg: Probabilistic Vision-Language Adaptation for Data-Efficient and Generalizable Medical Image Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.18964v1" target="_blank">Yor-Sarc: A gold-standard dataset for sarcasm detection in a low-resource African language</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.20300v1" target="_blank">What Makes a Good Query? Measuring the Impact of Human-Confusing Linguistic Features on LLM Performance</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
