@@ -272,49 +272,181 @@
 
                 <h2 id="daily-concept">Daily Concept: Gaze patterns in human-AI interaction</h2>
                 <p><strong>1. What is it?</strong><br>
-Gaze patterns in human-AI interaction refer to the spatial and temporal characteristics of eye movements exhibited by users while engaging with AI systems, such as Large Language Models. This concept involves analyzing fixations, saccades, and scanpaths to infer cognitive states like attention, confusion, or trust during tasks like prompt formulation or output verification. Researchers use these patterns to model how humans process and evaluate AI-generated content.</p>
+Gaze patterns in human-AI interaction refer to the spatial and temporal characteristics of eye movements generated when users engage with AI systems, such as Large Language Models. These patterns capture implicit signals like attention allocation, reading comprehension, and cognitive load during tasks like prompt formulation or output verification. By analyzing these signals, researchers can decode user intent and mental states that are not explicitly present in the text input or output.</p>
 
 <p><strong>2. How does it work?</strong><br>
-The process begins by capturing raw eye-tracking data and mapping gaze coordinates onto specific interface elements or text tokens. These signals are transformed into feature vectors representing fixation duration \(F_d\) and saccade velocity, which are synchronized with the LLM's token stream. Machine learning models then learn a mapping function \(f: (X_{text}, X_{gaze}) \rightarrow Y\) to predict user intent or cognitive load based on where the user looks. This effectively aligns human visual attention with the model's computational attention weights.</p>
+Eye-tracking hardware captures high-frequency data streams, typically including fixations where the eye rests on a specific area and saccades which are rapid movements between points. These raw coordinates are mapped to specific tokens in the LLM interface to create a temporal sequence of attention. In machine learning models, this gaze signal is often encoded as a feature vector \( g_t \) that is combined with standard text embeddings \( x_t \). This fusion allows the model to weigh input tokens differently, mathematically represented as a modified attention score \( \alpha_i = \text{softmax}(f(x_i, g_i)) \) that reflects human visual focus rather than learned semantic relevance alone.</p>
 
 <p><strong>3. Why does it matter?</strong><br>
-Understanding these patterns allows researchers to bridge the gap between explicit user inputs and implicit cognitive reactions, enabling AI systems to adapt to user attention in real time. It provides a novel signal for Reinforcement Learning from Human Feedback (RLHF), where gaze duration on specific tokens can indicate perceived accuracy or hallucination without explicit user rating. This intersection is critical for designing transparent and trustworthy AI interfaces that align model reasoning with human cognitive processes.</p>
+This concept is significant because it provides a dense, implicit feedback signal that can fine-tune LLMs without requiring explicit user ratings or corrections. It enables the development of adaptive interfaces that detect user confusion or verification effort in real time. Consequently, gaze data can improve model alignment by identifying which generated tokens attract scrutiny, effectively highlighting potential hallucinations or errors.</p>
 
 <p><strong>4. Key insight</strong><br>
-Gaze acts as an implicit feedback signal that reveals user attention and cognitive load before explicit interaction occurs. This allows LLMs to move beyond text-only understanding to a multi-modal perception of user intent.</p>
+Gaze patterns serve as a real-time proxy for human cognitive processing, offering a rich implicit signal that bridges the gap between user intent and model behavior.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
                 <div class="paper-entry" id="paper-1">
                     <h3 class="paper-title">
-                        <a href="https://arxiv.org/pdf/2602.01452v1" target="_blank">Cross-Paradigm Evaluation of Gaze-Based Semantic Object Identification for Intelligent Vehicles</a>
+                        <a href="https://arxiv.org/pdf/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a>
                     </h3>
                     <div class="paper-meta">
-                        <strong>Authors:</strong> Penghao Deng, Jidong J. Yang, Jiachen Bian<br>
-                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.01452v1" target="_blank">2602.01452v1</a>
+                        <strong>Authors:</strong> Parsa Madinei, Srijita Karmakar, Russell Cohen Hoffing et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.16138v1" target="_blank">2602.16138v1</a>
                     </div>
                     <div class="paper-topics">
                     </div>
 
                     <h4>Summary</h4>
-                    <p>### 1. Research Question. The paper aims to solve the problem of accurately identifying what objects a driver is looking at to improve Advanced Driver-Assistance Systems (ADAS). The core research question asks which computer vision paradigm most effectively maps driver gaze points to semantic objects in dynamic road scenes.</p>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of ambiguity in open-ended Visual Question Answering (VQA). It investigates how real-time eye-tracking data can be leveraged to resolve user intent and improve the accuracy of Large Vision-Language Models (VLMs) without additional training.</p>
 
-<p>### 2. Positioning. This work positions itself at the intersection of gaze analysis and computer vision for intelligent vehicles. It fills a gap in the literature by moving beyond single-approach studies to provide a cross-paradigm evaluation. It contrasts traditional detection methods with modern segmentation and emerging Vision-Language Models (VLMs) to guide future system design.</p>
+<p><strong>2. Positioning</strong><br>
+Current VLMs often struggle with ambiguous queries where the user's intent is not explicitly stated in the text. While existing research explores multi-turn dialogue or prompt engineering to clarify intent, this work introduces a novel multimodal approach. It fills a critical gap by utilizing implicit physiological signals, specifically gaze, as a direct mechanism for disambiguation during inference.</p>
 
-<p>### 3. Key Contribution. The main contribution is the demonstration that large Vision-Language Models (specifically Qwen2.5-VL-32b) can match or exceed traditional object detectors like YOLOv13, achieving Macro F1-Scores over \(0.84\). The study highlights that these VLMs offer superior robustness for identifying small, safety-critical objects like traffic lights in adverse nighttime conditions. Additionally, it identifies a critical failure mode in segmentation-assisted approaches caused by a "part-versus-whole" semantic gap.</p>
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is IRIS, a training-free inference method that integrates eye-tracking fixations to disambiguate user questions. The authors release a new benchmark dataset for gaze-based VQA and demonstrate that fixations synchronized with the start of the verbal query significantly boost accuracy on ambiguous questions, improving performance from 35.2% to 77.2%.</p>
 
-<p>### 4. Methodology. The authors evaluated three distinct vision paradigms for semantic identification using front-view camera footage collocated with driver gaze data. They tested direct object detection using YOLOv13, segmentation-assisted classification combining SAM2 with EfficientNetV2, and query-based reasoning using Qwen2.5-VL models in 7b and 32b variants. Performance was assessed by comparing the models' ability to correctly label objects at specific gaze coordinates.</p>
+<p><strong>4. Methodology</strong><br>
+IRIS captures user gaze data in real-time and isolates fixations that occur closest to the onset of the verbal question. The model uses these fixations to perform "inference-time saccades," effectively zooming in on or cropping the relevant visual region indicated by the user's gaze. This visual context is then combined with the text query to guide the VLM toward the correct answer.</p>
 
-<p>### 5. Limitations. A primary limitation acknowledged is the trade-off between the high performance of large VLMs and their computational cost, which challenges real-time deployment compared to efficient detectors like YOLO. The segmentation-assisted approach also demonstrated poor recall, limiting its viability for safety-critical tasks. Furthermore, the study focuses on semantic identification accuracy, leaving the latency constraints of deploying 32-billion parameter models in vehicles as an unresolved challenge.</p>
+<p><strong>5. Limitations</strong><br>
+The proposed approach relies on the availability of eye-tracking hardware, which may limit its immediate applicability in standard consumer settings. The study also focuses primarily on specific types of visual ambiguity, and the effectiveness of the method may depend on the calibration accuracy of the eye-tracker and the visual complexity of the scene.</p>
 
-<p>### 6. Critical Evaluation. This paper offers a compelling argument for the integration of large VLMs into driver monitoring systems, moving the field beyond the limitations of traditional bounding box detectors. The finding that VLMs excel at identifying small objects in low light is particularly significant for road safety. However, the practical utility of these findings depends heavily on future optimizations to reduce the latency of large models for edge deployment in vehicles.</p>
+<p><strong>6. Critical Evaluation</strong><br>
+This work presents a compelling integration of human-computer interaction and multimodal AI, offering a practical solution to the persistent problem of ambiguity in VQA. The training-free nature of IRIS is a significant strength, allowing for seamless integration with state-of-the-art architectures. However, the requirement for specialized hardware remains a barrier to widespread adoption, though it opens promising avenues for assistive technologies and high-end interfaces.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jia Li, Wenjie Zhao, Shijian Deng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.05132v1" target="_blank">2602.05132v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>Research Question</strong><br>
+The paper addresses the challenge of online egocentric gaze estimation, aiming to predict where a camera wearer is looking using only current and past video frames without access to future information. It specifically investigates whether modeling the temporal sequence of gaze behavior can improve prediction accuracy in the absence of explicit eye or head signals.</p>
+
+<p><strong>Positioning</strong><br>
+This work distinguishes itself from traditional third-person gaze estimation by focusing on the egocentric perspective, where explicit physiological cues like eye images are often missing. It fills a critical gap in existing literature by moving beyond single-frame inference, proposing that the strong temporal continuity of gaze during goal-directed activities is an underutilized prior for online prediction.</p>
+
+<p><strong>Key Contribution</strong><br>
+The primary contribution is ARGaze, a novel framework that reformulates gaze estimation as an autoregressive sequence prediction task inspired by decoding mechanisms in Large Language Models (LLMs). The authors demonstrate that conditioning predictions on a fixed-length history of recent gaze estimates significantly boosts performance, achieving state-of-the-art results on multiple egocentric benchmarks while adhering to strict online causality constraints.</p>
+
+<p><strong>Methodology</strong><br>
+ARGaze utilizes a transformer decoder architecture that predicts the current gaze target by attending to two specific inputs. These inputs are visual features extracted from the current frame and a "Gaze Context Window" containing a bounded history of recent gaze predictions. This autoregressive approach enforces causality, making the model suitable for real-time streaming applications where future frames are unavailable.</p>
+
+<p><strong>Limitations</strong><br>
+Although the abstract highlights the success of a fixed-length context window, this design choice inherently limits the model's ability to capture long-range temporal dependencies that might extend beyond the window's bounds. Furthermore, as an autoregressive approach, the model faces the potential risk of error accumulation, where inaccurate predictions from previous timesteps could adversely affect future estimates.</p>
+
+<p><strong>Critical Evaluation</strong><br>
+This research offers a significant methodological advancement by successfully adapting the autoregressive principles of LLMs to the spatial domain of gaze estimation. The strength of the work lies in its practical applicability for real-time Augmented Reality (AR) systems, as the bounded resource design allows for efficient streaming without sacrificing accuracy. However, the reliance on previous predictions as input creates a fragile dependency chain that requires robust handling to prevent drift in noisy real-world scenarios.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiahao Zhang, Yifan Zhang, Kevin Leach et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.22368v1" target="_blank">2602.22368v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates whether human eye-gaze patterns can serve as a proxy for expert knowledge to enhance Large Language Model (LLM) performance on code summarization tasks. It specifically asks how biological attention signals can be integrated into machine attention mechanisms to improve the semantic understanding of source code.</p>
+
+<p><strong>2. Positioning</strong><br>
+While LLMs have achieved high performance in generating code summaries, they primarily rely on statistical patterns from training data rather than the cognitive processes human experts use to read code. This work bridges the gap between software engineering psychology and deep learning by positioning human gaze data as a complementary signal. It fills a critical gap by moving beyond standard fine-tuning, proposing instead a structural augmentation that mimics human focus.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is EyeLayer, a lightweight module that seamlessly injects human attention priors into various LLM architectures without disrupting their pre-trained representations. The paper demonstrates that this approach is highly effective and generalizable, achieving up to 13.17% improvement in BLEU-4 scores across diverse model families. It provides evidence that human gaze encodes unique attention signals that correct or enhance the model's internal focus.</p>
+
+<p><strong>4. Methodology</strong><br>
+EyeLayer models human attention using a Multimodal Gaussian Mixture, utilizing learned parameters \((\mu_i, \sigma_i^2)\) to represent the location and intensity of developer focus. This mechanism redistributes token embeddings, effectively overlaying a "human focus" map onto the model's input processing. The authors evaluated this method by integrating it into LLaMA-3.2, Qwen3, and CodeBERT, comparing the results against standard fine-tuning baselines.</p>
+
+<p><strong>5. Limitations</strong><br>
+A primary limitation is the dependency on eye-tracking data, which requires specialized hardware and controlled environments to collect, making it scarcer than standard code-text pairs. The approach also assumes that the gaze patterns of the specific participants in the dataset generalize effectively to the broader population of developers and coding styles. Additionally, the paper does not deeply explore the computational overhead added by the Gaussian Mixture calculations during inference.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a compelling fusion of cognitive science and AI, proving that "soft" biological signals can quantifiably improve "hard" machine reasoning. The architecture is robust because it functions as a model-agnostic adapter, allowing it to boost performance across both encoder-only (CodeBERT) and decoder-only (LLaMA, Qwen) paradigms. However, the practical adoption of this technique may be hindered by the logistical difficulty of scaling eye-tracking data collection for new programming languages or specific domains.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Cassandra L. Jacobs, Morgan Grobol<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.17848v1" target="_blank">2602.17848v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates why larger language models align better with human reading behavior and cloze task performance. It specifically asks how model scale affects the relationship between next-token prediction probabilities and human cloze probabilities.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work builds upon existing research that uses language models to predict eye-tracking metrics and reading times. It fills a critical gap by explaining the mechanistic reasons behind the scaling effect, distinguishing between semantic alignment and reliance on low-level lexical statistics.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors demonstrate that larger models succeed because they prioritize semantic appropriateness over simple lexical co-occurrence statistics. A key finding is that increased memorization capacity helps models guess contextually relevant words, but this comes at the cost of reduced sensitivity to the low-level visual information humans use for word recognition.</p>
+
+<p><strong>4. Methodology</strong><br>
+The study compares next-token probability distributions from language models of varying sizes against human-generated cloze responses. It analyzes the correlation between model outputs and human data to determine how scaling influences the balance between semantic understanding and lexical statistical sensitivity.</p>
+
+<p><strong>5. Limitations</strong><br>
+The abstract notes that even the largest models still under-allocate probability mass to human responses, indicating imperfect alignment. Additionally, the finding that models rely on memorization rather than low-level processing suggests a fundamental divergence from human cognitive mechanisms during reading.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a nuanced perspective on the cognitive validity of large language models by highlighting a trade-off between semantic prediction and low-level processing. It suggests that while scaling improves performance on specific linguistic tasks, it may cause models to drift further away from the biological constraints of human vision and reading.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Haoyu Huang, Yoichi Sato<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11669v1" target="_blank">2602.11669v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>Here is a structured summary of the research paper.</p>
+
+<p><strong>1. Research Question</strong><br>
+Can a device wearer's gaze be accurately estimated using a camera mounted on the neck rather than on the head? The paper investigates the feasibility of this novel viewpoint and explores which modeling techniques best address the unique challenges it presents.</p>
+
+<p><strong>2. Positioning</strong><br>
+Prior research in egocentric gaze estimation has focused almost exclusively on head-mounted cameras, such as those found in VR headsets or smart glasses. This work positions itself as the first exploration of an alternative, potentially more comfortable viewpoint. It fills a significant gap by addressing the lack of datasets and benchmarks for neck-mounted gaze estimation.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors contribute the first known dataset for neck-mounted gaze estimation, comprising roughly 4 hours of video from 8 participants performing daily activities. They also propose and evaluate specific model extensions, most notably an auxiliary gaze out-of-bound classification task. This addition explicitly helps the model determine if the user is looking outside the camera's field of view.</p>
+
+<p><strong>4. Methodology</strong><br>
+The study employs a transformer-based model, GLC, as a baseline and tests two specific extensions. The first extension adds a classification head to predict if gaze targets fall outside the frame. The second proposes a multi-view co-learning approach. This second method attempts to jointly train head-view and neck-view models using a geometry-aware loss to transfer knowledge between perspectives.</p>
+
+<p><strong>5. Limitations</strong><br>
+The primary limitation is the scale of the dataset, which is relatively small with only 8 participants and 4 hours of data. The proposed multi-view co-learning approach failed to yield performance gains, suggesting that geometric alignment between head and neck views is difficult to achieve. The neck-mounted viewpoint also inherently suffers from occlusion issues and a highly dynamic field of view compared to head-mounted systems.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This paper is a pioneering study that opens a new sub-field within wearable gaze estimation by prioritizing user comfort and hardware simplicity. The success of the out-of-bound classification task is a practical insight, while the failure of the co-learning approach provides a valuable negative result. This highlights the significant geometric disparity between head and neck movements, guiding future research toward domain-specific architectures rather than simple transfer learning from head-mounted data.</p>
                 </div>
 
                 <hr>
 
                 <h3 id="references">References</h3>
                 <ul>
-                    <li><a href="https://arxiv.org/abs/2602.01452v1" target="_blank">Cross-Paradigm Evaluation of Gaze-Based Semantic Object Identification for Intelligent Vehicles</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.16138v1" target="_blank">IRIS: Intent Resolution via Inference-time Saccades for Open-Ended VQA in Large Vision-Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.05132v1" target="_blank">ARGaze: Autoregressive Transformers for Online Egocentric Gaze Estimation</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.22368v1" target="_blank">EyeLayer: Integrating Human Attention Patterns into LLM-Based Code Summarization</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.17848v1" target="_blank">On the scaling relationship between cloze probabilities and language model next-token prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2602.11669v1" target="_blank">Egocentric Gaze Estimation via Neck-Mounted Camera</a></li>
                 </ul>
 
                 <p><em>Feel free to reach out for discussion. Thanks for reading!</em></p>
