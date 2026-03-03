@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-03-03</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">March 03, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月03日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Knowledge editing in LLMs</h2>
+                <p><strong>1. 概念定义</strong><br>
+知识编辑是指在预训练大语言模型中对特定事实信息或行为进行定向修改的技术。该过程无需重新训练整个模型，而是精准定位并修改相关的参数或记忆模块。其目标在于高效地纠正错误，更新过时信息，或消除特定的敏感数据。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心机制通常包含知识定位与参数修改两个步骤。首先利用因果追踪或归因方法确定特定事实存储的神经元位置，通常位于前馈神经网络(FFN)层中。随后通过约束优化调整该区域的权重，使模型输出目标答案同时保持其他知识不变。其优化目标可表示为最小化编辑损失与正则化损失的组合 \(\min_{\theta'} \mathcal{L}_{edit}(\theta') + \lambda \mathcal{L}_{reg}(\theta, \theta')\)。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这项研究对于维持模型时效性及降低维护成本至关重要，避免了昂贵的全量重训练。在差分隐私领域，它为实现机器遗忘提供了技术路径，能够精准移除特定敏感数据。对于多智能体系统和BitNet等高效架构，它确保了智能体在长期运行中能动态适应环境变化并纠正错误信念。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+知识编辑将模型维护范式从静态部署转变为动态可更新的智能过程。它成功地在学习新知识的可塑性与保留旧知识的稳定性之间寻找到了关键平衡。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01792v1" target="_blank">ALTER: Asymmetric LoRA for Token-Entropy-Guided Unlearning of LLMs</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xunlei Chen, Jinyu Guo, Yuang Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01792v1" target="_blank">2603.01792v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决大语言模型中如何有效遗忘特定知识同时保留其他有用知识的难题。核心挑战在于处理知识保留与遗忘之间的模糊边界，以及缓解因参数空间高度纠缠导致的对非目标知识的附带损害。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于大语言模型机器遗忘领域，专注于解决现有方法在遗忘效率与模型效用保持之间的权衡问题。它填补了利用非对称低秩适应架构进行细粒度Token级遗忘的研究空白，为避免参数纠缠提供了新思路。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了ALTER框架，这是一种轻量级的遗忘方法，通过非对称LoRA架构实现了Token级的知识隔离。其创新之处在于利用Token熵引导共享矩阵 \(A\) 学习，从而在保证超过95%遗忘质量的同时，将模型效用保留率提升至90%以上。</p>
+
+<p><strong>4. 方法概述</strong><br>
+ALTER框架分为两个阶段执行。第一阶段通过LoRA中的共享矩阵 \(A\) 捕获并学习高熵Token。第二阶段利用非对称LoRA架构隔离参数，对目标子域内的Token执行特定的遗忘操作，从而解耦遗忘过程与模型主体参数。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文主要在TOFU、WMDP和MUSE等特定基准上验证了效果，对于更广泛或分布外知识的遗忘泛化能力仍需进一步考察。此外，依赖Token熵值来区分知识边界可能在某些语义复杂或模糊的场景下存在误判风险。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地利用了LoRA的非对称结构和熵引导机制，在遗忘彻底性和模型效用保留之间取得了优异的平衡。该方法不仅显著降低了计算开销，还为解决大模型知识纠缠这一核心痛点提供了极具潜力的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01986v1" target="_blank">Accurate, private, secure, federated U-statistics with higher degree</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Quentin Sinh, Jan Ramon<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01986v1" target="_blank">2603.01986v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在解决在联邦学习环境中，如何安全且隐私地计算阶数为 \( k \ge 2 \) 的U-统计量问题，例如Kendall's \(\tau\) 系数或AUC指标。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有解决方案大多局限于效用较低的本地差分隐私模型，或者在处理大规模域离散化时扩展性不佳。本文填补了在中心化差分隐私模型下，利用多方安全计算技术高效且准确地计算高阶U-统计量的研究空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一种结合多方安全计算（MPC）的协议，在中心化差分隐私框架下实现了高精度的U-统计量计算。该方法显著提升了准确性，实验显示在计算Kendall's \(\tau\) 系数时，均方误差相比现有基线降低了最多四个数量级。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者设计了一种安全协议，利用多方安全计算技术来聚合分布在各方的数据，并在中心化差分隐私的保护下进行计算。这种方法避免了直接在本地添加大量噪声，从而在保证数据隐私和安全的同时，大幅提高了统计结果的效用。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然摘要强调了准确性提升，但多方安全计算通常会引入额外的通信轮次和计算开销。此外，该方法依赖于中心化差分隐私模型，这要求存在一个可信的聚合服务器，这在某些完全去中心化的场景中可能难以满足。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作成功解决了隐私保护与统计效用之间的权衡难题，证明了在联邦统计学习中结合MPC与中心化差分隐私的巨大潜力。尽管MPC可能带来通信成本的增加，但其在精度上的突破性提升对于实际应用具有极高的价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.02012v1" target="_blank">MAP-Diff: Multi-Anchor Guided Diffusion for Progressive 3D Whole-Body Low-Dose PET Denoising</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Peiyuan Jing, Chun-Wun Cheng, Liutao Yang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.02012v1" target="_blank">2603.02012v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+低剂量正电子发射断层扫描(PET)虽然降低了辐射风险，但图像存在严重的噪声和定量退化问题。现有的扩散去噪模型在反向过程中缺乏约束，未能与PET剂量渐进形成的物理过程对齐，导致生成过程不可控。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于医学图像重建与生成式扩散模型的交叉领域。它填补了现有扩散模型在PET去噪任务中忽视剂量变化渐进特性的空白，提出了一种将临床先验知识融入生成过程的新范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MAP-Diff框架，创新性地引入临床观测的中间剂量扫描作为轨迹锚点。通过时间步相关的监督机制，该方法强制扩散模型的反向过程遵循剂量形成的物理规律，实现了从超低剂量到全剂量的渐进式恢复。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法利用中间剂量扫描作为锚点，通过匹配模拟扩散退化与真实多剂量PET数据来校准锚点时间步。模型设计了时间步加权锚点损失来正则化反向扩散过程，使得在推理时仅需超低剂量输入即可生成高质量的恢复图像。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖于成对的多剂量PET数据进行锚点校准，这在临床数据收集中具有较高挑战性。此外，扩散模型通常伴随较高的计算成本和较长的推理时间，可能限制其在实时临床诊断场景中的部署效率。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项将领域知识有效融入深度生成模型的高质量研究，不仅在PSNR和SSIM指标上取得了显著提升，还展示了优异的跨扫描仪泛化能力。其通过锚点机制增强模型可控性和可解释性的思路，对其他具有渐进变化特性的图像恢复任务具有重要的借鉴意义。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01686v1" target="_blank">DiffusionXRay: A Diffusion and GAN-Based Approach for Enhancing Digitally Reconstructed Chest Radiographs</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Aryan Goyal, Ashish Mittal, Pranav Rao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01686v1" target="_blank">2603.01686v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决深度学习模型训练中高质量标注数据稀缺的问题，特别是针对难以检测的细微肺结节病例。核心问题是利用CT生成的数字重建胸部X光片(DRR)通常存在图像模糊和解剖细节丢失等质量退化现象。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于医学图像合成与增强领域，旨在克服现有DRR技术生成的合成图像质量低下的瓶颈。它填补了如何利用生成模型提升合成医学影像诊断价值的空白，探索了扩散模型与生成对抗网络在X光图像修复中的协同潜力。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了DiffusionXRay这一新颖的图像修复流水线，创新性地结合了去噪扩散概率模型(DDPM)和生成对抗网络(GAN)。主要贡献在于设计了一种两阶段训练策略，先将低质量图像生成视为风格迁移问题解决数据来源，再通过配对训练实现高质量的图像重建。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法分为两个阶段执行。第一阶段利用DDPM-LQ和基于GAN的MUNIT-LQ生成低质量胸部X光片，以此构建训练所需的配对数据。第二阶段在这些配对的低质量和高质量图像上训练基于DDPM的模型，使其学习从模糊输入到清晰图像的映射关系。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然摘要未明确列出局限性，但此类生成模型通常面临训练资源消耗大和推理速度慢的问题。此外，合成图像中是否包含未被专家识别的虚假伪影，以及模型在不同人群中的泛化能力，都需要进一步的临床验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将数据增强与图像修复任务结合，为缓解医学影像数据稀缺提供了有效的解决方案。其优点在于不仅改善了图像的视觉质量，还注重保留了具有临床意义的细微病灶特征，这对于辅助诊断系统具有重要的实用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01912v1" target="_blank">Demonstrating ViviDoc: Generating Interactive Documents through Human-Agent Collaboration</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yinghao Tang, Yupeng Xie, Yingchaojie Feng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01912v1" target="_blank">2603.01912v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决创建交互式教育文档成本高昂且技术门槛高的问题。核心挑战在于如何利用LLM智能体自动化生成过程，同时克服其输出不可控和难以验证的缺陷。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于交互式文档生成与LLM智能体研究的交叉领域。它填补了纯自动化生成缺乏可控性与传统人工制作效率低下之间的空白，提出了一种人机协作的新范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了ViviDoc系统，引入了包含规划者、执行者和评估者的多智能体流水线。其核心创新在于文档规范这一中间表示，它将可视化组件解构并允许用户在代码生成前审核与修正计划。</p>
+
+<p><strong>4. 方法概述</strong><br>
+ViviDoc采用多智能体协作流程，从单一主题输入生成完整的交互式文档。系统通过DocSpec将可视化拆解为状态、渲染、过渡和约束四个组件，让用户能在代码生成前对教学意图进行可视化调整。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文摘要未明确详述具体局限性，但此类系统通常受限于底层LLM的编程能力和对复杂教学逻辑的理解深度。此外，DocSpec的设计虽然降低了门槛，但仍可能对不熟悉逻辑拆解的教育者构成一定的学习曲线。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作巧妙地将“人在回路”理念融入生成流程，有效平衡了自动化效率与输出可控性。通过引入可解释的中间表示，它为解决LLM生成代码难以调试的问题提供了极具价值的思路，具有很高的实用潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.02072v1" target="_blank">Cognitive Prosthetic: An AI-Enabled Multimodal System for Episodic Recall in Knowledge Work</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Lawrence Obiuwevwi, Krzysztof J. Rechowicz, Vikas Ashok et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.02072v1" target="_blank">2603.02072v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现代知识工作环境中的碎片化注意力和多模态信息流给人类的情景记忆带来了巨大压力，而现有工具无法整合认知与生理上下文来辅助回忆。这篇论文旨在解决如何利用AI技术辅助知识工作者有效检索过去工作经历中的情景记忆问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了现有工作场所工具在数据记录与可检索记忆表征之间的空白。它超越了单纯的笔记或分析功能，将认知、生理和注意力信号整合为可查询的记忆形式，定位为一种AI增强的记忆辅助系统。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了CPMS系统，这是一个端到端的隐私感知架构，旨在实现AI增强的记忆辅助。其核心创新在于将异构传感器数据转化为可查询的情景记忆，并支持基于自然语言的语义、时间及生理状态检索。</p>
+
+<p><strong>4. 方法概述</strong><br>
+系统通过同步语音转录、生理信号和注视行为，生成时间对齐的JSON格式情景记录。用户可以通过网页界面使用自然语言查询过去的经历，系统支持模块化操作并在本地处理数据以保障隐私。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+目前该系统主要作为概念验证存在，可能缺乏大规模实际部署的验证数据。虽然设计了隐私保护机制，但持续采集生理和注视数据可能在用户接受度和硬件舒适度方面面临挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作展示了将多模态数据转化为记忆辅助工具的技术可行性，具有重要的应用前景。其优点在于架构模块化且注重隐私保护，但缺点可能是对传感器硬件有一定依赖，且检索准确性高度依赖于多模态数据融合的质量。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01990v1" target="_blank">According to Me: Long-Term Personalized Referential Memory QA</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jingbiao Mei, Jinghong Chen, Guangyu Yang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01990v1" target="_blank">2603.01990v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+论文旨在解决现有长期记忆基准过度依赖对话历史，而无法评估AI在真实多模态个人生活经历中进行个性化指代推理的问题。</p>
+
+<p>### 2. 研究定位<br>
+现有研究多局限于单一文本模态的对话记忆，该工作填补了多模态、多源数据个性化记忆问答评估的空白，推出了首个此类基准ATM-Bench。</p>
+
+<p>### 3. 核心贡献<br>
+论文发布了包含约四年隐私保护数据的ATM-Bench基准，并提出了Schema-Guided Memory (SGM) 方法。实验证明SGM优于传统的描述性记忆方法，同时揭示了现有模型在困难任务上表现不佳的现状。</p>
+
+<p>### 4. 方法概述<br>
+论文提出了Schema-Guided Memory (SGM) 方法，通过结构化形式表示来自不同来源的记忆项。研究还实现了五种先进的记忆系统进行对比实验，全面评估了记忆摄入、检索与生成等不同环节的技术效果。</p>
+
+<p>### 5. 局限与不足<br>
+构建真实世界的个性化数据集始终面临隐私保护与数据规模扩充的潜在挑战。实验结果表明现有技术在处理复杂推理与冲突证据时准确率极低，距离实际应用仍有显著差距。</p>
+
+<p>### 6. 评价与思考<br>
+该工作切中个性化AI助手落地的关键痛点，具有很高的研究价值与实用导向。虽然SGM带来了一定提升，但极低的基准测试得分表明，长跨度多模态记忆的精准召回与推理仍是亟待攻克的难题。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01654v1" target="_blank">CeProAgents: A Hierarchical Agents System for Automated Chemical Process Development</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yuhang Yang, Ruikang Li, Jifei Ma et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01654v1" target="_blank">2603.01654v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决化学工艺开发过程中因多面性带来的巨大挑战，即如何有效整合专业知识、概念设计及参数模拟。核心研究问题是如何构建一个自动化的系统，以协作分工的方式完成复杂的化学工艺开发任务。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于将大语言模型应用于工业化学工程领域，填补了利用多智能体系统自动化复杂化学工艺开发流程的研究空白。它不仅探索了AI在垂直工程领域的应用潜力，还明确了当前LLM技术在工业应用中的能力边界。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了CeProAgents分层多智能体系统，实现了化学工艺开发的自动化协作分工。研究还构建了多维基准CeProBench，通过六种不同类型的任务全面评估了系统在化学工程核心领域的表现，验证了方法的有效性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+系统架构包含知识、概念和参数三个专门的智能体组，通过分层结构处理不同维度的任务。每个组采用了混合架构，结合了动态智能体聊天组与结构化的智能体工作流，以适应化学任务固有的复杂性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管系统展示了变革潜力，但实验结果也揭示了LLM在工业化学工程应用中仍存在当前边界。这可能意味着在处理极高复杂度的专业任务时，系统的准确性或稳定性仍有待提升，且依赖于基准测试的设计质量。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将多智能体协作机制引入传统化学工程领域，展示了AI在垂直工业场景落地的可行路径。其混合架构设计平衡了灵活性与结构性，为解决复杂工程问题提供了极具价值的参考范式。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.02170v1" target="_blank">SageBwd: A Trainable Low-bit Attention</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jintao Zhang, Marco Chen, Haoxu Wang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.02170v1" target="_blank">2603.02170v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决低比特注意力机制在模型预训练中性能落后于全精度注意力的问题。核心研究问题是如何消除SageBwd方法在预训练阶段与全精度注意力之间的性能差距，并探究量化误差的具体来源与稳定训练的条件。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于模型量化与高效训练研究的交叉领域。它填补了现有低比特注意力方法主要应用于推理加速，而在预训练场景下应用效果受限的研究空白，验证了INT8注意力在预训练中替代全精度注意力的可行性。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于通过深入分析，成功让SageBwd在预训练中匹配了全精度注意力的性能。研究明确指出QK-norm对于大Token训练至关重要，发现量化误差主要源于反向传播中的分数梯度 \(dS\)，并验证了K-smoothing在训练稳定性中的必要性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了一种可训练的INT8注意力机制，对注意力矩阵运算中的六个乘法进行量化。该方法结合理论分析与实验验证，引入QK-norm和K-smoothing技术来解决训练稳定性问题，并通过调整每步Token数量来优化训练效果。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法在大规模Token训练时高度依赖QK-norm来维持稳定性，增加了训练流程的约束。此外，虽然降低每步Token数量能提升性能，但这可能在一定程度上限制训练吞吐量的最大化。Q-smoothing在预训练中作用有限，说明现有平滑策略仍有改进空间。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作为低比特预训练提供了重要的理论指导和技术验证，具有较高的实用价值。它不仅解决了具体的性能差距问题，还通过归因分析揭示了反向传播量化误差的机制。不过，其对训练超参数如Token数量的敏感性提示我们，在实际大规模部署应用时仍需谨慎调整。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.01761v1" target="_blank">Modular Memory is the Key to Continual Learning Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Vaggelis Dorovatas, Malte Schwerin, Andrew D. Bagdanov et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.01761v1" target="_blank">2603.01761v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决基础模型在连续运行和经验积累方面的局限性，特别是传统持续学习方法因单纯依赖权重内学习而导致的灾难性遗忘问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究位于持续学习与基础模型研究的交叉点，试图突破传统持续学习仅关注参数更新的历史局限。它填补了如何在大规模模型中融合权重内学习的稳定性与上下文内学习的适应性的理论空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了以模块化记忆为中心的概念框架，主张通过架构设计结合权重内学习(IWL)和上下文内学习(ICL)。其创新之处在于利用ICL实现快速适应与知识积累，同时利用IWL进行稳定的能力更新，绘制了构建持续学习智能体的路线图。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了一种模块化记忆架构，将知识存储与模型参数更新分离。该方法利用上下文内学习机制处理新知识的快速获取，同时通过权重内学习机制对模型的基础能力进行稳定更新，从而实现持续适应。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+作为一篇概念性研究，该工作目前可能缺乏大规模的实证数据支持，具体的模块化记忆实现细节尚待完善。此外，如何在动态环境中平衡IWL与ICL的计算开销与性能，也是实际应用中潜在的挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作极具前瞻性，准确指出了当前基础模型缺乏持续适应能力的痛点，并提出了合理的解决思路。其优点在于理论框架清晰且具有启发性，但缺点在于目前仍处于概念阶段，距离工程落地和广泛应用仍需大量验证。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.01792v1" target="_blank">ALTER: Asymmetric LoRA for Token-Entropy-Guided Unlearning of LLMs</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01986v1" target="_blank">Accurate, private, secure, federated U-statistics with higher degree</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.02012v1" target="_blank">MAP-Diff: Multi-Anchor Guided Diffusion for Progressive 3D Whole-Body Low-Dose PET Denoising</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01686v1" target="_blank">DiffusionXRay: A Diffusion and GAN-Based Approach for Enhancing Digitally Reconstructed Chest Radiographs</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01912v1" target="_blank">Demonstrating ViviDoc: Generating Interactive Documents through Human-Agent Collaboration</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.02072v1" target="_blank">Cognitive Prosthetic: An AI-Enabled Multimodal System for Episodic Recall in Knowledge Work</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01990v1" target="_blank">According to Me: Long-Term Personalized Referential Memory QA</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01654v1" target="_blank">CeProAgents: A Hierarchical Agents System for Automated Chemical Process Development</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.02170v1" target="_blank">SageBwd: A Trainable Low-bit Attention</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.01761v1" target="_blank">Modular Memory is the Key to Continual Learning Agents</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
