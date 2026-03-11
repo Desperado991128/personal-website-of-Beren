@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-03-11</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">March 11, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月11日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Score-based generative models</h2>
+                <p>### 1. 概念定义<br>
+基于分数的生成模型通过估计对数概率密度的梯度（即分数）来学习数据分布，而非直接拟合难以处理的概率密度函数。这种方法利用梯度信息引导随机噪声逐步转化为符合目标分布的数据样本。</p>
+
+<p>### 2. 核心原理<br>
+模型训练一个神经网络来估计分数函数 \(\nabla_x \log p(x)\)，该函数指向数据密度增长最快的方向。通过去噪分数匹配等目标函数优化网络参数后，利用朗之万动力学进行采样。采样过程遵循以下随机微分方程形式的迭代更新。<br>
+\[ x_{t+1} = x_t + \epsilon \nabla_x \log p(x_t) + \sqrt{2\epsilon} z_t \]<br>
+其中 \(z_t\) 是标准高斯噪声，该过程逐步将噪声转化为清晰的数据样本。</p>
+
+<p>### 3. 研究意义<br>
+这类模型为现代扩散模型奠定了理论基础，解决了传统生成模型中的模式崩塌问题并提升了生成质量。在mechanistic interpretability研究中，分析模型学习到的分数场能够揭示神经网络在高维空间中的几何结构特征。这为理解Titans等新架构中的学习动态提供了重要的数学视角。</p>
+
+<p>### 4. 关键洞见<br>
+估计概率密度的梯度比估计密度本身更简单，因为梯度运算消除了需要复杂计算的归一化常数。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09881v1" target="_blank">Do What I Say: A Spoken Prompt Dataset for Instruction-Following</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Maike Züfle, Sara Papi, Fabian Retkowski et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09881v1" target="_blank">2603.09881v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的语音大语言模型(SLLMs)主要依赖文本提示进行评估，这与用户实际使用语音交互的场景存在显著差异。本研究旨在解决缺乏真实语音指令数据集来准确评估SLLMs在语音指令条件下性能的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了SLLMs评估领域中真实语音提示数据集的空白，将现有的基于文本的评估基准扩展到了语音模态。它为研究社区提供了一个标准化的工具，用于衡量模型在真实人机语音交互条件下的表现。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文构建了DOWIS数据集，这是一个涵盖9项任务、11种语言及5种风格的人类录制多语言语音提示数据集。研究通过基准测试发现，文本提示的性能普遍优于语音提示，但在语音输出任务中语音提示能缩小这一差距，强调了语音评估的必要性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者收集并构建了包含人类录制语音和书面文本的多语言提示数据集，设计其能够与现有的基准测试数据灵活搭配。随后利用该数据集对最先进的SLLMs进行评测，系统分析了提示模态、风格、语言及任务类型对模型性能的影响。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确列出局限性，但数据集每个任务-语言对仅包含10个提示变体，样本多样性可能受限。此外，研究主要关注指令跟随任务，可能未覆盖更复杂的多轮对话或实时交互场景。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作切中痛点，揭示了当前SLLMs在处理语音输入时相比文本输入的性能短板，特别是在低资源和跨语言场景下。这提示未来研究需要加强模型对语音信号的深层理解能力，而不仅仅依赖于语音到文本的转换。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.05168v1" target="_blank">Sparse-BitNet: 1.58-bit LLMs are Naturally Friendly to Semi-Structured Sparsity</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Di Zhang, Xun Wu, Shaohan Huang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.05168v1" target="_blank">2603.05168v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在探究半结构化 \(N:M\) 稀疏性与极低比特量化(如 \(1.58\)-bit BitNet)结合时的相互作用。核心问题是研究这两种技术是否能协同工作，以及 \(1.58\)-bit 模型对稀疏性的适应能力是否优于全精度模型。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于模型压缩领域，填补了半结构化稀疏性与极低比特量化独立研究之间的空白。它首次探索了这两种高效推理技术的交叉点，揭示了 \(1.58\)-bit 架构在稀疏化方面的独特优势。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Sparse-BitNet框架，首次实现了 \(1.58\)-bit 量化与动态 \(N:M\) 稀疏化的联合应用并保证了训练稳定性。研究发现 \(1.58\)-bit 模型比全精度模型更能抵抗稀疏性带来的精度损失，且通过定制算子实现了最高 \(1.30\) 倍的加速。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了一个统一的框架，将 \(1.58\)-bit 量化与动态 \(N:M\) 稀疏化相结合，并设计了稳定的训练策略。该方法支持多种训练模式，包括稀疏预训练和稠密到稀疏的转换，利用自定义稀疏张量核心优化计算效率。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管加速效果明显，但 \(1.30\) 倍的速度提升相对于理论上的压缩比仍有提升空间。该方法的性能高度依赖于定制的稀疏张量核心硬件支持，在通用硬件上的表现可能受限。此外，研究主要基于BitNet架构，在其他主流LLM架构上的泛化性有待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的创新性，打破了量化与稀疏化技术孤立发展的局面，发现了两者在极低比特下的天然协同效应。其实验结果扎实，为构建更高效的大语言模型提供了新的技术路径，具有很强的实用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09555v1" target="_blank">Compiler-First State Space Duality and Portable $O(1)$ Autoregressive Caching for Inference</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Cosmo Santoni<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09555v1" target="_blank">2603.09555v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+现有的状态空间模型（如Mamba）通常依赖定制的CUDA或Triton内核，导致模型推理与NVIDIA硬件强绑定，缺乏跨平台移植能力。本文旨在解决如何在不依赖手写内核的前提下，实现高效且可移植的状态空间模型推理。</p>
+
+<p>### 2. 研究定位<br>
+这项工作处于深度学习编译器优化与高效序列建模的交叉领域，填补了状态空间模型在非NVIDIA硬件（如TPU和CPU）上缺乏原生高效实现的空白。它挑战了高性能SSM推理必须依赖定制化算子的传统观念，证明了编译器自动优化可以替代手写内核。</p>
+
+<p>### 3. 核心贡献<br>
+论文证明了Mamba-2的对角状态结构和对角线计算特性能够完美映射到XLA编译器的融合与平铺优化中。作者在JAX中仅使用标准原语实现了完整的推理路径，并构建了无需主机同步的编译期设备端缓存，真正实现了理论上的 \(O(1)\) 状态管理。该实现首次实现了从单一源码在CPU、NVIDIA GPU和Google Cloud TPU上的无缝运行。</p>
+
+<p>### 4. 方法概述<br>
+研究者利用Mamba-2算法中的对角状态结构、可分块递归特性以及静态控制流，将其计算模式直接对应到XLA编译器擅长的算子融合优化上。通过使用JAX的标准原语构建预填充和解码路径，该方法避免了手写内核，并利用编译器实现了设备端的KV缓存管理，从而消除了生成过程中的主机同步开销。</p>
+
+<p>### 5. 局限与不足<br>
+该方法的有效性高度依赖于硬件平台是否拥有成熟且优化充分的XLA后端支持，对于支持尚不完善的硬件可能无法达到同等性能。尽管实现了跨平台运行，但在TPU v6e上的单流预填充性能约为15% MFU，算力利用率仍有提升空间。此外，该方法主要适用于满足特定结构条件的状态空间模型，对其他架构的通用性可能受限。</p>
+
+<p>### 6. 评价与思考<br>
+这是一项极具工程价值的研究，它成功打破了高性能状态空间模型对特定硬件厂商的垄断，降低了模型部署的门槛。通过展示“编译器优先”的设计思路，它为未来模型架构设计提供了新方向，即设计对编译器友好的算法结构而非单纯依赖手写算子。不过，其在大规模生产环境下的极限性能是否能力敌高度优化的定制CUDA内核，仍需进一步验证。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09582v1" target="_blank">BinaryAttention: One-Bit QK-Attention for Vision and Diffusion Transformers</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chaodong Xiao, Zhengqiang Zhang, Lei Zhang<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09582v1" target="_blank">2603.09582v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+Transformers中注意力模块的计算复杂度是限制视觉任务效率的主要瓶颈。核心问题在于如何通过极致的量化手段降低计算成本，同时保持模型性能不下降。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献主要关注8位或4位量化来平衡效率与精度。该工作填补了1位极低比特量化在视觉和扩散Transformer注意力机制中的空白，从理论层面证明了二值化保留关键相似性关系的可行性。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了BinaryAttention方法，实现了比FlashAttention2快2倍以上的推理速度。该方法在视觉和扩散Transformer基准测试中达到了匹配甚至超越全精度模型的性能，提供了高效的注意力替代方案。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法仅保留查询 \(Q\) 和键 \(K\) 的符号位，利用位运算替代浮点乘法以大幅降低计算开销。为了缓解1位量化的信息损失，论文引入了可学习偏置，并结合量化感知训练与自蒸馏技术来维持注意力机制的准确性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该研究主要聚焦于视觉和扩散模型，其在自然语言处理等其他Transformer领域的泛化能力尚未得到充分验证。此外，极端的1位压缩可能增加模型训练收敛的难度，且实际加速效果高度依赖特定硬件对位运算的优化支持。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具创新性，成功挑战了注意力机制量化的极限。它揭示了符号信息在视觉注意力中起主导作用，为未来高效模型的设计提供了重要启示。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09689v1" target="_blank">AutoViVQA: A Large-Scale Automatically Constructed Dataset for Vietnamese Visual Question Answering</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Nguyen Anh Tuong, Phan Ba Duc, Nguyen Trung Quoc et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09689v1" target="_blank">2603.09689v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在解决越南语视觉问答任务中缺乏大规模数据集以及评估标准不够完善的问题。核心研究问题是如何利用预训练Transformer架构提升越南语VQA的性能，并系统比较不同自动评估指标的有效性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于多模态学习和低资源语言处理的交叉领域，填补了越南语VQA领域缺乏大规模自动构建数据集的空白。它基于现有的ViVQA等小规模资源，进一步探索了结合文本和视觉预训练模型在低资源语境下的应用潜力。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是构建了一个大规模自动生成的越南语VQA数据集AutoViVQA。此外，研究通过整合PhoBERT和Vision Transformers等预训练模型，提供了系统性的自动评估指标比较分析，推动了多语言环境下的VQA研究。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文采用基于Transformer的架构，融合了用于文本表示的PhoBERT和用于视觉特征提取的Vision Transformers。研究在多语言设置下，系统比较了BLEU, METEOR, CIDEr等传统自动评估指标与基于大语言模型的评估方法。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+由于数据集是自动构建的，可能存在标注噪声或缺乏人工标注的细致性，影响模型在复杂推理任务上的表现。研究主要集中在越南语单一语言环境，模型在跨语言迁移方面的泛化能力可能受限。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作对于推动越南语等低资源语言的多模态研究具有重要价值，有效降低了数据获取的成本。然而，自动构建数据集的质量控制和自动评估指标与人类判断的对齐程度，仍是未来需要持续优化的方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09574v1" target="_blank">SCDP: Learning Humanoid Locomotion from Partial Observations via Mixed-Observation Distillation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Milo Carroll, Tianhu Peng, Lingfan Bao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09574v1" target="_blank">2603.09574v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决人形机器人运动控制中，如何从离线数据集提炼出仅依赖机载传感器的可部署策略，从而避免对复杂且不可靠的全状态估计的依赖。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究多依赖特权信息进行训练，这在实际部署中需要额外的状态估计模块，往往成为系统短板。本工作定位为一种端到端的解决方案，填补了在部分可观测条件下直接通过混合观测蒸馏学习高性能运动控制的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了传感器条件扩散策略(SCDP)，创新性地通过混合观测训练将感知输入与特权监督解耦。该方法引入了受限去噪和上下文分布对齐等技术，有效解决了部分观测下的动力学推断问题。实验不仅在仿真中达到特权基线的性能，更在真实G1机器人上实现了无需外部感知的鲁棒运动。</p>
+
+<p><strong>4. 方法概述</strong><br>
+SCDP利用扩散模型以传感器历史为条件，预测特权未来状态动作轨迹，迫使模型在输入受限时推断隐含的运动状态。为了解决训练与部署的差异，论文设计了上下文感知注意力掩码等机制，鼓励模型进行隐式状态估计。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+扩散模型通常伴随较高的推理计算开销，尽管论文实现了50Hz的控制频率，但在更低算力边缘设备上的实时性仍面临挑战。方法的有效性高度依赖于离线数据集的质量与覆盖范围，对于数据集中未见的极端地形或扰动可能泛化不足。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作巧妙地避开了显式状态估计这一传统难题，展示了扩散策略在机器人控制中的强大潜力。其核心亮点在于通过生成式模型隐式处理不确定性，为解决Sim-to-Real迁移中的感知鸿沟提供了极具启发性的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09931v1" target="_blank">Adaptive Clinical-Aware Latent Diffusion for Multimodal Brain Image Generation and Missing Modality Imputation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Rong Zhou, Houliang Zhou, Yao Su et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09931v1" target="_blank">2603.09931v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决临床多模态神经影像数据集中普遍存在的模态缺失问题。核心研究问题是如何利用不完整的观测数据和临床元数据，高质量地合成缺失的脑部影像模态，以辅助阿尔茨海默病的诊断。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于医学图像生成与缺失数据填补领域的交叉点。它填补了现有方法在极端数据缺失场景下难以维持诊断性能的空白，通过引入临床感知的生成机制提升了多模态神经影像分析的鲁棒性。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了ACADiff框架，实现了sMRI、FDG-PET和AV45-PET三种模态之间的双向高质量合成。创新之处在于设计了根据输入可用性动态重配置的自适应融合机制，并利用GPT-4o编码的提示提供语义级临床引导。</p>
+
+<p><strong>4. 方法概述</strong><br>
+ACADiff基于潜在扩散模型，通过逐步去噪潜在表示来学习不完整观测与目标模态间的映射。该方法采用自适应融合策略动态整合可用的影像数据与临床元数据，并部署三个专用生成器处理不同模态间的转换。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文主要在ADNI数据集上进行验证，模型在其他医疗机构或不同病理类型数据上的泛化能力有待进一步考察。此外，依赖GPT-4o进行提示编码可能引入外部模型的不确定性，且生成数据的临床诊断价值仍需通过大规模实际临床流程验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将大语言模型的语义理解能力与扩散模型的生成能力相结合，在极端数据缺失场景下展现了卓越的鲁棒性。其自适应融合机制设计精巧，为处理临床数据异构性问题提供了新的思路，具有重要的实际应用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09835v1" target="_blank">Chow-Liu Ordering for Long-Context Reasoning in Chain-of-Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Naman Gupta, Vaibhav Singh, Arun Iyer et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09835v1" target="_blank">2603.09835v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">titans</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决Chain-of-Agents框架在处理长上下文时的块排序问题。由于有限的共享记忆会造成有损信息瓶颈，不同的块处理顺序会显著影响最终的推理质量。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有的多智能体推理研究主要关注智能体架构设计或任务分解策略，而忽视了输入块处理顺序的重要性。该工作填补了这一空白，从概率图模型的角度分析了块顺序对信息瓶颈的影响。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献在于提出了基于Chow-Liu树的块排序方法，通过构建依赖树来优先处理强相关的信息块。实验证明该方法能有效减少信息损失，在多个长上下文基准测试中显著提升了答案相关性和准确率。</p>
+
+<p>4. <strong>方法概述</strong><br>
+该方法利用Chow-Liu算法学习文本块之间的依赖结构，构建最大生成树以优先连接强相关的块。随后采用广度优先遍历策略对树进行访问，从而生成优化的块处理序列。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+构建Chow-Liu树需要额外的计算开销来分析块间依赖关系，可能会增加推理延迟。该方法主要针对成对依赖关系建模，可能无法完全捕捉更复杂的多块交互逻辑。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+该工作将概率图模型理论与大模型智能体框架巧妙结合，为优化长上下文推理提供了理论支撑。这种方法不仅提升了性能，也为理解序列信息处理中的信息瓶颈提供了新的视角。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09909v1" target="_blank">MedMASLab: A Unified Orchestration Framework for Benchmarking Multimodal Medical Multi-Agent Systems</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yunhang Qian, Xiaobin Hu, Jiaquan Yu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09909v1" target="_blank">2603.09909v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决医学多智能体系统(MAS)研究中存在的架构碎片化问题，以及缺乏标准化多模态数据集成与跨专科基准测试的挑战。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了医学多智能体领域缺乏统一编排框架和大规模多模态基准的空白。它针对现有研究中数据摄取流程不一致和视觉推理评估标准缺失的现状，建立了新的技术基线。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献包括提出了支持异构架构和多模态数据的统一通信协议，开发了基于大视觉语言模型的零样本语义评估范式，并构建了迄今规模最大的医学多智能体基准数据集。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MedMASLab框架引入了标准化的多模态智能体通信协议，实现了异构架构间的无缝集成。它利用大型视觉语言模型构建了自动化临床推理评估器，通过零样本语义评估验证诊断逻辑，而非依赖传统的字符串匹配。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管多智能体系统提升了推理深度，但研究发现当前架构在跨特定医学子领域转换时表现出显著的脆弱性。此外，不同交互机制下的成本与性能权衡仍需进一步优化，领域特定的性能差距依然存在。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作为医学多智能体系统研究提供了急需的基础设施，其提出的语义评估方法有效克服了传统评估的局限性。然而评估器本身依赖于大型视觉语言模型的能力，可能会引入模型自身的偏差，且跨领域泛化能力仍是未来需要攻克的难点。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.09892v1" target="_blank">MSSR: Memory-Aware Adaptive Replay for Continual LLM Fine-Tuning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yiyang Lu, Yu He, Jianlong Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.09892v1" target="_blank">2603.09892v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决大语言模型在动态环境中进行持续微调时面临的灾难性遗忘问题。核心挑战在于如何在快速适应新任务的同时，有效防止模型对先前所学知识的性能退化。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于大语言模型持续学习领域的经验回放方法研究。针对现有回放策略依赖启发式规则或计算开销过大的局限性，本文填补了如何根据样本记忆强度进行自适应高效调度的技术空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MSSR框架，这是一种受记忆机制启发的经验回放方法。主要创新在于设计了样本级记忆强度估计机制，并据此实现自适应间隔的重放调度，在缓解遗忘与保持模型适应性之间取得了更优的平衡。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MSSR框架包含受记忆启发的采样器与调度器两个核心组件。该方法通过估计样本层面的记忆强度来识别易遗忘的样本，并以自适应的时间间隔安排这些样本进行重演，从而针对性地巩固模型记忆。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+作为一种基于回放的策略，该方法仍需存储部分历史数据，可能面临数据隐私和存储成本的挑战。虽然相比部分基准方法更高效，但记忆强度的估计过程仍引入了额外的计算开销。实验主要在11个序列任务上验证，其在更复杂或更长任务序列下的泛化能力有待进一步考察。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项将认知科学中的记忆动力学应用于AI模型训练的有益尝试。该方法在推理密集型任务上表现出的显著优势证明了精细化样本调度的重要性，为设计更智能的持续学习算法提供了极具价值的参考。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.09881v1" target="_blank">Do What I Say: A Spoken Prompt Dataset for Instruction-Following</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.05168v1" target="_blank">Sparse-BitNet: 1.58-bit LLMs are Naturally Friendly to Semi-Structured Sparsity</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09555v1" target="_blank">Compiler-First State Space Duality and Portable $O(1)$ Autoregressive Caching for Inference</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09582v1" target="_blank">BinaryAttention: One-Bit QK-Attention for Vision and Diffusion Transformers</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09689v1" target="_blank">AutoViVQA: A Large-Scale Automatically Constructed Dataset for Vietnamese Visual Question Answering</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09574v1" target="_blank">SCDP: Learning Humanoid Locomotion from Partial Observations via Mixed-Observation Distillation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09931v1" target="_blank">Adaptive Clinical-Aware Latent Diffusion for Multimodal Brain Image Generation and Missing Modality Imputation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09835v1" target="_blank">Chow-Liu Ordering for Long-Context Reasoning in Chain-of-Agents</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09909v1" target="_blank">MedMASLab: A Unified Orchestration Framework for Benchmarking Multimodal Medical Multi-Agent Systems</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.09892v1" target="_blank">MSSR: Memory-Aware Adaptive Replay for Continual LLM Fine-Tuning</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
