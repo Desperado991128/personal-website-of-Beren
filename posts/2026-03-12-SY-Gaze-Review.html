@@ -272,20 +272,16 @@
 
                 <h2 id="daily-concept">Daily Concept: Gaze-based intention recognition</h2>
                 <p><strong>1. What is it?</strong><br>
-Gaze-based intention recognition is the computational task of inferring a user's latent goals or planned actions based on their eye movement patterns. It treats visual attention as a proxy for cognitive state, allowing systems to predict what a user wants to achieve before they explicitly act. In the context of LLMs, this involves translating eye tracking data into semantic signals that guide language generation or information retrieval.</p>
+Gaze-based intention recognition is the computational inference of a user's goal or desired action derived from patterns in their eye movements. In the context of Large Language Models (LLMs), this process translates implicit gaze signals into explicit prompts or constraints to guide model behavior. It effectively transforms visual attention into a control signal for language generation or information retrieval.</p>
 
 <p><strong>2. How does it work?</strong><br>
-The process typically involves extracting spatio-temporal features from raw eye tracking data, such as fixation durations and saccade vectors, and encoding them into a latent representation. These gaze embeddings are then aligned with the embedding space of a language model through multimodal fusion techniques. The model learns to maximize the conditional probability of the intended action or text \( Y \) given the gaze input sequence \( G \).</p>
-
-<p>\[ P(Y | G) = \text{softmax}(f(G) \cdot W) \]</p>
-
-<p>Here, \( f(G) \) represents the encoded gaze features projected into the language model's semantic space. This allows the model to treat gaze patterns as implicit prompts that clarify user intent.</p>
+The mechanism involves capturing raw eye-tracking metrics, such as fixation durations and saccade vectors, and encoding them into a feature space. A neural network maps these spatiotemporal gaze patterns to a semantic embedding that the LLM can process, often treating gaze as a conditioning signal. Mathematically, the model learns a probability distribution over user intentions \( I \) given a sequence of gaze features \( G \), expressed as \( P(I | G) \). This embedding acts as a prefix or soft prompt, steering the LLM's generation process without requiring explicit text input.</p>
 
 <p><strong>3. Why does it matter?</strong><br>
-This capability bridges the gap between implicit human cognition and explicit machine instruction. It enables LLMs to resolve ambiguities in user prompts by leveraging the rich contextual grounding provided by visual attention. This leads to more intuitive human-computer interfaces where AI systems can offer proactive assistance without requiring users to formulate detailed text commands.</p>
+This capability is crucial for developing hands-free interfaces and accessibility tools for users with motor impairments. It also enables proactive AI assistants that anticipate user needs by analyzing visual attention in real time. By integrating gaze with LLMs, systems can achieve a deeper understanding of user context, moving beyond explicit text prompts to implicit behavioral cues.</p>
 
 <p><strong>4. Key insight</strong><br>
-Gaze serves as a silent, high-bandwidth signal that allows language models to ground their reasoning in the user's immediate visual focus and cognitive intent.</p>
+Gaze acts as a high-bandwidth signal that reveals user interest before explicit articulation occurs. Integrating this with LLMs allows AI to interpret not just what users say, but what they are looking at and intending to do.</p>
 
                 <h2 id="papers">Paper Summaries</h2>
 
@@ -302,22 +298,22 @@ Gaze serves as a silent, high-bandwidth signal that allows language models to gr
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper addresses the limitations of current Virtual Reality (VR) interaction paradigms that force users to memorize specific gestures for specific tasks. It asks how VR systems can instead interpret natural user intent directly from implicit eye-hand coordination to reduce cognitive load and physical fatigue.</p>
+The paper addresses the limitations of current Virtual Reality (VR) interaction paradigms, specifically the high learning costs and low error tolerance associated with users having to memorize specific gestures. It investigates whether an LLM-powered system can shift the interaction model from "Operation-to-Intent" to "Intent-to-Operation" by directly understanding natural eye-hand motions.</p>
 
 <p><strong>2. Positioning</strong><br>
-It positions itself against the standard "Operation-to-Intent" paradigm, where users must learn machine-defined rules to interact. The work fills a critical gap by introducing an "Intent-to-Operation" approach that leverages Large Language Models (LLMs) to bridge the semantic gap between natural human motion and system commands.</p>
+Current VR interfaces rely on rigid, predefined gesture sets that force users to adapt their behavior to the system's rules. This work positions itself at the intersection of spatial computing and Large Language Models (LLMs), filling a gap in intelligent user interfaces. It proposes a system that leverages semantic understanding to interpret user intent, contrasting with traditional systems that rely solely on pattern matching for gesture recognition.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The primary contribution is the SIAgent framework, which eliminates the need for predefined gesture memorization by understanding natural motions. It innovates by translating spatial gaze and hand motion data into natural language descriptions that an LLM processes to infer and execute user intent.</p>
+The primary contribution is SIAgent, a framework that translates raw spatial interaction data into natural language prompts for an LLM to infer user intent without requiring specific gesture memorization. The system introduces a method for mapping eye-gaze and hand-motion telemetry to textual descriptions, enabling an agent to execute tasks based on inferred goals. The authors demonstrate that this approach outperforms standard gaze-plus-pinch interactions in accuracy (97.2% vs 93.1%) while significantly reducing physical fatigue.</p>
 
 <p><strong>4. Methodology</strong><br>
-The system features two core modules. First, it translates spatial interaction data into natural language to recognize intent. Second, it generates an agent to execute the inferred task. The authors validated this approach through user studies comparing SIAgent against standard gaze-pinch interaction techniques across over 60 tasks.</p>
+The proposed framework consists of two main stages. First, the intent recognition module captures eye-tracking and hand-motion data, translating these spatial signals into natural language descriptions that an LLM processes to determine the user's goal. Second, an agent-based execution module generates the necessary actions to complete the identified task within the virtual environment. The authors validated this approach through two user studies covering over 60 interaction tasks, comparing the system against traditional operation-first techniques.</p>
 
 <p><strong>5. Limitations</strong><br>
-While the abstract highlights success, the reliance on "common sense" habits implies potential challenges with diverse user groups who may have different intuitive behaviors. Furthermore, the integration of LLMs for intent recognition introduces computational overhead and potential latency that may differ from lightweight, traditional gesture recognition systems.</p>
+While the abstract highlights high accuracy, LLM-based systems inherently introduce latency compared to rule-based gesture recognition, which could affect real-time performance in fast-paced scenarios. The reliance on natural language translation for spatial data may also introduce ambiguity in complex, continuous interactions where intent is difficult to verbalize discretely. Furthermore, the scope of the evaluation, covering 60 tasks, may not fully represent the infinite variability of natural human motion in unrestricted VR environments.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This research offers a compelling application of LLMs to gaze-tracking, effectively demonstrating that semantic intent understanding can outperform rigid gesture mapping. The reported improvement in accuracy to \(97.2\%\) and the reduction of physical fatigue are significant practical achievements. However, the practical deployment will depend heavily on the speed of the LLM inference pipeline and the robustness of the natural language translation for complex spatial tasks.</p>
+This research offers a compelling evolution for VR interaction by successfully applying LLM reasoning to gaze and motion data, effectively lowering the barrier to entry for new users. The reported reduction in arm fatigue and the elimination of gesture memorization are significant usability advantages that align well with the goals of accessible design. However, the practical deployment of such a system will depend heavily on the inference speed of the underlying models and the robustness of the translation layer between noisy spatial data and clean natural language prompts.</p>
                 </div>
                 <div class="paper-entry" id="paper-2">
                     <h3 class="paper-title">
@@ -332,22 +328,22 @@ This research offers a compelling application of LLMs to gaze-tracking, effectiv
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper investigates how to resolve ambiguity in open-ended Visual Question Answering (VQA) for Large Vision-Language Models (LVLMs). It specifically asks whether real-time eye-tracking data can be used to clarify user intent without requiring additional model training.</p>
+The paper addresses the challenge of ambiguity in open-ended Visual Question Answering (VQA) for Large Vision-Language Models. It investigates whether real-time eye-tracking data can be used to resolve user intent and disambiguate queries without requiring model retraining.</p>
 
 <p><strong>2. Positioning</strong><br>
-This work bridges the gap between cognitive signal processing and multimodal AI, addressing the common failure of LVLMs on ambiguous queries. It distinguishes itself by offering a training-free inference solution, contrasting with existing methods that often require fine-tuning or extensive prompt engineering to handle context.</p>
+Current Large Vision-Language Models often struggle with ambiguous questions where the user's intent is not explicitly stated, leading to incorrect or generic answers. This work positions itself at the intersection of cognitive science and multimodal AI, filling a gap by utilizing implicit human signals, specifically gaze, to ground the model's reasoning process. It moves beyond static visual inputs by introducing a dynamic, human-in-the-loop inference mechanism.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The authors introduce IRIS, a novel training-free inference technique that utilizes real-time gaze data to significantly improve VQA accuracy. They also provide a new benchmark dataset specifically designed for gaze-disambiguated VQA and a real-time evaluation protocol to facilitate future research in this domain.</p>
+The primary contribution is IRIS, a novel, training-free inference method that leverages eye-tracking data to improve VQA accuracy. The authors demonstrate that fixations occurring at the onset of a verbal question are the most informative, more than doubling accuracy on ambiguous questions from 35.2% to 77.2%. They also release a new benchmark dataset and a real-time interactive evaluation protocol to standardize future research in gaze-augmented multimodal models.</p>
 
 <p><strong>4. Methodology</strong><br>
-The approach involves tracking user fixations during image viewing and isolating those occurring nearest to the start of the verbal question. These specific gaze points are then used to guide the LVLM's attention to relevant image regions, effectively resolving potential ambiguities in the text query.</p>
+IRIS operates by monitoring user gaze patterns in real-time as they view an image and begin asking a question. The method isolates specific eye fixations that occur closest to the start of the verbal query, treating these spatial coordinates as attention anchors. These gaze inputs are then integrated into the prompt of Large Vision-Language Models during inference to focus their attention on the specific image region relevant to the user's intent.</p>
 
 <p><strong>5. Limitations</strong><br>
-The approach requires specialized eye-tracking hardware, limiting its immediate applicability to standard consumer setups. Furthermore, the effectiveness relies on precise synchronization between the user's gaze and speech onset, which could be susceptible to noise in less controlled environments.</p>
+The primary limitation is the hardware dependency, as the method requires specialized eye-tracking equipment which may not be available in standard consumer settings. The study also relies on a user study with 500 unique pairs, which, while substantial for human-subject research, may not fully capture the infinite variability of real-world ambiguity. Additionally, the approach assumes that users consistently fixate on relevant objects when asking questions, which might not hold true for all individuals or abstract queries.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-The reported improvement from 35.2% to 77.2% accuracy on ambiguous questions is impressive and highlights the value of multimodal intent signals. While the hardware requirement is a practical barrier, the method offers a compelling, low-cost integration path for enhancing VLM reliability in specialized applications.</p>
+This work offers a significant practical advancement by showing how biological signals can augment AI reasoning without the need for expensive fine-tuning. The insight regarding the timing of fixations relative to speech onset is particularly strong, providing a clear heuristic for future gaze-based interfaces. However, the reliance on external hardware remains a barrier to immediate widespread adoption in mobile or desktop applications lacking eye-tracking capabilities.</p>
                 </div>
                 <div class="paper-entry" id="paper-3">
                     <h3 class="paper-title">
@@ -362,22 +358,22 @@ The reported improvement from 35.2% to 77.2% accuracy on ambiguous questions is 
 
                     <h4>Summary</h4>
                     <p><strong>1. Research Question</strong><br>
-The paper investigates why state-of-the-art transformer language models, despite their superior performance in next-word prediction, often fail to accurately predict human reading times. The authors ask whether reading time metrics are fundamentally more sensitive to simple n-gram statistics than the complex probabilistic representations learned by modern neural networks.</p>
+This paper investigates why state-of-the-art transformer language models, despite their superior next-word prediction capabilities, often struggle to predict human reading times compared to older or simpler models. The core question asks whether reading time metrics are fundamentally more sensitive to simple \(n\)-gram statistics than the complex contextual patterns learned by modern LLMs.</p>
 
 <p><strong>2. Positioning</strong><br>
-This work addresses a paradox in the intersection of computational linguistics and psycholinguistics where lower perplexity in language models does not necessarily translate to better cognitive modeling. It challenges the recent trend of using increasingly complex transformers as cognitive models. The paper fills a gap by offering a statistical explanation for why simpler models often outperform sophisticated ones in predicting gaze behavior.</p>
+The work positions itself against recent findings that suggest a divergence between AI performance and cognitive modeling validity. It fills a theoretical gap by proposing that the observed drop in correlation is not a failure of the models but a misalignment between the complex features transformers learn and the simpler heuristics humans use during reading.</p>
 
 <p><strong>3. Key Contribution</strong><br>
-The main contribution is the finding that neural language models which produce probability estimates resembling simple n-gram models are the most effective at predicting eye-tracking metrics. This suggests that human reading behavior relies heavily on shallow statistical processing rather than the deep contextual reasoning utilized by advanced transformers. The authors empirically link the similarity to n-grams directly to the correlation with reading time data.</p>
+The main contribution is the demonstration that neural language models which generate probability estimates similar to \(n\)-gram models are the most effective at predicting eye-tracking metrics. This implies that "n-gram-likeness" serves as a strong proxy for psychometric validity, challenging the trend of using increasingly complex transformers to model human gaze behavior.</p>
 
 <p><strong>4. Methodology</strong><br>
-The researchers analyzed a variety of neural language models to calculate the correlation between their output probabilities and traditional n-gram statistics. They then compared these correlations against the models' ability to predict eye-tracking based reading times on naturalistic text datasets. This approach allowed them to quantify how much "n-gram-like" behavior contributes to the modeling of human gaze duration and fixation patterns.</p>
+The authors evaluate a range of neural language models by measuring the correlation between their output probability distributions and traditional \(n\)-gram probabilities. They then correlate these model outputs with ground-truth eye-tracking data from naturalistic text reading to determine which statistical features best predict human reading times.</p>
 
 <p><strong>5. Limitations</strong><br>
-While the paper makes a strong case for n-gram sensitivity, it may oversimplify the cognitive process of reading by reducing it to basic statistical matching. The study focuses primarily on the correlation of probabilities, potentially overlooking other linguistic features that influence reading time, such as syntactic surprise or semantic integration difficulty. Additionally, the findings might be contingent on the specific naturalistic datasets used for the eye-tracking evaluation.</p>
+The study focuses primarily on the statistical alignment of probabilities, potentially overlooking higher-level semantic or syntactic processing that transformers capture but \(n\)-grams miss. Additionally, the findings rely on specific naturalistic datasets, so the generalizability to all reading contexts or different eye-tracking metrics may be limited.</p>
 
 <p><strong>6. Critical Evaluation</strong><br>
-This paper provides a valuable reality check for researchers attempting to use large language models as direct proxies for human cognitive processing. Its strength lies in offering a concrete statistical explanation for the diminishing returns of model complexity in psycholinguistic modeling. However, a potential weakness is that it might discourage the exploration of how higher-order transformer features could still influence reading in ways not captured by simple n-gram metrics.</p>
+This work offers a compelling and counter-intuitive explanation for why better AI models do not always make better cognitive models. Its strength lies in connecting the simplicity of \(n\)-grams to the complexity of transformer attention mechanisms, though it risks oversimplifying the cognitive processes involved in reading by focusing heavily on local statistical regularities.</p>
                 </div>
                 <div class="paper-entry" id="paper-4">
                     <h3 class="paper-title">
@@ -391,17 +387,17 @@ This paper provides a valuable reality check for researchers attempting to use l
                     </div>
 
                     <h4>Summary</h4>
-                    <p>### 1. Research Question. The paper addresses the challenge of estimating human gaze targets in a way that generalizes well across different scenarios. It specifically asks how to effectively integrate multi-modal cues, such as eye appearance and head pose, with powerful pre-trained vision models to create a robust gaze estimation system.</p>
+                    <p>### 1. Research Question. The paper addresses the challenge of estimating human gaze targets from visible images in a way that generalizes well across different scenarios. It specifically asks how to efficiently integrate multi-modal cues, such as eye appearance and head pose, into a pre-trained vision foundation model to improve accuracy.</p>
 
-<p>### 2. Positioning. This work positions itself at the intersection of gaze estimation and modern vision foundation models. While previous research has explored gaze detection, this paper fills a gap by adapting the "Mixture-of-Experts" (MoE) technique, commonly used in Large Language Models, to the gaze domain. It aims to solve the difficulty of decoding diverse visual cues from a frozen foundation model without requiring prohibitive computational costs.</p>
+<p>### 2. Positioning. This work positions itself at the intersection of gaze estimation and large vision foundation models. It fills a gap in existing literature by moving beyond simple fine-tuning, instead proposing an adaptive mechanism to handle the diverse visual cues required for understanding human attention.</p>
 
-<p>### 3. Key Contribution. The main contribution is the GazeMoE framework, an end-to-end architecture that uses MoE modules to selectively activate relevant features from a frozen vision backbone. The authors also contribute a class-balancing auxiliary loss to address the common imbalance between "in-frame" and "out-of-frame" gaze targets. Additionally, they introduce strategic data augmentations, such as region-specific cropping, to improve model robustness.</p>
+<p>### 3. Key Contribution. The primary contribution is the GazeMoE framework, which applies Mixture-of-Experts (MoE) technology to selectively process gaze-related features from a frozen foundation model. The authors also introduce a class-balancing loss and specific data augmentation techniques to solve the common problem of imbalance between in-frame and out-of-frame gaze targets.</p>
 
-<p>### 4. Methodology. The proposed method leverages a frozen pre-trained vision foundation model as a feature extractor. Instead of fine-tuning the entire backbone, the authors attach Mixture-of-Experts (MoE) layers that adaptively route processing based on the input, allowing the model to focus on specific cues like eyes or context. This is combined with a specialized training regimen including a class-balancing loss and photometric augmentations to handle data scarcity and imbalance.</p>
+<p>### 4. Methodology. The proposed method keeps the vision foundation model frozen and adds Mixture-of-Experts modules to adaptively route visual information. This allows the system to selectively leverage specific cues like head pose or eye features. The training process incorporates region-specific cropping and photometric transformations to enhance robustness against data imbalance.</p>
 
-<p>### 5. Limitations. While the abstract highlights state-of-the-art results, potential limitations inherent to this approach include the computational overhead of the MoE layers compared to simpler decoder heads. The reliance on a frozen foundation model may also limit the model's ability to adapt to very specific or unusual gaze behaviors not well-represented in the pre-training data. Furthermore, the effectiveness of the class-balancing loss relies heavily on the specific distribution of the training datasets.</p>
+<p>### 5. Limitations. While the abstract highlights state-of-the-art performance, potential limitations include the increased architectural complexity compared to standard decoder heads. Reliance on a frozen foundation model could also limit the model's ability to adapt to very specific or unusual gaze patterns not well-represented in the pre-training data.</p>
 
-<p>### 6. Critical Evaluation. GazeMoE offers a compelling bridge between the distinct fields of gaze estimation and Large Language Model architectures, demonstrating how adaptive processing can improve upon standard fine-tuning approaches. The inclusion of practical solutions for data imbalance makes the work particularly relevant for real-world applications where "out-of-frame" gazes are common. However, the complexity of implementing MoE routing mechanisms might pose a barrier to adoption compared to lighter-weight models intended for mobile or embedded robotics applications.</p>
+<p>### 6. Critical Evaluation. This paper offers a compelling application of Mixture-of-Experts architectures, commonly used in Large Language Models, to the specialized domain of gaze estimation. The strength of the work lies in its efficient use of pre-trained knowledge without requiring prohibitively expensive retraining. However, the practical deployment speed of MoE models on robotic systems may be constrained by the complexity of the routing mechanisms.</p>
                 </div>
                 <div class="paper-entry" id="paper-5">
                     <h3 class="paper-title">
@@ -415,17 +411,17 @@ This paper provides a valuable reality check for researchers attempting to use l
                     </div>
 
                     <h4>Summary</h4>
-                    <p>### 1. Research Question. How can Vision-Language Models (VLMs) be improved to perform visually grounded reasoning for radiology tasks? The paper investigates whether sequential eye-tracking data from radiologists can serve as an effective supervision signal to guide the model's visual reasoning process.</p>
+                    <p>### 1. Research Question. The paper addresses the misalignment between how Vision-Language Models (VLMs) reason and how radiologists actually diagnose medical images. It investigates whether sequential eye-tracking data can serve as effective supervision to guide VLMs toward more accurate and human-like visual reasoning.</p>
 
-<p>### 2. Positioning. Current VLMs typically rely on text-based intermediate reasoning, which often fails to capture the visual search strategies essential for accurate medical diagnosis. This work positions itself against standard text-only supervision by arguing that visual reasoning should mimic the sequential evidence acquisition used by human experts. It fills a critical gap by translating cognitive visual search behaviors into concrete training signals for deep learning models.</p>
+<p>### 2. Positioning. Current VLMs typically perform intermediate reasoning using text tokens, which creates a disconnect when handling visually intensive radiology tasks. This work positions itself at the intersection of medical AI and cognitive science, arguing that visual reasoning requires visually grounded supervision rather than just textual associations. It fills a critical gap by utilizing temporal gaze data to teach models the "visual search" strategy used by expert radiologists.</p>
 
-<p>### 3. Key Contribution. The primary contribution is the introduction of dedicated "gaze tokens" that train the model to predict gaze-selected image patch indices in temporal order. This mechanism forces the model to follow a human-like visual search path before generating a diagnosis. The paper demonstrates that this approach achieves state-of-the-art performance on in-domain datasets and improves robustness on external zero-shot benchmarks.</p>
+<p>### 3. Key Contribution. The main contribution is the introduction of "gaze tokens," a specialized set of tokens trained to predict the temporal sequence of image patches that a radiologist fixates on. This mechanism forces the model to explicitly mimic the evidence acquisition process before generating a diagnosis. The result is a VLM that achieves state-of-the-art performance on the MIMIC-EYE dataset and demonstrates improved robustness on external zero-shot benchmarks.</p>
 
-<p>### 4. Methodology. The authors augment a standard VLM architecture with a small set of specialized tokens designed to output a sequence of image patch indices. During training, these tokens are supervised using radiologist eye-tracking data to replicate the specific order in which areas of interest were viewed. This process links the model's internal reasoning steps directly to the temporal acquisition of visual evidence.</p>
+<p>### 4. Methodology. The authors augment a standard VLM architecture with dedicated gaze tokens that are interleaved with visual and text tokens. During training, these tokens are supervised to output the indices of image patches corresponding to human eye fixations in chronological order. This objective encourages the model to prioritize relevant visual features sequentially, simulating a radiologist's scanning path before producing the final textual output.</p>
 
-<p>### 5. Limitations. While the results are positive, the method relies on the availability of high-quality, temporally ordered eye-tracking datasets, which are scarce and expensive to collect compared to standard text reports. The approach also assumes that mimicking human gaze patterns is the optimal strategy for visual reasoning, potentially limiting the model's ability to discover novel diagnostic patterns that humans might miss.</p>
+<p>### 5. Limitations. A primary limitation is the scarcity of high-quality, time-ordered eye-tracking datasets, which restricts the scalability of this supervision method. The approach also assumes that mimicking human gaze trajectories is the optimal reasoning strategy, potentially constraining the model from discovering alternative visual patterns that could be equally or more effective. Additionally, the reliance on gaze data may limit applicability in medical domains where such tracking equipment is unavailable.</p>
 
-<p>### 6. Critical Evaluation. This research offers a compelling bridge between cognitive science and deep learning by operationalizing gaze dynamics as a reasoning scaffold. The use of temporal gaze sequences rather than static attention maps is a sophisticated improvement for visual grounding tasks. However, the dependency on specialized eye-tracking hardware and data collection protocols may pose a significant barrier to widespread adoption compared to self-supervised alternatives.</p>
+<p>### 6. Critical Evaluation. This work offers a compelling improvement over standard "black box" VLMs by making the visual reasoning process explicit and grounded in human behavior. The strength lies in treating gaze not just as attention, but as a temporal reasoning signal that improves generalization. However, the practical impact is tempered by the significant data requirements, as curating large-scale gaze datasets is far more resource-intensive than standard image-text pair collection.</p>
                 </div>
 
                 <hr>
