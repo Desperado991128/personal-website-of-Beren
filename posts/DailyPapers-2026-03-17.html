@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-17</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 17, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 17, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Expert specialization analysis</h2>
+                <p>### 1. What is it?<br>
+Expert specialization analysis is the study of functional differentiation within Mixture of Experts (MoE) architectures. It examines whether individual expert networks learn to process specific types of inputs or distinct features, such as particular semantic concepts in diffusion models or specific memory patterns in agents, rather than acting as redundant generalists.</p>
+
+<p>### 2. How does it work?<br>
+The analysis operates by tracking the routing decisions of the gating network across a large dataset to identify activation patterns. Researchers measure the correlation between input features and expert selection, often calculating the conditional probability \( P(E_i \mid C_k) \) where \( E_i \) is a specific expert and \( C_k \) represents a category or cluster of input data. Low entropy in the activation distribution for a given input type indicates high specialization. This allows practitioners to visualize and quantify how effectively the router partitions the problem space among the available experts.</p>
+
+<p>### 3. Why does it matter?<br>
+This analysis is crucial for verifying that the increased parameter count in MoE models translates into efficient capacity utilization rather than redundancy. In diffusion models, it helps identify if experts specialize in distinct visual features like texture versus geometry. For agent memory systems, it ensures that experts learn to separate memory retrieval from reasoning tasks. Understanding these patterns prevents expert collapse where only a few experts are active, which would waste computational resources.</p>
+
+<p>### 4. Key insight. Effective specialization reveals that a sparse model can autonomously decompose a complex learning problem into modular sub-problems without explicit supervision.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15109v1" target="_blank">PAKAN: Pixel Adaptive Kolmogorov-Arnold Network Modules for Pansharpening</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Haoyu Zhang, Haojing Chen, Zhen Zhong et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15109v1" target="_blank">2603.15109v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the limitation of static activation functions in deep learning models used for pansharpening, which struggle to model complex non-linear mappings dynamically. It investigates whether making Kolmogorov-Arnold Networks (KANs) adaptive to individual pixels can improve the fusion of high-resolution spatial details with multispectral data.</p>
+
+<p>### 2. Positioning. This work positions itself at the intersection of remote sensing image processing and neural architecture design. It fills a specific gap in the literature regarding Kolmogorov-Arnold Networks, which offer learnable activation functions but traditionally lack the ability to adapt dynamically during inference. The authors propose a solution that bridges the gap between static network architectures and the need for input-dependent processing in image fusion.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the Pixel Adaptive Kolmogorov-Arnold Network (PAKAN) framework, which introduces dynamic adaptability to KAN architectures. The authors design two novel components, a 2D Adaptive KAN for spatial dimensions and a 1D Adaptive KAN for spectral channels, and integrate them into specific modules for feature fusion and refinement.</p>
+
+<p>### 4. Methodology. The proposed approach modifies the traditional KAN architecture by generating spline summation weights based on the input data rather than using fixed parameters. Specifically, the framework employs a 2D Adaptive KAN to handle spatial features and a 1D Adaptive KAN for spectral channels, assembling them into PAKAN 2to1 and PAKAN 1to1 modules to perform the pansharpening process.</p>
+
+<p>### 5. Limitations. The provided abstract does not explicitly acknowledge specific limitations regarding computational cost or training stability. However, potential limitations inherent to this approach include increased model complexity and computational overhead compared to static networks, as the model must generate adaptive weights for every pixel during inference.</p>
+
+<p>### 6. Critical Evaluation. This work offers a logical and innovative progression from static to dynamic activation functions, specifically tailored for the complex requirements of pansharpening. The strength of the paper lies in its granular approach to adaptability, though the practical trade-off between the reported performance gains and the computational cost of generating pixel-wise weights remains a crucial factor for real-world deployment.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15033v1" target="_blank">Rethinking Machine Unlearning: Models Designed to Forget via Key Deletion</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Sonia Laguna, Jorge da Silva Goncalves, Moritz Vandenhirtz et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15033v1" target="_blank">2603.15033v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the inefficiency and impracticality of current machine unlearning methods, which struggle to remove specific data influences without expensive retraining or access to the original training dataset. It asks whether models can be architecturally designed from the start to support instant and verifiable forgetting.</p>
+
+<p>### 2. Positioning. The authors position their work against the dominant "post-hoc" unlearning methods, which attempt to scrub data influence from a model after it has already been trained. They identify a critical gap in these existing approaches because they often require retaining the full training dataset to approximate unlearning. This work fills that gap by proposing a proactive "design" paradigm, shifting the burden from complex parameter updates to architectural preparation.</p>
+
+<p>### 3. Key Contribution. The main contribution is the introduction of "unlearning by design," a paradigm where the capability to forget is built directly into the model architecture. The authors instantiate this with MUNKEY, a memory-augmented transformer that enables zero-shot forgetting. This approach allows for the removal of specific data points through key deletion, eliminating the need for weight updates or access to the original samples.</p>
+
+<p>### 4. Methodology. MUNKEY utilizes a memory-augmented transformer architecture that decouples the memorization of specific training instances from the model's learned weights. During training, the model learns to map inputs to instance-specific keys stored in an external memory module. When an unlearning request occurs, the system simply deletes the corresponding key from memory, effectively removing the data influence without modifying the model parameters.</p>
+
+<p>### 5. Limitations. While the abstract demonstrates strong performance, a potential limitation of this approach is the scalability of the external memory module, as it requires storing a unique key for every training instance. Additionally, this method necessitates a specific architectural choice prior to training, meaning it cannot be applied to existing pre-trained models that were not built with this "unlearning by design" framework. There may also be computational overhead associated with managing and querying the memory module during inference.</p>
+
+<p>### 6. Critical Evaluation. This work represents a significant conceptual shift in machine unlearning by treating the ability to forget as a core architectural feature rather than a post-processing step. The strength of this approach lies in its operational efficiency and alignment with strict privacy requirements, as it guarantees data removal without the risks associated with approximate parameter updates. However, the requirement to adopt a specialized memory-augmented architecture may hinder its adoption in scenarios where standard transformer models are the established norm.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15250v1" target="_blank">In-Context Symbolic Regression for Robustness-Improved Kolmogorov-Arnold Networks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Francesco Sovrano, Lidia Losavio, Giulia Vilone et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15250v1" target="_blank">2603.15250v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the difficulty of extracting accurate and robust symbolic formulas from Kolmogorov-Arnold Networks (KANs). Specifically, it asks how to replace the learned functions on network edges with symbolic operators in a way that considers the entire network's performance rather than fitting edges in isolation.</p>
+
+<p>### 2. Positioning. Kolmogorov-Arnold Networks are a promising architecture for interpretable machine learning because they use learnable univariate functions on edges instead of fixed weights. However, current methods for converting these learned functions into symbolic expressions are brittle and sensitive to initialization. This work fills a critical gap by moving the extraction process from a local, isolated fitting problem to a global, context-aware optimization task.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the concept of "in-context symbolic regression," which selects symbolic operators based on their impact on the end-to-end network performance. The authors propose two specific methods to achieve this. They introduce Greedy in-context Symbolic Regression (GSR) for direct selection and Gated Matching Pursuit (GMP) for amortized selection via differentiable gates.</p>
+
+<p>### 4. Methodology. The authors propose two distinct algorithms to implement in-context regression. GSR works by iteratively testing candidate symbolic operators on specific edges and selecting the one that improves the overall network loss after a brief fine-tuning period. GMP trains a specialized layer with sparse gates that learn to select operators from a library during training, which are then discretized to produce the final symbolic network.</p>
+
+<p>### 5. Limitations. The abstract does not explicitly list specific limitations of the proposed methods. However, the GSR approach requires iterative fine-tuning steps which may increase the computational cost of the extraction process compared to simple fitting methods. Additionally, the success of GMP relies on the effectiveness of the gating mechanism and the subsequent discretization step.</p>
+
+<p>### 6. Critical Evaluation. This work provides a significant practical improvement for scientific machine learning by making the transition from black-box models to symbolic equations more reliable. The reported reduction of up to 99.8% in median test MSE demonstrates that considering global network interactions is far superior to local approximation. While the iterative nature of the greedy approach may add computational overhead, the substantial gains in robustness and accuracy make this a valuable contribution to interpretable AI.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15569v1" target="_blank">Mamba-3: Improved Sequence Modeling using State Space Principles</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Aakash Lahoti, Kevin Y. Li, Berlin Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15569v1" target="_blank">2603.15569v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the critical trade-off between inference efficiency and model quality in large language models. It investigates whether an inference-first design using state space principles can overcome the limitations of current linear models, specifically regarding state tracking capabilities and hardware efficiency.</p>
+
+<p>### 2. Positioning. This work positions itself as an evolution of sub-quadratic models, bridging the gap between the high quality of Transformers and the efficiency of linear models. It critiques existing linear approaches for sacrificing capability for speed and for failing to achieve theoretical efficiency on actual hardware. The authors aim to fill this gap by refining the State Space Model (SSM) framework to better compete with established Transformer architectures.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the Mamba-3 architecture, which introduces three specific methodological improvements to enhance linear models. These include a more expressive recurrence mechanism, a complex-valued state update rule, and a Multi-Input, Multi-Output (MIMO) formulation. Collectively, these allow Mamba-3 to push the performance-efficiency frontier, outperforming competitors like Gated DeltaNet and matching Mamba-2 quality with half the state size.</p>
+
+<p>### 4. Methodology. The authors propose an inference-first architecture combining three distinct techniques derived from SSM theory. First, they derive a more expressive recurrence via SSM discretization. Second, they implement a complex-valued state update rule to improve state tracking capabilities. Third, they utilize a Multi-Input, Multi-Output (MIMO) structure to boost performance without increasing decode latency.</p>
+
+<p>### 5. Limitations. The abstract does not explicitly list limitations, but the focus on specific tasks like state tracking suggests these were previous weak points that may still require validation across broader modalities. Additionally, while the model is efficient, the introduction of complex-valued states and MIMO structures could increase implementation complexity compared to simpler linear attention variants. Finally, the reported gains are modest (around 1-2 percentage points), suggesting incremental rather than revolutionary progress.</p>
+
+<p>### 6. Critical Evaluation. This work represents a significant engineering and theoretical step forward for efficient sequence modeling by successfully decoupling model quality from memory constraints. The strength lies in the rigorous application of SSM principles to solve specific failure modes like state tracking. However, the improvements, while consistent, are incremental compared to the previous generation, and the practical hardware utilization of the new complex-valued operations will need to be verified by the community.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15005v1" target="_blank">Pretraining and Benchmarking Modern Encoders for Latvian</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Arturs Znotins<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15005v1" target="_blank">2603.15005v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the scarcity of high-quality monolingual encoders for the low-resource Latvian language. It investigates whether modern transformer architectures can outperform existing multilingual and older monolingual models for Latvian NLP tasks.</p>
+
+<p><strong>2. Positioning</strong><br>
+Encoder-only transformers remain vital for practical NLP, yet low-resource languages like Latvian are often underrepresented in pretraining corpora. This work fills a specific gap by moving beyond generic multilingual models to provide specialized, high-performance tools for Latvian. It establishes a new standard for Latvian NLP by applying recent architectural advancements to a language that has historically lacked such resources.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors released a suite of pretrained Latvian encoders using RoBERTa, DeBERTaV3, and ModernBERT architectures, including variants for long contexts. Their best model, lv-deberta-base, sets a new benchmark by outperforming larger multilingual models with only 111M parameters. They also released evaluation resources to support future research and practical applications.</p>
+
+<p><strong>4. Methodology</strong><br>
+The team pretrained several transformer models on Latvian text using architectures known for efficiency and performance, such as DeBERTaV3 and ModernBERT. They evaluated these models on a diverse set of diagnostic and linguistic benchmarks to measure performance against existing baselines. This approach combined modern architectural design with a specific linguistic focus to maximize efficiency and accuracy.</p>
+
+<p><strong>5. Limitations</strong><br>
+While not explicitly detailed in the abstract, potential limitations include the constraints of data availability inherent to low-resource languages, which may restrict the model's exposure to rare linguistic patterns. The models are also restricted to discriminative tasks and cannot generate text, which limits their application compared to decoder-based Large Language Models.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research is a significant step forward for Latvian NLP, proving that specialized, efficient models can beat massive multilingual baselines. It successfully bridges the gap between modern architectural innovations and low-resource language applications. The release of models and benchmarks ensures the work has immediate practical utility for developers and researchers.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15541v1" target="_blank">Bridging Local and Global Knowledge: Cascaded Mixture-of-Experts Learning for Near-Shortest Path Routing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yung-Fu Chen, Anish Arora<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15541v1" target="_blank">2603.15541v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the difficulty of finding near-shortest paths in sparse networks where traditional deep learning models relying on local features fail. It asks how to effectively incorporate global structural knowledge to improve routing generalization in these topologically irregular environments.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current deep learning routing solutions excel in dense graphs using local information but perform poorly on sparse networks due to a lack of global context. This work positions itself as a bridge between these two domains. It offers a solution that scales model capacity based on the complexity of the network topology.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors introduce the Cascaded Mixture of Experts (Ca-MoE), a novel two-tier architecture that adaptively invokes global experts only when local experts are insufficient. They also contribute an online meta-learning strategy that stabilizes training and prevents catastrophic forgetting as network conditions change.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed Ca-MoE architecture consists of lower-tier experts utilizing local features and upper-tier experts relying on global features. An adaptive inference mechanism activates the upper tier only when necessary to ensure decision quality. This is combined with a meta-learning approach to fine-tune experts independently while maintaining stability.</p>
+
+<p><strong>5. Limitations</strong><br>
+The cascaded architecture implies a higher total parameter count and training complexity compared to single-model approaches. The mechanism for triggering upper-tier experts introduces a dependency on threshold settings that could affect the trade-off between speed and accuracy. Furthermore, while performance is close to the theoretical upper bound, the solution does not fully reach it in all scenarios.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+The proposed method offers a significant accuracy improvement of up to 29.1% in sparse networks, addressing a critical blind spot in current routing models. The architecture effectively balances computational efficiency with the need for global awareness. A potential weakness lies in the system's complexity, as managing multiple expert tiers and meta-learning updates may require substantial engineering effort compared to simpler models.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15507v1" target="_blank">Federated Learning of Binary Neural Networks: Enabling Low-Cost Inference</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Nitin Priyadarshini Shankar, Soham Lahiri, Sheetal Kalyani et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15507v1" target="_blank">2603.15507v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of deploying computationally intensive Deep Neural Networks (DNNs) on resource-constrained edge devices within a Federated Learning (FL) setting. It asks how to significantly reduce the memory footprint and computational cost of inference without suffering the accuracy loss typically associated with model compression techniques.</p>
+
+<p>### 2. Positioning. This work positions itself at the intersection of privacy-preserving distributed learning and efficient edge computing. It fills a critical gap left by traditional FL methods, which rely on real-valued models that are too heavy for edge devices, and post-training binarization techniques, which reduce size but degrade accuracy due to quantization errors. The authors propose a solution that integrates compression directly into the training process rather than treating it as an afterthought.</p>
+
+<p>### 3. Key Contribution. The main contribution is FedBNN, a framework that trains Binary Neural Networks (BNNs) in a federated setting to enable efficient on-device inference. The novelty lies in a rotation-aware training mechanism that learns binary representations directly during local training. This allows the model to maintain accuracy comparable to full-precision models while drastically reducing resource requirements.</p>
+
+<p>### 4. Methodology. FedBNN encodes model weights as single-bit values \(\{+1, -1\}\) instead of standard 32-bit floating-point numbers. The framework utilizes a rotation-aware training strategy during the local learning phase to minimize the quantization errors that usually plague binary models. This approach shrinks the model footprint and reduces the Floating Point Operations (FLOPs) required during inference.</p>
+
+<p>### 5. Limitations. While the method improves inference efficiency, training binary networks is generally more complex and may require more convergence steps than training real-valued models. The "rotation-aware" component adds specific algorithmic complexity to the local training process, which could be taxing on devices with limited processing power during the training phase. Additionally, the abstract does not detail the communication overhead required to synchronize these specific binary parameters.</p>
+
+<p>### 6. Critical Evaluation. This work offers a pragmatic solution to the trade-off between model complexity and edge resource constraints. The strength of the approach lies in addressing the root cause of accuracy loss in binary models by integrating the binarization process into the training loop itself. However, the practical feasibility depends heavily on whether the computational savings during inference outweigh the potential overhead introduced by the specialized training algorithm on already limited devices.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15119v1" target="_blank">A Tutorial on ALOS2 SAR Utilization: Dataset Preparation, Self-Supervised Pretraining, and Semantic Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Nevrez Imamoglu, Ali Caglayan, Toru Kouyama<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15119v1" target="_blank">2603.15119v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates how to effectively apply self-supervised learning techniques to Synthetic Aperture Radar (SAR) imagery despite challenges like high noise levels and a lack of labels. It also asks how to mitigate regional land cover bias when developing foundation models for specific areas.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself at the intersection of self-supervised learning and remote sensing, specifically addressing the underexplored domain of single-channel SAR data. It fills a gap by adapting popular masked image modeling techniques to handle SAR-specific noise and by providing a roadmap for creating region-specific datasets to reduce geographical bias.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors introduce SAR-W-SimMIM, a weighted variant of the SimMIM framework designed to minimize the impact of speckle noise during pretraining. They also provide a comprehensive methodology for processing ALOS-2 satellite observations into a dataset suitable for training a Vision Transformer on semantic segmentation tasks.</p>
+
+<p><strong>4. Methodology</strong><br>
+The researchers constructed a dataset using ALOS-2 single-channel imagery over Japan and pretrained a Vision Transformer autoencoder using a weighted masking strategy. This strategy uses intensity-weighted loss to handle noise, after which the encoder is fine-tuned with a task-specific decoder to perform semantic segmentation.</p>
+
+<p><strong>5. Limitations</strong><br>
+The study focuses specifically on the Japan region and single-channel HH polarization, which may limit the immediate applicability of the model to other geographical areas or multi-channel SAR data. Additionally, while the method improves upon random initialization, the evaluation relies heavily on comparison with the authors' previous specific variants rather than a broad array of external benchmarks.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This paper offers a valuable practical guide for researchers attempting to bridge the gap between modern self-supervised learning and difficult SAR data modalities. The strength of the work lies in its holistic approach to the pipeline, addressing everything from dataset preparation to noise-aware pretraining, though the scope of the validation remains somewhat geographically constrained.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15409v1" target="_blank">SEA-Vision: A Multilingual Benchmark for Comprehensive Document and Scene Text Understanding in Southeast Asia</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Pengfei Yue, Xingran Zhao, Juntao Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15409v1" target="_blank">2603.15409v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the lack of comprehensive benchmarks for document and scene text understanding in low-resource Southeast Asian languages. It investigates how well current multimodal models handle the region's linguistic diversity and complex document structures compared to high-resource languages.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing benchmarks predominantly focus on high-resource languages, leaving a significant gap in evaluating models within realistic multilingual environments. This work positions itself as a vital resource for Southeast Asia, a region characterized by complex writing systems and diverse document types that are currently underrepresented in AI research.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the SEA-Vision benchmark, which covers 11 Southeast Asian languages across document parsing and text-centric visual question answering tasks. It provides a massive dataset with hierarchical annotations and diverse question types, revealing significant performance gaps in state-of-the-art multimodal models when applied to low-resource languages.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors designed a hybrid annotation pipeline to make large-scale data collection feasible. This method combines automated filtering and scoring with Multimodal Large Language Model (MLLM) assistance, followed by lightweight verification from native speakers to ensure high data quality.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract highlights the difficulty of the task, it does not explicitly detail the limitations of the benchmark construction itself. However, potential limitations include the reliance on MLLM-assisted labeling which may propagate errors, and the inherent challenge of representing the full nuance of every Southeast Asian dialect within a finite dataset.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work is a significant contribution to the field of multilingual AI, addressing a clear disparity in evaluation resources for Southeast Asian languages. The proposed hybrid methodology offers a practical balance between automation and human verification, though the reported performance drop in leading models underscores the long road ahead for achieving truly global language understanding.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.15132v1" target="_blank">WiT: Waypoint Diffusion Transformers via Trajectory Conflict Navigation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Hainuo Wang, Mingjia Li, Xiaojie Guo<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.15132v1" target="_blank">2603.15132v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### Research Question. The paper addresses the problem of trajectory conflicts in pixel-space Flow Matching models. It investigates how to disentangle the intersecting optimal transport paths that occur due to the lack of semantic continuity in the pixel manifold.</p>
+
+<p>### Positioning. Current generative models often use latent autoencoders to bypass reconstruction difficulties, but this approach suffers from information loss. Conversely, models operating directly in pixel space avoid this bottleneck but struggle with intertwined generation trajectories. This work positions itself as a solution that retains the benefits of pixel-space generation while resolving the resulting transport inefficiencies.</p>
+
+<p>### Key Contribution. The main contribution is the Waypoint Diffusion Transformer (WiT), a novel architecture that factorizes the generation process using intermediate semantic waypoints. The paper introduces a mechanism called Just-Pixel AdaLN to dynamically condition the diffusion transformer on these waypoints. This approach successfully untangles generation trajectories, beating strong baselines and accelerating training convergence by 2.2 times.</p>
+
+<p>### Methodology. WiT breaks the optimal transport path into two distinct segments, namely prior-to-waypoint and waypoint-to-pixel. During the denoising process, a lightweight generator infers intermediate semantic waypoints from the current noisy state using pre-trained vision models. These waypoints then guide the primary diffusion transformer, steering the evolution of the image toward the final RGB pixels.</p>
+
+<p>### Limitations. The abstract does not explicitly list specific limitations. However, the approach relies on pre-trained vision models to project semantic waypoints, which introduces a dependency on external model quality. Additionally, the inclusion of a lightweight generator and the Just-Pixel AdaLN mechanism increases architectural complexity compared to standard pixel-space diffusion models.</p>
+
+<p>### Critical Evaluation. This work offers a compelling alternative to latent-based models by directly addressing the geometric challenges of pixel-space generation. The use of waypoints to navigate trajectory conflicts is an intuitive and effective strategy, supported by significant improvements in training speed. While the method adds architectural components, the ability to avoid information loss while maintaining competitive performance makes it a valuable contribution to the field.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.15109v1" target="_blank">PAKAN: Pixel Adaptive Kolmogorov-Arnold Network Modules for Pansharpening</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15033v1" target="_blank">Rethinking Machine Unlearning: Models Designed to Forget via Key Deletion</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15250v1" target="_blank">In-Context Symbolic Regression for Robustness-Improved Kolmogorov-Arnold Networks</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15569v1" target="_blank">Mamba-3: Improved Sequence Modeling using State Space Principles</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15005v1" target="_blank">Pretraining and Benchmarking Modern Encoders for Latvian</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15541v1" target="_blank">Bridging Local and Global Knowledge: Cascaded Mixture-of-Experts Learning for Near-Shortest Path Routing</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15507v1" target="_blank">Federated Learning of Binary Neural Networks: Enabling Low-Cost Inference</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15119v1" target="_blank">A Tutorial on ALOS2 SAR Utilization: Dataset Preparation, Self-Supervised Pretraining, and Semantic Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15409v1" target="_blank">SEA-Vision: A Multilingual Benchmark for Comprehensive Document and Scene Text Understanding in Southeast Asia</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.15132v1" target="_blank">WiT: Waypoint Diffusion Transformers via Trajectory Conflict Navigation</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
