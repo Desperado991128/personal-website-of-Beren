@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-03-24</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">March 24, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月24日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Gaze-based intention recognition</h2>
+                <p><strong>1. 概念定义</strong><br>
+Gaze-based intention recognition是一种利用眼动数据(如注视点轨迹、注视时长和瞳孔直径)来推断用户潜在目标或行为意图的技术。它将原始的生理信号转化为高层语义信息，使机器能够在用户未显式发出指令的情况下预测其下一步行动或需求。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心机制在于建立从眼动特征序列到意图类别的非线性映射。模型通常将眼动数据建模为时间序列，利用循环神经网络(RNN)或Transformer架构捕捉注视点之间的时空依赖关系。其数学目标是学习一个概率模型 \( P(y | X) \)，其中 \( X = \{x_1, x_2, ..., x_T\} \) 表示时间步 \( T \) 内的眼动特征序列，\( y \) 代表具体的意图类别。通过最大化对数似然函数 \( \sum \log P(y | X; \theta) \)，模型优化参数 \( \theta \) 以实现精准的意图分类。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在眼动追踪与LLM的交叉领域，该技术为多模态大模型提供了隐式的交互信号，使AI系统能够主动感知用户状态。它允许LLM根据用户的视觉注意力动态调整生成内容或辅助策略，从而实现从被动响应到主动理解的范式转变。这种能力对于构建无缝的人机交互界面和辅助技术具有重要的研究价值。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+眼动数据不仅是视觉感知的记录，更是认知状态的实时反映，为LLM提供了无需手动输入的“意图通道”。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21051v1" target="_blank">Cortical Policy: A Dual-Stream View Transformer for Robotic Manipulation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xuening Zhang, Qi Lv, Xiang Deng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21051v1" target="_blank">2603.21051v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是针对论文《Cortical Policy. A Dual-Stream View Transformer for Robotic Manipulation》的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 现有的视角变换器在处理多视角观测时，通常以特定视角的方式提取静态视觉表征，这导致了3D空间推理能力不足以及缺乏对动态环境变化的适应性。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作位于机器人操作与认知神经科学的交叉领域，填补了现有方法在静态几何理解与动态注意力调整之间缺乏协同作用的空白。它受人类大脑整合静态与动态视觉信息机制的启发，提出了一种模仿大脑皮层处理视觉信息的新框架。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了Cortical Policy，一种受大脑皮层启发的双流视角变换器架构。其创新点在于构建了静态视图流以增强空间理解，以及动态视图流通过模拟大脑背侧通路实现自适应调整，并成功将两者融合以处理语言条件下的复杂空间任务。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 方法包含两个并行支路，静态视图流利用预训练3D基础模型提取几何一致的关键点特征。动态视图流通过位置感知预训练的自我中心注视估计模型来模拟大脑背侧通路，实现类似眼动追踪的动态注意力调整，最终整合两路互补表征预测动作。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 双流架构的引入增加了模型的参数量和计算复杂度，可能影响推理速度。此外，该方法的有效性高度依赖于预训练3D基础模型的质量以及注视估计模型的准确性，在极端视角遮挡或光照剧烈变化下可能面临鲁棒性挑战。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作巧妙地将认知科学中的双流视觉处理机制引入机器人控制，特别是动态流中对注视的模拟与眼动追踪技术密切相关，展示了神经科学启发AI的巨大潜力。虽然论文主要聚焦于视觉运动控制，但其在语言条件下的多模态处理能力表明，未来结合LLM进行更高级的语义推理和任务规划是一个值得探索的方向。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.21051v1" target="_blank">Cortical Policy: A Dual-Stream View Transformer for Robotic Manipulation</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
