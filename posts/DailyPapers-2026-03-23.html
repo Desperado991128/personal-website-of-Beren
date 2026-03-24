@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-23</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 23, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 23, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Recurrent vs parallel computation</h2>
+                <p>### 1. What is it?<br>
+Recurrent computation processes data sequentially, where the operation at time step \(t\) depends on the result from time step \(t-1\). In contrast, parallel computation executes multiple operations simultaneously, allowing the model to process entire sequences at once rather than step by step. This distinction defines the fundamental trade-off between stateful memory and computational efficiency in modern deep learning architectures.</p>
+
+<p>### 2. How does it work?<br>
+In recurrent modes, the hidden state \(h_t\) is updated iteratively using the formula \(h_t = f(h_{t-1}, x_t)\), creating a dependency chain that prevents simultaneous calculation of future tokens. Parallel computation avoids this bottleneck by processing all tokens independently at once, typically using matrix multiplication operations like \(\text{Attention}(Q, K, V)\) where all positions interact globally. Recent architectures like Mamba use a parallel algorithm during training to compute results efficiently, then switch to a recurrent view for efficient inference. This dual perspective allows models to scale like Transformers while maintaining linear complexity.</p>
+
+<p>### 3. Why does it matter?<br>
+This concept is central to the design of Mamba and State Space Models, which aim to solve the quadratic scaling problem of Transformers without losing the ability to model long contexts. For low-resourced languages, efficient parallel training is crucial to maximize limited computational budgets, while recurrent efficiency reduces latency during deployment. Mixture of Experts models also rely on parallel computation to distribute workload across experts without introducing sequential bottlenecks.</p>
+
+<p>### 4. Key insight. The core trade-off has traditionally been between the fast inference of recurrent models and the fast training of parallel models. New architectures are now bridging this gap by offering parallel training speed with recurrent inference efficiency.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.22283v1" target="_blank">End-to-End Training for Unified Tokenization and Latent Denoising</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Shivam Duggal, Xingjian Bai, Zongze Wu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22283v1" target="_blank">2603.22283v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the inefficiency of multi-stage training pipelines required for current Latent Diffusion Models (LDMs). It investigates whether image tokenization and latent generation can be unified into a single, end-to-end trainable process.</p>
+
+<p>### 2. Positioning. Existing LDMs typically require a distinct pre-training stage for the tokenizer before the diffusion model can be trained on the frozen latent space. This work positions tokenization and generation as two aspects of the same latent inference problem, differing only in their conditioning inputs. It fills a gap in the literature by demonstrating that joint optimization from scratch is feasible without relying on frozen pretrained components.</p>
+
+<p>### 3. Key Contribution. The main contribution is the UNITE architecture, which employs a Generative Encoder to serve simultaneously as an image tokenizer and a latent generator through weight sharing. This structure enables a single-stage training procedure that jointly optimizes the model for both reconstruction and denoising tasks. The model achieves strong performance on ImageNet, reaching a FID score of 1.73 for the Large model, without needing adversarial losses or external pretrained encoders like DINO.</p>
+
+<p>### 4. Methodology. The authors propose a Generative Encoder that executes two forward passes with shared weights. The first pass infers latents from observed images to handle tokenization, while the second pass infers latents from noise and conditioning signals to handle generation. By averaging the gradients from these two passes, the model shapes a shared latent space that effectively supports both image reconstruction and synthesis.</p>
+
+<p>### 5. Limitations. While the model achieves near state of the art results, it does not fully surpass the performance of the best existing multi-stage pipelines. The abstract does not provide details on the computational cost or training stability compared to the traditional staged approach. Additionally, the specific architectural constraints of the Generative Encoder may require careful tuning to balance the objectives of tokenization and generation.</p>
+
+<p>### 6. Critical Evaluation. This work offers a valuable simplification of the LDM training paradigm by successfully removing the dependency on separately trained tokenizers. The insight that tokenization and generation share a fundamental mathematical structure is a strong theoretical contribution that could influence future architecture designs. However, the practical adoption of this method will depend on whether the single-stage training provides significant efficiency gains or ease of use compared to the standard, modular approach.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21489v1" target="_blank">Effective Strategies for Asynchronous Software Engineering Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiayi Geng, Graham Neubig<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21489v1" target="_blank">2603.21489v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the difficulty AI agents face when completing long-horizon software engineering tasks that involve multiple interdependent subtasks. It investigates how to coordinate multiple agents working asynchronously to improve both accuracy and speed without causing conflicts or integration errors.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current AI agents excel at isolated coding tasks but struggle with complex projects where simultaneous work on different components is required. The authors position their work against the failure modes of naive multi-agent systems, such as conflicting edits and synchronization issues. They fill a gap by adapting proven human collaboration strategies to create a structured coordination paradigm for AI.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the introduction of Centralized Asynchronous Isolated Delegation (CAID), a coordination paradigm that uses a central manager and isolated workspaces. The authors demonstrate that utilizing software engineering primitives like git worktree and branch-and-merge workflows allows agents to work concurrently and integrate their work reliably. This approach yields significant accuracy improvements over single-agent baselines on complex benchmarks.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed CAID framework delegates tasks through a central manager which creates dependency-aware plans. Agents execute their assigned subtasks asynchronously in isolated git workspaces to prevent interference. The system then integrates these partial solutions using git merge operations and verifies the combined code using executable tests.</p>
+
+<p><strong>5. Limitations</strong><br>
+The evaluation focuses primarily on Python-based benchmarks, specifically PaperBench and Commit0, which may limit the generalizability of the findings to other programming languages or environments. Additionally, the reliance on a central manager for task delegation could create a bottleneck or single point of failure for extremely large or ambiguous projects.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a pragmatic and effective solution by grounding multi-agent coordination in established software engineering tools rather than reinventing collaboration mechanisms. The substantial performance gains highlight that isolation and structured integration are key to unlocking the potential of asynchronous AI agents.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21829v1" target="_blank">Multi-View Deformable Convolution Meets Visual Mamba for Coronary Artery Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Xiaochan Yuan, Pai Zeng<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21829v1" target="_blank">2603.21829v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. How can we accurately segment coronary arteries from CTA images despite challenges like slender tubular structures, branching complexity, and severe class imbalance? The paper seeks to resolve the trade-off between capturing long-range dependencies and maintaining computational efficiency.</p>
+
+<p>### 2. Positioning. The work positions itself as an alternative to standard CNNs and Vision Transformers (ViTs). It addresses the inability of CNNs to model long-range spatial dependencies and the high computational cost of ViTs. By utilizing State Space Models (SSMs), specifically Mamba, the authors aim to provide a solution that is both context-aware and computationally scalable.</p>
+
+<p>### 3. Key Contribution. The primary contribution is MDSVM-UNet, a framework that integrates multidirectional snake convolution (MDSConv) for feature encoding and residual visual Mamba (RVM) for decoding. It also introduces a progressive two-stage segmentation strategy. This strategy first performs a coarse segmentation to locate regions of interest, then conducts detailed block-level segmentation to refine results and minimize false positives.</p>
+
+<p>### 4. Methodology. The proposed method uses a two-stage pipeline. In the encoding stage, MDSConv learns adaptive offsets along sagittal, coronal, and axial planes to capture the tortuous geometry of blood vessels. In the decoding stage, an RVM-based upsampling block uses selective state space mechanisms to model inter-slice dependencies with linear complexity.</p>
+
+<p>### 5. Limitations. The abstract does not explicitly list limitations, but potential drawbacks can be inferred from the architecture. The two-stage strategy likely increases total inference time compared to single-stage models. Additionally, the effectiveness of the detailed second stage depends heavily on the accuracy of the coarse first stage, meaning initial errors could propagate.</p>
+
+<p>### 6. Critical Evaluation. This work presents a strong hybrid approach that effectively combines the geometric flexibility of deformable convolutions with the efficiency of Mamba. It offers a theoretically sound solution to the specific problem of tubular structure segmentation. However, the complexity of implementing a two-stage pipeline with custom deformable convolutions may present integration challenges compared to standard off-the-shelf models.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.22017v1" target="_blank">AdditiveLLM2: A Multi-modal Large Language Model for Additive Manufacturing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Peter Pak, Amir Barati Farimani<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22017v1" target="_blank">2603.22017v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of adapting general-purpose Large Language Models (LLMs) to the highly specialized domain of additive manufacturing. It asks whether domain adaptive pretraining and visual instruction tuning can yield a proficient multi-modal model using a relatively small, curated dataset.</p>
+
+<p><strong>2. Positioning</strong><br>
+General LLMs often struggle with the specific technical nuances and visual requirements of engineering fields. This work fills a gap by providing an accessible method for domain specialization, moving beyond general capabilities to address the specific needs of additive manufacturing.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors present AdditiveLLM2, a multi-modal model capable of processing both text and images related to additive manufacturing. They also contribute the AdditiveLLM2-OA dataset and a specific benchmark to facilitate future research and evaluation in this domain.</p>
+
+<p><strong>4. Methodology</strong><br>
+The approach involves building upon the instruction-tuned Gemma 3 model and training it on a dataset of roughly 50 million tokens from open-access journals. The process specifically utilizes domain adaptive pretraining combined with visual instruction tuning to enhance both textual and visual understanding.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the reported accuracies are high, the dataset size of 50 million tokens is relatively small compared to the corpora used for foundational models, which may limit the depth of knowledge in niche sub-domains. Additionally, the evaluation is conducted on a specific benchmark, so performance on broader, unstructured industrial problems is not yet fully characterized.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a compelling case for efficient model specialization, showing that high domain accuracy is achievable without massive computational resources. The inclusion of multi-modal capabilities is a notable strength, though further testing on diverse real-world data would strengthen the claims of robustness.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21601v1" target="_blank">Riemannian Geometry Speaks Louder Than Words: From Graph Foundation Model to Next-Generation Graph Intelligence</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Philip S. Yu, Li Sun<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21601v1" target="_blank">2603.21601v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of constructing a robust Graph Foundation Model (GFM) capable of generalizing across multiple domains. It investigates whether Riemannian geometry can provide a better structural foundation for graph intelligence than current Graph Neural Networks or Large Language Models.</p>
+
+<p>### 2. Positioning. This work positions itself as a conceptual alternative to current approaches that rely on Graph Neural Networks (GNNs) or attempt to adapt Large Language Models (LLMs) for graph tasks. It fills a critical gap by arguing that GNNs lack memory retention for pretraining while LLMs fail to capture complex structural dependencies through serialization. The authors propose that geometry, rather than language, is the natural medium for expressing graph complexity.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the proposal of the Riemannian Foundation Model (RFM), a blueprint for next generation graph intelligence rooted in intrinsic geometric properties. This model moves beyond simple representation learning to enable endogenous structural inference and generation. It offers a progressive research agenda that integrates a Riemannian engine with LLMs to solve complex graph applications.</p>
+
+<p>### 4. Methodology. The authors propose using Riemannian geometry as the core mathematical framework to model the intrinsic structure of graphs. The methodology involves a two stage agenda. First, the model achieves universal structural understanding through intrinsic geometry. Second, it rebuilds the LLM with a Riemannian engine to handle general purpose graph modeling.</p>
+
+<p>### 5. Limitations. As this paper presents a conceptual framework, it does not provide experimental validation or specific architectural details for the proposed Riemannian Foundation Model. The complexity of implementing Riemannian geometric operations at scale may pose significant computational hurdles compared to standard Euclidean methods. Additionally, the theoretical integration of a Riemannian engine with existing Large Language Model architectures remains an open technical challenge.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling theoretical shift by recognizing that the non Euclidean nature of graphs makes them a poor fit for standard Euclidean or sequential models. Its strength lies in providing a principled mathematical direction for a field currently struggling to adapt language models to graph data. However, the lack of empirical evidence means the proposal serves more as a visionary manifesto than a proven technical solution.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21571v1" target="_blank">DATASHI: A Parallel English-Tashlhiyt Corpus for Orthography Normalization and Low-Resource Language Processing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Nasser-Eddine Monir, Zakaria Baou<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21571v1" target="_blank">2603.21571v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the critical scarcity of computational resources for Tashlhiyt, a low-resource Amazigh language. It investigates how to effectively normalize diverse, non-standard orthography and evaluates the ability of modern Large Language Models to process this under-represented language.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself as a foundational resource for Amazigh natural language processing, a field historically neglected due to data scarcity. It fills a specific gap by providing a parallel corpus that explicitly addresses the challenge of orthographic inconsistency in user-generated text. This dual focus on translation and normalization distinguishes it from standard parallel datasets.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the DATASHI corpus itself, comprising 5,000 English-Tashlhiyt sentence pairs with a unique subset of 1,500 sentences aligned in both standardized and non-standard forms. This structure enables systematic research into orthography normalization and provides a benchmark for low-resource language processing. The paper also offers a detailed diagnostic analysis of how state-of-the-art models handle specific phonological features.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors constructed a parallel corpus and evaluated state-of-the-art Large Language Models, including GPT-5 and Gemini-2.5-Pro, using zero-shot and few-shot prompting strategies. They measured performance through word and character-level error rates and conducted a fine-grained analysis of edit operations across distinct phonological classes.</p>
+
+<p><strong>5. Limitations</strong><br>
+While significant, the corpus size of 5,000 sentence pairs is relatively small compared to datasets for high-resource languages, which may limit the training of large-scale models. The focus is currently restricted to text-based tasks, though the authors suggest the data could support future speech collection efforts. Additionally, the reliance on proprietary LLMs for evaluation may pose reproducibility challenges for some researchers.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work represents a valuable step forward for low-resource NLP by providing a carefully curated resource for a language with complex phonological characteristics. The detailed error analysis regarding specific phonological features offers deeper insights than simple accuracy metrics alone. However, the limited scale of the dataset means it serves primarily as a benchmark for few-shot learning rather than a solution for training massive models from scratch.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.22275v1" target="_blank">Repurposing Geometric Foundation Models for Multi-view Diffusion</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Wooseok Jang, Seonghu Jeon, Jisang Han et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22275v1" target="_blank">2603.22275v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates the optimal latent space for Novel View Synthesis (NVS) to ensure geometric consistency across different viewpoints. It specifically questions whether the feature space of geometric foundation models is better suited for this task than standard VAE latent spaces.</p>
+
+<p><strong>2. Positioning</strong><br>
+While generative models have mastered single-image creation, they often lack the geometric consistency required for multi-view synthesis. Existing approaches typically use view-independent VAEs that fail to capture cross-view relationships effectively. This work positions itself as a solution that bridges the gap between geometric understanding and generative synthesis by altering the fundamental latent space.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is Geometric Latent Diffusion (GLD), a framework that repurposes the feature space of geometric foundation models for multi-view diffusion. This approach achieves superior 2D image quality and 3D consistency while training significantly faster than VAE-based methods. It also demonstrates competitive performance against state-of-the-art models without relying on heavy generative pretraining.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors replace the traditional VAE encoder with features extracted from a geometric foundation model, creating a latent space that inherently preserves geometric correspondences. A diffusion model is trained to operate directly on these geometric features to synthesize novel views. Finally, a decoder reconstructs high-fidelity RGB images from these generated features.</p>
+
+<p><strong>5. Limitations</strong><br>
+Although competitive, the model is trained from scratch and does not leverage the extensive semantic priors found in large-scale text-to-image models. The performance is also constrained by the capabilities and resolution limits of the underlying geometric foundation model used for feature extraction.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a significant insight by decoupling geometric understanding from the generative process, showing that a better latent space yields better results. The dramatic reduction in training time and high consistency metrics are strong indicators of the method's efficiency and effectiveness. However, the lack of text-to-image pretraining integration might limit its performance on complex, imaginative scenes compared to larger foundation models.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21608v1" target="_blank">DiT-Flow: Speech Enhancement Robust to Multiple Distortions based on Flow Matching in Latent Space and Diffusion Transformers</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Tianyu Cao, Helin Wang, Ari Frummer et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21608v1" target="_blank">2603.21608v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the lack of robustness in current speech enhancement models, which often struggle when deployed in real-world conditions that differ from their limited training data. It investigates whether a flow matching framework operating in a latent space can effectively enhance speech corrupted by diverse distortions such as noise, reverberation, and compression.</p>
+
+<p>### 2. Positioning. This work positions itself as an advancement over existing generative speech enhancement models, which are frequently constrained by narrow evaluation conditions and limited datasets. It fills a critical gap by focusing on multi-condition robustness and addressing the common mismatch between training environments and real-world deployment scenarios.</p>
+
+<p>### 3. Key Contribution. The primary contribution is DiT-Flow, a novel framework that combines flow matching with a Diffusion Transformer (DiT) backbone to process audio within a compact latent space. Additionally, the authors introduce a parameter-efficient training strategy integrating Low-Rank Adaptation (LoRA) with a Mixture of Experts (MoE) framework. This allows the model to handle unseen distortions effectively while updating only 4.9% of the total parameters.</p>
+
+<p>### 4. Methodology. DiT-Flow utilizes a Variational Autoencoder (VAE) to compress audio into compact latent features. It then applies a flow matching objective using a Diffusion Transformer architecture to reconstruct clean speech from distorted inputs. The model is validated on StillSonicSet, a synthetic dataset designed to mimic realistic acoustic scenes, and employs the LoRA-MoE combination to adapt efficiently to new distortion types.</p>
+
+<p>### 5. Limitations. The authors acknowledge that despite improvements in synthetic data realism, a bottleneck remains regarding the inevitable mismatch between training conditions and real-world deployment environments. While the proposed dataset is acoustically realistic, it is still synthetic, which may limit the model's applicability to certain complex or unpredictable real-world audio phenomena.</p>
+
+<p>### 6. Critical Evaluation. This work presents a compelling technical advancement by successfully unifying flow matching, latent diffusion, and parameter-efficient fine-tuning for speech enhancement. The reported ability to outperform state-of-the-art models while modifying only a small fraction of parameters is a significant achievement for resource-constrained applications. However, the reliance on synthetic validation data leaves open questions regarding its performance in truly unconstrained, dynamic real-world settings.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.22225v1" target="_blank">Adapting Self-Supervised Speech Representations for Cross-lingual Dysarthria Detection in Parkinson&#39;s Disease</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Abner Hernandez, Eunjung Yeo, Kwanghee Choi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22225v1" target="_blank">2603.22225v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+How can we effectively detect dysarthria in Parkinson's disease across different languages when speech data is scarce? The core question asks how to disentangle language-specific features from pathological speech features to prevent language identity from confounding the detection model.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current speech models often embed strong language-specific structures that hinder the transfer of medical diagnostic capabilities across languages. This work positions itself at the intersection of self-supervised learning and medical speech analysis. It addresses the specific gap in cross-lingual transferability where limited dysarthric speech data makes training robust, language-agnostic models difficult.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The paper introduces a Representation-level Language Shift (LS) technique. This method adapts source-language speech embeddings to align with target-language distributions using healthy control speech. The contribution is significant because it demonstrably removes language-dependent structures from the embedding space, leading to improved detection performance in cross-lingual scenarios.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors utilize a centroid-based vector adaptation method applied to self-supervised speech representations. They estimate a transformation vector by calculating the difference between centroids of healthy speech in the source and target languages. This vector shifts the source representations to align with the target language distribution, effectively reducing language identity signals.</p>
+
+<p><strong>5. Limitations</strong><br>
+The proposed method requires the availability of healthy control speech data in the target language to estimate the adaptation centroids. The evaluation is restricted to Diadochokinetic (DDK) exercises, which are structured speech tasks, so performance on spontaneous speech remains unverified. Additionally, while improvements were consistent, the gains were smaller in multilingual settings compared to strictly cross-lingual ones.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a mathematically straightforward yet effective solution to the domain shift problem in speech pathology. The strength lies in its interpretability, as the authors provide evidence that the method specifically reduces language identity information. However, the reliance on target-language healthy data limits its applicability in truly zero-resource scenarios where no target data exists.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.21574v1" target="_blank">Adaptive Robust Estimator for Multi-Agent Reinforcement Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Zhongyi Li, Wan Tian, Jingyu Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21574v1" target="_blank">2603.21574v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of training multi-agent systems where it is difficult to determine which agent deserves credit for a successful outcome. It specifically asks how to stabilize training in collaborative reasoning environments plagued by ambiguous agent interactions and noisy, heavy-tailed reward signals.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work situates itself at the intersection of multi-agent collaboration for large language models and robust reinforcement learning. It targets the specific gap where existing methods fail to handle interaction-level ambiguity and the instability caused by outlier rewards during policy optimization.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is a robust framework that combines structural role definition with statistical noise filtering. The authors introduce the Dual-Agent Answer-Critique-Rewrite (DACR) pipeline to solve credit assignment problems and the Adaptive Robust Estimator (ARE) to prevent training divergence caused by noisy rewards.</p>
+
+<p><strong>4. Methodology</strong><br>
+The DACR component enforces a strict three-stage workflow of answer, critique, and rewrite to explicitly attribute each agent's marginal contribution. The ARE component stabilizes the learning process by calculating robust mean estimates for batch experiences, effectively filtering out the bias introduced by heavy-tailed reward distributions.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract demonstrates success in mathematical reasoning and embodied intelligence tasks, the specific focus on a dual-agent structure may limit scalability to more complex systems involving many agents. Additionally, the reliance on a structured pipeline could potentially constrain the flexibility of reasoning compared to more free-form collaborative approaches.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a practical solution to the often overlooked problem of reward noise in multi-agent LLM training. The combination of a structured workflow for credit assignment and a robust estimator for optimization is a logical and significant step toward more reliable collaborative AI systems.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.22283v1" target="_blank">End-to-End Training for Unified Tokenization and Latent Denoising</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21489v1" target="_blank">Effective Strategies for Asynchronous Software Engineering Agents</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21829v1" target="_blank">Multi-View Deformable Convolution Meets Visual Mamba for Coronary Artery Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.22017v1" target="_blank">AdditiveLLM2: A Multi-modal Large Language Model for Additive Manufacturing</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21601v1" target="_blank">Riemannian Geometry Speaks Louder Than Words: From Graph Foundation Model to Next-Generation Graph Intelligence</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21571v1" target="_blank">DATASHI: A Parallel English-Tashlhiyt Corpus for Orthography Normalization and Low-Resource Language Processing</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.22275v1" target="_blank">Repurposing Geometric Foundation Models for Multi-view Diffusion</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21608v1" target="_blank">DiT-Flow: Speech Enhancement Robust to Multiple Distortions based on Flow Matching in Latent Space and Diffusion Transformers</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.22225v1" target="_blank">Adapting Self-Supervised Speech Representations for Cross-lingual Dysarthria Detection in Parkinson&#39;s Disease</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.21574v1" target="_blank">Adaptive Robust Estimator for Multi-Agent Reinforcement Learning</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
