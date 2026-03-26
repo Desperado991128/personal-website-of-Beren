@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-26</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 26, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 26, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Interpretability-based safety</h2>
+                <p>### 1. What is it?<br>
+Interpretability-based safety is an approach to AI alignment that focuses on understanding and controlling the internal mechanisms of a model to ensure it behaves safely. Rather than relying solely on external behavioral checks, this method attempts to inspect the model's internal representations to verify it is reasoning correctly and not just producing superficially correct outputs. It treats the model's internal state as the primary source of truth for its intentions and potential failure modes.</p>
+
+<p>### 2. How does it work?<br>
+This approach uses techniques like mechanistic interpretability to map specific neural network components, such as neurons or attention heads, to human-understandable concepts or features. Researchers often employ linear probes or sparse autoencoders to identify directions in the activation space that correspond to unsafe behaviors. Mathematically, if \( h \) represents a hidden state, we search for a direction vector \( v \) such that the projection \( \langle h, v \rangle \) correlates strongly with a specific risk or concept. By monitoring or modifying these internal activations, we can detect and mitigate hazards before they result in harmful outputs.</p>
+
+<p>### 3. Why does it matter?<br>
+This concept is critical for detecting "alignment faking" or deceptive alignment, where a model appears safe during training but acts dangerously in deployment. It provides a rigorous way to verify that safety generalizes to new domains, such as low-resource languages, by checking if safety features are structurally represented rather than just statistically correlated. It also aids privacy research by helping identify if a model has memorized specific training examples, ensuring that safety does not come at the cost of data leakage.</p>
+
+<p>### 4. Key insight. True safety requires looking inside the model to verify that its internal reasoning process aligns with human intent, rather than just observing that its final output looks correct.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24226v1" target="_blank">UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Liren Yu, Caiyuan Li, Feiyi Dong et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24226v1" target="_blank">2603.24226v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper aims to solve the problem of diminishing returns observed when scaling model parameters alone in industrial search ranking systems. It investigates how to jointly optimize data and model architecture to handle complex heterogeneous data distributions and unlock further performance gains.</p>
+
+<p>### 2. Positioning. This work positions itself against the prevailing trend of focusing solely on architectural improvements inspired by Large Language Model (LLM) scaling laws. It fills a critical gap by demonstrating that model scaling hits a performance ceiling without a corresponding strategy to expand and refine the training data signal.</p>
+
+<p>### 3. Key Contribution. The main contribution is the UniScale framework, a co-design approach that integrates data and model scaling. It introduces ES\(^3\), a system for expanding training signals across intra-domain and cross-domain contexts, and HHSFT, a novel transformer architecture designed to model the complex distributions of this scaled data. This synergy allows the model to surpass the performance limits of structure-only tuning.</p>
+
+<p>### 4. Methodology. The methodology employs a two-part co-design strategy. First, the ES\(^3\) system expands training data using hierarchical label attribution for intra-domain contexts and aligns cross-domain samples to capture user decisions. Second, the HHSFT architecture processes this data using Heterogeneous Hierarchical Feature Interaction and Entire Space User Interest Fusion to effectively model the expanded data distribution.</p>
+
+<p>### 5. Limitations. The abstract does not explicitly list limitations, but the complexity of the proposed co-design implies significant engineering overhead for implementation. Additionally, the reliance on hierarchical label attribution suggests the method may depend heavily on specific data structures that might not be available in all search or recommendation contexts. The evaluation is also focused specifically on E-commerce search, potentially limiting generalizability to other domains without further validation.</p>
+
+<p>### 6. Critical Evaluation. This work provides a strong industrial perspective by highlighting that data scaling is as crucial as model scaling for recommendation systems. The strength of the paper lies in its holistic approach, effectively arguing that architectural advances cannot compensate for limited or noisy training signals. However, the complexity of implementing both a custom sampling system and a specialized transformer architecture may present a high barrier to entry for practitioners with limited resources.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24044v1" target="_blank">MoE-Sieve: Routing-Guided LoRA for Efficient MoE Fine-Tuning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Andrea Manzoni<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24044v1" target="_blank">2603.24044v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### <strong>1. Research Question</strong><br>
+The paper investigates whether standard LoRA fine-tuning is inefficient for Mixture-of-Experts (MoE) models by updating rarely used experts. It asks if routing information can be leveraged to prune unnecessary adapters and reduce computational overhead without sacrificing model performance.</p>
+
+<p>### <strong>2. Positioning</strong><br>
+Standard parameter-efficient fine-tuning methods typically apply adapters uniformly across all model components, ignoring the sparse activation patterns inherent to MoE architectures. This work fills a gap by utilizing expert routing frequency as a signal for adapter placement, challenging the assumption that every expert requires fine-tuning.</p>
+
+<p>### <strong>3. Key Contribution</strong><br>
+The primary contribution is MoE-Sieve, a framework that selectively applies LoRA only to the most frequently activated experts based on routing profiles. The study demonstrates that tuning just the top 25% of experts maintains accuracy within 1 percentage point of full LoRA, while reducing trainable parameters by over 70% and training time by up to 50%.</p>
+
+<p>### <strong>4. Methodology</strong><br>
+The authors first profile expert routing counts using a small calibration dataset to identify which experts handle the majority of tokens. They then select the top-k most-routed experts per layer and apply LoRA adapters exclusively to this subset. This approach freezes the rarely activated "cold" experts, preventing them from introducing gradient noise.</p>
+
+<p>### <strong>5. Limitations</strong><br>
+The method relies on the assumption that the routing patterns observed in the small calibration set are representative of the full training distribution. Additionally, the authors found that more complex selection strategies, such as greedy per-layer budget optimization, do not yield improvements over the simpler uniform top-k selection method.</p>
+
+<p>### <strong>6. Critical Evaluation</strong><br>
+This work provides a practical and impactful solution for reducing the resource costs of fine-tuning large MoE models. The discovery that updating "cold" experts introduces noise rather than capacity is a nuanced insight that advances the understanding of MoE dynamics. However, the reliance on a calibration set for routing statistics could limit effectiveness on datasets where the distribution shifts significantly from the calibration data.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24295v1" target="_blank">RS-SSM: Refining Forgotten Specifics in State Space Model for Video Semantic Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Kai Zhu, Zhenyu Cui, Zehua Zang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24295v1" target="_blank">2603.24295v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the issue of information loss in State Space Models (SSMs) caused by fixed-size state space compression during Video Semantic Segmentation. It investigates how to recover forgotten specific spatiotemporal details to improve pixel-level segmentation accuracy.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current State Space Models are efficient for video processing but struggle to maintain the fine-grained details required for high-quality semantic segmentation. This work positions itself as an improvement over standard SSMs by specifically targeting the trade-off between efficient compression and the preservation of specific spatial details.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the RS-SSM framework, which actively identifies and refines information lost during state space compression. The authors introduce two novel components, the Channel-wise Amplitude Perceptron (CwAP) and the Forgetting Gate Information Refiner (FGIR), to achieve state-of-the-art performance on VSS benchmarks.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed method uses the CwAP module to extract and align the distribution characteristics of specific information within the state space. It then employs the FGIR module to adaptively invert the forgetting gate matrix, which allows the model to recover and refine the lost spatiotemporal specifics.</p>
+
+<p><strong>5. Limitations</strong><br>
+The provided text does not explicitly discuss specific limitations of the approach. However, the addition of refinement modules like CwAP and FGIR likely introduces extra computational parameters and complexity compared to baseline State Space Models.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a compelling solution to the "forgetting" problem inherent in fixed-size state spaces by directly manipulating the forgetting gate mechanism. While the results are impressive, the practical impact relies on whether the added complexity of the refinement modules remains low enough to preserve the efficiency advantages of SSMs.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24003v1" target="_blank">PAC-DP: Personalized Adaptive Clipping for Differentially Private Federated Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Hao Zhou, Siqi Cai, Hua Dai et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24003v1" target="_blank">2603.24003v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. How can federated learning systems maintain high model utility while preserving differential privacy in the presence of heterogeneous clients? The paper specifically investigates how to dynamically set gradient clipping thresholds for individual clients based on their specific privacy needs to solve the poor utility often caused by static clipping approaches.</p>
+
+<p>### 2. Positioning. Traditional differentially private federated learning methods typically rely on a fixed global threshold for gradient clipping. This static approach fails to account for the statistical heterogeneity of client data and their varying privacy sensitivities, which often results in a suboptimal trade-off between privacy and model accuracy. PAC-DP fills this gap by proposing a personalized approach that adapts the clipping mechanism to individual client requirements.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the PAC-DP framework, which maps personalized privacy budgets to optimal clipping thresholds. It introduces a Simulation-CurveFitting technique that uses public data to learn this mapping, avoiding the privacy risks of tuning during training. The authors also provide theoretical guarantees for convergence and a rigorous privacy accounting procedure.</p>
+
+<p>### 4. Methodology. The framework utilizes a server-hosted public proxy dataset to simulate the relationship between privacy budgets \(\epsilon\) and clipping thresholds \(C\). It fits a curve to these simulation results to create a mapping function that predicts an effective threshold for a given budget. During the actual training process, this function is deployed via a lightweight schedule to assign specific clipping thresholds to each client.</p>
+
+<p>### 5. Limitations. The approach requires access to a public proxy dataset that must be representative enough to approximate the behavior of the private data. The simulation phase adds a preliminary computational step before the main training begins. Additionally, the theoretical convergence guarantees rely on standard assumptions regarding the smoothness of the loss function.</p>
+
+<p>### 6. Critical Evaluation. This work presents a compelling and practical solution to a persistent bottleneck in private federated learning by moving away from rigid, global parameters. The reported accuracy improvements of up to 26% and faster convergence rates are significant results that demonstrate the value of personalization. A major strength is the elimination of data-dependent tuning during training, though the necessity of a relevant public proxy dataset could limit applicability in some specialized domains.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24569v1" target="_blank">POLY-SIM: Polyglot Speaker Identification with Missing Modality Grand Challenge 2026 Evaluation Plan</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Marta Moscati, Muhammad Saad Saeed, Marina Zanoni et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24569v1" target="_blank">2603.24569v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the problem of maintaining robust speaker identification when visual data is missing or when speakers use multiple languages. It asks how multimodal systems can effectively handle incomplete inputs and cross-lingual variability without sacrificing performance.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing multimodal speaker identification research typically relies on the assumption that both audio and visual inputs are always available and consistent. This work identifies a critical gap where real-world constraints, such as camera failures or linguistic diversity, cause standard models to fail. It positions itself as a standardized benchmark to bridge the divide between idealized laboratory conditions and practical application requirements.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the creation of the POLY-SIM Grand Challenge 2026, which provides a standardized framework for evaluating speaker identification under specific stressors. The authors introduce a comprehensive setup including a dedicated dataset, task definitions, and an evaluation protocol for missing modality and cross-lingual scenarios. They also provide a baseline model to serve as a reference point for future research submissions.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed approach involves a challenge structure where participants must develop algorithms capable of processing incomplete audio-visual data. The evaluation protocol specifically tests models on their ability to generalize across different languages and manage missing visual modalities. This methodology forces competing systems to leverage whatever data is available rather than relying on complete input pairs.</p>
+
+<p><strong>5. Limitations</strong><br>
+As an evaluation plan, the paper focuses on organizing the challenge rather than presenting a novel technical solution to the problem itself. The actual difficulty and quality of the benchmark depend heavily on the specific characteristics of the dataset, which are not detailed in the abstract. Furthermore, the baseline model provided is likely a foundational starting point and may not represent state-of-the-art performance on these complex tasks.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work is timely and highly relevant, addressing practical robustness issues that often hinder the deployment of multimodal AI systems. By formalizing the problem of missing modalities and polyglot speech, the challenge creates a necessary incentive for developing more resilient algorithms. However, the ultimate value of this contribution will depend on the diversity of the dataset and the engagement of the research community.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24562v1" target="_blank">Scaling Recurrence-aware Foundation Models for Clinical Records via Next-Visit Prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Haresh Rengaraj Rajamohan, Xiang Gao, Weicheng Zhu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24562v1" target="_blank">2603.24562v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates how to effectively apply large-scale generative pretraining to structured electronic health records (EHRs). It specifically asks how to model the recurrence of medical events accurately and how model scaling behaves in data-constrained clinical settings.</p>
+
+<p><strong>2. Positioning</strong><br>
+While foundation models have transformed natural language processing, their application to structured EHR data remains underexplored. This work fills a critical gap by addressing the unique temporal dynamics of patient histories, specifically challenging standard evaluation metrics that fail to distinguish between new diagnoses and recurring conditions.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors introduce RAVEN, a generative pretraining strategy that autoregressively predicts clinical events while explicitly accounting for recurring conditions. They identify and correct a major evaluation pitfall where repeated event tokens artificially inflate performance metrics. The study also provides empirical evidence that increasing model size is suboptimal without a corresponding increase in data volume for EHR tasks.</p>
+
+<p><strong>4. Methodology</strong><br>
+RAVEN utilizes a Transformer architecture trained on over one million patient records to generate tokenized clinical events for a patient's next visit based on their history. The model employs a specific regularization technique to distinguish between the onset of a condition and its subsequent occurrences. The authors evaluate the model using zero-shot disease forecasting, comparing it against fully fine-tuned models and simulation-based approaches.</p>
+
+<p><strong>5. Limitations</strong><br>
+The study operates within a data-constrained and compute-saturated regime, suggesting that the upper bounds of model performance may be restricted by dataset size rather than model architecture. Although the model generalizes to external cohorts, it struggles with lossy clinical code mappings and gaps in feature coverage. The reliance on next-visit prediction may also limit the ability to capture very long-term dependencies compared to other modeling objectives.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work provides a significant methodological correction by exposing how repeated tokens can distort performance metrics in clinical modeling. The finding that RAVEN rivals fine-tuned models in a zero-shot setting is a strong validation of generative pretraining for healthcare. However, the emphasis on the need for massive data scaling presents a practical challenge, as large-scale, high-quality EHR data is notoriously difficult to curate due to privacy and fragmentation issues.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24442v1" target="_blank">Relaxing Constraints in Anonymous Multi Agent Path Finding for Large Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Stepan Dergachev, Dmitry Avdeev<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24442v1" target="_blank">2603.24442v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the problem of Anonymous Multi-Agent Path-finding (AMAPF) in continuous environments where agents are modeled as large disks. Specifically, it investigates how to relax the strict spatial constraints required by existing algorithms regarding the distance between start and goal positions.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current MAPF research often relies on discrete grids that ignore agent size, making them unsuitable for real-world robotics. Conversely, existing continuous space methods impose restrictive constraints, such as requiring a large minimum distance between starting and ending positions. This work bridges the gap by enhancing continuous algorithms to be more practical for dense environments like warehouses.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is a modification to an existing continuous AMAPF algorithm that significantly reduces the required minimum separation between start and goal positions. The authors successfully lower the separation limit from \(4\) agent radii to \(2\sqrt{3}\) agent radii. They also provide a theoretical proof that this reduction maintains the original guarantees of safety and completeness.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors analyze the geometric constraints of an existing algorithm designed for disk-shaped agents in continuous space. They propose a modification to the algorithm's logic to allow for closer proximity of start and goal locations. This is followed by a rigorous theoretical derivation to prove that the new bounds preserve collision-free movement and goal attainment.</p>
+
+<p><strong>5. Limitations</strong><br>
+The proposed method still imposes a minimum separation constraint of \(2\sqrt{3}\) radii, which may remain restrictive in extremely cluttered or densely populated environments. Additionally, the work assumes all agents are disks of equal size, which limits its direct applicability to heterogeneous robot fleets with varying geometries. The validation is purely theoretical, leaving empirical performance in realistic simulations unexplored.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research offers a valuable theoretical improvement that makes continuous MAPF algorithms more flexible and applicable to real-world scenarios. The strength of the work lies in the rigorous mathematical proof that ensures safety is not compromised by the relaxed constraints. However, the reliance on specific geometric assumptions and the lack of experimental validation mean its practical efficiency in complex, dynamic environments remains to be seen.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24422v1" target="_blank">OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Ben Chen, Siyuan Wang, Yufei Ma et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24422v1" target="_blank">2603.24422v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the limitations of existing generative search frameworks, specifically their inability to fully understand complex queries, discover latent user intents, and avoid overfitting to narrow historical data. The core research question asks how to enhance generative retrieval with latent reasoning to overcome these specific bottlenecks in an industrial setting.</p>
+
+<p>### 2. Positioning. This work builds upon the Generative Retrieval (GR) paradigm, moving beyond standard cascaded architectures to offer end-to-end optimization. It positions itself as an upgrade to the industrial-scale OneSearch framework, filling the gap between simple log-fitting and the need for deep, reasoning-based user intent modeling.</p>
+
+<p>### 3. Key Contribution. The main contribution is the OneSearch-V2 framework, which introduces three novel components to improve search quality. These include a thought-augmented query understanding module, a reasoning-internalized self-distillation training pipeline, and a behavior preference alignment system. Together, these innovations allow the model to reason about user intent rather than just matching keywords or historical patterns.</p>
+
+<p>### 4. Methodology. The authors propose a three-pronged approach involving thought-augmented processing to deepen query understanding. They utilize self-distillation to uncover implicit user intentions that are not present in existing logs. Finally, they implement a preference alignment optimization system to prevent reward hacking and better incorporate direct user feedback.</p>
+
+<p>### 5. Limitations. The provided text does not explicitly discuss specific technical limitations or failure cases of the OneSearch-V2 framework. Potential limitations inherent to this approach could include the complexity of tuning the self-distillation process and the dependency on high-quality direct user feedback for effective preference alignment.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a robust solution for industrial search challenges, demonstrating impressive gains in key business metrics like conversion rates and order volume. The strength of the work lies in its practical utility, achieving better user experiences and mitigating issues like information bubbles without adding inference latency. While the results are strong, the lack of discussion on computational overhead for training or data requirements leaves some practical implementation details unclear.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24511v1" target="_blank">Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Alexander Panfilov, Peter Romov, Igor Shilov et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24511v1" target="_blank">2603.24511v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">attack_defense</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+Can an autonomous research pipeline powered by an LLM agent discover novel adversarial attack algorithms that outperform existing state-of-the-art methods? The paper investigates whether automating the iterative research process can yield superior solutions for jailbreaking and prompt injection attacks against large language models.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself at the intersection of autonomous AI research and AI safety, building upon recent advancements in LLM agents for coding and engineering tasks. It fills a gap in the literature by demonstrating that incremental safety research, specifically white-box adversarial red-teaming, can be successfully automated due to the availability of strong starting points and dense quantitative feedback.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the discovery of novel white-box adversarial attack algorithms that significantly outperform over 30 existing baselines. The discovered methods achieve up to 40% attack success rate on specific safety benchmarks where previous methods achieved 10% or less, and demonstrate remarkable transferability by achieving 100% success rates against hardened models like Meta-SecAlign-70B.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose an "autoresearch" pipeline powered by Claude Code that iteratively improves upon existing attack implementations like GCG. The agent autonomously modifies code and strategies based on quantitative feedback from the optimization objective, effectively treating algorithm discovery as a coding and optimization task.</p>
+
+<p><strong>5. Limitations</strong><br>
+The study focuses primarily on white-box attacks, which require access to model weights, limiting the applicability of the findings to black-box scenarios where model internals are hidden. Additionally, the automated discovery of powerful jailbreaking techniques raises significant dual-use concerns, as the release of such algorithms could potentially be misused by malicious actors.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This paper provides compelling evidence that LLM agents can act as effective autonomous researchers in the security domain, delivering quantitative improvements over human-designed baselines. A key strength is the demonstration of transferability to held-out models, though the reliance on white-box access may limit the broader relevance of the specific attacks discovered.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24366v1" target="_blank">CoordLight: Learning Decentralized Coordination for Network-Wide Traffic Signal Control</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yifeng Zhang, Harsh Goel, Peizhuo Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24366v1" target="_blank">2603.24366v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of achieving scalable and efficient network-wide traffic signal control in decentralized environments. It specifically investigates how multiple agents can overcome partial observability to coordinate effectively and optimize traffic flow across large urban networks.</p>
+
+<p>### 2. Positioning. This work positions itself within the field of Multi-Agent Reinforcement Learning (MARL) for traffic control. It targets the gap between single-intersection optimization and network-wide scalability, noting that existing methods often struggle with the complexities of coordination and limited visibility in decentralized settings.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the CoordLight framework, which combines two novel components to enhance both local decision-making and neighborly coordination. The authors introduce Queue Dynamic State Encoding (QDSE) for better state representation and Neighbor-aware Policy Optimization (NAPO) to facilitate targeted collaboration between intersections.</p>
+
+<p>### 4. Methodology. The methodology employs a MARL framework where agents use QDSE to encode local traffic dynamics based on vehicle queuing models. The proposed NAPO algorithm integrates an attention mechanism that calculates robust advantages by discerning dependencies between adjacent agents, allowing the system to prioritize interactions with influential neighbors.</p>
+
+<p>### 5. Limitations. While the abstract highlights strong empirical results, potential limitations include the computational overhead introduced by the attention mechanism as the network size grows. Additionally, the reliance on queuing models for state representation may not fully capture highly complex or chaotic traffic behaviors that deviate from standard flow models.</p>
+
+<p>### 6. Critical Evaluation. This work appears to be a robust contribution to the field, validated by testing on large-scale datasets with up to 196 intersections. Its strength lies in the hybrid approach of combining domain-specific knowledge (queuing models) with advanced learning techniques (attention mechanisms), though real-world deployment would require validation beyond simulation environments.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.24226v1" target="_blank">UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24044v1" target="_blank">MoE-Sieve: Routing-Guided LoRA for Efficient MoE Fine-Tuning</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24295v1" target="_blank">RS-SSM: Refining Forgotten Specifics in State Space Model for Video Semantic Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24003v1" target="_blank">PAC-DP: Personalized Adaptive Clipping for Differentially Private Federated Learning</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24569v1" target="_blank">POLY-SIM: Polyglot Speaker Identification with Missing Modality Grand Challenge 2026 Evaluation Plan</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24562v1" target="_blank">Scaling Recurrence-aware Foundation Models for Clinical Records via Next-Visit Prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24442v1" target="_blank">Relaxing Constraints in Anonymous Multi Agent Path Finding for Large Agents</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24422v1" target="_blank">OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24511v1" target="_blank">Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24366v1" target="_blank">CoordLight: Learning Decentralized Coordination for Network-Wide Traffic Signal Control</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

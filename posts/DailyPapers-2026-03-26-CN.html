@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-03-26</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">March 26, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月26日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Interpretability-based safety</h2>
+                <p><strong>1. 概念定义</strong><br>
+基于可解释性的安全性是指利用模型内部表征和决策机制的分析技术来确保AI系统的安全运行。它不单纯依赖外部行为测试，而是通过检查模型内部的激活状态和电路逻辑来识别潜在的风险行为。这种方法能够发现那些在输出中不可见但在内部存在的隐患，例如隐私泄露或欺骗性对齐。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心机制在于将模型的高层行为映射到具体的内部组件，例如特定神经元或注意力头。研究者通过训练线性探针或进行因果干预来定位负责特定安全关键特征的子网络。例如在隐私保护场景中，可以检测隐藏状态 \( h \) 是否编码了敏感属性 \( y \)，通过最小化探针的分类损失 \( \mathcal{L}(P(h), y) \) 来量化信息泄露风险。这使得我们能够精确控制模型的行为，而不是将其视为黑盒。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这一研究方向对于构建可信赖的AI至关重要，因为它提供了一种从内部机制层面验证模型对齐情况的方法。在Mamba架构或低资源语言等新兴领域，这种内部视角能确保安全机制在新范式下依然有效且未被绕过。结合差分隐私等技术，它还能作为一种审计工具，验证模型是否真正遗忘了敏感训练数据。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+真正的安全不仅在于模型输出的结果是否无害，更在于其内部推理过程是否透明且符合预期。只有理解了模型内部的运作逻辑，才能从根本上排除隐蔽的安全隐患。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24226v1" target="_blank">UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Liren Yu, Caiyuan Li, Feiyi Dong et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24226v1" target="_blank">2603.24226v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的搜索排序模型在单纯增加参数规模时面临收益递减的问题，且复杂的异构数据分布导致的性能下降难以仅通过模型设计来恢复。本文旨在解决如何通过数据与架构的协同设计来突破模型性能瓶颈的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于工业界搜索与推荐系统扩展律研究的前沿，区别于以往仅关注模型架构改进的思路。它填补了数据规模扩展与模型架构设计之间缺乏协同优化的研究空白，提出了一种联合优化的新范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了UniScale框架，实现了数据规模与模型架构的协同优化。主要创新包括构建全空间样本系统ES\(^3\)以扩展训练信号，以及设计异构分层样本融合Transformer (HHSFT) 来有效建模复杂的异构数据分布。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法包含两个核心部分。首先是ES\(^3\)系统，它通过分层标签归因构建全局监督信号，并引入跨域样本以丰富训练数据。其次是HHSFT架构，利用异构分层特征交互和全空间用户兴趣融合机制，有效处理扩展后的复杂数据分布。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文摘要未明确提及局限性，但该方法的复杂性可能导致工程实现和系统维护成本较高。此外，该方法主要在大规模电商搜索平台上验证，在其他类型推荐场景中的泛化能力有待进一步考察。数据扩展带来的计算资源消耗也是一个潜在挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的实践价值，它打破了单纯追求模型参数规模的传统思路，强调了数据质量与模型架构匹配的重要性。通过协同设计，该方法成功释放了模型缩放的潜力，为工业级大规模推荐系统的优化提供了极具参考价值的路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24044v1" target="_blank">MoE-Sieve: Routing-Guided LoRA for Efficient MoE Fine-Tuning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Andrea Manzoni<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24044v1" target="_blank">2603.24044v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+标准LoRA微调混合专家模型时会对所有专家添加适配器，但专家路由分布极度不均，导致对低频激活的冷专家进行微调效率低下。本研究旨在解决如何利用路由信息选择性微调专家，从而在保持性能的同时大幅提升效率。</p>
+
+<p>### 2. 研究定位<br>
+现有MoE微调研究多关注适配器结构或路由机制改进，较少关注基于专家激活频率的选择性微调策略。这项工作填补了MoE专家激活模式分析的空白，提出了一种基于数据驱动分析的极简高效微调范式。</p>
+
+<p>### 3. 核心贡献<br>
+论文提出了MoE-Sieve框架，通过分析路由计数仅选择每层Top-\(k\)专家进行LoRA微调。该方法在仅微调25%专家的情况下实现了与全量LoRA相当的性能，同时减少了约70%的可训练参数并缩短了50%的训练时间。研究还揭示了微调冷专家可能引入梯度噪声而非提升精度的现象。</p>
+
+<p>### 4. 方法概述<br>
+MoE-Sieve首先在一个小的校准数据集上统计各层专家的路由频次。随后根据频次排序，每层选取被路由次数最多的Top-\(k\)个专家。最后仅对这些高频专家应用LoRA适配器进行微调，忽略其余低频专家。</p>
+
+<p>### 5. 局限与不足<br>
+该方法依赖于校准集的路由分布，若下游任务数据分布与校准集差异巨大，效果可能会受限。虽然实验覆盖了不同架构，但对于极深或极宽的MoE模型，固定的Top-\(k\)策略的泛化性仍需进一步验证。此外，该方法主要针对冻结主干网络的场景，可能不适用于全参数微调。</p>
+
+<p>### 6. 评价与思考<br>
+这是一项非常实用且具有洞察力的工作，通过简单的观察解决了复杂的效率问题。它证明了精准定位关键参数比盲目全量微调更有效，符合“少即是多”的原则。该方法实现简单且易于集成，对于资源受限的大模型微调场景具有很高的应用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24295v1" target="_blank">RS-SSM: Refining Forgotten Specifics in State Space Model for Video Semantic Segmentation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kai Zhu, Zhenyu Cui, Zehua Zang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24295v1" target="_blank">2603.24295v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结。</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 视频语义分割任务需要像素级的时空建模能力以维持时间一致性，但现有的状态空间模型在进行线性复杂度的状态空间压缩时，固定大小的状态空间不可避免地会遗忘特定的细节信息，这严重限制了模型在像素级分割任务上的性能表现。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作聚焦于视频语义分割领域中状态空间模型的优化，旨在解决模型效率与细粒度信息保留之间的矛盾。它填补了现有SSM方法在压缩过程中丢失特定时空细节这一关键空白，通过补偿被遗忘的信息提升了模型在像素级任务中的表现。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了RS-SSM方法，通过互补地细化被遗忘的时空细节来增强分割性能。主要创新点包括设计了通道级振幅感知器用于提取和对齐特定信息的分布特征，以及提出了遗忘门信息细化器来自适应地反转和修正遗忘门矩阵。该方法在提升分割精度的同时，保持了较高的计算效率。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 该方法包含两个核心模块。首先是通道级振幅感知器，它负责从状态空间中提取特定信息的分布特征并进行对齐。其次是遗忘门信息细化器，它根据提取的分布特征自适应地调整遗忘门矩阵，利用反转后的遗忘门来补充在压缩过程中丢失的特定信息，从而增强时空像素级分割能力。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 尽管方法声称保持了高效率，但引入额外的细化模块不可避免地增加了模型的参数量和推理延迟。该机制主要针对特定信息的恢复，可能在处理极长序列或超高分辨率视频时面临内存访问瓶颈。此外，该方法在非语义分割类视频任务上的泛化能力尚未在摘要中明确体现。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作敏锐地指出了状态空间模型在压缩过程中“遗忘特定信息”的本质缺陷，并提出了一种巧妙的逆向修正思路。通过显式建模和恢复被遗忘的细节，该工作成功在保持SSM计算优势的同时提升了像素级任务的精度，为后续高效视频理解模型的设计提供了极具价值的参考方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24003v1" target="_blank">PAC-DP: Personalized Adaptive Clipping for Differentially Private Federated Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Hao Zhou, Siqi Cai, Hua Dai et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24003v1" target="_blank">2603.24003v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+传统差分隐私联邦学习(DP-FL)方法通常依赖固定的梯度裁剪阈值，这种静态设置忽略了客户端之间的异构性以及各异的隐私敏感度，导致隐私与模型效用之间的权衡不佳。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于记录级局部差分隐私联邦学习领域，旨在解决现有方法无法根据个性化隐私需求动态调整裁剪参数的问题。它填补了如何在保护隐私的前提下，根据用户特定的隐私预算自适应优化梯度裁剪阈值的研究空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了PAC-DP框架，创新性地引入模拟与曲线拟合方法，利用服务器端的公共代理数据集学习隐私预算 \(\epsilon\) 与裁剪阈值 \(C\) 之间的映射关系。该工作不仅提供了理论上的收敛性保证和隐私核算程序，还在多个基准测试中实现了最高26%的准确率提升和45.5%的收敛加速。</p>
+
+<p><strong>4. 方法概述</strong><br>
+PAC-DP利用服务器端的公共代理数据集进行离线模拟，拟合出个性化隐私预算到梯度裁剪阈值的映射函数。在在线训练阶段，该方法通过轻量级的逐轮调度策略部署该映射，实现了基于预算条件的阈值选择，从而避免了训练过程中依赖私有数据的参数调优。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法的有效性依赖于服务器端可用的公共代理数据集，若代理数据与用户私有数据分布差异较大，可能影响映射关系的准确性。此外，虽然避免了训练时的数据依赖调优，但离线的模拟与曲线拟合过程仍需消耗额外的计算资源。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作通过引入个性化自适应裁剪机制，有效缓解了差分隐私联邦学习中的客户端异构性难题，具有显著的实际应用价值。其将公共数据知识迁移至私有数据训练过程的设计思路巧妙，但对公共代理数据集的依赖在实际落地场景中可能构成一定门槛。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24569v1" target="_blank">POLY-SIM: Polyglot Speaker Identification with Missing Modality Grand Challenge 2026 Evaluation Plan</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Marta Moscati, Muhammad Saad Saeed, Marina Zanoni et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24569v1" target="_blank">2603.24569v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+该论文旨在解决现实场景中多模态说话人识别系统面临的模态缺失和跨语言干扰问题。核心挑战在于如何在视觉信息不可用且说话人使用不同语言时，保持系统的鲁棒性和识别准确率。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究通常假设训练和测试阶段拥有完整且同质的音视频数据，这在实际应用中往往难以满足。本工作填补了在模态缺失与跨语言双重复杂条件下进行说话人识别的研究空白，推动了该领域向更实用的方向发展。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是提出了POLY-SIM Grand Challenge 2026，建立了一个标准化的基准测试平台。该工作不仅构建了专门的数据集和评估协议，还提供了基线模型，为开发能够处理不完整多模态输入的鲁棒算法奠定了基础。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作为一个评测计划，论文详细阐述了挑战赛的设计方案，包括构建包含多语种说话人的数据集和制定具体的任务流程。文中还提出了评估协议和基线模型，用于衡量系统在缺失模态和跨语言场景下的表现。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+作为一份评测计划，论文主要侧重于框架设计和基准建立，尚未深入探讨具体的算法改进细节。此外，虽然指出了模态缺失和跨语言的挑战，但实际数据采集的复杂性和标注噪声可能会对参赛算法带来未预料的干扰。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的实用价值，切中了当前多模态学习脱离理想化假设的关键痛点。通过提供标准化的基准，它能有效引导学术界关注真实环境下的鲁棒性问题，促进更具落地潜力的说话人识别技术发展。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24562v1" target="_blank">Scaling Recurrence-aware Foundation Models for Clinical Records via Next-Visit Prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Haresh Rengaraj Rajamohan, Xiang Gao, Weicheng Zhu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24562v1" target="_blank">2603.24562v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在探索大规模预训练模型在结构化电子健康记录(EHR)数据中的应用潜力，并解决现有评估方法中因重复事件标记导致的性能指标虚高问题。核心研究问题是如何设计一种生成式预训练策略，使其能有效利用患者历史信息预测下次就诊事件，并正确处理疾病的复发情况。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了大规模语言模型技术在医疗结构化数据领域应用相对不足的空白。它挑战了传统的基于模拟的下一词元预测方法，提出了一种更符合临床实际场景的生成式建模方案。同时，该研究也是对EHR领域基础模型缩放定律的一次重要实证探索。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了RAVEN模型，这是一种基于复发感知下次就诊事件预测的新型生成式预训练策略。研究揭示了EHR模型评估中的一个关键陷阱，即如果不区分新发病例与复发病例，重复事件标记会人为地夸大模型性能。此外，论文还实证分析了数据受限环境下的模型缩放行为，指出单纯增加模型规模而不增加数据量是次优的。</p>
+
+<p><strong>4. 方法概述</strong><br>
+RAVEN利用超过一百万个体的数据集，通过自回归方式生成下次就诊的标记化临床事件。模型引入了针对重复事件预测的正则化机制，基于患者病史进行条件生成。该方法直接优化下次就诊预测任务，而非依赖传统的表示学习或基于模拟的预训练目标。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究发现，在数据受限且算力饱和的情况下，单纯扩大模型参数规模并不能带来最优的性能提升，这对数据规模提出了更高要求。尽管模型在外部队列中表现出了泛化能力，但在面对有损的临床代码映射和特征覆盖缺失时，仍面临实际应用的挑战。此外，该研究主要关注下次就诊预测，对于更长期的临床预测任务可能需要进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作不仅在技术上提出了一个性能优越的模型，更重要的是指出了EHR建模领域长期存在的评估方法论缺陷，具有很高的启发性。其对缩放定律的分析表明，医疗AI领域不能盲目照搬通用NLP的经验，必须重视数据的垂直领域特性。该模型在零样本预测上媲美全监督模型的表现，展示了基础模型在医疗预测任务中的巨大应用潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24442v1" target="_blank">Relaxing Constraints in Anonymous Multi Agent Path Finding for Large Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Stepan Dergachev, Dmitry Avdeev<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24442v1" target="_blank">2603.24442v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文解决了连续空间中匿名多智能体路径规划 (AMAPF) 的问题，特别关注具有物理尺寸的大型智能体。核心问题在于现有算法对起始和目标位置之间的距离有过于严格的约束，限制了其在真实场景中的适用性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于连续空间多智能体路径规划领域，填补了现有方法在处理大型智能体时几何约束过于苛刻的空白。相比于忽略智能体尺寸的离散网格方法，本文聚焦于更具现实意义的连续空间场景，致力于解决现有算法对起始和目标位置间距要求过高的问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是提出了一种改进算法，成功将起始和目标位置之间的最小分离距离要求从 \(4r\) 降低至 \(2\sqrt{3}r\)。其创新之处在于在放宽几何约束的同时，从理论上证明了算法依然保持原有的完备性和安全性，即保证所有智能体无碰撞地到达目标。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文基于一种现有的连续空间AMAPF算法进行改进，该算法将智能体建模为等大小的圆盘。作者通过调整几何约束条件，提出了一种修改方案，使得在更紧凑的空间布局下依然能够构建有效的路径规划。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管降低了距离限制，但 \(2\sqrt{3}r\) 的最小间距要求在极度拥挤的环境中仍然可能构成障碍。研究假设智能体为等大小的圆盘模型，这可能无法完全适用于形状不规则的机器人。此外，摘要主要侧重于理论证明，未详细提及算法在实际大规模场景中的计算效率。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作在理论与应用之间取得了良好的平衡，通过数学优化显著提升了算法在受限环境下的适用性。其优点在于提供了严格的理论保证，增强了算法在实际机器人部署中的可靠性。不过，对于非圆形智能体或动态障碍物环境的扩展性仍有待进一步探索。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24422v1" target="_blank">OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ben Chen, Siyuan Wang, Yufei Ma et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24422v1" target="_blank">2603.24422v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有生成式检索框架在处理复杂查询时存在理解不足，难以有效挖掘用户潜在意图，且易于过拟合狭窄历史偏好，限制了系统性能的进一步提升。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于工业级生成式检索系统的深度优化。它在现有端到端检索范式的基础上，填补了如何通过引入潜在推理机制来增强模型深层理解能力与意图挖掘能力的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了OneSearch-V2框架，创新性地设计了思维增强的查询理解模块，推理内化的自蒸馏训练流程，以及行为偏好对齐优化系统。这些贡献使得系统在不增加推理成本的前提下，显著提升了搜索质量与商业指标，有效缓解了信息茧房问题。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法包含三个核心步骤。首先通过思维增强模块突破浅层语义匹配限制，其次利用推理内化自蒸馏挖掘用户隐式意图，最后通过行为偏好对齐优化系统解决单一指标下的奖励黑客问题。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究主要基于电商场景验证，在通用搜索或其他垂直领域的适用性需进一步探讨。自蒸馏训练流程的引入可能会增加模型训练阶段的计算开销与复杂度。论文未详细讨论模型在面对极端冷启动数据时的表现。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作展示了将推理能力与生成式检索结合的巨大潜力，证明了深度语义理解对提升搜索系统商业价值的关键作用。其亮点在于不仅关注模型架构的改进，还通过偏好对齐系统解决了实际落地中的奖励黑客问题，具有很强的工程实践指导意义。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24511v1" target="_blank">Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Alexander Panfilov, Peter Romov, Igor Shilov et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24511v1" target="_blank">2603.24511v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">attack_defense</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨能否利用LLM agents自动发现新的对抗攻击算法，以解决现有攻击方法在越狱和提示注入任务中效果有限的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于LLM自主研究与AI安全的交叉领域，填补了自动化发现最先进对抗攻击算法的空白。它验证了增量安全与安保研究可以通过LLM agents实现自动化，是对现有AI自主研究文献的重要扩展。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Claudini系统，成功发现了性能显著优于30多种现有基线的攻击算法。实验结果表明，新算法在特定安全防护模型上的攻击成功率从基线的 \(\leq 10\%\) 提升至 \(40\%\)，且在Meta-SecAlign-70B模型上达到了 \(100\%\) 的攻击成功率。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法构建了一个基于Claude Code的autoresearch流水线，以现有的GCG等攻击算法为起点进行迭代优化。系统利用白盒对抗红队测试提供的密集定量反馈，自动生成并筛选出更优的攻击算法实现。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究主要集中在白盒攻击场景，这要求攻击者拥有模型的完全访问权限，可能限制了其在黑盒场景下的直接应用。同时，自动生成的高效攻击算法虽然有助于防御测试，但也可能被恶意行为者利用，带来潜在的安全风险。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具前瞻性，有力证明了LLM agents在自动化科学研究特别是AI安全领域的巨大潜力。其惊人的实验结果不仅展示了自动化算法发现的可行性，也警示我们需要重新审视现有防御机制在强对抗环境下的脆弱性。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24366v1" target="_blank">CoordLight: Learning Decentralized Coordination for Network-Wide Traffic Signal Control</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yifeng Zhang, Harsh Goel, Peizhuo Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24366v1" target="_blank">2603.24366v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决分散式交通信号控制中因部分可观测性和协调复杂性导致的可扩展性及效率难题。核心问题是如何在缺乏全局信息的情况下，实现大规模交通网络中多智能体的高效协同决策。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于多智能体强化学习(MARL)在交通信号控制领域的应用研究。它填补了现有方法在处理大规模网络时难以有效建模邻居间状态与动作依赖关系的空白，致力于提升局部路口与邻居智能体间的协同能力。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了CoordLight框架，包含基于车辆排队模型的队列动态状态编码(QDSE)，以及邻居感知策略优化算法(NAPO)。创新之处在于利用注意力机制捕捉邻居间的依赖关系，实现了针对性的协同决策和更稳健的策略更新。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法通过QDSE增强智能体对局部交通动态的分析与预测能力。NAPO算法则通过整合注意力机制来识别相邻智能体间的状态和动作依赖，从而在策略优化中优先处理关键邻居的交互，实现网络级的协调控制。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管在仿真环境中表现优异，但该方法在极端交通拥堵或突发事故等非稳态场景下的鲁棒性仍有待验证。此外，引入注意力机制虽然提升了协调能力，但也增加了模型的计算复杂度，可能对实时控制系统的推理速度提出挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将先验知识(排队模型)与深度强化学习结合，有效平衡了局部决策精度与全局协同效率。其在大规模真实路网数据集上的验证充分证明了方法的实用价值，为解决大规模多智能体协同问题提供了优秀的范式。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.24226v1" target="_blank">UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24044v1" target="_blank">MoE-Sieve: Routing-Guided LoRA for Efficient MoE Fine-Tuning</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24295v1" target="_blank">RS-SSM: Refining Forgotten Specifics in State Space Model for Video Semantic Segmentation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24003v1" target="_blank">PAC-DP: Personalized Adaptive Clipping for Differentially Private Federated Learning</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24569v1" target="_blank">POLY-SIM: Polyglot Speaker Identification with Missing Modality Grand Challenge 2026 Evaluation Plan</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24562v1" target="_blank">Scaling Recurrence-aware Foundation Models for Clinical Records via Next-Visit Prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24442v1" target="_blank">Relaxing Constraints in Anonymous Multi Agent Path Finding for Large Agents</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24422v1" target="_blank">OneSearch-V2: The Latent Reasoning Enhanced Self-distillation Generative Search Framework</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24511v1" target="_blank">Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24366v1" target="_blank">CoordLight: Learning Decentralized Coordination for Network-Wide Traffic Signal Control</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
