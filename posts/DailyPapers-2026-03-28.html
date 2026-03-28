@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-28</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 28, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 28, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Hierarchical task planning</h2>
+                <p>### 1. What is it?<br>
+Hierarchical task planning is a structured approach where an AI agent decomposes complex, long-horizon goals into a tree of manageable sub-goals and primitive actions. It organizes decision making across multiple levels of abstraction, bridging the gap between high-level strategic intent and low-level execution. This method contrasts with flat planning by introducing layers of responsibility within the policy architecture.</p>
+
+<p>### 2. How does it work?<br>
+The process typically involves a high-level policy that sets abstract sub-goals and a low-level policy that generates specific actions to achieve them. In reinforcement learning, this is often formalized through the options framework, where a policy \(\pi\) selects among temporally extended actions or options \(\omega\), rather than primitive actions \(a\). The high-level planner operates on a longer time scale, effectively reducing the search space depth, while the low-level controller handles immediate environmental interactions. This decomposition allows the system to solve sub-problems independently, often represented as a goal-conditioned value function \(V(s, g)\).</p>
+
+<p>### 3. Why does it matter?<br>
+This approach is crucial for modern AI because it enables agents to solve problems with long time horizons that defeat standard monolithic models. In the context of new LLM architectures, it facilitates reasoning capabilities like Chain of Thought by treating intermediate steps as sub-goals. For AI safety, hierarchical structures provide natural checkpoints for verification, ensuring that high-level plans remain aligned with human intent before low-level execution begins.</p>
+
+<p>### 4. Key insight. Hierarchical planning transforms a computationally intractable long-horizon problem into a series of tractable short-horizon sub-problems. This structural prior significantly improves sample efficiency and generalization to novel tasks.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.25702v1" target="_blank">S2D2: Fast Decoding for Diffusion LLMs via Training-Free Self-Speculation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Ligong Han, Hao Wang, Han Gao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.25702v1" target="_blank">2603.25702v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### Research Question. The paper addresses the difficulty of balancing speed and accuracy in block-diffusion language models. Specifically, it investigates how to accelerate decoding in the few-step regime without sacrificing generation quality or requiring additional model training.</p>
+
+<p>### Positioning. Block-diffusion models typically rely on confidence thresholds to speed up generation, but these are often brittle and result in a poor tradeoff between latency and accuracy. Existing solutions to this problem involve expensive retraining or increased test-time computation. This work fills the gap by offering a training-free approach that optimizes the decoding trajectory directly.</p>
+
+<p>### Key Contribution. The primary contribution is S2D2, a training-free self-speculative decoding framework. The authors introduce the insight that a block-diffusion model behaves like an autoregressive model when the block size is set to one, allowing a single pretrained model to serve as both the parallel drafter and the sequential verifier. This method achieves significant speedups, up to \(4.7\times\) faster than standard autoregressive decoding, while improving accuracy.</p>
+
+<p>### Methodology. S2D2 operates by using the diffusion model in parallel mode to propose a block of tokens and then using the same model in autoregressive mode (block size of one) to verify them. The framework employs lightweight routing policies to determine if verification is necessary for a given block. This creates a hybrid decoding path where diffusion handles rapid token generation and the autoregressive mode acts as a critic.</p>
+
+<p>### Limitations. The proposed method is specifically designed for block-diffusion architectures and may not apply directly to standard autoregressive transformers or other diffusion formulations. While the routing policies are lightweight, they add computational overhead that could potentially reduce gains on very short sequences or with simpler models. The paper also focuses primarily on specific model families like SDAR and LLaDA, leaving broader generalization to be fully explored.</p>
+
+<p>### Critical Evaluation. This paper presents an elegant and practical solution to a key bottleneck in diffusion-based text generation. The strength of the work lies in its training-free nature and the clever reuse of the existing model for both drafting and verification. However, the complexity of the routing logic and the overhead of switching modes could pose implementation challenges in production environments compared to simpler decoding strategies.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.25551v1" target="_blank">Voxtral TTS</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Alexander H. Liu, Alexis Tacnet, Andy Ehrenberg et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.25551v1" target="_blank">2603.25551v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                        <span class="topic-tag">bitnet</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of creating high-quality, expressive multilingual speech synthesis that requires only a few seconds of reference audio for voice cloning. It investigates how to achieve superior naturalness and speaker similarity in a multilingual context compared to existing proprietary systems.</p>
+
+<p>### 2. Positioning. This work positions itself as a competitive open-weights alternative to leading commercial models like ElevenLabs Flash v2.5. It fills a gap in the current landscape by offering a model that specifically targets the intersection of multilingual capability, expressivity, and efficient voice cloning from short audio prompts.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the release of Voxtral TTS, a model that achieves a 68.4% win rate against a strong industry baseline in human evaluations. The authors also introduce the Voxtral Codec, a novel speech tokenizer utilizing a hybrid VQ-FSQ quantization scheme to improve audio representation.</p>
+
+<p>### 4. Methodology. The model employs a hybrid architecture that separates generation into two distinct stages. It uses auto-regressive generation for semantic speech tokens and flow-matching for acoustic tokens. These processes rely on the custom Voxtral Codec to efficiently encode and decode the audio signals.</p>
+
+<p>### 5. Limitations. The model weights are released under a CC BY-NC license, which explicitly restricts commercial use and may limit adoption in industrial applications. Additionally, while the model excels in naturalness, the abstract does not provide details regarding inference speed or computational efficiency compared to the baseline.</p>
+
+<p>### 6. Critical Evaluation. The reported performance against a major proprietary competitor is impressive and suggests a significant advancement for open-source speech synthesis. The hybrid architecture appears to effectively balance semantic coherence with acoustic quality, making this a valuable resource for the research community despite the non-commercial license restriction.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.18742v1" target="_blank">6Bit-Diffusion: Inference-Time Mixed-Precision Quantization for Video Diffusion Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Rundong Su, Jintao Zhang, Zhihang Yuan et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.18742v1" target="_blank">2603.18742v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### Research Question. The paper addresses the challenge of reducing the high memory usage and computational cost of video diffusion transformers during inference. It specifically investigates how to dynamically allocate precision levels to optimize the trade-off between inference efficiency and generation quality.</p>
+
+<p>### Positioning. This work positions itself within the field of Post-Training Quantization (PTQ) for diffusion models. It addresses the limitation of existing methods that use static bit-width allocations, which often ignore the varying quantization sensitivity of activations across different diffusion timesteps. By introducing a dynamic, inference-time approach, the authors fill a critical gap in adapting precision to the specific needs of each layer and timestep.</p>
+
+<p>### Key Contribution. The primary contribution is a mixed-precision quantization framework that dynamically assigns NVFP4 or INT8 precision based on a layer's sensitivity. The authors also introduce Temporal Delta Cache (TDC), a novel technique that exploits the temporal consistency of transformer block residuals to skip unnecessary computations. This combination achieves aggressive quantization while maintaining high visual fidelity.</p>
+
+<p>### Methodology. The authors identified a linear correlation between a transformer block's input-output difference and the quantization sensitivity of its internal linear layers. Based on this, they designed a lightweight predictor that allocates 4-bit floating point (NVFP4) precision to temporally stable layers and 8-bit integer (INT8) precision to volatile layers. Additionally, they leveraged the temporal redundancy of block residuals to skip computations for invariant blocks via Temporal Delta Cache.</p>
+
+<p>### Limitations. The abstract does not explicitly list specific limitations, though the reliance on NVFP4 implies a dependency on hardware that supports 4-bit floating point operations. Furthermore, the lightweight predictor and caching mechanism introduce some additional logic overhead during the inference process. The effectiveness of the Temporal Delta Cache also likely depends on the specific video content and motion dynamics.</p>
+
+<p>### Critical Evaluation. This work offers a compelling and practical solution for deploying video diffusion models by cleverly linking activation dynamics to quantization strategy. The reported results of \(1.92 \times \) acceleration and \(3.32 \times \) memory reduction are impressive and represent a significant step forward for efficient inference. However, the real-world applicability may be initially constrained by the requirement for specific hardware support for NVFP4 formats.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.23516v1" target="_blank">MSA: Memory Sparse Attention for Efficient End-to-End Memory Model Scaling to 100M Tokens</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yu Chen, Runkai Chen, Sheng Yi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23516v1" target="_blank">2603.23516v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the critical limitation of current Large Language Models (LLMs), which struggle to process context lengths beyond 1 million tokens due to the computational constraints of full-attention architectures. It investigates whether it is possible to scale memory capacity to lifetime-scale information (100 million tokens) while maintaining reasoning precision and end-to-end trainability.</p>
+
+<p>### 2. Positioning. The authors position their work as a superior alternative to existing long-context solutions such as hybrid linear attention, fixed-size memory states like RNNs, and external retrieval methods like RAG. They argue that these existing approaches suffer from precision degradation, increasing latency, or a lack of end-to-end optimization. This work fills the gap by offering a solution that decouples memory capacity from reasoning complexity, allowing for massive scalability without the performance bottlenecks typical of current methods.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the Memory Sparse Attention (MSA) framework, an end-to-end trainable architecture that achieves linear complexity for both training and inference. The paper demonstrates the ability to scale context from 16K to 100M tokens with less than 9% performance degradation. It also introduces specific techniques such as document-wise Rotary Positional Embeddings (RoPE) and Memory Interleaving to ensure stability and facilitate complex multi-hop reasoning across scattered data.</p>
+
+<p>### 4. Methodology. MSA utilizes a scalable sparse attention mechanism to reduce computational overhead and a technique called document-wise RoPE to handle position encoding across massive sequences. The framework incorporates KV cache compression and a scheme named Memory Parallel to optimize hardware usage, enabling 100M-token inference on just two A800 GPUs. Additionally, Memory Interleaving is proposed to allow the model to reason dynamically across different memory segments.</p>
+
+<p>### 5. Limitations. While the paper reports high performance, the reliance on sparse attention mechanisms may inherently risk missing fine-grained dependencies that a full-attention model would capture. The requirement for specific hardware optimizations, such as Memory Parallel and KV cache compression, suggests that implementation may be complex and potentially restricted to high-end GPU configurations. Furthermore, the abstract does not detail the training cost or data efficiency compared to standard dense models.</p>
+
+<p>### 6. Critical Evaluation. This work represents a significant engineering achievement in the long-context LLM space, effectively challenging the dominance of RAG systems for large-scale memory tasks. The claim of running 100M tokens on limited hardware is compelling, suggesting a practical path forward for applications like Digital Twins and massive corpus summarization. However, the true test will be the model's ability to handle nuanced retrieval tasks where sparse attention might overlook critical but low-salience information.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.22120v2" target="_blank">StreamingClaw Technical Report</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiawei Chen, Zhe Chen, Chaoqun Du et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22120v2" target="_blank">2603.22120v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of enabling AI agents to perform real-time, closed-loop perception, decision-making, and action in dynamic physical environments. It specifically asks how to overcome the fragmented capabilities of current systems, which often struggle with offline-only processing, a lack of long-term memory, or an inability to handle streaming video input proactively.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself at the intersection of streaming video understanding and embodied intelligence, filling a critical gap left by existing agents that rely on offline processing or lack real-time interaction capabilities. It targets the specific bottleneck preventing agents from sustaining operations in complex, open-world scenarios like autonomous driving and intelligent cockpits. The framework aims to bridge the divide between static video analysis and dynamic, proactive agent behavior required for real-world deployment.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is StreamingClaw, a unified agent framework that natively supports real-time multimodal streaming interactions while remaining compatible with the OpenClaw ecosystem. It introduces a comprehensive architecture featuring hierarchical multimodal long-term memory and the ability to reason about future events proactively. Furthermore, it provides specialized streaming tools and action-centric skills designed to close the loop between perception and physical action.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose a framework architecture that integrates five core capabilities, including real-time streaming reasoning and hierarchical memory evolution for efficient retrieval. The methodology involves equipping agents with "streaming tools" that allow for continuous action execution rather than single-step operations. This approach enables the system to maintain a perception-decision-action closed loop while managing multimodal memory storage and sharing across multiple agents.</p>
+
+<p><strong>5. Limitations</strong><br>
+The provided abstract does not explicitly detail specific technical limitations or benchmark results regarding latency or accuracy. However, implementing a real-time, multimodal closed-loop system likely involves significant computational overhead and latency management challenges. Additionally, the system's reliance on compatibility with the OpenClaw framework may constrain its architecture to the specific design choices and resources of that existing ecosystem.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+The proposed framework offers a promising architectural solution to the pressing need for real-time, embodied AI agents, particularly through its integration of long-term memory and proactive reasoning. The emphasis on a closed-loop system aligns well with the practical requirements of autonomous driving and robotics. However, without empirical data from the full paper, the practical efficiency of the memory retrieval mechanisms and the real-world latency of the streaming tools remain the critical factors for determining its success.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24793v1" target="_blank">AVControl: Efficient Framework for Training Audio-Visual Controls</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Matan Ben-Yosef, Tavi Halperin, Naomi Ken Korem et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24793v1" target="_blank">2603.24793v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of efficiently controlling video and audio generation across diverse modalities without relying on fixed monolithic models or requiring costly architectural modifications for each new control type.</p>
+
+<p>### 2. Positioning. Existing approaches typically train a single large model for a fixed set of controls or necessitate expensive structural changes to accommodate new modalities. This work fills the gap by providing a lightweight, extendable alternative that avoids these inefficiencies. It specifically notes that naively extending image-based in-context methods fails for video structural control, motivating the need for their specific architectural approach.</p>
+
+<p>### 3. Key Contribution. The main contribution is AVControl, a framework that treats control modalities as separate LoRA adapters on a parallel canvas, requiring no changes to the underlying model architecture. It achieves state-of-the-art results on the VACE Benchmark for tasks like depth and pose guidance while introducing the first modular audio-visual controls for a joint generation model. The method is also highly efficient, requiring only a fraction of the training budget compared to monolithic alternatives.</p>
+
+<p>### 4. Methodology. Built upon the LTX-2 joint audio-visual foundation model, the approach introduces a parallel canvas that provides reference signals as additional tokens in the attention layers. Instead of modifying the core network, specific control modalities like depth, pose, or audio are trained as independent Low-Rank Adaptation (LoRA) adapters. This design allows the model to interpret structural and auditory guidance directly through the attention mechanism.</p>
+
+<p>### 5. Limitations. While the method excels at structural controls, it only achieves competitive rather than superior results on camera control and audio-visual benchmarks. The framework relies on the capabilities of the underlying LTX-2 foundation model, meaning the quality of the controlled output is bounded by the base model's performance. Additionally, the abstract does not detail the potential challenges or interference issues that might arise when combining multiple control LoRAs simultaneously.</p>
+
+<p>### 6. Critical Evaluation. This research offers a practical and scalable solution for controllable generation by successfully decoupling control mechanisms from the base model. The parallel canvas approach is a clever method for resolving the failures of image-based in-context learning in video domains. Its primary strength lies in its extreme compute efficiency and modularity, though the competitive performance on non-structural tasks suggests room for further refinement in complex camera and audio integration.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.25562v1" target="_blank">Revisiting On-Policy Distillation: Empirical Failure Modes and Simple Fixes</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yuqian Fu, Haohuan Huang, Kaiwen Jiang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.25562v1" target="_blank">2603.25562v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates why the sampled-token variant of on-policy distillation (OPD) frequently fails in long-horizon language model tasks. It seeks to identify the specific failure modes and develop a more robust training objective.</p>
+
+<p><strong>2. Positioning</strong><br>
+On-policy distillation is a popular post-training technique that relies on student-generated outputs rather than fixed datasets. However, existing methods struggle when student outputs drift into regions where teacher guidance is unreliable. This work positions itself as a corrective study, bridging theoretical bias-variance tradeoffs with practical implementation fixes.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors identify three specific failure modes in standard sampled-token OPD, including imbalanced token signals and tokenizer mismatches. They introduce a novel objective called teacher top-K local support matching. This method combines truncated reverse-KL with top-p sampling to stabilize training and improve performance.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed method replaces standard token-level matching with truncated reverse-KL to focus on high-probability teacher tokens. It incorporates top-p rollout sampling to prevent the student from drifting into low-probability regions. The authors also apply special-token masking to handle tokenizer mismatches.</p>
+
+<p><strong>5. Limitations</strong><br>
+The theoretical analysis reveals a tradeoff where reducing bias leads to higher gradient variance. The empirical validation is restricted to math reasoning and multi-task agentic scenarios. Additionally, the proposed fixes specifically target the sampled-token variant, which may not generalize to all distillation settings.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This paper offers a valuable diagnostic approach by clearly identifying why a popular method fails, rather than just proposing a new model. The proposed fixes are practical and computationally simple to implement. However, the reliance on specific hyperparameters like top-p and top-K might require careful tuning for new datasets.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24800v1" target="_blank">Calibri: Enhancing Diffusion Transformers via Parameter-Efficient Calibration</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Danil Tokhchukov, Aysel Mirzoeva, Andrey Kuznetsov et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24800v1" target="_blank">2603.24800v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates whether the generative performance of Diffusion Transformers (DiTs) can be significantly improved through minimal parameter adjustments. It specifically explores how to optimize the denoising process to enhance image quality and reduce inference time without extensive retraining.</p>
+
+<p><strong>2. Positioning</strong><br>
+This research positions itself within the domain of efficient model fine-tuning, addressing the high computational cost typically associated with improving large diffusion models. It fills a gap by offering a lightweight alternative to full model retraining, focusing on the specific structural properties of Transformer-based diffusion architectures.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The main contribution is the Calibri method, which optimizes DiT blocks by introducing and tuning learned scaling parameters. This approach modifies only about 100 parameters, yet it consistently improves text-to-image generation quality and reduces the number of denoising steps required for inference.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors frame the calibration of DiT components as a black-box reward optimization problem rather than using standard gradient descent. They utilize an evolutionary algorithm to search for optimal scaling parameters that adjust the output of DiT blocks during the denoising process.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract highlights efficiency, the use of evolutionary algorithms for optimization can sometimes require many function evaluations to converge. Furthermore, the method relies on the assumption that simple scaling parameters are sufficient to correct systematic errors in the denoising process, which might not capture all nuances of model error.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+Calibri offers an impressive trade-off between performance gain and computational cost, making it highly attractive for practical applications. The strength lies in its simplicity and the surprising effectiveness of modifying such a small number of parameters. A potential weakness is the dependency on black-box optimization, which might be less stable or predictable than gradient-based methods in certain scenarios.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24329v1" target="_blank">GameplayQA: A Benchmarking Framework for Decision-Dense POV-Synced Multi-Video Understanding of 3D Virtual Agents</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yunzhe Wang, Runhui Xu, Kexin Zheng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24329v1" target="_blank">2603.24329v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the lack of suitable benchmarks for evaluating Multimodal LLMs (MLLMs) designed for autonomous agents. It asks whether current models can effectively perceive rapid state changes and reason about concurrent multi-agent behaviors from a first-person perspective in dynamic 3D environments.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing video understanding benchmarks often fail to capture the specific challenges faced by embodied agents, such as tracking fast-paced decision-making and attributing actions to specific entities in a crowded space. This work positions itself at the intersection of embodied AI and video understanding, filling a critical gap by providing a dataset specifically designed for agentic perception in complex, multi-agent scenarios.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors introduce GameplayQA, a benchmarking framework featuring densely annotated gameplay videos with a novel triadic structure of Self, Other Agents, and World. The contribution includes 2.4K diagnostic Question-Answer pairs organized by cognitive complexity and a structured distractor taxonomy that allows researchers to pinpoint exactly where and how models hallucinate.</p>
+
+<p><strong>4. Methodology</strong><br>
+The researchers captured multiplayer 3D gameplay videos and annotated them at a high density of 1.22 labels per second, synchronizing state changes, actions, and events with video timestamps. They structured the data around a triadic decomposition to reflect the natural perspective of an agent, generating QA pairs that test reasoning across three levels of cognitive complexity.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract highlights the poor performance of frontier models, it implies that the extreme "decision density" of the gameplay environment might currently be too challenging for existing architectures to handle effectively. Additionally, the focus on virtual 3D environments may necessitate further validation to prove the direct transferability of these findings to real-world robotics scenarios.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a valuable and rigorous tool for exposing the weaknesses of current MLLMs in temporal and cross-video grounding. The triadic annotation system is a smart formalization for multi-agent interactions, though the high density of decisions in the dataset might prove excessively difficult for current models, potentially slowing immediate progress on the benchmark.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.24036v1" target="_blank">SpectralSplats: Robust Differentiable Tracking via Spectral Moment Supervision</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Avigail Cohen Rimon, Amir Mann, Mirela Ben Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24036v1" target="_blank">2603.24036v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the fragility of differentiable 3D Gaussian Splatting (3DGS) when used for video tracking in uncontrolled environments. Specifically, it asks how to prevent optimization from failing when severe camera misalignment results in zero pixel overlap between the rendered model and the target image.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself as a solution to the limitations of standard photometric losses in model-based tracking. It fills a critical gap where existing methods, which rely on local spatial overlap, fail due to vanishing gradients when the rendered object is outside the target's footprint.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The main contribution is SpectralSplats, a framework that shifts optimization from the spatial domain to the frequency domain using Spectral Moments. It introduces a principled Frequency Annealing schedule to ensure robust convergence from global alignment to precise spatial detail, acting as a drop-in replacement for standard spatial losses.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose supervising rendered images using global complex sinusoidal features rather than direct pixel comparisons. This creates a global basin of attraction that provides valid gradients even without spatial overlap. The method utilizes a derived Frequency Annealing schedule to transition smoothly from global convexity to precise alignment, avoiding the local minima typically associated with high-frequency signals.</p>
+
+<p><strong>5. Limitations</strong><br>
+The provided abstract does not explicitly list specific limitations of the proposed method. However, potential considerations inherent to this approach include the computational overhead of calculating spectral features and the complexity of tuning the frequency annealing schedule for diverse scenarios.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research presents a theoretically robust solution to a fundamental practical problem in differentiable rendering. The strength of the work lies in its ability to recover tracking from severe misalignment without requiring perfect initial conditions. While the abstract demonstrates strong results across various deformation parameterizations, the real-world efficacy will depend on the speed of the spectral calculations compared to standard spatial methods.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.25702v1" target="_blank">S2D2: Fast Decoding for Diffusion LLMs via Training-Free Self-Speculation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.25551v1" target="_blank">Voxtral TTS</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.18742v1" target="_blank">6Bit-Diffusion: Inference-Time Mixed-Precision Quantization for Video Diffusion Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.23516v1" target="_blank">MSA: Memory Sparse Attention for Efficient End-to-End Memory Model Scaling to 100M Tokens</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.22120v2" target="_blank">StreamingClaw Technical Report</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24793v1" target="_blank">AVControl: Efficient Framework for Training Audio-Visual Controls</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.25562v1" target="_blank">Revisiting On-Policy Distillation: Empirical Failure Modes and Simple Fixes</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24800v1" target="_blank">Calibri: Enhancing Diffusion Transformers via Parameter-Efficient Calibration</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24329v1" target="_blank">GameplayQA: A Benchmarking Framework for Decision-Dense POV-Synced Multi-Video Understanding of 3D Virtual Agents</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.24036v1" target="_blank">SpectralSplats: Robust Differentiable Tracking via Spectral Moment Supervision</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
