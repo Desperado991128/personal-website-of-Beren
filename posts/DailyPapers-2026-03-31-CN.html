@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-03-31</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">March 31, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年03月31日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Debate for AI alignment</h2>
+                <p><strong>1. 概念定义</strong><br>
+AI对齐辩论是一种可扩展的监督方法，通过让两个AI智能体针对特定陈述进行对抗性辩论，并由人类或较弱模型担任评判者来决定胜负。其核心目标是在人类难以直接评估的任务上，利用竞争性论证过程引导AI系统输出符合人类意图的真实答案。</p>
+
+<p><strong>2. 核心原理</strong><br>
+该机制通常被建模为一个零和博弈，其中一个智能体主张正确答案，另一个智能体主张错误答案。评判者根据双方展示的证据和反驳论点进行裁决，获胜者获得正向奖励。优化目标可以表示为最大化获胜概率 \( \pi^* = \arg\max_{\pi} \mathbb{E}[R(\pi)] \)，其中 \( R \) 是基于评判者决策的奖励函数。这一过程依赖于“辩论优于生成”的假设，即识别论证缺陷比从头生成完美论证更容易。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这种方法在AI安全领域至关重要，因为它提供了一种在不依赖超级人类专家的情况下监督超级智能系统的路径。在低资源语言处理和大语言模型心理健康应用中，辩论机制可以帮助验证模型输出的真实性和安全性，减少幻觉和有害建议的风险。它有效地扩展了人类监督能力，使其能够处理超出人类认知边界的复杂问题。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+辩论将对齐问题从“如何解决问题”转化为“如何评判论点”，利用了人类在鉴别真相方面往往优于直接计算的能力。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28288v1" target="_blank">FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Gnankan Landry Regis N&#39;guessan<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28288v1" target="_blank">2603.28288v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+现有的Kolmogorov-Arnold Networks (KAN) 使用固定网格上的B样条基函数，缺乏针对非平滑函数逼近的内在多尺度分解能力。本文旨在解决KAN在处理非平滑或具有分形特征函数时的性能瓶颈，探索如何通过基函数设计来匹配目标函数的正则性。</p>
+
+<p>### 2. 研究定位<br>
+该工作位于神经算子逼近与分形几何的交叉领域，填补了现有神经网络在处理非平滑、粗糙目标函数时缺乏正则性匹配机制的空白。它挑战了传统神经网络仅依赖平滑基函数的范式，提出了一种基于目标正则性的基函数设计新策略。</p>
+
+<p>### 3. 核心贡献<br>
+论文提出了FI-KAN，将迭代函数系统理论中的可学习分形插值函数基引入KAN架构。主要创新在于设计了Pure和Hybrid两种变体，使网络能够根据目标函数的正则性自适应调整基函数的几何特性。实验证明Hybrid FI-KAN在非平滑PDE解和分形目标上实现了显著性能提升，并提供了可解释的分形维数正则化机制。</p>
+
+<p>### 4. 方法概述<br>
+论文利用迭代函数系统(IFS)理论构建分形插值函数(FIF)作为新的基函数，替代或增强原有的B样条基。Pure FI-KAN完全使用FIF基，而Hybrid FI-KAN则保留B样条路径并叠加可学习的分形校正项。通过引入可微的分形维数参数，网络边能在训练过程中自适应地匹配目标函数的粗糙程度。</p>
+
+<p>### 5. 局限与不足<br>
+Pure FI-KAN在平滑目标函数上的表现不如标准KAN，显示出该方法对目标特性的强敏感性。虽然Hybrid版本缓解了这一问题，但引入分形机制增加了模型的参数复杂度和潜在的计算开销。此外，该研究主要集中在特定类型的逼近任务上，其在更广泛的高维机器学习任务中的扩展性仍需验证。</p>
+
+<p>### 6. 评价与思考<br>
+这是一项极具洞察力的工作，成功将分形几何理论融入深度学习，为解决非平滑函数逼近难题提供了强有力的工具。其提出的正则性匹配原则不仅显著提升了模型在粗糙目标上的性能，还通过分形维数增强了模型的可解释性。这启示未来的神经网络设计应更加关注数据本身的几何特性与基函数的匹配程度。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28257v1" target="_blank">Nonlinear Factor Decomposition via Kolmogorov-Arnold Networks: A Spectral Approach to Asset Return Analysis</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> David Breazu<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28257v1" target="_blank">2603.28257v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决经典主成分分析(PCA)在市场危机期间因线性假设失效而无法有效捕捉资产收益方差的问题。核心研究问题是如何构建一种非线性因子分解方法，以提升对资产收益动态变化的解释能力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于金融计量经济学与深度学习的交叉领域。它填补了将Kolmogorov-Arnold网络应用于资产定价和因子分析的空白，提供了一种超越传统线性模型的谱分析方法。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了KAN-PCA模型，成功将经典PCA推广至非线性空间。理论上证明了经典PCA是KAN-PCA在激活函数受限时的特例。实验表明该方法在样本内重建中取得了更高的 \(R^2\) 值。</p>
+
+<p><strong>4. 方法概述</strong><br>
+KAN-PCA是一种自编码器架构，使用Kolmogorov-Arnold网络作为编码器，线性映射作为解码器。该方法用学习到的B样条函数替代经典PCA中的线性投影，以捕捉资产收益的非线性结构。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管样本内表现优异，但在修正数据泄露后，其样本外表现仅与经典PCA持平，泛化优势不明显。研究仅基于20只标普500股票进行测试，数据规模相对较小。此外，模型的计算复杂度可能高于经典PCA。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作是将新型神经网络架构应用于经典金融问题的有力尝试，理论推导严谨。虽然样本内效果提升显著，但样本外表现的局限性揭示了金融数据中非线性模式捕捉的难度。这提示我们在追求模型复杂度的同时，需警惕过拟合风险。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chongyang Zhao, Mingsong Li, Haodong Lu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.27481v1" target="_blank">2603.27481v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文主要解决大型视觉语言模型在基于混合专家架构进行持续学习时，因路由漂移导致的灾难性遗忘问题。核心挑战在于如何防止新任务数据中的旧Token和模糊Token被错误地路由到新添加的专家中，从而破坏模型对旧任务的记忆。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于多模odal持续指令微调领域，针对现有MoE持续学习方法虽然冻结了旧专家但仍发生遗忘的现象进行了深入探究。它填补了关于Token级路由行为分析的空白，明确指出了路由漂移是导致专家隔离失效的关键因素。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文揭示了Token困境现象，即新任务中的模糊和旧Token对学习贡献极小却会引发严重的遗忘。提出了LLaVA-DyMoE框架，通过漂移感知的Token分配策略和互补的路由分数正则化，有效解决了路由漂移问题，实现了超过7%的准确率提升。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了一种动态MoE框架，通过分析Token的路由分数分布来识别不同类型的Token。该方法应用针对性的正则化策略，引导模糊和旧Token远离新专家以保持路由稳定，同时强制专家组分离以促进新专家的特化。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法引入了额外的Token级引导和正则化机制，可能会增加模型训练过程中的计算复杂度和超参数调优难度。此外，对于Token类型的识别依赖于路由分数分布，在面对分布极度复杂或差异巨大的多模态数据时，其判别标准的鲁棒性仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作展示了深刻的细粒度分析能力，从Token行为层面解释了MoE架构在持续学习中的失效模式。它不仅提出了有效的解决方案，更重要的是为理解混合专家模型中的路由机制提供了新的视角，对后续研究具有重要的参考价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28114v1" target="_blank">Attention Frequency Modulation: Training-Free Spectral Modulation of Diffusion Cross-Attention</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Seunghun Oh, Unsang Park<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28114v1" target="_blank">2603.28114v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+这篇论文旨在解决扩散模型中交叉注意力机制的逐步多分辨率动态特性未被充分表征的问题，这限制了无需训练的原理性控制方法的发展。</p>
+
+<p>### 2. 研究定位<br>
+该工作定位在对扩散模型交叉注意力机制的频谱动态分析上，填补了对去噪过程中token竞争模式演变缺乏深入理解的理论空白。它将信号处理视角引入扩散模型控制，为无需重训练的推理时干预提供了新的理论基础。</p>
+
+<p>### 3. 核心贡献<br>
+论文主要贡献在于发现了扩散交叉注意力在去噪过程中具有稳定的从粗到细的频谱演变规律。基于此发现，提出了注意力频率调制（AFM）方法，这是一种无需训练、即插即用的推理时干预技术。该方法首次在傅里叶域对注意力logits进行频谱重加权，实现了对token竞争空间尺度的连续控制。</p>
+
+<p>### 4. 方法概述<br>
+AFM方法将交叉注意力视为潜在网格上的时空信号，在傅里叶域中对softmax之前的注意力logits进行编辑。它通过一个与去噪进度对齐的时间表来重新加权低频和高频波段，从而改变token竞争模式的空间尺度。此外，该方法还可以利用token分配熵作为自适应门控机制来调节频率编辑的强度。</p>
+
+<p>### 5. 局限与不足<br>
+论文发现熵主要作为频率编辑的自适应增益而非独立的控制轴，这限制了控制维度的多样性。虽然方法无需训练，但其干预依赖于预定义的进度对齐时间表，可能在处理极端复杂或非典型提示词时缺乏灵活性。此外，实验主要基于Stable Diffusion，其在其他架构上的泛化性有待进一步验证。</p>
+
+<p>### 6. 评价与思考<br>
+这项工作极具创新性，通过引入信号处理的视角揭示了扩散模型内部机制的频谱特性，为模型可解释性提供了新见解。AFM作为一种零成本干预手段，具有很强的实用性，能够在不破坏语义的前提下实现显著的视觉编辑。然而，该方法对傅里叶变换的依赖可能增加推理时的计算开销，且对高频细节的控制可能不如对低频结构的控制直观。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28366v1" target="_blank">AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Milton Zhou, Sizhong Qin, Yongzhi Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28366v1" target="_blank">2603.28366v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决短视频广告制作中现有工作流脱节且工具模态单一的问题，这导致了高昂的制作成本和低下的生产效率。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了现有研究缺乏端到端多模态视频编辑统一框架的空白。它超越了传统单一模态处理的局限，将视频编辑任务整合到一个基于离散Token的统一生成范式中。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了AutoCut框架，创新性地构建了共享的视频 音频 文本Token空间。其核心贡献在于利用多模态大语言模型实现了包括视频筛选排序 脚本生成及配乐选择在内的全流程自动化编辑。</p>
+
+<p><strong>4. 方法概述</strong><br>
+AutoCut利用专用编码器提取特征，并通过残差向量量化将音视频离散化为与文本对齐的统一Token。基于此，研究开发了经过多模态对齐与监督微调的多模态大语言模型，最终将预测的Token序列转化为完整的视频输出。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确详述局限性，但将连续的音视频信号离散化可能导致高频细节信息的损失。此外，模型在处理复杂长视频时的推理效率以及对特定广告数据集的依赖性也是潜在的制约因素。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有显著的工业应用价值，通过统一Token空间巧妙地解决了多模态对齐难题。它不仅降低了广告制作门槛，也为利用大语言模型控制复杂视频编辑任务提供了极具启发性的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28643v1" target="_blank">The Ultimate Tutorial for AI-driven Scale Development in Generative Psychometrics: Releasing AIGENIE from its Bottle</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Lara Russell-Lasalandra, Hudson Golino, Luis Eduardo Garrido et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28643v1" target="_blank">2603.28643v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+传统心理量表开发过程耗时且严重依赖专家经验与大规模预测试。本文旨在解决如何利用大语言模型自动化生成并验证高质量的心理测量项目池。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究位于生成式AI与心理测量学的交叉领域，旨在革新传统的量表构建流程。它填补了自动化项目生成与结构化心理测量验证之间的空白，实现了从人工迭代到全自动计算流程的转变。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文发布了<code>AIGENIE</code> R包，实现了AI-GENIE框架以自动化生成和筛选心理测量项目。其创新在于结合大语言模型的生成能力与网络心理测量学的降维管道，实现了完全在计算机模拟环境下的结构验证。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法首先利用大语言模型生成候选项目池，并将其转化为高维嵌入向量。随后应用探索性图分析（EGA）、独特变量分析（UVA）及自举EGA组成的多步骤降维管道，以筛选出结构有效的项目。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法主要自动化了量表开发的早期阶段，生成的项目池仍需后续的现实世界数据验证。生成项目的质量高度依赖于所选大语言模型的性能及提示词设计的优劣。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作是将大语言模型应用于社会科学研究的优秀范例，显著提升了量表开发的效率。其支持多种模型提供商及离线模式的设计极具实用性，但研究者仍需警惕AI生成内容可能存在的偏差。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28713v1" target="_blank">DreamLite: A Lightweight On-Device Unified Model for Image Generation and Editing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kailai Feng, Yuxiang Wei, Bo Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28713v1" target="_blank">2603.28713v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有扩散模型参数量巨大导致部署困难，而现有的端侧轻量级模型大多仅支持文生图任务，缺乏对文本引导图像编辑任务的支持。这篇论文旨在解决如何在单一轻量级模型中高效统一图像生成与编辑功能的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于端侧轻量级AI模型领域，填补了端侧扩散模型无法统一支持图像生成与编辑任务的空白。它是首个在单一网络中同时实现这两项功能的端侧扩散模型，并在性能上超越了现有的端侧模型。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一个仅0.39B参数的统一模型DreamLite，首次在端侧设备上实现了高质量的图像生成与编辑。创新点在于引入了潜空间上下文拼接机制和任务渐进式联合预训练策略，并实现了在移动端小于1秒的高效推理。</p>
+
+<p><strong>4. 方法概述</strong><br>
+DreamLite基于剪枝后的移动端U-Net骨干网络，通过在潜空间进行水平拼接来统一条件输入。生成任务采用(目标 | 空白)配置，编辑任务采用(目标 | 源)配置，并通过任务渐进式预训练、高质量SFT及强化学习优化模型。最终利用步数蒸馏技术将去噪过程缩减至4步。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管性能优越，但0.39B的参数量在处理极其复杂的语义理解或高细节生成时，可能仍不及参数量更大的服务器级模型。训练过程涉及多阶段渐进式预训练和强化学习，流程相对复杂且计算成本较高。此外，其实测性能高度依赖于特定的高端移动设备硬件。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作在端侧AI应用方面具有突破性意义，成功解决了轻量级模型多功能集成的难题。其通过简单的拼接机制统一不同任务的思路非常巧妙，且在移动端实现小于1秒的推理速度极具实用价值。这为未来在资源受限设备上部署多功能生成式AI提供了重要的技术参考。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28498v1" target="_blank">MRI-to-CT synthesis using drifting models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Qing Lyu, Jianxu Wang, Jeremy Hudson et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28498v1" target="_blank">2603.28498v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结:</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在解决如何从MRI图像高保真地合成CT图像的问题，核心目标是实现仅依赖MRI的盆腔放疗工作流程，从而避免患者接受额外的CT扫描带来的电离辐射。研究重点在于生成包含清晰骨骼细节的CT图像，以满足临床放疗规划对解剖结构精度的要求。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作位于医学图像转换领域的前沿，主要针对现有生成模型在图像质量与推理效率之间难以兼顾的痛点进行定位。它填补了快速推理模型在MRI到CT合成任务中的性能空白，特别是对比了传统的CNN、GAN以及近年来备受关注但推理缓慢的扩散模型。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文的主要贡献是验证了漂移模型在盆腔MRI到CT合成任务中的优越性，该模型在SSIM、PSNR等指标上均超越了UNet、WGAN-GP及DDPM等主流基准。其创新之处在于实现了单步推理，在保持毫秒级推理速度的同时，显著提升了皮质骨边缘的锐利度并减少了伪影，打破了质量与效率的权衡困境。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 研究者提出使用漂移模型进行跨模态图像合成，并在Gold Atlas Male Pelvis和SynthRAD2023两个数据集上进行了广泛实验。该方法与卷积神经网络、生成对抗网络、物理启发概率模型以及多种扩散模型进行了严格对比，通过定量指标计算和定性视觉评估来验证模型在骨骼与软组织界面的表现。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 虽然论文展示了优异的合成结果，但摘要中未明确提及该方法的具体局限性，例如对训练数据规模的依赖程度或在不同解剖部位的泛化能力。此外，尽管提到了下游应用前景，但缺乏在实际临床放疗规划流程中的验证结果，这可能限制了其结论的直接临床转化价值。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作展示了漂移模型在医学图像生成领域的巨大潜力，特别是其“一步推理”的特性解决了扩散模型落地应用的关键瓶颈。我认为该方法为MRI-only放疗规划提供了一个极具竞争力的解决方案，未来的研究可以重点关注其在多中心数据上的鲁棒性以及在临床工作流中的实际整合效果。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28572v1" target="_blank">Unrestrained Simplex Denoising for Discrete Data. A Non-Markovian Approach Applied to Graph Generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yoann Boget, Alexandros Kalousis<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28572v1" target="_blank">2603.28572v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的离散数据生成模型（如扩散模型）通常直接在离散状态空间操作，导致状态变化突兀且性能受限。本文旨在解决如何在保持去噪模型理论保证的同时，更平滑高效地在概率单纯形上生成离散结构数据。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于离散生成建模与扩散/流匹配技术的前沿交叉点。它填补了现有方法受限于马尔可夫过程或离散空间操作不便的空白，提出了一种在概率单纯形上进行连续建模的新视角。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了无约束单纯形去噪框架，这是一种在概率单纯形上操作的新型生成模型。核心创新在于引入了一种非马尔可夫噪声方案，使得不同时刻的噪声表示在给定干净数据下条件独立。该方法移除了传统扩散模型中的不必要约束，在简化公式的同时显著提升了图生成任务的性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法不直接在离散空间操作，而是将数据映射到概率单纯形上进行连续空间建模。通过设计一种非马尔可夫噪声过程，打破了传统扩散模型中前后时刻状态的强依赖关系。这种设计允许模型在保留去噪理论保证的前提下，更灵活地从噪声中恢复出离散数据结构。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确提及局限性，但该方法主要在概率单纯形上操作，可能面临高维类别空间的计算挑战。此外，虽然非马尔可夫性质简化了公式，但其在更复杂的离散数据类型（如长文本序列）上的泛化能力仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作提供了一个优雅的理论视角，将离散生成问题转化为概率单纯形上的连续过程，有效避免了离散状态突变的问题。非马尔可夫设计的引入是对传统扩散模型假设的大胆突破，展示了简化约束反而能提升性能的可能性。这对于图生成领域具有重要的参考价值，也可能启发其他离散结构建模任务的新思路。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28263v1" target="_blank">Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Eneko Valero, Maria Ribalta i Albado, Oscar Sainz et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28263v1" target="_blank">2603.28263v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有大语言模型主要面向英语，在低资源语言上表现不佳，且现有的适应方法计算成本高昂或依赖稀缺的高质量指令数据。本文旨在解决如何在不进行重复微调的情况下，将语言知识高效迁移至指令微调模型这一核心问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究定位于低资源语言模型适应领域，填补了模型合并在这一特定场景下系统性研究的空白。它挑战了传统的持续预训练或指令微调范式，提出了一种无需特定语言指令数据的轻量级替代方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一种新颖的方法，通过将语言特定的基座模型与指令微调模型合并，实现了低成本的语言能力迁移。实验证明该方法在多种伊比利亚语言上有效，且能通过组合多个语言模型实现多语言能力，显著降低了计算成本。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法利用模型合并技术，将包含特定语言知识的基座模型权重直接添加到现有的指令微调模型中。这一过程无需针对目标语言进行额外的指令数据收集或重复微调，即可赋予模型在新语言下的指令遵循能力。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究主要在伊比利亚语言上进行验证，其结论在其他语系或极低资源语言上的普适性仍需进一步考察。此外，模型合并可能面临权重冲突或灾难性遗忘的风险，如何确定最佳的合并比例可能需要额外的调优。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的实用价值，为资源匮乏的语言社区提供了一种经济可行的模型本地化路径。它打破了“必须针对每种语言进行全量微调”的传统认知，展示了模型编辑技术的巨大潜力，但在保持通用能力与新增语言能力的平衡上可能仍需精细调整。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.28288v1" target="_blank">FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28257v1" target="_blank">Nonlinear Factor Decomposition via Kolmogorov-Arnold Networks: A Spectral Approach to Asset Return Analysis</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28114v1" target="_blank">Attention Frequency Modulation: Training-Free Spectral Modulation of Diffusion Cross-Attention</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28366v1" target="_blank">AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28643v1" target="_blank">The Ultimate Tutorial for AI-driven Scale Development in Generative Psychometrics: Releasing AIGENIE from its Bottle</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28713v1" target="_blank">DreamLite: A Lightweight On-Device Unified Model for Image Generation and Editing</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28498v1" target="_blank">MRI-to-CT synthesis using drifting models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28572v1" target="_blank">Unrestrained Simplex Denoising for Discrete Data. A Non-Markovian Approach Applied to Graph Generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28263v1" target="_blank">Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

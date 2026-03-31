@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-03-31</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">March 31, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for March 31, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Debate for AI alignment</h2>
+                <p>### 1. What is it?<br>
+Debate is a proposed training paradigm for AI alignment where two or more AI agents engage in an adversarial dialogue to convince a human judge of the truth regarding a specific question or action. It aims to solve the scalable oversight problem by allowing humans to supervise AI systems that possess capabilities surpassing the human supervisor.</p>
+
+<p>### 2. How does it work?<br>
+In this setup, two agents take turns making statements or arguments visible to a human judge, with one agent arguing for the correct answer and the other arguing for an incorrect answer. The process is modeled as a zero-sum game where the optimal strategy involves exposing the flaws in the opponent's reasoning. If an agent attempts to deceive the judge, the opponent is incentivized to highlight the specific evidence proving the deception. The training objective optimizes the agents to maximize their probability of winning the judge's approval, formalized as maximizing the expected value \( E[R(a, b)] \) where \( R \) is the reward assigned by the human judge.</p>
+
+<p>### 3. Why does it matter?<br>
+This approach matters because it provides a potential path to aligning superhuman AI systems by amplifying human oversight capabilities without requiring the human to understand the full complexity of the task. It transforms the alignment challenge into a competitive verification problem, ensuring that powerful models remain honest even when the supervisor lacks domain expertise. In high stakes fields like AI security or mental health applications, this mechanism could verify that model outputs are safe and truthful rather than merely sounding plausible.</p>
+
+<p>### 4. Key insight. Adversarial scrutiny forces AI systems to be more honest than they would be in isolation, allowing a relatively weak human supervisor to reliably extract truth from much stronger AI agents.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28288v1" target="_blank">FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Gnankan Landry Regis N&#39;guessan<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28288v1" target="_blank">2603.28288v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the limitation of standard Kolmogorov-Arnold Networks (KAN) which rely on B-splines that struggle to approximate non-smooth or irregular functions efficiently. It investigates whether incorporating learnable fractal interpolation functions into the network architecture can improve accuracy on targets with varying degrees of regularity.</p>
+
+<p>### 2. Positioning. This work positions itself at the intersection of neural network architecture design and classical approximation theory. It fills a gap in the current KAN literature which lacks intrinsic multi-scale decomposition methods for non-smooth functions. The authors argue that current fixed-grid B-spline approaches are insufficient for rough or singular data distributions.</p>
+
+<p>### 3. Key Contribution. The main contribution is the Fractal Interpolation KAN (FI-KAN) which introduces learnable fractal interpolation function bases derived from iterated function system theory. The authors propose two specific variants. Pure FI-KAN replaces B-splines entirely with fractal bases while Hybrid FI-KAN augments B-splines with a learnable fractal correction path.</p>
+
+<p>### 4. Methodology. The authors utilize Iterated Function System (IFS) theory to construct basis functions with learnable contraction parameters. These parameters allow the network to adapt its differentiable fractal dimension to match the regularity of the target function during training. The approach is evaluated on Holder regularity benchmarks, fractal targets with noise, and complex partial differential equation solutions involving rough coefficients or geometric singularities.</p>
+
+<p>### 5. Limitations. The paper acknowledges that the Pure FI-KAN variant underperforms on smooth targets compared to standard KANs. This indicates that fractal bases are not universally superior but are specifically suited for rough or irregular data. Additionally the Hybrid approach while more robust likely introduces increased computational complexity and parameter overhead compared to the baseline model.</p>
+
+<p>### 6. Critical Evaluation. This work offers a rigorous theoretical advancement by successfully bridging fractal geometry and neural network function approximation. The empirical results are impressive, particularly the substantial error reductions on difficult PDE problems. However the necessity of choosing between Pure and Hybrid variants suggests a practical trade-off, requiring users to have some prior intuition about the smoothness of their target data.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28257v1" target="_blank">Nonlinear Factor Decomposition via Kolmogorov-Arnold Networks: A Spectral Approach to Asset Return Analysis</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> David Breazu<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28257v1" target="_blank">2603.28257v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the inefficiency of classical Principal Component Analysis (PCA) in capturing variance during market crises when linear correlations between assets break down. It investigates whether a nonlinear approach using Kolmogorov-Arnold Networks can better model complex asset return structures than traditional linear methods.</p>
+
+<p>### 2. Positioning. This work positions itself as a direct generalization of classical PCA within the domain of financial factor analysis. It fills a gap left by linear models that struggle to adapt to the dramatic correlation shifts often observed during periods of high market volatility.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the introduction of KAN-PCA, an autoencoder architecture that combines a Kolmogorov-Arnold Network encoder with a linear decoder. The authors theoretically prove that classical PCA is a specific instance of their model when the spline activations are constrained to be linear functions.</p>
+
+<p>### 4. Methodology. The proposed method utilizes an autoencoder where the encoder consists of a Kolmogorov-Arnold Network with learned B-spline functions on each edge, while the decoder remains a simple linear map. This architecture allows the model to learn nonlinear factors by projecting input data onto spline-based functions rather than straight lines.</p>
+
+<p>### 5. Limitations. A significant limitation noted is that while the model achieves higher in-sample reconstruction accuracy, it only matches classical PCA performance out-of-sample after correcting for data leakage in the training procedure. This suggests the additional model complexity does not yet yield superior predictive power on unseen data.</p>
+
+<p>### 6. Critical Evaluation. The work offers a compelling theoretical extension to PCA by grounding it in the Kolmogorov-Arnold representation theorem. However, the empirical results are mixed, as the failure to outperform standard PCA out-of-sample suggests the model may currently be overfitting the training data or struggling to generalize the learned nonlinearities.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Chongyang Zhao, Mingsong Li, Haodong Lu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.27481v1" target="_blank">2603.27481v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the problem of catastrophic forgetting in Large Vision Language Models (LVLMs) during continual learning. It specifically investigates why Mixture of Experts (MoE) models still suffer from performance degradation on old tasks even when existing experts are frozen.</p>
+
+<p>### 2. Positioning. This work positions itself within the domain of multimodal continual instruction tuning, specifically focusing on Mixture of Experts (MoE) architectures. While existing methods rely on expert isolation to prevent forgetting, this paper identifies a critical gap known as routing drift, where tokens from old tasks are incorrectly routed to newly added experts.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the identification of the "token's dilemma," a phenomenon where ambiguous and old tokens in new training data inadvertently cause forgetting. The authors propose LLaVA-DyMoE, a framework that uses drift-aware token assignment to guide these specific tokens away from new experts, effectively mitigating routing drift.</p>
+
+<p>### 4. Methodology. The proposed method characterizes tokens based on their routing score distributions to identify ambiguous and old tokens. It employs a token-level assignment guidance mechanism to steer these specific tokens away from new experts, alongside complementary regularization techniques to enforce expert-group separation and enhance specialization.</p>
+
+<p>### 5. Limitations. The paper does not explicitly detail limitations in the provided text, but the approach relies on incrementally expanding the model with new experts, which inevitably increases the total parameter count over time. Additionally, the reliance on characterizing token types via routing scores adds computational overhead during the training phase compared to standard MoE training.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling fine-grained analysis of why MoE architectures fail in continual learning settings, moving beyond simple parameter isolation strategies. The proposed solution is technically sound and demonstrates significant empirical improvements, though the necessity of continually increasing model size remains a practical constraint for real-world deployment.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28114v1" target="_blank">Attention Frequency Modulation: Training-Free Spectral Modulation of Diffusion Cross-Attention</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Seunghun Oh, Unsang Park<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28114v1" target="_blank">2603.28114v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the lack of principled, training-free methods for controlling cross-attention in latent diffusion models. It investigates how the spectral properties of attention maps evolve during denoising and whether these properties can be manipulated to edit images without retraining.</p>
+
+<p>### 2. Positioning. This work bridges the gap between diffusion model interpretability and practical image editing. While existing literature often treats attention as a static spatial map, this paper positions cross-attention as a dynamic spatiotemporal signal. It fills a gap by characterizing the spectral progression of token competition, moving beyond simple attention weighting to structural frequency analysis.</p>
+
+<p>### 3. Key Contribution. The authors introduce Attention Frequency Modulation (AFM), a novel plug-and-play technique that modifies cross-attention logits in the Fourier domain. They demonstrate that diffusion cross-attention follows a consistent "coarse-to-fine" spectral progression, which serves as a fingerprint for token competition. This contribution allows for continuous, training-free control over the spatial scale of generated features.</p>
+
+<p>### 4. Methodology. The method summarizes token-softmax weights into concentration maps and analyzes their Fourier power across denoising steps. AFM intervenes during inference by applying progress-aligned reweighting to low and high-frequency bands of the pre-softmax logits. This process can be further refined using token-allocation entropy to adaptively gate the frequency modifications.</p>
+
+<p>### 5. Limitations. The study finds that entropy acts primarily as an adaptive gain rather than an independent control axis, limiting the granularity of the additional control mechanism. While semantic alignment is largely preserved, the spectral manipulation may introduce visual artifacts or unintended structural changes if not carefully tuned. The method also adds computational overhead for Fourier transforms during the inference pipeline.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a compelling theoretical advance by applying signal processing principles to the inner workings of diffusion attention. The strength of the work lies in its training-free nature and its ability to produce substantial visual edits through a principled spectral approach. However, the practical utility may be constrained by the finding that entropy provides less independent control than initially hoped.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28366v1" target="_blank">AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Milton Zhou, Sizhong Qin, Yongzhi Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28366v1" target="_blank">2603.28366v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper aims to solve the inefficiency and high cost of producing short-form advertisement videos. It investigates how to build a unified, end-to-end AI framework that automates the entire editing workflow rather than relying on disjoint, modality-specific tools.</p>
+
+<p>### 2. Positioning. Current AI tools for video editing are fragmented, often focusing on isolated tasks like audio processing or visual effects without a cohesive workflow. This work positions itself as a holistic solution that integrates these disjoint processes into a single pipeline. It fills the gap between specialized AI models and the complex, multi-modal requirements of professional video production.</p>
+
+<p>### 3. Key Contribution. The main contribution is the AutoCut framework, which unifies video selection, script generation, and background music selection within a single model. It introduces a novel method for multimodal discretization, transforming video and audio features into a shared token space that a Large Language Model can process. This approach allows for controllable generation and end-to-end automation of advertisement video creation.</p>
+
+<p>### 4. Methodology. AutoCut employs dedicated encoders to extract features from video and audio, using residual vector quantization to discretize them into unified tokens aligned with text representations. These tokens train a multimodal Large Language Model through alignment and supervised fine-tuning to handle various editing tasks. A final production pipeline then translates the model's predicted token sequences into a deployable video output.</p>
+
+<p>### 5. Limitations. The abstract does not explicitly detail specific limitations, but potential constraints may include the loss of fine-grained detail during the discretization of continuous video and audio signals into tokens. Additionally, the system's reliance on a foundation model suggests it may inherit the biases or hallucinations common to Large Language Models. The quality of the final output is also heavily dependent on the diversity and quality of the advertisement datasets used for training.</p>
+
+<p>### 6. Critical Evaluation. This work offers a compelling solution to a practical industrial bottleneck by bridging the gap between generative AI and professional video editing workflows. Its primary strength lies in the innovative use of a shared token space to make video editing compatible with the reasoning capabilities of Large Language Models. However, the real-world viability will ultimately depend on the system's ability to handle the nuanced creative requirements of high-end advertisement production.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28643v1" target="_blank">The Ultimate Tutorial for AI-driven Scale Development in Generative Psychometrics: Releasing AIGENIE from its Bottle</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Lara Russell-Lasalandra, Hudson Golino, Luis Eduardo Garrido et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28643v1" target="_blank">2603.28643v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+How can the time-consuming and expert-intensive process of psychological scale development be automated? The paper seeks to determine if Large Language Models (LLMs) and network psychometrics can reliably generate and validate item pools without initial human intervention.</p>
+
+<p><strong>2. Positioning</strong><br>
+Traditional scale development is a bottleneck in psychological research, often requiring extensive manual effort and pilot testing before psychometric evaluation can occur. This work positions itself at the intersection of generative AI and psychometrics, offering a computational alternative to the qualitative early stages of instrument design. It fills a critical gap by providing a structured, automated workflow for both well-established and emerging psychological constructs.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the <code>AIGENIE</code> R package, which implements the AI-GENIE framework to fully automate item generation and structural validation *in silico*. It uniquely combines LLM text generation with a rigorous psychometric reduction pipeline, allowing researchers to produce validated item pools entirely offline. The package also offers flexibility by supporting multiple LLM providers and allowing users to apply the validation pipeline to existing item sets.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed framework uses LLMs to generate a large pool of candidate items based on target construct definitions. These items are transformed into high-dimensional embeddings and processed through a multi-step reduction pipeline. This pipeline utilizes Exploratory Graph Analysis (EGA), Unique Variable Analysis (UVA), and bootstrap EGA to identify and retain only the most structurally sound items.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the framework automates structural validation, it relies heavily on the quality of the LLM outputs and the prompt engineering used to generate items. The *in silico* approach may overlook subtle linguistic nuances or cultural contexts that human experts would typically catch during qualitative review. Furthermore, the method focuses on early-stage development, meaning the resulting scales still require traditional pilot testing to confirm real-world reliability and validity.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a significant practical advancement by reducing the startup costs of scale development from weeks of expert labor to minutes of computation. The inclusion of an offline mode and support for local models demonstrates a thoughtful approach to data privacy and accessibility. However, the reliance on automated structural validation risks prioritizing statistical patterns over semantic depth, necessitating a hybrid approach where AI assists rather than replaces human judgment.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28713v1" target="_blank">DreamLite: A Lightweight On-Device Unified Model for Image Generation and Editing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Kailai Feng, Yuxiang Wei, Bo Chen et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28713v1" target="_blank">2603.28713v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of deploying high-performance diffusion models on resource-constrained mobile devices. It investigates whether a single lightweight network can effectively support both text-to-image generation and text-guided image editing without relying on server-side infrastructure.</p>
+
+<p><strong>2. Positioning</strong><br>
+Existing diffusion models typically require billions of parameters, making them difficult to deploy on devices. While previous on-device models exist, they focus almost exclusively on generation and lack the ability to edit existing images. This work positions itself as the first unified on-device solution to bridge the gap between generation and editing tasks within a compact architecture.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The authors introduce DreamLite, a 0.39 billion parameter model that unifies generation and editing capabilities in a single network. The model achieves competitive quality against larger server-side models while enabling sub-second inference on a smartphone. It also demonstrates a novel training methodology that stabilizes learning for compact architectures.</p>
+
+<p><strong>4. Methodology</strong><br>
+DreamLite utilizes a pruned mobile U-Net backbone and employs in-context spatial concatenation in the latent space to handle different tasks. Specifically, it uses a (target | blank) configuration for generation and (target | source) for editing. The training process involves a task-progressive strategy, Supervised Fine-Tuning (SFT), reinforcement learning, and step distillation to reduce inference to 4 steps.</p>
+
+<p><strong>5. Limitations</strong><br>
+While competitive, a model with only 0.39 billion parameters may struggle with highly complex semantic reasoning or intricate details compared to state-of-the-art server-side models with billions of parameters. The demonstrated performance relies on specific high-end mobile hardware (Xiaomi 14), so results may vary on less powerful devices. The abstract does not detail potential failure cases in complex editing scenarios where spatial consistency is critical.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work represents a significant engineering achievement in optimizing diffusion models for mobile deployment. The ability to generate or edit a \(1024 \times 1024\) image in less than one second is a major step forward for practical applications. However, the inherent trade-off between model size and generative capability suggests that it may still fall short of the creative flexibility offered by much larger models.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28498v1" target="_blank">MRI-to-CT synthesis using drifting models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Qing Lyu, Jianxu Wang, Jeremy Hudson et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28498v1" target="_blank">2603.28498v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the challenge of generating accurate synthetic CT images from MRI scans to support MR-only radiotherapy workflows. It specifically asks whether drifting models can outperform existing deep learning techniques in both image quality and inference speed.</p>
+
+<p><strong>2. Positioning</strong><br>
+The authors position their work against a comprehensive set of baselines, ranging from standard CNNs and GANs to state-of-the-art diffusion models. They aim to fill the gap for a synthesis method that maintains high anatomical fidelity without the computational expense of iterative diffusion sampling.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The main contribution is demonstrating that drifting models can achieve superior structural consistency and image fidelity compared to strong baselines like WGAN-GP and DDPM. Crucially, the model achieves this with one-step inference, reducing generation time to milliseconds.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed approach utilizes drifting models to translate MRI data into CT images. The authors conduct experiments on the Gold Atlas Male Pelvis and SynthRAD2023 datasets, evaluating performance using metrics like SSIM, PSNR, and RMSE alongside visual inspections of bone structures.</p>
+
+<p><strong>5. Limitations</strong><br>
+The study is restricted to pelvic imaging, requiring future work to test generalization to other anatomical regions. Additionally, while the synthetic images are high quality, the authors acknowledge that validation for downstream tasks like radiotherapy planning is still necessary.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This research presents a significant practical advancement by resolving the trade-off between the high quality of diffusion models and the speed of single-pass networks. The ability to generate sharp bone details in milliseconds makes this a highly promising direction for clinical integration, provided it passes further regulatory and clinical hurdles.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28572v1" target="_blank">Unrestrained Simplex Denoising for Discrete Data. A Non-Markovian Approach Applied to Graph Generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yoann Boget, Alexandros Kalousis<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28572v1" target="_blank">2603.28572v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. How can we generate discrete data structures, such as graphs, without the abrupt state changes and limitations inherent in current discrete diffusion methods? The paper seeks to solve this by designing a generative process that operates on the probability simplex rather than directly on discrete states.</p>
+
+<p>### 2. Positioning. This work positions itself as an evolution of current Diffusion and Flow Matching models tailored for discrete structures. It addresses a specific gap in the literature where existing methods either suffer from abrupt transitions in discrete state space or rely on complex, constrained Markovian frameworks.</p>
+
+<p>### 3. Key Contribution. The main contribution is the introduction of "unrestrained simplex denoising", a framework that operates on the probability simplex using a non-Markovian noising scheme. This approach allows noisy representations at different times to be conditionally independent given the clean data, removing unnecessary constraints while preserving theoretical guarantees.</p>
+
+<p>### 4. Methodology. The proposed method maps discrete data points to the probability simplex and applies a noising scheme that does not depend on the previous time step (non-Markovian). Instead of a sequential chain where noise accumulates step-by-step, the model creates noisy versions at any time \(t\) based solely on the original clean data. This simplifies the learning objective and allows for more flexible generation.</p>
+
+<p>### 5. Limitations. While the paper demonstrates strong results on graph benchmarks, the specific computational overhead of operating on the probability simplex for very large vocabulary sizes is not deeply explored. Additionally, the evaluation focuses primarily on graph data, leaving the efficacy of this approach for other discrete modalities, such as text or biological sequences, as an area for future validation.</p>
+
+<p>### 6. Critical Evaluation. This work offers a theoretically elegant simplification of discrete generative modeling by removing Markovian constraints, which often complicate training and sampling. The empirical results on graph generation are compelling, suggesting that the probability simplex is a robust alternative to direct discrete manipulation. However, the practical impact will depend on how well the method scales to the massive discrete vocabularies found in natural language processing.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28263v1" target="_blank">Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Eneko Valero, Maria Ribalta i Albado, Oscar Sainz et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28263v1" target="_blank">2603.28263v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper investigates whether language knowledge can be transferred to an instruction-tuned Large Language Model (LLM) by merging it with a language-specific base model. It asks if this approach can successfully enable instruction following in new languages without relying on language-specific instruction data or expensive fine-tuning.</p>
+
+<p><strong>2. Positioning</strong><br>
+Current adaptation methods for low-resource languages typically require costly continual pre-training and high-quality instruction datasets, which are often scarce. This work positions model merging as a lightweight, resource-efficient alternative to these traditional approaches. It fills a gap in the literature by systematically exploring the viability of weight interpolation for transferring linguistic capabilities to instruction-tuned models.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the demonstration that merging a language-specific base model with an instruction-tuned model effectively imparts new linguistic abilities. This method eliminates the need to create language-specific instruction datasets or repeat the instruction-tuning process for every new language. The paper also shows that combining multiple language-specific models can create multilingual capabilities efficiently.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose a technique where the model weights of a target language base model are combined with those of an existing instruction-tuned model. They validated this approach by testing on four Iberian languages, including Basque and Catalan, across two different model families. The experiments assessed the model's ability to follow instructions in the target languages and compared performance against traditional adaptation methods.</p>
+
+<p><strong>5. Limitations</strong><br>
+The study is limited to four Iberian languages, which may not fully represent the challenges of vastly different low-resource language families or scripts. While the method reduces computational costs, it relies on the availability of a pre-trained base model for the specific target language. Additionally, the merging process may not fully recover the nuanced performance achievable through high-quality, native instruction tuning.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work offers a highly practical solution for democratizing LLMs, significantly lowering the barrier to entry for low-resource language communities. The strength of the paper lies in its simplicity and the clear demonstration that distinct model capabilities can be decoupled and recombined efficiently. However, the reliance on existing base models means it does not solve the "cold start" problem for languages with absolutely no prior model representation.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.28288v1" target="_blank">FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28257v1" target="_blank">Nonlinear Factor Decomposition via Kolmogorov-Arnold Networks: A Spectral Approach to Asset Return Analysis</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28114v1" target="_blank">Attention Frequency Modulation: Training-Free Spectral Modulation of Diffusion Cross-Attention</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28366v1" target="_blank">AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28643v1" target="_blank">The Ultimate Tutorial for AI-driven Scale Development in Generative Psychometrics: Releasing AIGENIE from its Bottle</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28713v1" target="_blank">DreamLite: A Lightweight On-Device Unified Model for Image Generation and Editing</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28498v1" target="_blank">MRI-to-CT synthesis using drifting models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28572v1" target="_blank">Unrestrained Simplex Denoising for Discrete Data. A Non-Markovian Approach Applied to Graph Generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28263v1" target="_blank">Merge and Conquer: Instructing Multilingual Models by Adding Target Language Weights</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
