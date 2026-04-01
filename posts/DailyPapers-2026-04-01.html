@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily AI Research Papers - 2026-04-01</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">Daily AI Research Papers</h2>
+            <div class="post-meta">
+                <span class="date">April 01, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI Research Daily</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>Table of Contents</h3>
+              <ol>
+                <li><a href="#daily-concept">Daily Concept</a></li>
+                <li><a href="#papers">Paper Summaries</a></li>
+                <li><a href="#references">References</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>Here are selected AI research papers and a concept explainer for April 01, 2026.</p>
+
+                <h2 id="daily-concept">Daily Concept: Expert routing mechanisms</h2>
+                <p>### 1. What is it?<br>
+Expert routing mechanisms are gating functions used in sparse neural architectures to determine which specialized sub-networks, or experts, should process a given input. Instead of activating the entire model for every token, the router selectively activates a subset of experts. This dynamic selection allows models to scale their parameter counts significantly without a proportional increase in computational cost.</p>
+
+<p>### 2. How does it work?<br>
+The mechanism typically employs a trainable gating network that takes the input token representation and outputs a score for each available expert. A sparsity-enforcing function, such as a Top-K operation, selects the highest-scoring experts and normalizes their weights via softmax. The final output is the weighted sum of the outputs from the selected experts, while the outputs of non-selected experts are ignored. Mathematically, for an input \( x \), the output \( y \) is computed as \( y = \sum_{i=1}^{N} G(x)_i E_i(x) \), where \( G(x)_i \) represents the gating weight for expert \( i \) and \( E_i(x) \) is the expert's output.</p>
+
+<p>### 3. Why does it matter?<br>
+This approach is fundamental to modern scaling laws because it allows models to reach massive sizes while maintaining feasible inference speeds. In research areas like unlearning and agent memory, routing creates modular sub-networks where specific knowledge or behaviors can be localized to specific experts. This modularity enables researchers to target specific regions of the model for editing or erasure without degrading the overall system performance.</p>
+
+<p>### 4. Key insight. Expert routing transforms deep learning from a paradigm of dense computation to one of conditional computation. It enables models to possess vast capacity while only utilizing the relevant subset of parameters for any given task.</p>
+
+                <h2 id="papers">Paper Summaries</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29632v1" target="_blank">An Empirical Study of Multi-Agent Collaboration for Automated Research</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Yang Shen, Zhenyi Yi, Ziyi Zhao et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29632v1" target="_blank">2603.29632v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper investigates the most effective coordination frameworks for Multi-Agent Systems (MAS) in the context of automated research. Specifically, it asks how different multi-agent structures compare to a single-agent baseline when optimizing machine learning tasks under fixed computational time constraints.</p>
+
+<p>### 2. Positioning. This work addresses the rapid transition in the AI community from single Large Language Models to Multi-Agent Systems. It identifies a gap in the existing literature regarding the optimal coordination strategies for these agents and fills it by providing a systematic empirical comparison of distinct architectural paradigms.</p>
+
+<p>### 3. Key Contribution. The primary contribution is a rigorous benchmark comparing a single-agent baseline against two multi-agent paradigms, namely a subagent architecture and an agent team architecture. The study reveals a critical trade-off where the subagent mode offers high throughput and resilience, while the agent team mode provides deep theoretical alignment despite higher operational fragility.</p>
+
+<p>### 4. Methodology. The authors utilized a controlled execution-based testbed featuring Git worktree isolation and explicit global memory to ensure fair comparisons. They evaluated the systems by assigning automated machine learning optimization tasks under strictly fixed computational time budgets to measure performance differences.</p>
+
+<p>### 5. Limitations. The study acknowledges that the agent team architecture suffers from operational fragility due to the challenges of multi-author code generation. Additionally, the findings are specific to automated machine learning optimization tasks, which may limit generalizability to other research domains without further testing.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a grounded empirical perspective on the hype surrounding multi-agent systems, moving beyond theoretical potential to practical trade-offs. Its strength lies in the rigorous experimental setup, though the reliance on a specific testbed suggests that further research is needed to validate these findings across broader scientific domains.</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29765v1" target="_blank">Training-Free Dynamic Upcycling of Expert Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Eros Fanì, Oğuzhan Ersoy<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29765v1" target="_blank">2603.29765v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of combining multiple specialized Large Language Models into a single unified system without incurring the high computational costs of retraining. It asks how we can merge distinct expert models into a Mixture of Experts (MoE) architecture while preserving their specific knowledge and avoiding catastrophic forgetting.</p>
+
+<p>### 2. Positioning. Current methods for building multi-domain models often struggle with interference between tasks or the expense of multitask fine-tuning. While existing MoE approaches combine experts, they typically require further optimization to function cohesively. This work fills the gap by offering a training-free alternative that instantly recycles existing dense models into a unified MoE structure.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the introduction of Dynamic Upcycling MoE (DUME), a framework that constructs a multitask model from separate dense experts without any additional training. The method allows for the dynamic addition of new experts while maintaining scalability. It demonstrates that this training-free approach can match or even exceed the performance of original dense models, retaining up to 97.6% of performance in language modeling and achieving 102.1% in reasoning tasks.</p>
+
+<p>### 4. Methodology. DUME operates by reusing the weights of pre-trained dense experts to initialize a Mixture of Experts model. It leverages the closed-form solution of ridge regression to calculate the optimal parameters for combining these experts. This mathematical approach eliminates the need for gradient-based optimization, allowing the model to integrate experts instantly and efficiently.</p>
+
+<p>### 5. Limitations. While the method retains most capabilities, the language modeling performance retains 97.6% of the original expert's ability, indicating a slight degradation compared to the specialized source model. The approach is also dependent on the availability of high-quality, pre-trained dense experts for the specific domains required. Furthermore, the abstract suggests that fine-tuning is still beneficial after the upcycling process, implying the initial merge may not always be the final optimal state.</p>
+
+<p>### 6. Critical Evaluation. This work offers a highly practical solution to a significant bottleneck in model development by removing the need for expensive retraining. The strength of the approach lies in its mathematical elegance, using ridge regression to solve the merging problem effectively. However, the slight performance drop in causal language modeling suggests that some interference still occurs during the merging process, leaving room for improvement in preserving exact expert fidelity.</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Chongyang Zhao, Mingsong Li, Haodong Lu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.27481v1" target="_blank">2603.27481v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of catastrophic forgetting in Large Vision Language Models (LVLMs) during continual learning. Specifically, it investigates why Mixture of Experts (MoE) models still forget previous tasks even when old experts are frozen, identifying "routing-drift" as the core failure mode.</p>
+
+<p>### 2. Positioning. This work fits into the domain of Multimodal Continual Instruction Tuning. While existing literature often relies on parameter isolation strategies like freezing old experts to prevent forgetting, this paper highlights that such methods are insufficient because routing mechanisms can still change undesirably. It fills a critical gap by analyzing token-level routing dynamics and correcting the misassignment of old or ambiguous tokens to new experts.</p>
+
+<p>### 3. Key Contribution. The primary contribution is the identification of the "token's dilemma," which reveals that ambiguous and old tokens in new training data contribute little to learning new tasks but actively cause forgetting when routed to new experts. To solve this, the authors introduce LLaVA-DyMoE, a dynamic MoE framework that utilizes drift-aware token assignment. This approach achieves a significant performance boost, reported as over a 7% increase in mean final accuracy compared to baseline methods.</p>
+
+<p>### 4. Methodology. The authors propose a framework that characterizes tokens based on their routing score distributions to distinguish between beneficial and detrimental training samples. They implement a token-level assignment guidance mechanism that actively steers ambiguous and old tokens away from new experts. This is complemented by routing score regularizations that enforce separation between expert groups to maintain old routing patterns and ensure new experts specialize effectively.</p>
+
+<p>### 5. Limitations. While the abstract demonstrates impressive performance gains, the approach relies on incrementally adding experts, which implies a growing memory footprint and parameter count over time. Furthermore, the method requires specific characterization of token types via routing scores, which may add computational overhead during the training phase compared to standard static routing approaches.</p>
+
+<p>### 6. Critical Evaluation. This paper provides a valuable mechanistic insight into why parameter isolation alone fails to prevent forgetting in Mixture of Experts models. The proposed solution is elegant because it directly addresses the root cause of the performance drop rather than simply applying generic regularization. However, the practicality of the method depends heavily on how efficiently the system can dynamically expand and manage routing without incurring prohibitive computational costs during long sequences of tasks.</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29520v1" target="_blank">TrafficMoE: Heterogeneity-aware Mixture of Experts for Encrypted Traffic Classification</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Qing He, Xiaowei Fu, Lei Zhang<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29520v1" target="_blank">2603.29520v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the problem of performance degradation in encrypted traffic classification caused by static modeling approaches. It investigates how to effectively distinguish between structured protocol headers and randomized, noisy payloads when current one-size-fits-all pipelines force them into a unified processing path.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself against existing deep learning frameworks that rely on homogeneous pipelines with uniform parameter sharing. It fills a critical gap by challenging the standard static fusion strategy, arguing that entangling structured headers with stochastic payloads inevitably degrades the extraction of fine-grained discriminative features.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is the TrafficMoE framework, which introduces a Disentangle-Filter-Aggregate (DFA) paradigm to replace static modeling. Key innovations include a dual-branch sparse Mixture-of-Experts architecture for modality-specific modeling and an uncertainty-aware filtering mechanism to suppress high-variance noise from encrypted payloads.</p>
+
+<p><strong>4. Methodology</strong><br>
+The proposed method disentangles traffic headers and payloads using a dual-branch architecture to enable specialized processing. It introduces an uncertainty-aware filtering mechanism to quantify reliability and suppress noise, followed by a routing-guided strategy that dynamically aggregates cross-modality features based on the specific traffic context.</p>
+
+<p><strong>5. Limitations</strong><br>
+While the abstract does not list explicit limitations, the introduction of Mixture-of-Experts and routing mechanisms suggests increased architectural complexity and computational overhead compared to simpler static models. Additionally, the effectiveness of the uncertainty-aware filtering relies heavily on accurate variance estimation, which may be challenging in highly volatile network environments.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work presents a logical evolution from static to dynamic traffic analysis by acknowledging the inherent heterogeneity of network data. Its strength lies in the targeted handling of distinct data modalities, though the practical deployment challenges regarding the computational cost of the routing and expert layers remain a consideration for real-time applications.</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29493v1" target="_blank">MemFactory: Unified Inference &amp; Training Framework for Agent Memory</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Ziliang Guo, Ziheng Li, Zhiyu Li<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29493v1" target="_blank">2603.29493v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p><strong>1. Research Question</strong><br>
+The paper addresses the fragmentation in current implementations of memory-augmented Large Language Models (LLMs). It asks how we can create a unified infrastructure to streamline the integration, training, and evaluation of memory operations for AI agents.</p>
+
+<p><strong>2. Positioning</strong><br>
+This work positions itself as the first unified framework specifically designed for memory-augmented agents, filling the gap left by task-specific implementations. It draws inspiration from successful fine-tuning frameworks like LLaMA-Factory to provide a standardized baseline for the field. The authors target the specific difficulty of applying Reinforcement Learning (RL) to memory operations, which previously lacked cohesive tooling.</p>
+
+<p><strong>3. Key Contribution</strong><br>
+The primary contribution is MemFactory, a highly modular framework that treats the memory lifecycle as a set of atomic, plug-and-play components. It uniquely integrates Group Relative Policy Optimization (GRPO) to fine-tune memory management policies using multi-dimensional rewards. This allows researchers to construct custom memory agents via a "Lego-like" architecture that supports advanced paradigms like Memory-R1 and MemAgent.</p>
+
+<p><strong>4. Methodology</strong><br>
+The authors propose a "Lego-like" architecture where memory functions are abstracted into interchangeable modules. They natively implement RL techniques, specifically GRPO, to optimize internal memory policies based on environmental feedback. The framework is empirically validated on the MemAgent architecture using publicly available data for both in-domain and out-of-distribution testing.</p>
+
+<p><strong>5. Limitations</strong><br>
+The abstract does not explicitly list specific limitations, though the empirical validation is restricted to the MemAgent architecture. Potential limitations include the computational overhead associated with maintaining such a modular abstraction layer. Additionally, the effectiveness of the RL optimization relies heavily on the design of the multi-dimensional environmental rewards.</p>
+
+<p><strong>6. Critical Evaluation</strong><br>
+This work represents a significant engineering milestone that effectively lowers the barrier to entry for developing complex, long-term AI agents. The reported relative performance gain of 14.8% suggests the framework is not only convenient but also practically effective. Its main strength lies in standardizing the pipeline, though its long-term impact will depend on community adoption and extensibility to future memory paradigms.</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29475v1" target="_blank">Survival In-Context: Prior-fitted In-context Learning Tabular Foundation Model for Survival Analysis</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Dmitrii Seletkov, Paul Hager, Rickmer Braren et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29475v1" target="_blank">2603.29475v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. Can the prior-fitted paradigm, which pretrains models on large collections of synthetic data, be effectively adapted for survival analysis? The paper investigates whether this approach can overcome common challenges in time-to-event modeling such as data scarcity, censoring, and heterogeneous tabular covariates.</p>
+
+<p>### 2. Positioning. This work bridges the gap between recent advances in tabular foundation models and the specific needs of survival analysis. While prior-fitted models have shown success in standard classification and regression tasks, their application to survival analysis has remained unexplored. The authors position their model as a solution that brings the benefits of in-context learning to the medical domain without requiring task-specific training.</p>
+
+<p>### 3. Key Contribution. The authors introduce Survival In-Context (SIC), the first prior-fitted foundation model specifically designed for survival analysis that is pretrained exclusively on synthetic data. A key novelty is the development of a flexible framework for generating synthetic survival datasets, which allows for explicit control over covariate and time-event distributions. This enables the model to produce individualized predictions in a single forward pass, eliminating the need for hyperparameter tuning.</p>
+
+<p>### 4. Methodology. The researchers first created a rich survival prior by designing a framework to generate diverse synthetic datasets with controlled characteristics. They then pretrained a transformer-based model on this synthetic data to perform in-context learning. The resulting model, SIC, takes a context set of covariates and survival times as input and outputs predictions for new individuals without updating its weights.</p>
+
+<p>### 5. Limitations. The abstract indicates that the model achieves superior performance primarily in medium-sized data regimes, suggesting it may not outperform established methods in scenarios with very large or extremely small datasets. Additionally, pretraining exclusively on synthetic data carries the inherent risk that the generated distributions may not fully capture the complexity and noise found in real-world medical data.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a promising step toward practical foundation models for healthcare by removing the computational burden of hyperparameter tuning, which is often a major hurdle in clinical settings. However, the reliance on synthetic data for pretraining is a bold choice that requires rigorous validation to ensure the model does not overfit to the idiosyncrasies of the generation process rather than genuine survival signals.</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29467v1" target="_blank">M-MiniGPT4: Multilingual VLLM Alignment via Translated Data</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Seung Hun Han, Youssef Mohamed, Mohamed Elhoseiny<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29467v1" target="_blank">2603.29467v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper investigates how to extend the capabilities of Vision Large Language Models (VLLMs) to multiple languages effectively. It specifically asks how translated data and alignment techniques can be utilized to improve multilingual vision-language understanding.</p>
+
+<p>### 2. Positioning. This work builds upon the MiniGPT4 architecture to fill the gap in multilingual performance, which is often limited in existing English-centric models. It targets the need for robust vision-language models in low-resource language settings where native training data is scarce.</p>
+
+<p>### 3. Key Contribution. The authors introduce M-MiniGPT4, a model that outperforms state-of-the-art competitors in its weight class with 36% accuracy on the multilingual MMMU benchmark. They also contribute a comprehensive open-source release including code, model weights, and translated datasets to foster future research.</p>
+
+<p>### 4. Methodology. The approach involves training on a mixture of native multilingual data and translated data to broaden language coverage. It also incorporates a dedicated multilingual alignment stage using parallel text corpora to synchronize language understanding with visual inputs.</p>
+
+<p>### 5. Limitations. The reliance on machine-translated data risks propagating translation errors or losing cultural nuances present in native data. While strong for its weight class, the model may still lag behind much larger proprietary models in complex reasoning tasks.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a practical and accessible approach to multilingual VLLMs, making strong performance achievable without prohibitive computational costs. The open-source contribution is a major strength that encourages reproducibility and further development in underrepresented languages. The primary weakness lies in the potential quality ceiling imposed by using synthetic translated data rather than large-scale native human annotations.</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29660v1" target="_blank">STRADAViT: Towards a Foundational Model for Radio Astronomy through Self-Supervised Transfer</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Andrea DeMarco, Ian Fenech Conti, Hayley Camilleri et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29660v1" target="_blank">2603.29660v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the challenge of analyzing radio source morphology across diverse telescopes and imaging pipelines, which currently hinders the processing of next-generation survey data. It investigates whether a specialized self-supervised pretraining framework can create a more effective foundational model for radio astronomy than generic computer vision models.</p>
+
+<p>### 2. Positioning. As radio astronomy surveys begin to produce millions of resolved sources, the field lacks a robust, generalizable model for automated morphology analysis. Existing generic Vision Transformers offer strong baselines but are not optimized for the specific statistical properties of radio images. This work positions itself as a bridge, adapting general computer vision advances to the unique noise and feature distributions found in radio astronomy data.</p>
+
+<p>### 3. Key Contribution. The primary contribution is STRADAViT, a continued pretraining framework that adapts Vision Transformers to radio astronomy through reconstruction and contrastive learning. The authors release a model checkpoint that achieves competitive transfer performance on classification tasks while requiring lower computational costs than existing state-of-the-art baselines. They also demonstrate that radio-aware data augmentations provide a better starting point for downstream tasks than standard optical-image pretraining.</p>
+
+<p>### 4. Methodology. The authors utilize a mixed-survey dataset of 512x512 image cutouts from MeerKAT, ASKAP, LOFAR, and SKA to continue pretraining a Vision Transformer. They introduce radio astronomy-aware view generation techniques and test three distinct pretraining branches including reconstruction-only, contrastive-only, and a two-stage combination. The resulting models are evaluated using linear probing and fine-tuning on three morphology benchmarks known as MiraBest, LoTSS DR2, and Radio Galaxy Zoo.</p>
+
+<p>### 5. Limitations. While the model improves performance relative to its initialization, the gains over the strong DINOv2 baseline are selective and do not appear in every tested scenario. The approach relies on continued pretraining, meaning the model capacity and initial biases are still inherited from the underlying generic Vision Transformer architecture. Additionally, the study focuses primarily on morphology classification, leaving the performance on other potential downstream tasks less explored.</p>
+
+<p>### 6. Critical Evaluation. This work offers a practical and efficient pathway to domain-specific foundation models by showing that targeted adaptation outperforms simply scaling up generic models. The strength of the paper lies in its rigorous ablation study and the demonstration that standard optical-image augmentations are suboptimal for radio data. However, the incremental nature of the gains over DINOv2 suggests that the domain gap, while significant, can be partially mitigated by sufficiently powerful general-purpose models.</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29517v1" target="_blank">LLM Probe: Evaluating LLMs for Low-Resource Languages</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Hailay Kidu Teklehaymanot, Gebrearegawi Gebremariam, Wolfgang Nejdl<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29517v1" target="_blank">2603.29517v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper addresses the lack of standardized methods to evaluate Large Language Models (LLMs) in low-resource and morphologically rich languages. It asks how these models perform across specific linguistic tasks when training data is scarce.</p>
+
+<p>### 2. Positioning. Existing literature focuses heavily on high-resource languages, leaving the linguistic capabilities of LLMs in low-resource settings poorly understood. This work positions itself as a solution to the lack of annotated resources and standardized evaluation frameworks for these underrepresented languages.</p>
+
+<p>### 3. Key Contribution. The primary contribution is LLM Probe, a lexicon-based framework designed to systematically assess lexical alignment, part-of-speech recognition, morphosyntactic probing, and translation accuracy. Additionally, the authors provide a manually annotated benchmark dataset for a low-resource Semitic language to facilitate reproducible research.</p>
+
+<p>### 4. Methodology. The authors constructed a manually annotated dataset featuring bilingual lexicons with tags for grammatical gender, part-of-speech, and morphosyntactic features. They evaluated various model architectures, including causal language models and sequence-to-sequence models, using this benchmark to measure performance across the four linguistic dimensions.</p>
+
+<p>### 5. Limitations. While the framework is generalizable, the provided benchmark dataset focuses specifically on a single low-resource Semitic language as a case study. The evaluation is also restricted to specific linguistic tasks defined by the lexicon-based approach, potentially missing broader semantic or pragmatic capabilities.</p>
+
+<p>### 6. Critical Evaluation. This work is a significant step toward more inclusive AI, offering a structured, linguistically grounded method to diagnose model failures in low-resource scenarios. However, the reliance on a single case study language limits the immediate understanding of how well these findings transfer to other linguistic families or distinct low-resource contexts.</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.29426v1" target="_blank">Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Aided Multi-Agent Reinforcement Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>Authors:</strong> Jiaao Ma, Chuan Lin, Guangjie Han et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.29426v1" target="_blank">2603.29426v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>Summary</h4>
+                    <p>### 1. Research Question. The paper aims to solve the instability and inefficiency problems in multi-Autonomous Underwater Vehicle (AUV) cooperative target tracking. Specifically, it addresses the challenges of non-stationarity in decentralized coordination, exploration inefficiency caused by sparse rewards, and the lack of robustness against underwater environmental disturbances.</p>
+
+<p>### 2. Positioning. This work positions itself at the intersection of underwater robotics and advanced multi-agent reinforcement learning (MARL). It fills a critical gap in the literature where existing methods struggle to maintain robustness under unmodeled hydrodynamic conditions and fail to converge effectively due to unstable decentralized training environments.</p>
+
+<p>### 3. Key Contribution. The main contribution is the Supervised Diffusion-Aided MARL (SDA-MARL) algorithm, which integrates a hierarchical architecture with generative modeling. Key innovations include a dual-decision architecture to stabilize experience replay and a supervised diffusion mechanism that generates high-fidelity samples to accelerate learning without relying on handcrafted rewards.</p>
+
+<p>### 4. Methodology. The authors propose a four-layer hierarchical MARL architecture that separates global training from local execution. The core SDA-MARL algorithm utilizes a dual-decision architecture with segregated experience pools and employs a diffusion model guided by supervised learning to denoise and generate high-quality training samples for the Deep Deterministic Policy Gradient network.</p>
+
+<p>### 5. Limitations. The primary limitation is that the evaluation is conducted entirely through comprehensive underwater simulations rather than real-world physical trials. Additionally, the complexity of the hierarchical diffusion model may introduce significant computational overhead, potentially limiting its deployment on AUVs with constrained processing power.</p>
+
+<p>### 6. Critical Evaluation. This paper offers a compelling integration of generative diffusion models with reinforcement learning to address persistent stability issues in multi-agent systems. While the approach is technically sophisticated and addresses clear gaps in robustness and convergence, the practical viability of the method remains to be proven in physical underwater environments where sensor noise and hardware constraints are prevalent.</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">References</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2603.29632v1" target="_blank">An Empirical Study of Multi-Agent Collaboration for Automated Research</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29765v1" target="_blank">Training-Free Dynamic Upcycling of Expert Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.27481v1" target="_blank">On Token&#39;s Dilemma: Dynamic MoE with Drift-Aware Token Assignment for Continual Learning of Large Vision Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29520v1" target="_blank">TrafficMoE: Heterogeneity-aware Mixture of Experts for Encrypted Traffic Classification</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29493v1" target="_blank">MemFactory: Unified Inference &amp; Training Framework for Agent Memory</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29475v1" target="_blank">Survival In-Context: Prior-fitted In-context Learning Tabular Foundation Model for Survival Analysis</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29467v1" target="_blank">M-MiniGPT4: Multilingual VLLM Alignment via Translated Data</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29660v1" target="_blank">STRADAViT: Towards a Foundational Model for Radio Astronomy through Self-Supervised Transfer</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29517v1" target="_blank">LLM Probe: Evaluating LLMs for Low-Resource Languages</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.29426v1" target="_blank">Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Aided Multi-Agent Reinforcement Learning</a></li>
+                </ul>
+
+                <p><em>Feel free to reach out for discussion and feedback. Thanks for reading!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
