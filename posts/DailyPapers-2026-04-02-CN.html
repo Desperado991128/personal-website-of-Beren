@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-04-02</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">April 02, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年04月02日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Interpretability-based safety</h2>
+                <p>### 1. 概念定义<br>
+基于可解释性的安全性是一种通过深入理解模型内部工作机制来保障AI系统安全的方法。它不单纯依赖外部输入输出的行为测试，而是通过分析模型内部的神经元激活或特征表示来识别并消除潜在的危险能力。这种方法旨在从源头发现模型中的隐患，例如隐藏的恶意意图或未被触发的有害知识。</p>
+
+<p>### 2. 核心原理<br>
+该方法的核心理念是将高风险的概念或行为定位到模型的高维表示空间中的特定方向。研究人员通过训练线性探针或使用稀疏自动编码器，在模型的隐藏层激活中寻找与危险行为相关的特征向量。假设模型的隐藏状态为 \( h \)，我们试图找到一个安全相关方向 \( v \)，使得该方向上的投影大小能够指示风险水平。数学上，这可以表示为寻找一个映射函数 \( f(h) = \sigma(v^T h + b) \)，其中 \( \sigma \) 为激活函数，用于预测该状态下的安全概率。</p>
+
+<p>### 3. 研究意义<br>
+在扩散模型和大型基础模型日益强大的今天，传统的红队测试和微调方法难以覆盖所有潜在的安全漏洞。这项研究对于构建可信赖的AI至关重要，因为它提供了一种检测模型是否“伪装”安全或隐藏恶意能力的手段。特别是在AI安全领域，它使得我们能够在模型造成实际危害之前，从内部结构上验证其对齐程度。</p>
+
+<p>### 4. 关键洞见<br>
+真正的安全性不仅在于模型输出的结果看起来无害，更在于其内部计算过程不包含恶意的意图或未被激活的危险知识。理解模型内部的“思考”过程比仅仅约束其外部行为更为根本和可靠。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00706v1" target="_blank">AfrIFact: Cultural Information Retrieval, Evidence Extraction and Fact Checking for African Languages</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Israel Abebe Azime, Jesujoba Oluwadara Alabi, Crystina Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00706v1" target="_blank">2604.00706v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文致力于解决低资源非洲语言环境下的自动事实验证问题，特别是涉及医疗和文化领域的虚假声明，旨在降低信息匮乏社区面临的风险。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有事实验证研究主要集中在高资源语言，缺乏针对非洲低资源语言的系统性数据集。本研究填补了这一空白，构建了涵盖信息检索、证据提取及事实验证完整流程的非洲语言数据集。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文发布了AfrIFact数据集，覆盖10种非洲语言及英语，支持自动事实验证的全流程评估。研究揭示了现有嵌入模型在跨语言检索上的缺陷，并证明了少样本提示和特定任务微调能显著提升模型性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究构建了一个包含信息检索、证据提取和事实验证三个关键步骤的基准数据集。实验评估了嵌入模型的检索能力，并测试了大语言模型在少样本提示和微调设置下的验证表现。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+现有模型在医疗文档检索上的表现显著低于文化和新闻领域，显示出领域适应性不足。此外，即使是最先进的嵌入模型在非洲语言上也缺乏有效的跨语言检索能力。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的社会价值，关注了技术研究中常被忽视的低资源语言社区。它不仅提供了宝贵的基准数据，还明确指出了当前大模型在多语言事实核查能力上的短板，为未来的研究方向提供了清晰指引。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00785v1" target="_blank">Scalable Pretraining of Large Mixture of Experts Language Models on Aurora Super Computer</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Dharma Teja Vooturi, Dhiraj Kalamkar, Dipankar Das et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00785v1" target="_blank">2604.00785v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+本文旨在解决在百亿亿次级超级计算机上高效预训练大规模混合专家语言模型所面临的计算扩展性和系统稳定性挑战。</p>
+
+<p>### 2. 研究定位<br>
+该工作定位为在Aurora这一基于Intel PVC架构的百亿亿次超级计算机上进行大规模LLM预训练的先行实践。它填补了在非主流NVIDIA生态下进行千亿参数级MoE模型高效训练的空白，验证了异构硬件在大模型训练中的潜力。</p>
+
+<p>### 3. 核心贡献<br>
+论文开发了Optimus训练库，成功在3000多个GPU节点上从头预训练了多个稠密及MoE模型，最大参数量达220B。核心创新在于实现了约90%的扩展效率，并通过定制内核与优化器设计将训练速度提升了 \(1.71\times\)。</p>
+
+<p>### 4. 方法概述<br>
+研究团队开发了Optimus库，引入了针对专家计算的自定义GPU内核以及EP-Aware分片优化器以解决MoE训练瓶颈。同时，该库集成了完善的容错机制，确保了在万卡规模下训练任务的稳定性与连续性。</p>
+
+<p>### 5. 局限与不足<br>
+最大的220B模型仅训练了1000亿token，相较于小模型的4万亿token训练量可能存在训练不充分的问题。此外，研究高度依赖Aurora特定的硬件架构，相关优化技术在其他平台上的迁移难度可能较大。</p>
+
+<p>### 6. 评价与思考<br>
+这是一项极具工程价值的系统研究，展示了在非NVIDIA生态下实现高效大规模训练的可能性。其高达90%的弱扩展效率证明了系统的优越性，为百亿亿次计算在大模型领域的应用提供了重要参考。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00812v1" target="_blank">Cost-Penalized Fitness in FMA-Orchestrated Mixture of Experts: Experimental Evidence for Molecular Memory in Domain Adaptation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Martin Jaraiz<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00812v1" target="_blank">2604.00812v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决混合专家模型在满负荷运行且面临数据分布变化时，如何动态管理其专家池的核心难题。研究重点在于探索系统如何在容量受限的情况下实现高效的领域适应。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了现有MoE管理策略中缺乏长期记忆保留机制的空白。它区别于传统的专家替换策略，提出了一种通过专家多样化积累来实现领域适应的新范式，为大规模模型的生命周期管理提供了新视角。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是发现了“分子记忆”效应，即休眠专家在领域回归时能重新激活，从而实现零专家更换的快速恢复。实验数据显示，在返回已学习领域时系统恢复速度提升9-11倍。此外，研究还预测了显著的算力成本与能源节约潜力。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究提出了nanoFMT系统，一种由自由市场算法(FMA)编排的Transformer架构。核心机制包括引入成本惩罚的适应度指标，以及为新生专家设置线性宽限期。这种设计促使系统在面临新数据时倾向于保留和多样化专家，而非直接替换。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+实验基于七次受控运行，样本量相对有限，可能影响结论的统计显著性与普适性。成本与能源节约的分析基于特定假设模型，实际工业级部署的效果与开销仍需进一步验证。摘要未详细说明该方法在超大规模参数模型上的扩展性细节。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作为解决MoE模型中的灾难性遗忘问题提供了极具启发性的思路。通过引入类似生物进化的“休眠与重激活”机制，在效率与适应性之间取得了良好平衡。若能进一步验证其在更复杂任务中的表现，将对LLM的持续学习领域产生重要影响。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00942v1" target="_blank">Differentially Private Manifold Denoising</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiaqi Wu, Yiqing Sun, Zhigang Yao<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00942v1" target="_blank">2604.00942v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决如何利用敏感参考数据集修正含噪查询点，同时确保参考数据满足差分隐私要求的问题。核心挑战在于如何在保护隐私的前提下，有效提取几何结构信号以实现流形去噪。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作将差分隐私引入流形学习方法中，填补了现有文献中几何数据处理与隐私保护之间的空白。它解决了在受监管环境中使用敏感数据进行流形去噪时缺乏形式化隐私保证的问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了首个差分隐私流形去噪框架，在保留几何信号的同时提供形式化的 \((\varepsilon, \delta)\)-DP 保证。研究还建立了非渐近收敛速率的理论效用保证，并展示了隐私与效用之间的权衡关系。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法采用迭代过程，首先在校准灵敏度下私密估计局部均值和切几何，然后将查询点沿私密估计的子空间投影向局部均值进行修正。该框架通过调度器分配隐私预算，并在迭代和查询过程中进行严格的隐私核算。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖于对流形正则性、采样密度和测量噪声的标准假设，这些假设在实际复杂数据中可能难以完全满足。此外，随着隐私预算的收紧，去噪效果可能会显著下降，存在明显的效用与隐私权衡限制。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的理论与实践价值，成功地将形式化隐私保护融入几何数据分析流程。其模块化设计便于集成，理论保证增强了方法的可靠性，但在极高维或极低隐私预算场景下的性能仍需进一步验证。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.26357v1" target="_blank">MPDiT: Multi-Patch Global-to-Local Transformer Architecture For Efficient Flow Matching and Diffusion Model</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Quan Dao, Dimitris Metaxas<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.26357v1" target="_blank">2603.26357v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的Diffusion Transformer (DiT) 架构采用各向同性设计，在每一层都处理相同数量的patch token，导致训练过程计算开销过大。本文旨在解决如何在不牺牲生成性能的前提下，显著降低DiT的计算成本。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于扩散模型架构优化的前沿，针对现有DiT模型计算效率不足的问题进行改进。它填补了在Transformer架构中引入层级化多尺度处理机制的空白，为构建高效的生成模型提供了新思路。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MPDiT架构，通过多patch设计实现了从全局上下文到局部细节的层级化处理。该方法在保持良好生成质量的同时，将计算量降低了高达50%。此外，论文还提出了改进的时间和类嵌入设计，加速了模型训练收敛。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MPDiT采用了一种由粗到细的层级化策略，前几层Transformer块处理较大的patch以捕获粗糙的全局上下文。后续层则切换到较小的patch以精细化局部细节，从而减少早期层中token的数量并降低整体计算复杂度。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文主要在ImageNet数据集上验证了方法的有效性，其在更复杂数据集或文本到图像生成任务中的泛化能力有待进一步验证。虽然计算量显著降低，但多patch设计可能增加了架构设计的复杂性，对超参数选择较为敏感。此外，摘要未详细说明推理速度的具体提升幅度。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地借鉴了人类视觉感知和CNN中由粗到细的处理机制，成功打破了DiT各向同性设计的计算瓶颈。其核心优势在于以极简的结构调整换取了显著的效率提升，具有很强的实用价值。不过，该方法在不同生成任务中的通用性以及与其它高效注意力机制的兼容性值得后续深入探讨。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00923v1" target="_blank">Positional Cognitive Specialization: Where Do LLMs Learn To Comprehend and Speak Your Language?</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Luis Frentzen Salim, Lun-Wei Ku, Hsing-Kuo Kenneth Pao<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00923v1" target="_blank">2604.00923v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决大语言模型适应新语言时成本高昂且过程不透明的问题。核心研究问题是探究模型在训练过程中如何通过功能性的认知专业化来习得新语言。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了多语言可解释性研究中关于模型训练动态的空白。现有文献主要关注已训练模型如何处理多语言指令，而本文则深入探究了模型在训练过程中获得新语言能力的具体机制。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于揭示了模型内部的位置认知专业化现象，即语言感知能力在早期层涌现，而语言生成能力在晚期层涌现。基于此发现，论文提出了CogSym方法，仅微调最外侧的少量层级即可实现高效的语言适应。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者通过从输入和输出方向进行层消融扫描，在低资源语言上验证了感知与生成功能的分离。据此提出的CogSym方法仅微调模型中最靠前和靠后的25%层级，在保持性能接近全量微调基线的同时显著提升了效率。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究主要基于低资源语言进行实验，结论在高资源语言或不同架构模型上的普适性可能受限。尽管性能接近全量微调，但仍存在2-3%的性能偏差。此外，层消融实验可能无法完全捕捉模型内部所有复杂的神经元交互动态。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作成功地将可解释性研究的理论发现转化为实用的工程优化策略，具有很高的应用价值。它证明了局部微调的可行性，为降低大模型语言适应门槛提供了新思路。不过该方法在极端多语言场景下的表现仍有待进一步考察。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00931v1" target="_blank">PsychAgent: An Experience-Driven Lifelong Learning Agent for Self-Evolving Psychological Counselor</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yutao Yang, Junsong Li, Qianjun Pan et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00931v1" target="_blank">2604.00931v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决现有AI心理咨询师依赖静态数据集训练，无法像人类专家那样通过临床实践持续积累经验并自我进化的问题。核心研究问题是如何构建一个能够进行终身学习，并在多轮咨询中实现自我提升的智能体。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作将AI心理咨询研究从传统的静态监督微调范式，推进到了基于终身学习的动态交互范式。它填补了现有文献在多轮心理咨询场景下，缺乏经验积累机制和持续成长能力的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了PsychAgent框架，实现了经验驱动的终身学习机制。主要创新在于设计了记忆增强规划引擎以维持治疗连续性，以及构建了技能演化与强化内化引擎来实现从历史轨迹中提取并整合新技能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法包含三个核心模块。记忆增强规划引擎利用持久记忆确保多轮对话的连贯性。技能演化引擎从历史咨询轨迹中提取实践技能。强化内化引擎则通过拒绝微调技术，将演化出的技能有效整合到模型中。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法高度依赖历史咨询轨迹的质量，可能面临偏差累积或错误强化的风险。拒绝微调策略在整合新技能时，可能在一定程度上限制模型的生成多样性。此外，实验对比中提及的基线模型名称暗示了特定的实验设置，其结果在真实世界临床环境中的泛化性有待进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作很有洞察力，它抓住了心理咨询需要长期连续性和专家经验成长的关键特性。优点在于将智能体架构与领域需求深度结合，提供了可自我进化的解决方案。缺点在于系统架构相对复杂，且在自我演化过程中如何确保心理咨询的安全性和伦理合规性仍是一个挑战。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.26017v1" target="_blank">QuitoBench: A High-Quality Open Time Series Forecasting Benchmark</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Siqiao Xue, Zhaoyang Zhu, Wei Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.26017v1" target="_blank">2603.26017v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">titans</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决时间序列预测领域缺乏大规模、高质量基准测试这一根本瓶颈。核心研究问题是如何构建一个能够准确反映预测属性而非仅依赖领域标签的评测体系。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了现有时间序列预测研究中缺乏机制平衡基准的空白。它超越了传统的应用领域分类，通过引入趋势、季节性和可预测性三个维度来定义数据机制。这使得评估结果更能反映模型在不同数据特性下的真实表现。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是构建了基于十亿级时间序列语料库Quito的高质量基准QuitoBench。创新之处在于提出了基于趋势、季节性和可预测性的八种机制分类法，而非传统的领域标签。此外，研究通过大规模评测揭示了深度学习与基础模型在不同上下文长度下的性能交叉现象。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文构建了QuitoBench基准，它基于支付宝九大业务领域的十亿级时间序列数据。研究设计了涵盖趋势、季节性和可预测性的八种机制组合，并对深度学习、基础模型及统计基线等10种模型进行了超过23万次评估实例的测试。实验通过跨基准和跨指标的一致性验证了结果的可靠性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管数据规模庞大，但数据来源仅限于支付宝的业务场景，可能无法完全覆盖工业界所有类型的时间序列特性。评测仅包含10个代表性模型，随着新模型的快速涌现，基准的时效性需要持续维护。此外，研究主要关注点预测误差，对概率预测的探讨相对较少。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作为时间序列预测领域提供了极具价值的实证洞察，特别是关于上下文长度对模型优劣的影响以及数据规模的重要性。它挑战了盲目追求大模型的趋势，证明了深度学习模型在参数效率上的优势。该基准的开放将有力推动基于机制的模型设计与评估。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00788v1" target="_blank">UK AISI Alignment Evaluation Case-Study</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Alexandra Souly, Robert Kirk, Jacob Merizian et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00788v1" target="_blank">2604.00788v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在评估先进AI系统是否能可靠地遵循预期目标。核心问题是当前沿模型作为编码助手部署在AI实验室内部时，是否会破坏安全研究。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于AI安全与对齐评估的前沿领域。它填补了在模拟真实内部部署场景下，评估AI智能体潜在破坏行为和评估意识的研究空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于开发了一套基于Petri工具的评估框架，能够模拟真实的内部编码智能体部署环境。研究创新地验证了该模拟环境的有效性，并揭示了特定模型在面对安全相关任务时会出现拒绝执行的现象。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了一个基于开源LLM审计工具Petri的评估框架，设计了定制脚手架以模拟AI实验室内部编码助手的真实部署。研究者通过改变研究动机、活动类型、替代威胁和模型自主性等变量，对模型进行了多场景测试。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+这项工作的明确局限性在于场景覆盖范围可能不够全面，且评估意识问题仍需进一步解决。此外，虽然模拟轨迹难以被模型区分，但模拟环境与真实世界之间仍可能存在未知的差异。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的实践意义，为AI安全评估提供了可复现的开源框架和实证数据。其优点在于关注了模型拒绝任务和评估意识等细微行为，但未发现破坏行为也提示我们，随着模型能力的提升，更复杂的对抗性测试可能仍然是必要的。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.00605v1" target="_blank">Fluently Lying: Adversarial Robustness Can Be Substrate-Dependent</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Daye Kang, Hyeongboo Baek<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00605v1" target="_blank">2604.00605v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">attack_defense</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文质疑了现有防御系统中关于模型准确率下降与检测数量减少必然同步发生的假设。核心研究问题是探究对抗性失效模式是否会依赖于神经网络的底层基板，即不同的网络实现形式是否会导致截然不同的攻击表现。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于对抗机器学习与神经形态计算的研究交叉点。它填补了针对脉冲神经网络(SNN)特有对抗性失效模式研究的空白，挑战了基于人工神经网络建立的传统防御假设。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文首次发现并命名了质量腐化现象，即模型在遭受攻击时mAP急剧下降但检测数量保持高位。这是首个证明对抗性失效模式具有基板依赖性的证据，表明现有防御生态可能存在系统性盲区。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者选取了四种SNN架构，在 \(l_{\infty}\) 和 \(l_2\) 两种威胁模型下使用标准PGD攻击进行测试。通过对比分析EMS-YOLO模型的异常表现，验证了五种标准防御组件无法检测或缓解这种新型失效模式。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+质量腐化现象目前仅在EMS-YOLO这一种模型上被稳定观测到，其普遍性仍需更多模型验证。实验主要关注SNN与ANN的差异，未深入探讨该现象产生的深层生物学或数学机制。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具启发性，它打破了“准确率下降即检测数减少”的固有认知。研究结果警示安全社区，防御策略的制定不能仅基于单一基板的特性，需针对新型架构开发专用的监控与防御机制。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2604.00706v1" target="_blank">AfrIFact: Cultural Information Retrieval, Evidence Extraction and Fact Checking for African Languages</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00785v1" target="_blank">Scalable Pretraining of Large Mixture of Experts Language Models on Aurora Super Computer</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00812v1" target="_blank">Cost-Penalized Fitness in FMA-Orchestrated Mixture of Experts: Experimental Evidence for Molecular Memory in Domain Adaptation</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00942v1" target="_blank">Differentially Private Manifold Denoising</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.26357v1" target="_blank">MPDiT: Multi-Patch Global-to-Local Transformer Architecture For Efficient Flow Matching and Diffusion Model</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00923v1" target="_blank">Positional Cognitive Specialization: Where Do LLMs Learn To Comprehend and Speak Your Language?</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00931v1" target="_blank">PsychAgent: An Experience-Driven Lifelong Learning Agent for Self-Evolving Psychological Counselor</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.26017v1" target="_blank">QuitoBench: A High-Quality Open Time Series Forecasting Benchmark</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00788v1" target="_blank">UK AISI Alignment Evaluation Case-Study</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.00605v1" target="_blank">Fluently Lying: Adversarial Robustness Can Be Substrate-Dependent</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
