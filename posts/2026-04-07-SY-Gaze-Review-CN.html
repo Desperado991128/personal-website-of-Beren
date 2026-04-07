@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-04-07</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">April 07, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年04月07日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Fixation detection algorithms</h2>
+                <p><strong>1. 概念定义</strong><br>
+注视检测算法是将原始眼动数据流分类为注视和眼跳等离散事件的计算方法。这些算法通过识别眼睛相对静止的时刻，将连续的坐标信号转化为具有认知意义的语义单元，从而提取出阅读过程中的有效信息。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心原理通常基于速度阈值或空间分散度来区分眼睛的静止与运动状态。以常用的I-DT算法为例，它通过滑动窗口计算采样点的空间分散度，若分散度低于预设阈值则判定为注视。数学上，对于时间窗口 \( W \) 内的点集，分散度 \( D \) 通常定义为点对之间的最大距离，即 \( D = \max_{i,j \in W} \|p_i - p_j\| \)，当 \( D < \delta \) 时识别为一个注视事件。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在眼动追踪与LLM的交叉研究中，注视持续时间是衡量人类认知负荷和阅读理解深度的关键指标。准确的注视检测使得研究者能够将人类的阅读模式与语言模型的注意力权重或Token预测概率进行对齐分析。这种对齐有助于揭示人类与模型在处理语言信息时的差异，从而指导模型优化或构建更符合人类认知的评估基准。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+注视检测不仅是数据预处理步骤，更是将低层眼动信号转化为高层认知语义的关键桥梁，直接决定了后续人机对齐研究的有效性。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.04905v1" target="_blank">ClickAIXR: On-Device Multimodal Vision-Language Interaction with Real-World Objects in Extended Reality</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Dawar Khan, Alexandre Kouyoumdjian, Xinyu Liu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.04905v1" target="_blank">2604.04905v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是关于论文《ClickAIXR. On-Device Multimodal Vision-Language Interaction with Real-World Objects in Extended Reality》的结构化总结。</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在解决扩展现实（XR）交互中依赖云端AI带来的隐私泄露与高延迟问题，同时克服了传统基于注视或纯语音交互在对象选择上的模糊性与不精确性。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作填补了XR领域中高精度控制器交互与设备端视觉语言模型（VLM）结合的空白。它区别于依赖云端的ChatGPT类应用或存在“米达斯接触”问题的注视点交互系统，提供了一种兼具精确性与隐私保护的本地化解决方案。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了ClickAIXR框架，创新性地将设备端VLM推理与基于控制器的点击选择范式相结合。这一贡献实现了对现实世界物体的精确选取与多模态问答，通过完全本地化的处理流程提升了交互透明度与用户信任。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 系统基于Magic Leap SDK开发，用户通过控制器点击现实物体，系统捕获图像并利用ONNX runtime在本地运行VLM进行推理。该方法避免了数据上传云端的过程，直接在设备端处理视觉信息并生成文本或语音回答。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 实验结果显示系统延迟仅为中等水平，可能对实时交互体验造成一定影响。设备端模型的计算能力受限，其推理质量与复杂逻辑理解能力可能不及最新的云端大模型，且用户满意度仅被评估为“可接受”而非卓越。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 该工作巧妙地利用点击交互规避了眼动追踪中注视点抖动与意图识别困难的技术痛点，为XR交互提供了更可靠的输入模态。然而，随着设备端算力的提升，如何在保证隐私的同时进一步压缩VLM推理延迟，将是该技术能否普及的关键挑战。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.03401v1" target="_blank">Can LLMs Reason About Attention? Towards Zero-Shot Analysis of Multimodal Classroom Behavior</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Nolan Platt, Sehrish Nizamani, Alp Tural et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.03401v1" target="_blank">2604.03401v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决传统课堂观察中人工分析耗时费力以及视频录制引发的隐私泄露问题。核心探究如何利用大语言模型(LLM)对视线和姿态等几何数据进行零样本推理，从而在保护隐私的前提下理解学生注意力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于教育数据挖掘与大语言模型应用的交叉领域，填补了利用LLM直接推理多模态几何数据以理解课堂行为的空白。相比传统的计算机视觉分析方法，本文尝试引入LLM的零样本能力来生成高层次的语义分析，而非仅仅进行低层特征分类。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一套端到端的隐私保护分析流程，通过仅保留骨骼和视线数据确保符合FERPA隐私法规。其创新之处在于利用QwQ-32B-Reasoning模型对提取的视线和姿态坐标进行零样本分析，无需针对特定课堂场景进行模型微调即可生成行为洞察。此外，系统通过Web仪表盘将抽象的几何数据转化为直观的注意力热力图和行为摘要。</p>
+
+<p><strong>4. 方法概述</strong><br>
+系统首先使用OpenPose提取骨骼坐标，并利用Gaze-LLE模型进行视线估计，随后立即删除原始视频帧，仅将几何数据存储为JSON文件。这些非识别性的几何数据被输入QwQ-32B-Reasoning模型，该模型通过零样本推理分析学生在不同授课片段的行为模式。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+实验发现LLM在处理课堂空间布局的空间推理任务时表现不佳，难以准确理解学生与物体之间的相对位置关系。目前的系统仅处于初步验证阶段，对于更复杂的课堂互动场景，LLM的推理准确性和稳定性仍有待提升。此外，仅依赖几何坐标可能丢失了部分对理解上下文至关重要的视觉语义信息。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该研究巧妙地将眼动追踪技术与LLM的语义推理能力结合，为教育隐私计算提供了一个极具参考价值的解决方案。优点在于通过数据脱敏解决了隐私痛点，并探索了LLM在非文本模态推理上的潜力。缺点在于未解决LLM本身的空间认知缺陷，未来可能需要引入显式的空间坐标编码或图结构来辅助LLM更好地理解环境布局。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.23202v1" target="_blank">Gaze-Regularized Vision-Language-Action Models for Robotic Manipulation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Anupam Pani, Yanchao Yang<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23202v1" target="_blank">2603.23202v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+现有的视觉-语言-动作模型在处理细粒度机器人操作任务时表现不佳，核心问题在于缺乏主动的视觉注意力分配机制，难以有效聚焦于任务关键区域。</p>
+
+<p>2. <strong>研究定位</strong><br>
+该工作位于眼动追踪与具身智能的交叉领域，填补了VLA模型缺乏人类感知先验引导的空白。它将人类视觉注意力作为一种监督信号引入机器人学习，旨在解决模型注意力分散与任务相关性弱的问题。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文提出了一个眼动正则化训练框架，在不修改模型架构且不增加推理开销的前提下，将人类眼动信号转化为监督信号。该方法显著提升了机器人在细粒度任务中的操作精度，并增强了模型注意力机制的可解释性。</p>
+
+<p>4. <strong>方法概述</strong><br>
+该方法将时间聚合的眼动热图转换为图像块级别的分布，利用KL散度约束Transformer内部的注意力机制。通过这种正则化手段，模型被迫学习符合人类视觉模式的注意力分布，从而更准确地捕捉任务相关特征。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+尽管论文声称无需眼动追踪设备，但方法的有效性可能高度依赖于训练数据集中眼动标注的质量与准确性。此外，将人类视觉模式迁移到机器人视角可能存在视角差异，这在摘要中未被深入讨论。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作巧妙地将认知科学中的眼动先验与大模型训练相结合，为解决机器人细粒度操作提供了一种低成本高效益的方案。不仅提升了性能指标，还改善了模型的可解释性，这对于构建可信赖的具身智能系统具有重要意义。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.02509v1" target="_blank">Rapidly deploying on-device eye tracking by distilling visual foundation models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Cheng Jiang, Jogendra Kundu, David Colmenares et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.02509v1" target="_blank">2604.02509v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在解决AR/VR设备硬件配置频繁迭代导致高精度视线估计模型难以快速部署的问题。核心挑战在于视觉基础模型直接应用于近眼红外图像时精度不足，且针对新硬件配置收集大量真实标注数据成本高昂。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作位于视觉基础模型应用与眼动追踪部署的交叉领域。它填补了通用视觉基础模型难以直接适配近眼红外图像这一特定领域的空白，同时解决了在缺乏真实标注数据时如何快速适配新硬件配置的难题。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了DistillGaze框架，创新性地利用合成数据监督与未标记真实数据的自监督学习来蒸馏视觉基础模型。该方法在保持模型轻量化(仅256K参数)的同时，将视线估计误差相对纯合成数据基线降低了58.62%，实现了高性能的设备端实时部署。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 该方法包含两个阶段。首先利用带标签的合成数据和未标记的真实数据，通过自监督学习将视觉基础模型调整为领域专业化的教师模型。随后通过教师引导和自训练机制，训练出适合设备端部署的轻量级学生模型。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 该方法在很大程度上依赖于合成数据的质量，若合成数据与真实场景的分布差异过大可能会限制模型性能。此外两阶段的蒸馏流程相对复杂，可能会增加模型训练和调优的时间成本。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这是一项极具实用价值的工作，巧妙结合了合成数据与蒸馏技术，解决了硬件迭代带来的部署难题。它为视觉基础模型在特定垂直领域的落地提供了优秀范式，展示了如何有效结合合成监督与真实数据自监督来处理设备端回归任务。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2603.28319v1" target="_blank">Beyond Scanpaths: Graph-Based Gaze Simulation in Dynamic Scenes</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Luke Palmer, Petar Palasek, Hazem Abdelkawy<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.28319v1" target="_blank">2603.28319v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决动态场景中人类注意力建模不准确的问题，特别是现有方法将注视数据简化为显著图或扫描路径时，忽略了注视动态的显式时间演化过程。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于计算机视觉与汽车安全的交叉领域，填补了现有文献在显式建模原始注视轨迹时间动态方面的空白。它超越了传统的静态显著图预测，通过引入自回归动力系统视角，重新定义了动态环境下的注意力建模范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于提出了Affinity Relation Transformer (ART) 和Object Density Network (ODN)，分别用于建模驾驶员与环境元素的交互及预测随机注视分布。此外，作者发布了Focus100数据集，包含30名参与者的原始注视数据，并首次实现了直接在未过滤的原始注视数据上训练，生成了更自然的注视轨迹。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文将注视建模建模为一个自回归动力系统，将驾驶场景表示为以注视为中心的异构图。核心架构ART利用图Transformer处理驾驶员注视、交通对象和道路结构之间的交互，结合ODN预测下一步注视的概率分布，从而显式展开原始注视轨迹的时间序列。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该研究主要针对驾驶场景，其在其他复杂动态场景下的泛化能力有待验证。虽然直接使用原始数据避免了过滤偏差，但原始数据固有的噪声可能对模型鲁棒性提出挑战。此外，基于图结构的方法在处理高复杂度动态环境时，计算开销可能较大。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作的亮点在于引入了类似LLM的自回归生成思想，将注视预测转化为序列生成任务，有效捕捉了注意力的时序依赖性。直接在原始注视数据上训练的策略非常创新，避免了传统预处理带来的信息损失，为眼动追踪领域提供了新的基准思路。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2604.04905v1" target="_blank">ClickAIXR: On-Device Multimodal Vision-Language Interaction with Real-World Objects in Extended Reality</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.03401v1" target="_blank">Can LLMs Reason About Attention? Towards Zero-Shot Analysis of Multimodal Classroom Behavior</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.23202v1" target="_blank">Gaze-Regularized Vision-Language-Action Models for Robotic Manipulation</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.02509v1" target="_blank">Rapidly deploying on-device eye tracking by distilling visual foundation models</a></li>
+                    <li><a href="https://arxiv.org/abs/2603.28319v1" target="_blank">Beyond Scanpaths: Graph-Based Gaze Simulation in Dynamic Scenes</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
