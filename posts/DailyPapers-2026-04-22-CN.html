@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-04-22</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">April 22, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年04月22日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Ternary weight quantization</h2>
+                <p>### 概念定义</p>
+
+<p>三值权重量化是一种模型压缩技术，将神经网络的权重限制为三个可能的值，通常表示为负值、零和正值。这种技术显著降低了模型的存储需求和计算复杂度，同时相比二值化保留了更高的表达能力。它通常将全精度权重映射为 $\{- \alpha, 0, + \alpha\}$ 的形式，其中 $\alpha$ 是一个可学习的缩放因子。</p>
+
+<p>### 核心原理</p>
+
+<p>核心原理在于将连续的浮点权重离散化为三个离散值，即正数、负数和零。具体的量化过程通常设定一个阈值 $\Delta$，当权重的绝对值大于该阈值时进行量化，否则置为零。其数学表达通常如下：</p>
+
+<p>\[<br>
+w^q = \begin{cases} <br>
++\alpha & \text{if } w > \Delta \\ <br>
+0 & \text{if } |w| \le \Delta \\ <br>
+-\alpha & \text{if } w < -\Delta <br>
+\end{cases}<br>
+\]</p>
+
+<p>其中 $\alpha$ 是一个缩放系数，通常通过最小化量化误差来确定，用于保持权重张量的能量。</p>
+
+<p>### 研究意义</p>
+
+<p>在机器遗忘和AI安全领域，三值量化中的零权重提供了一种天然的剪枝机制，能够有效切断特定神经元连接从而移除敏感信息。对于KAN网络等新兴架构，这种量化方法在降低计算开销的同时，保留了足够的模型容量来拟合复杂函数。它为边缘设备部署和隐私保护模型提供了一种平衡效率与精度的解决方案。</p>
+
+<p>### 关键洞见</p>
+
+<p>相比二值化，三值量化的关键优势在于引入了零值，这不仅带来了稀疏性从而加速计算，还为模型提供了“遗忘”特定连接的能力。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19405v1" target="_blank">Lost in Translation: Do LVLM Judges Generalize Across Languages?</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Md Tahmid Rahman Laskar, Mohammed Saidul Islam, Mir Tafseer Nayeem et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19405v1" target="_blank">2604.19405v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了大型视觉语言模型(LVLM)的自动评估器是否具备跨语言的泛化能力。核心问题是，仅基于英语基准测试开发的奖励模型能否在多语言环境下保持可靠和一致的判断力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究主要集中在英语环境下的模型评估，严重忽视了非英语场景下的模型表现。这项工作填补了多语言多模态评估基准的空白，将研究视角从单一语言扩展到了25种类型多样的语言，揭示了当前评估体系的盲点。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文发布了MM-JudgeBench，这是首个大规模多语言多模态评判模型评估基准，包含超过6万个成对偏好样本。研究还提供了配套的多语言训练集，并对22个主流LVLM进行了系统性评估，有力揭示了现有模型在跨语言一致性上的显著缺陷。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究构建了包含通用视觉语言偏好和图表视觉文本推理两个互补子集的基准测试。通过扩展VL-RewardBench和OpenCQA等现有数据集，研究团队构建了涵盖25种语言的评估数据。基于此基准，论文系统分析了不同架构和大小的LVLM在多语言环境下的判断准确性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究发现模型规模和架构无法有效预测多语言鲁棒性，表明现有的模型扩展策略难以解决跨语言泛化问题。即便是目前最先进的LVLM评估器，在处理不同语言时也表现出行为不一致，暴露了当前奖励建模技术在多语言场景下的根本性局限。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作及时且关键，它挑战了AI社区以英语为中心的评估惯例，强调了构建多语言基准对于开发可靠评估器的必要性。其优点在于数据规模大且语言覆盖广，但未来的工作需要进一步探究如何从架构层面根本解决跨语言对齐问题，而不仅仅是依赖数据层面的扩展。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19240v1" target="_blank">Industrial Surface Defect Detection via Diffusion Generation and Asymmetric Student-Teacher Network</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Shuo Feng, Runlin Zhou, Yuyang Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19240v1" target="_blank">2604.19240v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决工业表面缺陷检测中缺陷样本稀缺、数据分布长尾严重以及复杂背景下细微缺陷难以精确定位的难题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于无监督异常检测领域，填补了高质量缺陷样本生成与高效特征重建网络结合的空白。它通过生成模型缓解数据匮乏问题，并改进了师生网络架构以提升检测精度，在无监督方法中处于领先地位。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+主要贡献在于提出了一种结合去噪扩散概率模型(DDPM)和非对称师生网络的新框架。创新点包括利用Perlin噪声掩码生成物理一致的缺陷样本，以及设计非对称网络结构来放大正常与异常区域的特征差异。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法首先在正常样本上训练DDPM，通过引入恒定方差高斯扰动和Perlin噪声生成高保真缺陷样本及像素级标注。随后构建非对称双流网络，利用教师网络提供稳定特征表示，学生网络重建正常模式，并结合余弦相似度损失与像素级分割监督进行联合优化。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管摘要未明确提及，但DDPM的推理速度通常较慢，可能限制其在实时工业检测中的应用。此外，生成缺陷的真实性和多样性高度依赖于噪声设计的先验假设，可能无法完全覆盖所有真实工业场景中的复杂缺陷类型。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该方法在MVTecAD数据集上取得了优异的性能，图像级和像素级AUROC均达到98%以上，证明了生成式模型在数据增强方面的巨大潜力。将扩散模型与师生网络结合的思路新颖且有效，但模型复杂度和计算开销可能是实际部署中需要权衡的因素。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19508v1" target="_blank">Bangla Key2Text: Text Generation from Keywords for a Low Resource Language</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Tonmoy Talukder, G M Shahariar<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19508v1" target="_blank">2604.19508v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决低资源语言孟加拉语在关键词驱动文本生成任务中缺乏大规模数据集的问题，探索如何利用关键词生成流畅且相关的文本。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有关键词生成文本的研究主要集中在英语等高资源语言，针对孟加拉语的研究相对稀缺。这项工作通过构建大规模数据集填补了该领域的空白，为低资源语言的文本生成研究提供了重要基础。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是构建并开源了包含\(2.6\)百万对关键词与文本的Bangla Key2Text数据集。研究团队还建立了基于mT5和BanglaT5的基线模型，证明了任务特定的微调显著优于零样本大语言模型。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者开发了一个基于BERT的关键词提取流程，从大量孟加拉语新闻文章中提取关键词，构建了关键词与文本配对的数据集。在模型训练阶段，研究采用了mT5和BanglaT5两种序列到序列模型进行微调，并使用了自动评估指标与人工评估相结合的方式验证效果。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+数据集主要来源于新闻文本，可能限制了模型在其他领域如文学或对话场景的泛化能力。基于BERT的关键词提取流程可能存在误差，导致数据集中包含噪声。实验对比主要针对零样本模型，未充分探讨更大规模模型在微调后的表现。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项扎实的数据构建工作，为低资源语言社区提供了宝贵的资源，具有较高的实用价值。通过自动化流程构建大规模数据集的方法值得借鉴，但模型层面的创新相对较少，主要侧重于应用现有架构解决数据稀缺问题。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19540v1" target="_blank">Mesh Memory Protocol: Semantic Infrastructure for Multi-Agent LLM Systems</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Hongwei Xu<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19540v1" target="_blank">2604.19540v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决多智能体LLM系统在跨越长时间和会话重启时的认知协作难题。核心问题是如何构建一个语义层面的协议，使智能体能够细粒度地评估信息、追溯来源并保持记忆的持久相关性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了多智能体通信协议中“语义基础设施”层的空白。它区别于现有的底层工具访问或任务委派协议，专注于解决智能体间认知状态共享与整合的高层语义问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Mesh Memory Protocol (MMP)，这是一套完整的语义通信协议规范。主要创新在于设计了四个协同工作的原语，分别解决了细粒度信息接受、来源可追溯性以及记忆持久化存储的核心挑战。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MMP通过CAT7定义了统一的认知记忆块七字段模式，利用SVAF机制实现基于角色的字段级评估。系统通过智能体间谱系追踪内容的父节点与祖先节点，并结合Remix机制仅存储接收者理解后的信息而非原始信号，从而构建了完整的记忆流转体系。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确提及局限性，但固定的七字段模式(CAT7)可能限制了特定领域信息的表达灵活性。此外，Remix机制仅存储理解后的信息，可能在长期多轮传递中导致原始细节的累积性丢失。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的工程价值和理论前瞻性，成功将多智能体协作从简单的任务分解提升到了认知融合的层面。其提出的“语义基础设施”概念为构建长期运行的自主智能体网络提供了坚实的架构基础，但协议的普适性仍需更广泛的社区验证。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19278v1" target="_blank">Explicit Trait Inference for Multi-Agent Coordination</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Suhaib Abdurahman, Etsuko Ishii, Katerina Margatina et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19278v1" target="_blank">2604.19278v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决基于大语言模型的多智能体系统在复杂任务中易发生的协调失败问题，例如目标漂移、错误级联和行为不一致。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了现有文献中关于LLM智能体能否从交互历史中系统性推断他人特质并加以利用的空白。它将心理学理论引入多智能体协调领域，为提升系统鲁棒性提供了新视角。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了显式特质推断方法ETI，这是首个证明LLM智能体能可靠推断伙伴特质并利用结构化特质感知进行协调的系统性证据。该方法显著降低了协调失败带来的损失，并提供了一种轻量级的解决方案。</p>
+
+<p><strong>4. 方法概述</strong><br>
+ETI方法让智能体基于心理学中的热情维度(如信任)和能力维度(如技能)，从交互历史中推断并跟踪伙伴特征。这些推断出的特质档案随后被用来指导智能体的决策过程，从而优化多智能体协调。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法的性能提升在不同场景和模型间存在差异，表明其效果可能依赖于特定的模型能力或环境设置。此外，特质推断依赖于交互历史的积累，在交互稀疏的初始阶段可能面临冷启动问题。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作的亮点在于将心理学理论成功应用于AI系统，提供了一个可解释且有效的协调机制。实验结果显著，证明了结构化特质感知对于提升多智能体系统性能的重要性，具有很强的实用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19167v1" target="_blank">LBLLM: Lightweight Binarization of Large Language Models via Three-Stage Distillation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Siqing Song, Chuang Wang, Yong Lang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19167v1" target="_blank">2604.19167v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+该论文旨在解决大语言模型在资源受限环境下部署时面临的计算和内存开销过大的问题。核心研究问题是如何在极低比特量化条件下，特别是权重二值化和激活值4比特量化的设置下，实现高效且准确的模型推理。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于大语言模型极度压缩领域，针对现有的二值化方法往往难以平衡压缩率与性能的难题。它填补了无需引入额外高精度通道或旋转矩阵即可实现高性能 \(W(1+1)A4\) 极低比特量化的研究空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了LBLLM框架，创新性地采用三阶段蒸馏策略实现 \(W(1+1)A4\) 量化。其核心贡献在于提出了解耦设计，有效缓解了权重与激活值量化之间的干扰。该方法仅需单GPU和极少训练数据即可超越现有SOTA方法，证明了极低比特量化的实用性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+LBLLM采用三阶段流程。首先通过训练后量化初始化模型，接着在全精度激活值下进行逐层蒸馏以优化二值化权重，最后训练可学习的激活量化因子以实现动态4比特激活值量化。这种分步策略避免了量化过程中的相互干扰。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管训练效率高，但仅使用0.016B词元进行训练可能在某些特定领域任务上泛化能力受限。该方法虽然无需旋转矩阵，但引入了分组位图和可学习因子，可能在一定程度上增加了实现的复杂度。此外，仅验证了 \(W(1+1)A4\) 配置，对其他量化配置的通用性尚待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项极具实用价值的工作，它打破了极低比特量化必须依赖高精度辅助结构的惯例。其解耦训练思路巧妙，显著提升了训练稳定性和最终精度。然而，实际部署效果仍依赖于硬件对 \(W(1+1)A4\) 运算的具体优化支持。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19404v1" target="_blank">M$^{2}$GRPO: Mamba-based Multi-Agent Group Relative Policy Optimization for Biomimetic Underwater Robots Pursuit</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yukai Feng, Zhiheng Wu, Zhengxing Wu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19404v1" target="_blank">2604.19404v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决仿生水下机器人在协同追捕任务中面临的长期决策、部分可观测性以及多机协调困难的问题。核心挑战在于如何在复杂的动态水下环境中，同时保证策略模型的表达能力与训练过程的稳定性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究位于多智能体强化学习与仿生机器人控制的交叉领域，专注于提升水下协同作业的效率与稳定性。它填补了现有方法在处理长序列时序依赖以及多智能体信用分配效率方面的空白，提供了一种兼具高性能与低资源消耗的解决方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了 \( M^{2}GRPO \) 框架，创新性地将Mamba架构引入多智能体策略学习以捕捉长时域依赖。该方法通过群组相对优势函数优化信用分配，在保证策略更新稳定性的同时，显著降低了训练资源需求。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法采用集中训练分散执行(CTDE)范式，利用基于Mamba的策略网络结合注意力机制处理观测历史与智能体交互关系。通过归一化组内奖励计算群组相对优势，并利用高斯采样生成有界连续动作，实现了高效的多智能体策略优化。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管在仿真和泳池实验中表现优异，但在更复杂的开放水域环境(如洋流干扰、浑浊水域)中的泛化能力仍需进一步验证。此外，Mamba架构相较于成熟的Transformer模型，在硬件生态支持与推理优化方面可能仍存在一定差距。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将状态空间模型Mamba引入多智能体强化学习，为解决长时域决策问题提供了新思路。其结合群组相对优化的策略不仅提升了训练效率，也为实际水下机器人协同作业提供了极具实用价值的工程参考。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19343v1" target="_blank">Scalable Memristive-Friendly Reservoir Computing for Time Series Classification</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Coşku Can Horuz, Andrea Ceni, Claudio Gallicchio et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19343v1" target="_blank">2604.19343v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决如何在储备池计算框架下高效且可扩展地利用忆阻器件特性进行时间序列分类的问题。核心挑战在于如何突破传统储备池计算在训练效率和模型深度上的限制，以实现高性能与低计算成本的统一。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于神经形态计算与储备池计算的交叉领域，是对忆阻友好型回声状态网络(MF-ESN)的进一步拓展。它填补了现有储备池计算在并行化扩展与深层结构构建方面的空白，证明了无梯度模型在长序列任务中能够超越主流梯度模型。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了名为MARS的忆阻友好型并行储备池架构，通过引入新型减法跳跃连接实现了深层模型的高效构建。该方法在保持轻量级特性的同时，将训练速度提升了最高21倍，并在多个长序列基准测试中超越了LRU、S5和Mamba等强梯度模型。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MARS架构通过并行化储备池设计实现了可扩展计算，并利用减法跳跃连接增强了模型深度与表达能力。该方法无需复杂的梯度反向传播，仅需训练读出层，从而将完整的训练过程缩短至秒级甚至毫秒级。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管算法设计面向忆阻硬件，但当前实验主要基于软件模拟，其实际部署在物理忆阻器件上的性能与能耗优势仍需验证。此外，作为储备池计算的一种，模型可能仍需针对不同任务调整储备池的超参数，且减法跳跃连接的稳定性在不同数据分布下的表现有待进一步探讨。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具启发性，它打破了深度学习模型必须依赖耗时梯度训练的固有印象，展示了神经形态计算在效率和性能上的双重潜力。MARS不仅在预测精度上挑战了当前最先进的序列模型，更在计算效率上实现了数量级的飞跃，为未来低功耗边缘智能设备的设计提供了极具价值的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19401v1" target="_blank">Revisiting Catastrophic Forgetting in Continual Knowledge Graph Embedding</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Gerard Pons, Carlos Escolano, Besim Bilalli et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19401v1" target="_blank">2604.19401v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 论文旨在解决持续知识图谱嵌入中灾难性遗忘评估不准确的问题。核心在于揭示现有评估协议忽略了新实体嵌入干扰旧实体预测这一现象，从而导致对模型抗遗忘能力的误判。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该研究定位于持续知识图谱嵌入领域，专注于重新审视灾难性遗忘的成因与评估机制。它填补了现有文献对“实体干扰”这一关键遗忘来源的认知空白，挑战了仅通过限制旧嵌入变化来缓解遗忘的传统观点。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文首次识别并定义了“实体干扰”现象，即新实体嵌入会干扰模型对旧知识的预测。研究提出了修正后的CKGE评估协议及定制化的遗忘度量指标，通过实验证明忽略该效应会导致模型性能被高估达25%。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 论文提出了一种改进的评估协议，在测试阶段显式考量新引入实体对已学习事实的干扰影响。研究通过在多个基准数据集上进行广泛的对比实验，量化了不同CKGE方法与KGE模型在面对实体干扰时的真实表现。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 该工作主要聚焦于评估协议的修正与新现象的揭示，并未提出具体的算法解决方案来直接缓解实体干扰带来的负面影响。此外，研究主要关注实体增长显著的场景，对于其他类型的图谱演化模式讨论相对有限。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这是一篇具有深刻洞察力的论文，它挑战了该领域长期存在的评估假设，纠正了对模型能力的误判。这项工作强调了评估机制与算法设计同等重要，为未来开发真正鲁棒的持续学习模型指明了关键方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19737v1" target="_blank">Safe Continual Reinforcement Learning in Non-stationary Environments</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Austin Coursey, Abel Diaz-Gonzalez, Marcos Quinones-Grueiro et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19737v1" target="_blank">2604.19737v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决在非平稳环境中进行安全持续强化学习的问题。核心挑战在于如何在系统动力学和操作条件发生意外变化时，既能适应新环境又能保持安全约束，同时避免灾难性遗忘。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于持续强化学习与安全强化学习的交叉领域。虽然这两个领域分别解决了非平稳性和安全性问题，但关于两者结合的研究尚属空白，本文填补了这一关键缺口。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文引入了三个针对安全关键持续适应的基准环境，并系统评估了现有安全RL和持续RL方法。研究发现并揭示了在非平稳动力学下维持安全约束与防止灾难性遗忘之间存在根本性矛盾，指出现有方法难以兼顾两者。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者提出并考察了基于正则化的策略来缓解安全与遗忘之间的权衡。研究通过实验分析了这些策略在所提基准上的表现，详细刻画了它们的优势与局限性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究表明现有的基于正则化的策略只能部分缓解而非完全解决安全与适应之间的冲突。此外，论文主要关注基准测试和现象揭示，尚未提出能够完全解决该根本矛盾的终极算法，仍面临诸多开放性挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项非常及时且具有实践意义的研究，它通过构建基准环境为后续研究提供了重要的实验平台。文章揭示了安全性与可塑性之间的核心张力，为开发能够长期自主运行的弹性控制器指明了方向，但目前的解决方案仍处于探索阶段。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2604.19405v1" target="_blank">Lost in Translation: Do LVLM Judges Generalize Across Languages?</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19240v1" target="_blank">Industrial Surface Defect Detection via Diffusion Generation and Asymmetric Student-Teacher Network</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19508v1" target="_blank">Bangla Key2Text: Text Generation from Keywords for a Low Resource Language</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19540v1" target="_blank">Mesh Memory Protocol: Semantic Infrastructure for Multi-Agent LLM Systems</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19278v1" target="_blank">Explicit Trait Inference for Multi-Agent Coordination</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19167v1" target="_blank">LBLLM: Lightweight Binarization of Large Language Models via Three-Stage Distillation</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19404v1" target="_blank">M$^{2}$GRPO: Mamba-based Multi-Agent Group Relative Policy Optimization for Biomimetic Underwater Robots Pursuit</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19343v1" target="_blank">Scalable Memristive-Friendly Reservoir Computing for Time Series Classification</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19401v1" target="_blank">Revisiting Catastrophic Forgetting in Continual Knowledge Graph Embedding</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19737v1" target="_blank">Safe Continual Reinforcement Learning in Non-stationary Environments</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
