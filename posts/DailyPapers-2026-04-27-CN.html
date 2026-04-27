@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-04-27</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">April 27, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年04月27日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Selective state spaces</h2>
+                <p><strong>1. 概念定义</strong><br>
+Selective state spaces 是一种改进的状态空间模型架构。它打破了传统模型中线性时不变的约束，使模型参数能够依赖于当前的输入数据。这种机制允许模型根据内容有选择地保留重要信息或过滤无关噪声。</p>
+
+<p><strong>2. 核心原理</strong><br>
+传统状态空间模型使用固定参数处理所有输入，这限制了模型的上下文推理能力。Selective state spaces 让关键参数如步长 \(\Delta\) 和矩阵 \(B\) 与 \(C\) 成为输入 \(x_t\) 的函数。这使得模型能够动态调整状态更新的方式。离散化后的状态更新公式可以表示为 \[ h_t = \bar{A}_t h_{t-1} + \bar{B}_t x_t \]，其中参数会根据输入内容变化，从而实现对信息的筛选。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这一创新解决了状态空间模型在语言建模中性能不足的关键瓶颈。它使得模型在保持线性推理复杂度的同时，能够达到媲美 Transformer 的性能表现。这对于构建处理超长序列的高效大模型具有重要的推动作用。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+通过让模型参数依赖于输入内容，实现了对信息流动的精准控制。这是在计算效率与建模能力之间找到的最佳平衡点。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.18580v2" target="_blank">Sessa: Selective State Space Attention</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Liubomyr Horbatko<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.18580v2" target="_blank">2604.18580v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+现代序列建模中，Transformer在长上下文中会稀释单个token的影响力，而结构化状态空间模型(SSM)容易丢失长程敏感度。这篇论文旨在解决这两种主流机制在长上下文场景下信息保留与选择性检索能力不足的问题。</p>
+
+<p>### 2. 研究定位<br>
+该工作定位于Transformer与结构化状态空间模型的交叉研究领域。它填补了现有模型在长上下文记忆衰减与选择性检索能力之间的空白，旨在构建一种兼具长记忆保持和灵活检索能力的混合架构。</p>
+
+<p>### 3. 核心贡献<br>
+论文提出了Sessa解码器架构，从理论上证明了其在特定条件下具有幂律记忆尾 \(O(\ell^{-\beta})\)，衰减速度慢于Transformer和Mamba等基线模型。该工作是所比较模型中唯一能实现灵活选择性检索且影响力不随距离衰减的模型类。实验结果表明Sessa在长上下文任务上取得了最强性能，同时在短上下文任务上保持竞争力。</p>
+
+<p>### 4. 方法概述<br>
+Sessa将注意力机制置于循环反馈路径内部，构建了一种新型解码器结构。这种方法创建了多条基于注意力的路径，使过去的token能够通过循环状态影响未来状态，从而摆脱了对单一注意力读取或单一循环链的依赖。</p>
+
+<p>### 5. 局限与不足<br>
+论文的理论优势建立在特定的显式假设之上，这可能限制了结论在所有场景下的普适性。虽然长上下文性能优异，但在短上下文语言建模上仅与基线模型持平，未显示出显著优势。摘要中未详细阐述该架构的计算开销与推理效率。</p>
+
+<p>### 6. 评价与思考<br>
+这项工作巧妙地融合了注意力机制与循环状态传播的优势，为解决长上下文建模难题提供了新颖的视角。理论证明与实验结果的一致性增强了其说服力，显示出其在需要长程依赖任务上的巨大潜力。然而，其实际应用价值仍需进一步验证，特别是在计算资源消耗与大规模部署的可行性方面。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19835v1" target="_blank">Expert Upcycling: Shifting the Compute-Efficient Frontier of Mixture-of-Experts</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chaitanya Dwivedi, Binxuan Huang, Himanshu Gupta et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19835v1" target="_blank">2604.19835v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+从头训练大型混合专家模型面临高昂的计算成本和内存开销。论文旨在解决如何在保持推理成本不变的前提下，高效地扩展模型容量并提升模型质量。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究主要关注从头训练大型MoE模型，而本工作探索了一种基于已有模型的渐进式扩展路径。它填补了模型重用与高效扩展之间的空白，挑战了必须从随机初始化开始训练大模型的传统观念。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了expert upcycling方法，允许在继续预训练过程中动态增加专家数量。它建立了一个理论框架来分解质量差距，并引入了基于效用的专家选择策略来优化非均匀复制。实验表明该方法在达到相同验证损失时可节省32%的GPU小时。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法通过复制现有模型的专家并扩展路由器，将 \(E\) 专家模型扩展为 \(mE\) 专家模型。扩展后的模型继承源模型的知识，随后通过继续预训练打破专家间的对称性并促进专业化。方法还利用梯度重要性分数指导关键专家的复制。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法的效果依赖于继续预训练的质量和预算，并非完全无成本的升级。非均匀复制策略需要额外的计算来评估专家重要性，增加了实现的复杂度。此外，研究主要集中在特定规模的模型上，在超大规模模型上的表现仍需验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的工业应用价值，提供了一种经济高效的模型扩容方案。它将理论与实践结合，不仅提出了算法，还给出了合理的解释。这种方法可能改变未来大模型的训练范式，使得资源受限的团队也能构建更大的模型。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.21518v1" target="_blank">DiffNR: Diffusion-Enhanced Neural Representation Optimization for Sparse-View 3D Tomographic Reconstruction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Shiyan Su, Ruyi Zha, Danli Shi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.21518v1" target="_blank">2604.21518v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>研究问题</strong><br>
+这篇论文致力于解决神经表示在稀疏视角CT重建任务中因数据采集不足而产生的严重伪影问题。核心难点在于如何引入有效的先验知识来约束解空间，同时保持重建过程的高效性。</p>
+
+<p><strong>研究定位</strong><br>
+该工作位于神经辐射场等隐式表示技术与生成式AI的交叉领域。它针对现有稀疏视角重建方法中迭代去噪过程耗时过长的问题，填补了如何高效利用扩散模型先验来加速高质量重建的技术空白。</p>
+
+<p><strong>核心贡献</strong><br>
+论文提出了DiffNR框架，其核心贡献在于设计了SliceFixer单步扩散模型用于校正切片伪影。该工作创新性地提出了修复与增强策略，通过周期性生成伪参考体积来提供辅助监督，避免了频繁调用扩散模型带来的高昂计算成本。</p>
+
+<p><strong>方法概述</strong><br>
+该方法首先训练一个包含专用条件层的单步扩散模型SliceFixer，用于修复降质的CT切片。在重建过程中，系统周期性地利用SliceFixer生成高质量的伪参考体积，为神经表示的优化提供3D感知监督，从而修正欠约束区域的伪影。</p>
+
+<p><strong>局限与不足</strong><br>
+虽然单步扩散模型提升了速度，但在处理极度稀疏视角数据时，其生成内容的精细度可能不及多步迭代扩散模型。伪参考体积的生成质量直接影响最终重建效果，若扩散模型产生幻觉，可能会引入额外的误差。此外，该方法的训练依赖于特定的数据整理策略，在不同医学影像数据域间的迁移可能需要额外调整。</p>
+
+<p><strong>评价与思考</strong><br>
+这项工作巧妙地避开了将CT求解器嵌入耗时迭代去噪过程的常规路径，在性能与效率之间找到了优秀的平衡点。实验显示PSNR平均提升3.99 dB，证明了该方法在提升图像质量和泛化能力上的显著优势。这对于推动稀疏视角CT重建技术在临床等实时性要求较高场景的应用具有重要参考价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.17492v1" target="_blank">Coevolving Representations in Joint Image-Feature Diffusion</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Theodoros Kouzelis, Spyros Gidaris, Nikos Komodakis<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.17492v1" target="_blank">2604.17492v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的联合图像-特征扩散模型依赖于固定不变的语义表示空间，这限制了生成模型根据生成目标进行自适应调整的能力。本文旨在解决如何让引导扩散过程的语义表示空间在训练过程中动态演化，从而提升生成任务的效果。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于生成式建模与表示学习的交叉领域，是对现有联合扩散模型范式的改进。它打破了以往方法中特征提取器与生成模型相互独立的常规，填补了表示空间静态化与生成目标动态化之间的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了CoReDi框架，实现了语义表示空间与扩散模型的联合演化，证明了自适应表示能显著提升生成质量。其关键创新在于通过停止梯度、归一化和正则化策略，成功解决了联合优化过程中可能出现的特征崩塌和退化问题。</p>
+
+<p><strong>4. 方法概述</strong><br>
+CoReDi通过联合训练一个轻量级线性投影层与扩散模型，使语义表示空间逐步特化于图像合成任务。为了防止直接优化导致的退化解，该方法引入了停止梯度目标、归一化以及针对性的正则化策略来维持训练稳定性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文解决了特征崩塌问题，但引入的多项训练技巧可能增加了超参数调节的复杂度。此外，该方法依赖于预训练视觉编码器的初始质量，线性投影层的表达能力相比于非线性网络可能存在一定上限。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作提出了一个直观且有效的观点，即表示空间不应是静态的，而应随生成任务共同进化。它为提升扩散模型性能提供了一个低成本且高效的改进方向，展示了让特征表示服务于生成目标的潜力，具有较强的实用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.20720v1" target="_blank">COMPASS: COntinual Multilingual PEFT with Adaptive Semantic Sampling</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Noah Flynn<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.20720v1" target="_blank">2604.20720v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>研究问题</strong><br>
+论文旨在解决大语言模型在多语言微调中因跨语言负迁移导致性能下降的问题，同时应对动态环境中数据分布变化导致的模型老化挑战。</p>
+
+<p><strong>研究定位</strong><br>
+现有研究多依赖语言学相似性指导微调，往往难以有效平衡跨语言知识迁移与干扰。本文提出了一种数据中心化的解决方案，填补了利用语义分布自适应采样进行多语言持续学习的空白。</p>
+
+<p><strong>核心贡献</strong><br>
+论文提出了COMPASS框架，利用分布感知的语义采样策略选择辅助数据，有效减少了跨语言干扰。研究还扩展了持续学习框架COMPASS-ECDA，能够动态监测数据分布变化并更新模型，实现了对新知识的适应与旧知识的保留。</p>
+
+<p><strong>方法概述</strong><br>
+该方法利用多语言嵌入和聚类技术识别训练数据与目标使用分布之间的语义差距。通过优先采样代表性不足的语义簇数据，模型训练轻量级语言特定适配器，从而最大化正向跨语言迁移。</p>
+
+<p><strong>局限与不足</strong><br>
+该方法的性能依赖于多语言嵌入的质量，若嵌入空间本身存在偏差可能影响聚类和采样效果。此外，持续的分布监测和聚类过程可能增加系统的计算开销和部署复杂性。</p>
+
+<p><strong>评价与思考</strong><br>
+这项工作从数据分布角度切入多语言适应，相比单纯调整模型架构提供了更灵活且可持续的解决方案。实验在多种主流模型和长文本任务上验证了有效性，展示了其在实际生产环境中维护多语言模型的巨大潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.21904v1" target="_blank">UniGenDet: A Unified Generative-Discriminative Framework for Co-Evolutionary Image Generation and Generated Image Detection</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yanran Zhang, Wenzhao Zheng, Yifei Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.21904v1" target="_blank">2604.21904v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决图像生成与生成图像检测这两个领域因架构范式差异而长期独立发展、难以协同的问题。核心研究问题是如何在一个统一框架下弥合生成任务与判别任务之间的架构鸿沟，实现两者的共同进化。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于连接图像生成与检测两个对立领域的交叉研究前沿。它填补了现有研究中因生成网络与判别网络架构割裂而导致的协同空白，提出了一种将两者融合的统一范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于提出了首个统一的生成与判别框架UniGenDet，实现了图像生成与检测的共同进化。创新点包括设计了共生多模态自注意力机制以弥合任务差距，以及引入检测器指导的生成对齐机制来促进双向信息流动。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了UniGenDet框架，通过设计共生多模态自注意力机制和统一微调算法来连接生成与判别任务。该方法利用检测器指导的生成对齐机制，使得生成任务能提升检测的可解释性，同时检测标准能引导生成更高保真的图像。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文声称达到了SOTA性能，但统一框架的训练复杂度和计算开销可能高于独立模型。此外，联合训练过程中生成器与检测器之间的博弈平衡可能难以维持，且模型对未知的新型生成攻击的泛化能力仍有待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的创新性，打破了生成与检测对立的传统思维，展示了两者互利共生的潜力。其优点在于通过统一架构实现了性能的相互促进，为多任务学习提供了新思路，但同时也增加了模型优化和实际部署的难度。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.20156v1" target="_blank">Temporally Extended Mixture-of-Experts Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Zeyu Shen, Peter Henderson<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.20156v1" target="_blank">2604.20156v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的混合专家模型在每个token处频繁切换专家，导致在GPU内存受限时，卸载和预取等优化策略失效。论文旨在解决这种高频切换带来的内存管理低效问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作位于大规模MoE模型扩展与强化学习选项框架的交叉领域。它填补了现有MoE模型在资源受限环境下优化策略的空白，特别是针对高频专家切换导致卸载和预取技术失效的难题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了时间扩展的混合专家模型，引入基于强化学习选项框架的控制器来动态管理专家切换。其创新在于通过引入思考成本，成功将专家切换率从超过50%降低至5%以下，同时保留了高达90%的模型性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法基于带有思考成本的option-critic框架，为每个MoE层添加一个控制器，学习何时切换专家集以及加载哪些专家。通过在gpt-oss-20b模型上应用低秩适配器和自蒸馏奖励进行轻量级训练，实现了专家切换决策的稀疏化。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管保留了大部分性能，但在MATH等基准测试上仍有约10%的精度损失，表明该方法以牺牲部分能力换取了效率。引入额外的控制器和强化学习训练增加了模型架构与训练流程的复杂性，且思考成本的参数设定可能需要针对不同任务进行调整。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项极具创意的工作，巧妙地将强化学习中的选项框架应用于大模型推理优化，有效缓解了MoE模型部署中的内存瓶颈。其价值在于为构建内存高效且易于扩展的MoE模型提供了一条有理论依据的路径，对于大规模模型的实际落地应用具有重要意义。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.18519v1" target="_blank">LLM Safety From Within: Detecting Harmful Content with Internal Representations</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Difan Jiao, Yilun Liu, Ye Yuan et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.18519v1" target="_blank">2604.18519v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的LLM防御模型主要依赖模型最终层的表示，忽略了分布在中间层的丰富安全特征。本文旨在解决如何有效利用模型内部状态来提升有害内容检测的准确性与效率。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于LLM安全防御与模型可解释性研究的交叉点。它填补了现有研究仅关注模型输出端表示而忽视内部隐层特征的技术空白，提出了一种基于内部表征的新型检测范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了SIREN模型，这是一种轻量级检测器，在参数量仅为SOTA模型二百五十分之一的情况下实现了更优的性能。其创新点在于证明了LLM内部状态是构建高效、低延迟有害内容检测器的坚实基础。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法首先利用线性探针识别LLM内部的“安全神经元”，提取分布在各层的安全相关特征。随后通过自适应层加权策略整合这些特征，构建出不改变底层模型权重的有害内容分类器。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法需要访问模型的内部隐藏状态，这在仅通过API提供服务的闭源模型上可能难以实施。此外，针对特定模型训练的探针可能在不同架构的模型间迁移性有限。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具实用价值，它绕过了笨重的生成式检测模型，大幅降低了计算成本。通过挖掘模型内部特征，它不仅提升了检测效率，还为理解LLM的安全机制提供了新的视角。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.22436v1" target="_blank">AgentSearchBench: A Benchmark for AI Agent Search in the Wild</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Bin Wu, Arastun Mammadli, Xiaoyu Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.22436v1" target="_blank">2604.22436v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决如何在海量真实世界AI智能体中准确找到适合特定任务的智能体。核心挑战在于智能体能力具有组合性和执行依赖性，仅凭文本描述难以准确评估其实际表现。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究通常假设功能明确或候选池受控，忽视了真实场景下的复杂性。这项工作填补了大规模真实世界智能体搜索基准的空白，将研究重点从静态文本匹配推向了动态执行评估。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文构建了包含近万个真实世界智能体的大规模基准AgentSearchBench。研究发现语义相似度与实际执行性能之间存在显著差距，证明了基于文本的检索方法存在局限性。论文提出利用轻量级行为信号和执行感知探测来显著提升智能体排序的质量。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文将智能体搜索形式化为检索和重排序问题，涵盖可执行任务查询和高级任务描述两种场景。评估过程不再依赖文本相似度，而是基于执行结果的真实性能信号。通过引入执行感知探测等方法，实现了对智能体能力的动态评估。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然引入执行信号能提高准确性，但执行探测过程可能比纯文本检索消耗更多的计算资源和时间。基准测试主要基于当前可获取的智能体，随着生态系统的快速迭代，维护基准的时效性可能具有挑战性。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具实践价值，深刻揭示了文本描述与实际能力之间的“语义鸿沟”。它为未来智能体市场和检索系统的设计提供了关键指引，证明了动态执行反馈在智能体发现中不可或缺的地位。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.21300v1" target="_blank">Explainable Disentangled Representation Learning for Generalizable Authorship Attribution in the Era of Generative AI</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Hieu Man, Van-Cuong Pham, Nghia Trung Ngo et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.21300v1" target="_blank">2604.21300v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的作者归属和AI生成文本检测方法常受困于内容与风格的纠缠问题，导致模型错误地建立写作风格与主题之间的虚假关联，从而在不同领域间泛化能力不足。本文旨在解决这一核心问题，学习鲁棒且解耦的作者风格表示。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于作者归属分析与生成式AI文本检测的交叉领域。它填补了现有研究在处理跨领域泛化时的空白，特别是针对模型因无法有效分离内容信息而导致的性能瓶颈进行了针对性改进。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了EAVAE框架，通过架构设计实现了风格与内容的显式解耦。其核心创新在于引入了一个不仅能判别样本归属，还能生成自然语言解释的判别器，在提升解耦效果的同时增强了模型的可解释性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+EAVAE采用变分自编码器(VAE)架构，分别为风格和内容设计了独立的编码器。模型首先通过监督对比学习预训练风格编码器，随后利用判别器在微调阶段强制执行解耦约束，确保风格表示不受内容信息的干扰。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖于复杂的两阶段训练流程，可能增加了计算资源和时间成本。此外，生成自然语言解释的判别器虽然提升了可解释性，但其生成的解释质量可能受限于底层语言模型的能力，且需要额外的验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项兼具理论创新与实用价值的工作，特别是在生成式AI普及的背景下，解耦风格与内容对于检测AI生成文本至关重要。引入自然语言解释是一个亮点，使得模型决策过程更加透明，有助于建立用户信任。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2604.18580v2" target="_blank">Sessa: Selective State Space Attention</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19835v1" target="_blank">Expert Upcycling: Shifting the Compute-Efficient Frontier of Mixture-of-Experts</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.21518v1" target="_blank">DiffNR: Diffusion-Enhanced Neural Representation Optimization for Sparse-View 3D Tomographic Reconstruction</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.17492v1" target="_blank">Coevolving Representations in Joint Image-Feature Diffusion</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.20720v1" target="_blank">COMPASS: COntinual Multilingual PEFT with Adaptive Semantic Sampling</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.21904v1" target="_blank">UniGenDet: A Unified Generative-Discriminative Framework for Co-Evolutionary Image Generation and Generated Image Detection</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.20156v1" target="_blank">Temporally Extended Mixture-of-Experts Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.18519v1" target="_blank">LLM Safety From Within: Detecting Harmful Content with Internal Representations</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.22436v1" target="_blank">AgentSearchBench: A Benchmark for AI Agent Search in the Wild</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.21300v1" target="_blank">Explainable Disentangled Representation Learning for Generalizable Authorship Attribution in the Era of Generative AI</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
