@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-04-29</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">April 29, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年04月29日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Fixation detection algorithms</h2>
+                <p><strong>1. 概念定义</strong><br>
+注视点检测算法是一种将原始眼动数据流分割为离散注视事件和眼跳事件的信号处理技术。它将连续且充满噪声的眼动坐标序列转化为有意义的时空单元，从而提取出观察者在特定位置停留的持续时间和位置信息。这是眼动数据分析中最基础也是最关键的预处理步骤。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心原理通常基于速度阈值或离散度阈值来区分眼睛的相对静止与快速运动状态。算法计算连续采样点之间的瞬时速度或空间分布，当速度低于设定阈值 \( v < \theta \) 或采样点聚集在一定范围内时判定为注视。常用的I-VT算法通过计算瞬时速度 \( v_i = \frac{\|p_{i+1} - p_i\|}{\Delta t} \) 并与阈值比较来实现分类。而I-DT算法则基于假设，即注视期间眼睛停留在一个较小的空间范围内，通过滑窗检测点的离散程度来识别注视事件。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在眼动与LLM的交叉研究中，这些算法提取的注视特征为模型提供了人类认知加工的黄金标准。研究者利用注视时长和位置作为标签，训练语言模型模拟人类的阅读注意力机制或预测文本处理难度。这有助于构建更具可解释性的AI模型，并探索人类语言理解与机器文本处理之间的异同。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+注视点检测是将低级生理信号转化为高级认知特征的关键桥梁，决定了眼动数据能否有效用于指导语言模型的训练与评估。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19888v1" target="_blank">SGAP-Gaze: Scene Grid Attention Based Point-of-Gaze Estimation Network for Driver Gaze</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Pavan Kumar Sharma, Pranamesh Chakraborty<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19888v1" target="_blank">2604.19888v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有驾驶员视线估计模型仅依赖面部信息预测视线落点，忽略了关键的交通场景上下文线索。本文旨在解决如何有效融合驾驶员面部特征与外部场景信息以提高视线估计准确性的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了驾驶员视线估计领域中缺乏同步面部与场景图像数据集的空白。它将研究重心从传统的单模态面部分析扩展到多模态场景感知建模，强调了场景上下文对理解驾驶员注意力的重要性。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于构建了包含同步面部与场景图像的UD-FSG基准数据集。提出了SGAP-Gaze网络，创新性地利用Transformer注意力机制融合面部视线意图与场景网格特征。实验表明该方法在平均像素误差上相比现有最优模型降低了23.5%。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法首先提取并融合面部、眼部及虹膜特征以构建视线意图向量。随后利用基于Transformer的注意力机制计算空间场景网格的注意力分数，将面部视线意图与场景特征深度融合，最终回归得到视线落点。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确列出局限，但潜在不足可能包括模型对新驾驶场景的泛化能力受限。多模态数据同步与处理的复杂性可能增加实际部署的计算成本。在极端光照或遮挡条件下场景图像的有效性仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作有效地将场景上下文引入视线估计，是一个符合人类认知直觉的创新。虽然论文未直接使用LLM技术，但其对Transformer注意力机制的应用展示了注意力机制在多模态融合中的强大潜力。该方法显著提升了边缘区域的预测精度，对开发更安全的自动驾驶辅助系统具有重要价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.20361v1" target="_blank">Object Referring-Guided Scanpath Prediction with Perception-Enhanced Vision-Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Rong Quan, Yantao Lai, Dong Liang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.20361v1" target="_blank">2604.20361v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决对象指代表达引导的扫视路径预测 (ORSP) 问题，即根据语言描述预测人类在视觉场景中搜索特定目标对象时的注意力扫视路径。核心研究问题是如何有效地融合多模态信息并增强模型对细粒度位置信息的感知能力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于眼动追踪与视觉语言模型的交叉领域，主要填补了现有扫视预测方法在多模态信息深度融合方面的不足。它通过引入大规模预训练模型，提升了模型对细粒度位置信息的感知能力，从而改进了特定目标搜索任务的表现。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了ScanVLA模型，首次利用视觉语言模型 (VLM) 实现了视觉与语言特征的内在对齐与融合。创新点包括设计了历史增强扫视路径解码器 (HESD) 以利用历史注视信息，以及引入冻结的分割LoRA来增强细粒度定位能力，在不增加大量计算成本的情况下显著提升了性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+ScanVLA模型首先利用视觉语言模型提取并融合图像与文本特征。随后，模型通过历史增强扫视路径解码器 (HESD) 将历史注视点的位置信息作为输入，以此预测当前的注视位置。此外，模型采用冻结的分割LoRA作为辅助模块，增强了模型对目标对象的精确定位能力。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文声称计算成本可控，但基于VLM的架构通常参数量较大，对推理资源仍有较高要求。冻结的分割LoRA虽然节省了训练成本，但可能限制了模型在特定极端场景下的适应性。此外，模型对复杂长文本描述的理解能力仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将视觉语言模型引入眼动追踪领域，有效解决了多模态融合难题。利用分割LoRA增强位置感知是一个高效的设计选择，避免了高昂的微调成本。该方法为未来结合大模型进行认知任务建模提供了有价值的参考方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.19410v2" target="_blank">Understanding Password Preferences, Memorability, and Security through a Human-Centered Lens</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Duru Paker, Suleyman Ozdel, Enkelejda Kasneci<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.19410v2" target="_blank">2604.19410v2</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本研究旨在探究基于AI的密码生成器的有效性及用户感知，核心问题是分析用户在密码创建、选择和记忆过程中的行为模式如何影响密码的客观安全性与主观质量。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于以人为中心的安全研究，填补了关于AI密码生成器实际可用性与用户接受度的认知空白。它通过引入眼动追踪技术，超越了传统的可用性测试，深入分析了用户在面对自创与AI生成密码时的认知负荷与决策机制。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于验证了AI生成密码在安全强度与人类记忆性之间的权衡，并发现用户倾向于选择安全性较低的自生成密码。创新之处在于揭示了视觉注意力与密码熵之间的行为关联，即对上下文线索的关注度越高，生成的密码强度往往越高，这为注意力驱动的安全设计提供了依据。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究采用眼动追踪实验，对比了三种基于大语言模型的密码生成器(DeepSeek, ChatGPT, PassGPT)与一种规则随机生成器。参与者在四种网站情境下进行密码创建、选择与记忆任务，系统全程记录其眼动数据以分析行为特征。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究结果显示AI生成的高强度密码在记忆性上存在明显短板，限制了其实际应用潜力。此外，实验环境可能无法完全模拟真实网络威胁下的用户行为，且样本可能未覆盖所有用户群体。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地结合了眼动追踪技术与LLM应用评估，为理解人机交互中的安全决策提供了生理层面的证据。其提出的注意力驱动安全设计具有前瞻性，提示未来的AI安全工具应更多考虑用户的认知过程与上下文交互，而非仅仅追求算法层面的高强度。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.18712v1" target="_blank">Probing for Reading Times</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Eleftheria Tsipidi, Samuel Kiegeland, Francesco Ignazio Re et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.18712v1" target="_blank">2604.18712v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是针对论文《Probing for Reading Times》的结构化中文总结。</p>
+
+<p>1. <strong>研究问题</strong><br>
+这篇论文旨在探究语言模型的内部表示是否编码了关于人类认知处理的信号。其核心研究问题是模型各层的表示能否有效预测人类阅读时的眼动追踪指标，以及这种预测能力在模型层级中的分布规律。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有研究已证实语言模型表示包含丰富的语言学信息，但尚不清楚这些表示是否捕捉到了人类实时处理语言的认知特征。这项工作填补了从语言学探测扩展到认知信号探测的空白，建立了语言模型架构与人类阅读处理阶段之间的联系。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+研究发现模型早期层的表示在预测首次注视和凝视时长等早期眼动指标时，表现优于传统的惊异度指标。这一发现揭示了模型深度与人类阅读时间阶段之间存在功能性对齐，即低层结构或词汇表示捕捉了类似人类的早期处理特征。此外，结合惊异度和早期层表示可以进一步提升预测性能，但最佳预测因子高度依赖于具体语言和眼动指标。</p>
+
+<p>4. <strong>方法概述</strong><br>
+作者使用正则化线性回归作为探测分类器，在涵盖五种语言的两个眼动追踪语料库上进行实验。该方法将模型每一层的表示作为特征，与惊异度、信息值等标量预测因子进行对比，以此预测多种眼动追踪指标。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+研究结果表明最佳预测因子在不同语言和眼动指标间差异显著，缺乏跨语言的统一规律。对于总阅读时间等晚期指标，模型表示的预测能力不如惊异度，说明模型在捕捉深层认知整合过程方面仍有不足。此外，探测方法仅建立了表示与阅读时间的相关性，未能完全解释其背后的因果机制。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作为理解大语言模型的认知合理性提供了有力的实证证据，特别是关于模型早期层对应人类早期阅读阶段的发现具有很强的启发性。这表明人类快速的眼动处理可能更多依赖于低级的词汇或结构特征，而非复杂的深层语义推理，这对未来设计更符合人类认知机制的模型架构具有重要参考价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.17988v1" target="_blank">Employing General-Purpose and Biomedical Large Language Models with Advanced Prompt Engineering for Pharmacoepidemiologic Study Design</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xinyao Zhang, Nicole Sonne Heckmann, Manuela Del Castillo Suero et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.17988v1" target="_blank">2604.17988v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在探究大型语言模型在自动化药物流行病学研究设计中的可靠性，核心问题是对比通用大模型与生物医学专用大模型在此特定专业任务中的表现差异。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 现有文献多关注通用模型的不准确性，但缺乏对生物医学微调模型在药物流行病学领域的具体评估。这项工作填补了这一空白，通过实证研究明确了不同架构模型在专业研究设计中的适用边界。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文发现通用大模型（如GPT-4o和DeepSeek-R1）结合高级提示策略，在研究设计支持上优于生物医学专用模型。研究还证实Least-to-Most提示策略能显著提升模型推理的稳定性，为后续研究设计工具开发提供了重要参考。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 研究选取了GPT-4o、DeepSeek-R1等通用模型与Bio-Medical-Llama-3等微调模型，基于46个药物警戒方案进行测试。实验采用了Least-to-Most和Active Prompting策略，从相关性、逻辑论证和本体代码一致性三个维度对模型输出进行了量化评估。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 所有测试模型在本体代码映射任务上的表现均不尽如人意，显示出LLM在处理精确医学术语标准化时的局限性。生物医学微调模型在生成理由的相关性和充分性上普遍弱于通用模型，且存在推理不稳定的问题。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作揭示了通用大模型在特定垂直领域可能比专用微调模型更具实用价值的反直觉现象，突显了提示工程的关键作用。然而，模型在复杂本体映射任务上的短板表明，当前LLM尚不能完全替代人类专家进行严谨的研究设计，未来需探索检索增强生成等技术来弥补知识短板。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2604.19888v1" target="_blank">SGAP-Gaze: Scene Grid Attention Based Point-of-Gaze Estimation Network for Driver Gaze</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.20361v1" target="_blank">Object Referring-Guided Scanpath Prediction with Perception-Enhanced Vision-Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.19410v2" target="_blank">Understanding Password Preferences, Memorability, and Security through a Human-Centered Lens</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.18712v1" target="_blank">Probing for Reading Times</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.17988v1" target="_blank">Employing General-Purpose and Biomedical Large Language Models with Advanced Prompt Engineering for Pharmacoepidemiologic Study Design</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
