@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-05-05</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">May 05, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年05月05日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Scaling laws for neural networks</h2>
+                <p><strong>1. 概念定义</strong><br>
+神经网络缩放定律描述了模型性能如何随着模型参数规模、训练数据量和计算资源的增加而呈现可预测的提升。它揭示了这些关键因素与模型最终损失之间的幂律关系，表明在特定范围内扩大规模能持续带来性能收益。</p>
+
+<p><strong>2. 核心原理</strong><br>
+该定律的核心在于模型测试损失 \(L\) 与参数量 \(N\)、数据集大小 \(D\) 以及训练计算量 \(C\) 之间存在幂律关系。这种关系可以表示为 \(L(N) \approx (N_c/N)^{\alpha_N}\) 或 \(L(D) \approx (D_c/D)^{\alpha_D}\)，其中 \(N_c\) 和 \(D_c\) 是常数，\(\alpha\) 是缩放指数。这意味着性能提升的速度会逐渐减慢，但只要遵循最优计算分配原则，增加计算预算就能持续降低损失。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这一发现为现代大模型的设计提供了理论指导，帮助研究者在基础架构研究中决定如何在模型参数和训练数据之间最优地分配计算预算。在低资源语言研究中，它帮助确定达到特定性能所需的最小数据量。同时它也被用于攻击防御领域，用来预测更大模型在面对对抗性攻击时的鲁棒性表现。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+模型性能主要由可用的计算资源决定，而非仅仅依赖特定的模型架构细节。这解释了为什么当前AI研究倾向于构建更大、更通用的模型。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02372v1" target="_blank">Privacy Preserving Machine Learning Workflow: from Anonymization to Personalized Differential Privacy Budgets in Federated Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Judith Sáinz-Pardo Díaz, Álvaro López García<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02372v1" target="_blank">2605.02372v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在解决联邦学习工作流中存在的数据隐私泄露与数据完整性挑战，核心问题是如何在保护敏感表格数据隐私的同时，有效应对投毒攻击并优化模型性能。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于隐私保护机器学习领域，专注于处理敏感表格数据的联邦学习架构。它填补了现有研究中静态隐私预算分配与客户端实际风险差异之间的空白，并完善了对投毒攻击的防御机制。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一个集成了数据匿名化与差分隐私的综合工作流。主要创新包括对客户端漂移的形式化定义与检测机制，以及提出了一种基于重识别风险的个性化差分隐私预算分配方法，有效提升了模型性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者构建了一个包含数据匿名化预处理和全局差分隐私的联邦学习工作流。该方法利用重识别风险指标为不同客户端分配个性化隐私预算，同时引入客户端漂移的形式化定义来检测并缓解潜在的投毒攻击。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法仅在公开的医疗记录表格数据集上进行了验证，其在图像或文本等非结构化数据上的适用性尚不明确。此外，引入复杂的匿名化和个性化预算分配机制可能会增加系统的计算开销与通信成本。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有较强的实用价值，因为它打破了传统联邦学习中统一隐私预算的限制，使隐私保护更贴合客户端的实际风险状况。其结合投毒攻击防御的思路提升了系统的鲁棒性，但工作流的复杂性可能对实际部署提出挑战。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02794v1" target="_blank">Edge-Efficient Image Restoration: Transformer Distillation into State-Space Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Srinivas Soumitri Miriyala, Sowmya Vajrala, Sravanth Kodavanti et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02794v1" target="_blank">2605.02794v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决Transformer模型在移动端图像修复任务中计算开销大、推理延迟高的问题，同时克服状态空间模型(SSM)在细粒度修复任务上性能不足的挑战。核心问题是如何在边缘设备上平衡图像修复质量与推理效率。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于高效计算机视觉与模型压缩领域的交叉点，填补了高性能Transformer模型难以在资源受限的边缘设备上部署的空白。它通过结合Transformer的全局建模能力与SSM的线性时间复杂度优势，探索了一种混合架构的新范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一个模块化混合框架，将Transformer模块蒸馏为轻量级SSM模块，构建了混合U-Net架构。引入了高效网络搜索(ENS)策略，自动寻找修复质量与推理速度的最佳平衡点。实验表明，该方法在Snapdragon 8 Elite CPU上实现了最高3.4倍的加速，同时保持了具有竞争力的修复质量。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者首先训练轻量级SSM模块作为Transformer模块的特征蒸馏替代品，以此降低计算成本。随后利用ENS多目标搜索策略，在预对齐的组件空间中自动选择特定任务的混合配置。ENS通过优化修复质量并惩罚Transformer使用量，实现了无需反复硬件性能分析即可发现高效架构的目标。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+不同任务的加速效果差异较大，去噪任务的加速比仅为1.17倍，提升相对有限。实验主要集中在移动端CPU平台，缺乏对GPU或NPU等不同硬件平台的性能验证。此外，搜索策略虽然避免了重复性能分析，但仍需预对齐组件库，增加了前期准备成本。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的实用价值，巧妙地利用知识蒸馏将Transformer的能力迁移到高效的SSM结构中。ENS策略提供了一种自动化的架构设计思路，有效解决了人工设计混合网络的难题。这为在边缘设备上部署高性能视觉模型提供了一条极具潜力的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02319v1" target="_blank">Optimal Privacy-Utility Trade-Offs in LDP: Functional and Geometric Perspectives</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Seung-Hyun Nam, Hyun-Young Park, Si-Hyeon Lee<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02319v1" target="_blank">2605.02319v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在解决本地差分隐私（LDP）中缺乏统一理论框架来刻画最优隐私-效用权衡（PUT）及对应最优通道的问题。核心挑战在于如何摆脱以往依赖特定问题逐一分析的模式，建立通用的理论解决方案。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该研究定位于填补LDP领域中缺乏系统性理论工具的空白，改变了以往研究碎片化、依赖特定案例分析的局面。它建立了一个通用的理论框架，不仅适用于统计决策中的风险最小化，还涵盖了互信息、\(f\)-散度等信息论度量的最大化问题。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文的主要贡献在于揭示了贝叶斯与极小极大风险关于LDP通道的关键函数性质，并据此大幅缩减了优化搜索域。此外，作者建立了Blackwell序下最大LDP通道与有限维多面体的一一对应关系，使得最优权衡问题在计算上变得可行，并在特定对称条件下推导出了精确的解析表达式。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ 论文首先从函数视角出发，利用数据处理不等式、拟凸性和凹性等性质简化优化问题的定义域。随后从凸几何视角切入，证明了最大LDP通道与有限维多面体存在对应关系，从而将最优权衡的计算转化为可通过顶点枚举或线性规划求解的几何问题。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 尽管论文提供了理论框架，但对于不具有传递群作用对称性的复杂问题，可能仍需依赖数值计算而非闭式解析解。此外，虽然将问题转化为了线性规划，但在极高维数据场景下，顶点枚举或线性规划的计算复杂度可能依然是一个挑战。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这是一项理论深度扎实的工作，成功将复杂的隐私优化问题转化为可计算的几何问题，具有很高的学术价值。其优势在于理论的统一性和普适性，能够涵盖并加强已有的研究结果。不过，该工作主要侧重于理论刻画，在实际大规模数据系统中的工程应用与计算效率可能需要后续研究进一步探索。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.27818v1" target="_blank">MASCing: Configurable Mixture-of-Experts Behavior via Activation Steering Masks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jona te Lintelo, Lichao Wu, Marina Krček et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.27818v1" target="_blank">2604.27818v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">attack_defense</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决混合专家模型因稀疏激活导致行为难以控制的安全挑战，以及传统微调方法在快速适配不同安全目标时成本高昂的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位为首个无需重训练即可灵活重配置MoE模型行为的框架。它填补了现有文献中关于MoE模型路由机制可控性研究的空白，提供了一种轻量级且可配置的安全干预方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MASCing框架，创新性地利用基于LSTM的代理模型捕捉跨层路由依赖，并通过导向掩码在推理时覆盖专家选择。该方法在防御多轮越狱攻击和特定内容生成任务中表现出显著的性能提升，且仅需极低的计算开销。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MASCing首先训练一个基于LSTM的代理模型，用于捕捉跨层路由依赖并将路由logits映射到下游行为。随后该方法优化一个导向矩阵以识别行为相关的专家回路，并在推理阶段应用导向掩码覆盖路由门控机制，从而实现对专家选择的定向干预。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然该方法无需重训练主模型，但构建和训练代理模型仍需一定的数据准备和计算资源。此外，通过覆盖路由机制来干预行为可能在极端输入分布下产生未预见的副作用，其对模型通用能力的长期影响仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的实用价值，为MoE模型的安全部署提供了一种低成本、可配置的解决方案。其优点在于无需改动模型权重即可实现行为重配置，但该方法的有效性高度依赖于代理模型对路由行为的建模准确性。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02297v1" target="_blank">Graph Federated Unlearning for Privacy Preservation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ruotong Ma, Wentao Yu, Qizhou Wang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02297v1" target="_blank">2605.02297v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决图联邦学习（GFL）中用户退出后的隐私泄露问题。核心挑战在于如何彻底移除用户信息并防止其在去中心化系统中残留或传播，同时避免传统机器遗忘方法导致的模型性能显著下降。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于图联邦学习与机器遗忘的交叉领域，填补了GFL场景下用户退出机制中隐私保护的研究空白。现有研究多关注训练过程，而忽视了用户撤回数据后信息残留引发的隐私风险，本文首次深入探讨了这一被忽视的关键问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了一种新颖的图联邦遗忘框架，有效平衡了隐私保护与模型性能。创新之处在于设计了正交遗忘更新策略以减少对模型性能的影响，并引入虚拟客户端机制来维护图拓扑结构，同时提出了新的成员推理框架用于严格评估遗忘效果。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法包含两个关键调整。首先，通过引导遗忘更新方向使其与学习其他数据的梯度正交，最小化对整体性能的影响。其次，引入由中央服务器维护的虚拟客户端，在不恢复被移除实体信息的前提下，有效保存图拓扑结构和全局嵌入。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+引入虚拟客户端机制可能会增加中央服务器的存储负担和计算开销。正交性约束的优化过程可能较为复杂，在超大规模图数据下的计算效率可能面临挑战。此外，评估依赖于特定的成员推理框架，面对其他类型的隐私攻击时防御能力尚需验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有重要的实际应用价值，巧妙地解决了GDPR等法规下用户“被遗忘权”在图联邦学习中的落地难题。该方法在保证隐私的同时兼顾了模型效用，思路清晰且实验充分，为后续隐私保护研究提供了新的基准。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02589v1" target="_blank">Representation learning from OCT images</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Hedi Tabia, Désiré Sidibé, Nawres Khlifa et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02589v1" target="_blank">2605.02589v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">mechanistic_interpretability</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决如何利用表示学习技术自动化分析眼科OCT图像的问题。其核心在于处理海量临床数据，减少对昂贵专家标注的依赖，并提升跨设备与人群的诊断一致性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位为一篇全面的综述文章，系统梳理了OCT图像分析领域的发展脉络。它填补了从早期深度学习到最新基础模型这一跨度内缺乏系统性文献总结的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+文章建立了一套包含监督学习、自监督学习、生成式方法及多模态学习在内的分类体系。提供了公开数据集的结构化概览，并提出了一种统一的数学框架来形式化各类学习范式。深入讨论了体素基础模型预训练和公平性缓解等前沿开放研究方向。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文通过分类法组织文献，涵盖了基于CNN和Transformer的架构、3D体素建模以及视觉语言系统等关键技术。分析了每种范式的方法论贡献及其局限性，并探讨了评估协议的具体考量。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+当前领域在面向3D体素数据的基础模型预训练方面仍面临挑战。现有研究在不确定性感知、隐私保护训练以及模型公平性与可解释性方面存在明显不足。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作为OCT图像分析领域提供了极具价值的全景式指南，其提出的统一数学框架有助于读者深入理解不同方法的本质。它成功地将传统的图像处理任务与现代基础模型研究连接起来，为后续研究指明了道路。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.00754v2" target="_blank">Themis: Training Robust Multilingual Code Reward Models for Flexible Multi-Criteria Scoring</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Indraneil Paul, Glavaš Glavas, Iryna Gurevych<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.00754v2" target="_blank">2605.00754v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有代码奖励模型主要依赖执行反馈，仅关注代码的功能正确性，缺乏多语言支持和多维度的评估能力。本文旨在解决如何训练能够跨多种编程语言并根据多种标准进行灵活评分的鲁棒奖励模型这一问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了代码生成领域中多标准奖励模型研究的空白，超越了传统仅关注功能正确性的单一维度评估。它将奖励模型的应用范围从简单的执行反馈扩展到了涵盖代码风格、安全性等多个维度的综合评价，丰富了语言模型后训练的工具集。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文构建了首个涵盖五种偏好维度和八种编程语言的代码奖励模型基准 Themis-CodeRewardBench。同时发布了目前最大的开源代码偏好数据集 Themis-CodePreference，并训练出支持多标准评分的 Themis-RM 模型系列，参数规模从 600M 到 32B 不等。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者首先构建多维度基准来剖析现有模型在功能正确性之外的局限性，进而构建了包含超过 35 万个偏好对的大规模数据集。利用该数据集，团队训练了不同规模的奖励模型，使其能够处理多语言环境下的复杂评价标准，并验证了跨语言迁移的有效性。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管数据集规模庞大，但偏好数据的标注质量与一致性仍可能存在偏差，可能影响模型判断的准确性。模型在处理极端复杂的代码逻辑或非常罕见的编程语言时，其泛化能力可能面临挑战。此外多标准评分本身具有一定的主观性，这可能给模型建立客观统一的评价标准带来困难。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项扎实且具有高度实用价值的工作，为代码生成评估提供了关键的数据与基准设施。它成功证明了多标准训练对于提升奖励模型可靠性的重要性，对后续代码大模型的优化与对齐具有重要的指导意义，展示了奖励模型在代码领域超越简单正确性检查的潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02767v1" target="_blank">TOC-SR: Task-Optimal Compact diffusion for Image Super Resolution</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Sowmya Vajrala, Akshay Bankar, Manjunath Arveti et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02767v1" target="_blank">2605.02767v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+扩散模型在图像超分辨率任务中表现优异，但其庞大的模型参数量和迭代采样过程导致计算成本高昂，难以在实际场景中高效部署。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于解决扩散模型在图像超分辨率任务中效率与质量之间的权衡问题。它填补了现有研究中缺乏针对超分辨率任务进行模型紧凑化设计及一步式推理优化的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了TOC-SR框架，成功构建了高效的超分辨率模型。主要创新在于发现了一种紧凑的扩散骨干网络，实现了参数量6.6倍的减少，并将扩散过程蒸馏为单步生成器，显著提升了推理速度。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法首先基于十六通道潜变量扩散模型，利用特征级生成蒸馏构建参数高效的代理模块。随后通过 \(\epsilon\) 约束贝叶斯优化进行架构搜索，以在保持生成保真度的同时最小化模型复杂度。最后将该紧凑骨干网络适配至超分辨率任务，并将扩散过程蒸馏为单步生成器。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管摘要强调了效率提升，但未详细说明一步生成器在处理复杂纹理细节时相较于多步迭代模型的性能差距。此外，架构搜索过程可能需要较高的计算资源，且方法的泛化能力有待在其他低层视觉任务中进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作在推动扩散模型实用化方面具有重要意义，通过架构搜索与知识蒸馏的结合有效解决了效率瓶颈。其优点在于显著降低了计算成本并保持了重建质量，但缺点可能在于模型优化流程相对复杂，增加了训练阶段的时间成本。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02608v1" target="_blank">Dependency Parsing Across the Resource Spectrum: Evaluating Architectures on High and Low-Resource Languages</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kevin Guan, Happy Buzaaba, Christiane Fellbaum<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02608v1" target="_blank">2605.02608v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+本文旨在探究基于Transformer的模型在低资源语言依存句法分析中是否仍能保持其优越性。核心问题是评估不同复杂度的解析架构在不同资源规模下的性能差异及转折点。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究多关注Transformer在高资源语言上的最先进表现，而忽视了其在低资源环境下的适用性研究。这项工作填补了该空白，通过跨语言比较明确了简单架构与复杂预训练模型在不同资源谱系下的效能边界。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于实证证明了Biaffine LSTM在低资源环境下优于Transformer模型，并识别出了性能交叉的资源阈值。研究还揭示了形态复杂性是导致Transformer在低资源场景下表现不佳的关键预测因子。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究选取了Biaffine LSTM、Stack-Pointer Network以及AfroXLMR-large和RemBERT两种Transformer模型进行对比实验。实验涵盖了十种类型多样的语言，特别关注低资源非洲语言，并控制数据规模与形态复杂性变量进行深入分析。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究仅限于依存句法分析任务，结论可能难以直接推广到其他NLP任务。实验涉及的语言数量有限，可能无法完全代表所有低资源语言的特性。此外，研究主要依赖现有模型架构，未提出新的混合架构方案。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的实用价值，挑战了“Transformer万能”的普遍假设，为低资源语言工具开发提供了明确的模型选择指南。研究结果强调了根据数据规模选择合适模型架构的重要性，避免了在数据不足时盲目追求大模型带来的资源浪费。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.02496v1" target="_blank">Tibetan-TTS:Low-Resource Tibetan Speech Synthesis with Large Model Adaptation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiaxu He, Chao Wang, Jie Lian et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.02496v1" target="_blank">2605.02496v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决藏语语音合成长期面临的语音资源稀缺、方言差异显著以及书写文本与口语发音映射复杂这三大核心难题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位为业界首个基于大模型的藏语TTS系统，填补了利用大模型技术解决低资源藏语语音合成领域的空白。它通过跨语言自适应训练，探索了在数据匮乏条件下构建高质量语音合成系统的可行路径。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于构建了首个基于大模型骨干的藏语TTS系统，并提出了面向藏语的文本表示与分词器适配方案。实验表明该系统在低资源条件下生成的语音自然稳定，主观MOS得分超过4.28，发音准确率高于96%，显著优于现有外部商业接口。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法基于Xingchen AGI Lab开发的大型语音合成模型，集成了数据质量增强技术。核心策略包括针对藏语特性的文本表示与分词器适配，以及利用跨语言自适应训练来实现低资源藏语语音合成。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文为未来统一多方言合成奠定了基础，但当前工作可能尚未完全解决藏语复杂的方言统一问题。此外，系统性能在一定程度上依赖于基础大模型的能力，在极端低资源场景下的泛化性仍有待进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作成功验证了大模型适配策略在低资源语言合成中的有效性，具有较高的工程应用价值。其针对特定语言的文本处理设计思路，为解决其他低资源语种的语音合成问题提供了有益的技术参考。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2605.02372v1" target="_blank">Privacy Preserving Machine Learning Workflow: from Anonymization to Personalized Differential Privacy Budgets in Federated Learning</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02794v1" target="_blank">Edge-Efficient Image Restoration: Transformer Distillation into State-Space Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02319v1" target="_blank">Optimal Privacy-Utility Trade-Offs in LDP: Functional and Geometric Perspectives</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.27818v1" target="_blank">MASCing: Configurable Mixture-of-Experts Behavior via Activation Steering Masks</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02297v1" target="_blank">Graph Federated Unlearning for Privacy Preservation</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02589v1" target="_blank">Representation learning from OCT images</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.00754v2" target="_blank">Themis: Training Robust Multilingual Code Reward Models for Flexible Multi-Criteria Scoring</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02767v1" target="_blank">TOC-SR: Task-Optimal Compact diffusion for Image Super Resolution</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02608v1" target="_blank">Dependency Parsing Across the Resource Spectrum: Evaluating Architectures on High and Low-Resource Languages</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.02496v1" target="_blank">Tibetan-TTS:Low-Resource Tibetan Speech Synthesis with Large Model Adaptation</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
