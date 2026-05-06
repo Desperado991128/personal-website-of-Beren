@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-05-06</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">May 06, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年05月06日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Sparse vs dense expert selection</h2>
+                <p><strong>1. 概念定义</strong><br>
+稀疏专家选择指的是一种路由机制，即每个输入Token仅激活总专家池中的一小子集。稠密专家选择则涉及激活所有或很大一部分专家来处理输入。这一选择决定了模型在推理过程中的计算效率和表示能力。</p>
+
+<p><strong>2. 核心原理</strong><br>
+在稀疏选择中，门控网络计算路由分数 \(g(x)\) 并应用 top-k 运算符来选择专家。最终输出是仅来自选定专家的输出的加权组合，其中权重由门控值决定。数学上，这通常表示为 \(y = \sum_{i=1}^{N} g(x)_i E_i(x)\)，其中对于未选中的专家 \(g(x)_i = 0\)。稠密选择对门控分数应用 softmax 激活，确保每个专家以非零权重参与，通常导致更高的计算成本但可能具有更平滑的梯度流。</p>
+
+<p><strong>3. 研究意义</strong><br>
+稀疏选择是训练具有万亿参数的大规模基础模型的关键推动力，因为它允许扩展模型容量而无需成比例增加推理成本。稠密选择提供了更好的训练稳定性和负载均衡，使其适用于需要全面利用模型参数的场景。在攻击防御领域，稀疏模型可能面临特定的路由绕过攻击风险，而稠密模型则表现出不同的对抗鲁棒性特征。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+稀疏选择将计算成本与模型参数量解耦，允许构建庞大的模型，而稠密选择则优先考虑参数的均匀利用。这种权衡代表了现代架构设计中效率与稳定性之间的核心冲突。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03547v1" target="_blank">Erase Persona, Forget Lore: Benchmarking Multimodal Copyright Unlearning in Large Vision Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> JuneHyoung Kwon, JungMin Yun, YoungBin Kim<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03547v1" target="_blank">2605.03547v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决大型视觉语言模型中版权内容遗忘效果难以评估的问题。核心挑战在于如何在复杂的多模态环境下，准确衡量模型是否有效擦除了受版权保护的视觉概念，同时保持模型的一般能力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有的机器遗忘研究多集中于文本模态，缺乏针对多模态场景的系统性评估手段。这项工作填补了大型视觉语言模型版权遗忘领域的空白，为该领域提供了首个标准化的评估基准。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了CoVUBench，这是首个专门用于评估大型视觉语言模型版权遗忘的基准框架。其创新之处在于使用了程序化生成的合成数据以规避法律风险，并设计了系统性的视觉变化来测试遗忘方法的泛化能力。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该框架利用程序化生成的合成数据构建测试集，涵盖构图变化和多种领域表现以模拟真实场景。评估协议同时考量版权方的遗忘诉求与模型部署方的效用保留，通过量化这一权衡来全面评估遗忘算法的性能。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+由于主要依赖程序化生成的合成数据，这些数据可能无法完全覆盖现实世界中受版权保护内容的所有复杂分布与长尾特征。此外，该工作仅提供评估基准，具体的遗忘算法优化仍需后续研究解决。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作对于推动生成式AI的合规化发展具有重要意义，直接回应了业界关注的版权风险痛点。通过量化遗忘效果与模型效用之间的权衡，它为开发负责任的大型视觉语言模型提供了关键的量化工具。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03804v1" target="_blank">ScrapMem: A Bio-inspired Framework for On-device Personalized Agent Memory via Optical Forgetting</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiale Chang, Yuxiang Ren<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03804v1" target="_blank">2605.03804v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+这篇论文旨在解决在资源受限的边缘设备上部署LLM智能体长期个性化记忆的难题。核心挑战在于如何在处理多模态数据复杂性的同时，有效降低高昂的存储成本。</p>
+
+<p>### 2. 研究定位<br>
+该工作定位于LLM智能体记忆管理与边缘AI计算的交叉领域。它填补了现有研究在设备端环境中平衡长期记忆保留与存储效率的空白，特别是针对多模态数据的处理提供了新思路。</p>
+
+<p>### 3. 核心贡献<br>
+论文的主要贡献在于提出了仿生的“光学遗忘”机制和情景记忆图结构。创新之处在于通过模拟人类记忆的模糊化过程实现高效压缩，在大幅降低存储需求的同时保持了优秀的检索性能。</p>
+
+<p>### 4. 方法概述<br>
+ScrapMem框架首先将多模态数据整合为“剪贴簿页”，随后引入光学遗忘机制渐进式降低旧记忆的分辨率以节省空间。同时，系统构建情景记忆图来组织关键事件，利用因果时序结构维持语义一致性并提升检索效果。</p>
+
+<p>### 5. 局限与不足<br>
+尽管论文声称效果显著，但光学遗忘机制通过降低分辨率处理旧记忆，可能导致关键细节永久丢失而无法恢复。此外，构建和维护情景记忆图在极长期或极高频数据流场景下可能引入额外的计算开销。该方法对非视觉模态数据的泛化能力也有待进一步验证。</p>
+
+<p>### 6. 评价与思考<br>
+这项工作为边缘端LLM部署提供了一个极具启发性的解决方案，巧妙地利用仿生学原理平衡了性能与资源消耗。其优点在于存储效率提升显著且实验数据扎实，但“光学遗忘”的具体实现细节及其对非视觉模态的适用性仍需深入考量。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2604.27818v1" target="_blank">MASCing: Configurable Mixture-of-Experts Behavior via Activation Steering Masks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jona te Lintelo, Lichao Wu, Marina Krček et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.27818v1" target="_blank">2604.27818v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">attack_defense</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是针对论文《MASCing. Configurable Mixture-of-Experts Behavior via Activation Steering Masks》的结构化总结:</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文旨在解决混合专家模型因稀疏激活导致行为难以控制的安全挑战。核心问题是如何在不进行昂贵重训练的情况下，针对不同安全场景灵活地重新配置模型行为。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 这项工作填补了MoE模型安全配置领域的空白，现有方法通常依赖成本高昂的全量微调或重训练。它定位为首个无需重训练即可灵活重配置MoE行为的安全框架，为模型行为控制提供了一种轻量级解决方案。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了MASCing框架，实现了无需重训练即可对MoE模型行为进行灵活重配置。其创新之处在于利用基于LSTM的代理模型捕捉路由依赖，并通过导向掩码在推理时覆盖专家选择，从而定向干预模型行为。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ MASCing首先训练一个基于LSTM的代理模型，用于捕捉跨层路由依赖并将路由logits映射到下游行为。随后优化一个导向矩阵以识别与特定行为相关的专家回路，在推理阶段应用导向掩码直接干预路由门控，实现对专家选择的覆盖。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 该方法依赖于代理模型对路由依赖关系的准确建模，若代理模型存在偏差可能影响干预效果。此外，虽然展示了提升模型服从成人内容请求的能力，但这引发了潜在的伦理滥用风险。方法在不同架构MoE模型间的泛化能力仍需进一步验证。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作提供了一种极具实用价值的轻量级方案，成功将模型行为控制从参数调整转变为路由干预。其亮点在于极低的推理开销与显著的效果提升，证明了MoE模型内部存在可干预的行为回路。不过这也提示我们需要关注路由层面的新型对抗攻击风险。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03984v1" target="_blank">Flow Sampling: Learning to Sample from Unnormalized Densities via Denoising Conditional Processes</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Aaron Havens, Brian Karrer, Neta Shaul<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03984v1" target="_blank">2605.03984v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决如何从已知能量函数定义的非归一化密度中进行高效采样的问题。核心挑战在于能量函数评估通常计算成本高昂，因此需要学习一种能够减少评估次数的高效采样器。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作将扩散模型和流匹配技术从基于数据样本的生成建模迁移到了无数据设定的采样任务中。它填补了在能量函数评估受限场景下，如何构建高效且可扩展采样器的空白，特别是针对黎曼流形上的采样问题提供了新的解决方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Flow Sampling框架，这是一种基于扩散模型和流匹配的无数据采样方法。主要创新在于设计了以噪声样本为条件的训练目标，通过回归去噪扩散漂移来优化采样过程。此外，该方法自然扩展到了黎曼流形，推导出了常曲率流形上的闭式条件漂移公式。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法利用插值过程来最小化训练期间的能量函数评估次数。与标准扩散模型以数据样本为条件回归加噪漂移不同，Flow Sampling以噪声样本为条件，回归由能量函数构建的去噪扩散漂移。这种设计使得模型能够在欧几里得空间及黎曼流形上实现高效采样。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文摘要未明确提及局限性，但潜在的不足可能包括对能量函数质量的依赖。虽然减少了评估次数，但训练过程本身可能仍需较高的计算资源。此外，在黎曼流形上的闭式解推导目前仅限于常曲率流形，对于更复杂的几何结构可能需要额外处理。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项连接生成模型与科学计算应用的高质量工作。其将采样问题转化为条件去噪过程的视角新颖，且在黎曼流形上的扩展具有重要的理论价值。该方法在分子构象生成等实际任务中展示了强大的性能，为高成本能量函数的采样提供了有效的解决方案。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03472v1" target="_blank">Detecting Stealth Sycophancy in Mental-Health Dialogue with Dynamic Emotional Signature Graphs</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Tianze Han, Beining Xu, Hanbo Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03472v1" target="_blank">2605.03472v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决对话式AI心理治疗师在离线场景下的响应质量评估难题。核心问题是如何准确识别那些表面看似合理、但实际上未能改善甚至恶化用户心理状态的“隐性奉承”或无效回应。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了心理健康对话评估中缺乏临床导向评估指标的空白。现有方法如直接LLM打分或文本相似度指标无法捕捉治疗过程中的动态临床方向，本研究提出了一种基于临床状态轨迹的评估范式，纠正了传统方法对治疗质量的对齐偏差。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是提出了动态情绪特征图 (DESG)，这是一种模型无关的评估器，利用解耦的临床状态和非对称临床几何来评分。此外，研究构建了一个包含3000个对话窗口的诊断性压力测试基准，证明了DESG在检测无效或有害回应方面显著优于现有基线模型。</p>
+
+<p><strong>4. 方法概述</strong><br>
+DESG方法将对话窗口建模为图结构，通过解耦临床状态来表示用户的心理变化轨迹。它利用非对称临床几何距离来衡量回应是否引导用户状态向调节或重构方向移动，从而替代传统的文本相似度计算，实现对治疗方向性的量化评估。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管方法表现优异，但消融实验显示图结构组件主要提供可解释性而非性能提升的主要来源，这意味着核心性能高度依赖于临床状态流形的构建质量。此外，该研究依赖于构建的压力测试基准，在真实世界复杂多变的临床对话数据中的泛化能力仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的实用价值，它成功将临床心理学原则转化为可计算的评估指标，摆脱了对昂贵且可能存在偏差的LLM裁判的依赖。其创新点在于引入非对称几何距离来量化治疗过程中的“方向性”，为AI心理健康应用提供了一种更可靠、可解释的自动化质检工具。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03512v1" target="_blank">Brainrot: Deskilling and Addiction are Overlooked AI Risks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ilias Chalkidis, Anders Søgaard<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03512v1" target="_blank">2605.03512v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">llm_mental_health</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了为何当前的AI安全与对齐研究忽视了认知退化与成瘾等心理风险，以及如何弥补这一学术研究与公众关切之间的巨大鸿沟。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究批判性地审视了现有的生成式AI安全文献，指出当前研究过度集中于仇恨言论、恶意滥用等外部危害。它填补了关于用户长期认知能力退化与心理依赖这一研究领域的空白，将公众的焦虑引入了学术讨论范畴。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于量化了学术文献与公众讨论在认知及心理健康风险上的关注度差异。作者提出了将技能退化与成瘾问题纳入AI安全和对齐框架的初步思路，并建议通过信息宣传和监管手段来缓解这些风险。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者通过系统梳理现有AI安全文献，对比分析了学术界与公众舆论关注点的偏差。论文采用了定性讨论结合定量评估的方法，提出了应对认知卸载导致的能力退化及系统依赖成瘾的潜在缓解策略。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+作为一篇观点性质的论文，它可能缺乏实证心理学实验数据来直接证明GenAI导致的具体退化程度。提出的缓解策略目前仍处于初步构想阶段，尚未形成成熟的技术解决方案。对于如何精确定义和测量“脑腐烂”程度的指标体系也尚待完善。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具现实意义，及时纠正了AI安全领域过度关注外部恶意风险而忽视内部认知侵蚀的倾向。它为理解人机交互的长期社会影响提供了重要视角。不过，如何将这些心理层面的风险转化为可优化、可计算的对齐目标，仍是未来研究需要攻克的难点。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03999v1" target="_blank">RD-ViT: Recurrent-Depth Vision Transformer for Semantic Segmentation with Reduced Data Dependence Extending the Recurrent-Depth Transformer Architecture to Dense Prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Renjie He<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03999v1" target="_blank">2605.03999v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+标准Vision Transformer模型因每层拥有独立参数，导致对大规模训练数据依赖严重。本文旨在解决如何在语义分割任务中降低这种数据依赖，同时保持高性能并减少模型参数量。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作将循环深度Transformer架构从通用场景扩展到了语义分割这一稠密预测领域。它填补了现有ViT在参数效率和数据效率方面的空白，特别适用于医学影像等数据稀缺的应用场景。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了RD-ViT架构，用单一共享模块的循环执行替代了传统的深层堆叠，显著降低了参数量。研究引入了LTI稳定状态注入和自适应计算时间(ACT)等机制，实现了计算资源的动态分配与收敛保证。实验证明该方法在低数据环境下性能优于标准ViT，且MoE专家能自发特化以处理不同的解剖结构。</p>
+
+<p><strong>4. 方法概述</strong><br>
+RD-ViT将传统的深层Transformer堆叠替换为一个共享参数的模块，该模块在推理时循环执行\(T\)次。为了保证训练收敛和性能，模型结合了LTI稳定状态注入机制，并引入ACT来根据图像空间复杂度动态调整计算量。此外，模型还集成了深度LoRA适配器和Mixture-of-Experts前馈网络，以增强模型对特定类别的表达能力。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文仅在ACDC心脏MRI这一单一医学数据集上进行了验证，结论在更广泛的自然图像或大规模数据集上的普适性尚需考察。虽然参数量减少，但循环结构可能增加推理时的计算延迟。实验环境基于Google Colab，可能限制了模型在大规模高分辨率数据上的全面评估。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项扎实的工作，成功地将循环架构应用于视觉稠密预测任务，MoE专家自发特化于不同心脏结构的发现非常有启发性。它展示了参数共享机制在降低数据依赖方面的巨大潜力，对于医学影像等小样本领域具有重要的实用价值。不过，循环结构带来的训练稳定性挑战和推理速度的权衡值得后续研究进一步探讨。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03866v1" target="_blank">Memory-Efficient Continual Learning with CLIP Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ryan King, Gang Li, Bobak Mortazavi et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03866v1" target="_blank">2605.03866v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决CLIP模型在持续学习场景下的灾难性遗忘问题，特别是在内存缓冲区受限时，如何有效防止模型在旧任务上的性能下降。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于视觉-语言模型预训练与持续学习的交叉领域。它填补了现有研究在低资源约束下的空白，即当用于回放的内存缓冲区非常小时，如何缓解CLIP模型对比损失失效的问题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于提出了一种内存高效的分布鲁棒优化方法。该方法通过动态重加权每个类别的损失，解决了小样本缓冲区导致的训练不稳定问题。实验证明该方法能在极低内存占用下实现高效的持续适应并最小化遗忘。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者设计了一种动态重加权机制，在训练过程中根据每个类别的分布情况调整损失权重。这种策略专门针对CLIP模型的对比损失特性进行了优化，使其在小规模记忆回放时仍能保持稳健的学习能力。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确列出局限性，但动态重加权机制可能引入额外的超参数调优需求。此外，该方法在处理更复杂的跨域任务或极长任务序列时的鲁棒性仍需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的实际应用意义，因为它降低了持续学习对大容量显存的依赖。它从优化目标的角度而非模型架构的角度解决问题，思路清晰且易于集成。不过其动态权重的计算开销对训练速度的影响是一个值得关注的细节。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03742v1" target="_blank">Benchmarking Parameter-Efficient Fine-Tuning of Large Language Models for Low-Resource Tajik Text Generation with the Tajik Web Corpus</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Mullosharaf K. Arabov<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03742v1" target="_blank">2605.03742v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决生成式大语言模型在低资源塔吉克语环境下的适配问题。核心研究问题是如何在数据稀缺的背景下，寻找最优的模型架构与参数高效微调策略，以实现高质量的塔吉克语文本生成。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了低资源语言特别是塔吉克语在生成式大模型研究领域的空白。现有文献缺乏大规模的塔吉克语开源语料库，也缺乏针对该语言的系统性微调基准测试。本研究通过构建基础数据资源并建立技术基线，为后续的低资源语言模型研究提供了重要参考。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文构建并公开了目前最大的开源塔吉克语网络语料库，包含约11.1亿字符。研究首次系统评估了全量微调、LoRA及QLoRA等策略在塔吉克语文本生成任务上的表现。实验结果明确指出Mistral 7B配合QLoRA策略在资源消耗与生成质量之间取得了最佳平衡。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者在1万份文档的子样本上测试了自回归、编码器-解码器及仅编码器三类模型架构。实验对比了全量微调、LoRA及QLoRA三种策略，并设置了秩为8和16的参数配置。评估指标涵盖困惑度、交叉熵损失、GPU显存占用及训练时间。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+实验主要基于1万份文档的子样本进行，可能无法完全反映全量数据训练下的模型性能。小模型如GPT-2在进行全量微调时虽然困惑度低，但出现了严重的灾难性遗忘问题。仅编码器模型XLM-RoBERTa在生成任务上表现不佳，显示其架构局限性。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项兼具数据资源建设与工程实践价值的扎实工作，为低资源语言社区提供了宝贵资产。实验证明QLoRA能有效降低计算成本且不显著损失质量，这对资源受限的研究者极具指导意义。然而研究主要依赖困惑度等统计指标，若能增加人工评估或语义理解维度的测试将使结论更加全面。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.03497v1" target="_blank">GRIFDIR: Graph Resolution-Invariant FEM Diffusion Models in Function Spaces over Irregular Domains</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> James Rowbottom, Elizabeth L. Baker, Nick Huang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.03497v1" target="_blank">2605.03497v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的无穷维函数空间扩散模型在处理不规则区域和复杂拓扑结构时存在局限，难以实现真正的分辨率不变性。本文旨在解决如何在非结构化网格和复杂几何区域上构建高保真且分辨率不变的扩散模型这一核心问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于无穷维生成模型与科学计算领域的交叉前沿，旨在填补现有算子学习骨干网络(如傅里叶神经算子)无法有效处理非结构化网格和复杂几何区域的空白。它将图卷积与有限元方法相结合，拓展了函数空间扩散模型在复杂拓扑结构上的适用范围。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了名为GRIFDIR的新架构，创新性地将广义图卷积核表示为有限元函数，从而实现了对非结构化网格的自然处理。该方法成功解决了传统骨干网络在复杂几何区域上的泛化难题，并在保持分辨率不变性的同时，显著提升了在不规则区域上捕捉函数分布的能力。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法构建了一种基于有限元函数的广义图卷积核，将其作为函数空间扩散模型的骨干网络。通过这种方式，模型能够直接在非结构化网格上进行运算，无需依赖规则网格假设，从而自然适应复杂的几何边界和拓扑结构。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管摘要未明确提及局限性，但基于有限元方法和图卷积的特性，该方法可能面临较高的计算成本，特别是在处理大规模网格时。此外，相比于成熟的网格方法，基于图结构的扩散采样过程可能需要更多的推理步骤或更复杂的预处理过程。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项极具理论深度与实用价值的工作，巧妙地将经典有限元方法与现代生成模型相结合，为解决复杂几何上的生成任务提供了新思路。其优势在于数学原理清晰且适用范围广泛，特别适合流体力学等涉及复杂边界的科学计算场景，但计算效率可能是实际应用中需要关注的重点。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2605.03547v1" target="_blank">Erase Persona, Forget Lore: Benchmarking Multimodal Copyright Unlearning in Large Vision Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03804v1" target="_blank">ScrapMem: A Bio-inspired Framework for On-device Personalized Agent Memory via Optical Forgetting</a></li>
+                    <li><a href="https://arxiv.org/abs/2604.27818v1" target="_blank">MASCing: Configurable Mixture-of-Experts Behavior via Activation Steering Masks</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03984v1" target="_blank">Flow Sampling: Learning to Sample from Unnormalized Densities via Denoising Conditional Processes</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03472v1" target="_blank">Detecting Stealth Sycophancy in Mental-Health Dialogue with Dynamic Emotional Signature Graphs</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03512v1" target="_blank">Brainrot: Deskilling and Addiction are Overlooked AI Risks</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03999v1" target="_blank">RD-ViT: Recurrent-Depth Vision Transformer for Semantic Segmentation with Reduced Data Dependence Extending the Recurrent-Depth Transformer Architecture to Dense Prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03866v1" target="_blank">Memory-Efficient Continual Learning with CLIP Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03742v1" target="_blank">Benchmarking Parameter-Efficient Fine-Tuning of Large Language Models for Low-Resource Tajik Text Generation with the Tajik Web Corpus</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.03497v1" target="_blank">GRIFDIR: Graph Resolution-Invariant FEM Diffusion Models in Function Spaces over Irregular Domains</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
