@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-05-09</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">May 09, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年05月09日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Training with quantized weights</h2>
+                <p><strong>1. 概念定义</strong><br>
+使用量化权重进行训练是指在神经网络的训练过程中直接使用低精度数值格式（如INT8）来表示模型权重，而非传统的全精度浮点数。这种方法在训练循环中引入量化操作，使模型能够主动适应低精度表示带来的信息损失，从而同时优化训练效率与最终模型性能。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心机制涉及在前向传播过程中将全精度权重映射为低比特离散值，并在反向传播中解决量化函数导数不可导的问题。前向传播时权重通常通过量化函数 \(Q(\cdot)\) 进行离散化。在反向传播时，由于量化操作的梯度几乎处处为零，研究者通常使用直通估计器近似梯度，即假设 \(\frac{\partial L}{\partial w} \approx \frac{\partial L}{\partial w_q}\)。这使得全精度权重能够根据低精度输出的误差进行有效更新。</p>
+
+<p><strong>3. 研究意义</strong><br>
+这项技术对于降低大模型的训练成本至关重要，特别是在混合专家模型中，它能显著减少显存占用并允许更大的模型规模。在扩散模型中，它有助于加速密集的迭代训练过程。对于差分隐私研究，量化的离散性质甚至可以作为一种正则化手段或隐私增强机制。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+通过让模型在训练时就“意识”到量化的存在，这种方法通常比训练后量化获得更高的最终精度，实现了效率与性能的更好平衡。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.15138v1" target="_blank">Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Saisab Sadhu, Pratinav Seth, Vinay Kumar Sankarapu<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.15138v1" target="_blank">2605.15138v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">bitnet</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是该论文的结构化总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 这篇论文解决了机器遗忘在模型部署场景下的失效问题。核心研究问题在于为何现有的遗忘方法在经过4位量化压缩后，被遗忘的知识会重新恢复，以及如何防止这种恢复。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 该工作定位于机器遗忘与模型压缩的交叉领域，填补了现有遗忘评估忽视部署前量化步骤的空白。它揭示了现有梯度方法因参数更新幅度过小而被量化噪声淹没的根本缺陷，指出了学术界评估与工业界部署之间的严重脱节。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了MANSU方法，首次同时实现了有效遗忘、性能保留、量化鲁棒性和结构擦除四个关键属性。创新之处在于揭示了参数更新幅度与NF4量化bin宽度之间的数量级差异，并提出了CAD指标，能够区分深层的结构擦除与表面的行为抑制。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ MANSU结合了因果电路归因来定位最小的遗忘子图，并使用电路受限的零空间投影来确保遗忘过程不破坏保留知识。关键机制是引入了参数幅度下限，强制更新幅度超过量化bin的边界，从而保证遗忘效果在量化压缩后依然存在。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 该方法依赖于因果电路归因技术，这可能在超大规模模型上带来额外的计算开销。虽然解决了量化逆转问题，但其针对特定量化格式（如NF4）设计的参数幅度下限机制，在其他压缩算法下的通用性有待进一步验证。此外，电路发现的准确性直接影响遗忘效果。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这项工作极具实践价值，纠正了学术界仅在全精度下评估遗忘效果的偏差。它通过微观的参数更新视角解释了宏观的遗忘失效现象，理论分析透彻。提出的CAD指标为遗忘领域提供了更严谨的评估标准，推动了该领域向可验证的结构化遗忘迈进。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.09971v1" target="_blank">HapticLDM: A Diffusion Model for Text-to-Vibrotactile Generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jiahao Xiong, Fei Wang, Anran Xu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.09971v1" target="_blank">2605.09971v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决如何根据自然语言文本生成准确、一致且完整的触觉振动信号。核心挑战在于克服现有自回归模型难以捕捉全局依赖关系以及数据受限的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于文本到触觉生成领域的前沿探索，填补了利用扩散模型进行此类生成的空白。它旨在超越现有的自回归基线方法(如HapticGen)，提供一种能够更好处理时间包络连贯性的生成方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了首个基于潜在扩散模型的文本到振动生成框架HapticLDM。创新点包括引入强调动态特性的文本处理策略，以及一种用于调节时间包络稳定性的全局去噪机制。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法构建在潜在扩散模型架构之上，首先通过特定的文本处理策略构建高质量数据对以实现细粒度建模。随后模型利用全局去噪机制，在生成过程中对振动信号的时间包络进行调节，以实现连贯稳定的输出。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管摘要强调了性能提升，但用户研究仅涉及30名参与者，样本规模相对有限。此外，扩散模型通常面临推理速度慢的问题，这在实时交互应用中可能构成潜在挑战。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作将扩散模型成功引入触觉生成领域，有效解决了自回归模型在全局依赖捕捉上的短板。它不仅提升了生成信号的真实感和语义一致性，也为元宇宙和游戏等场景的交互设计提供了高效的工具。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.15179v1" target="_blank">Eradicating Negative Transfer in Multi-Physics Foundation Models via Sparse Mixture-of-Experts Routing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ellwil Sharma, Arastu Sharma<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.15179v1" target="_blank">2605.15179v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决多物理场基础模型在扩展过程中面临的负迁移问题。核心挑战在于，同时训练差异巨大的偏微分方程体系会导致梯度冲突和优化不稳定，从而阻碍通用模型的构建。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作处于科学机器学习与基础模型研究的交叉前沿。它针对现有密集神经算子在处理光谱和几何需求不兼容的多物理场时的局限性，提出了一种新的架构解决方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了Shodh-MoE架构，通过稀疏激活机制有效隔离了不同物理机制的参数路径。该模型不仅实现了近乎完美的质量守恒，还展示了路由器能够自主将不同物理领域的任务分配给特定专家，从而消除了负迁移。</p>
+
+<p><strong>4. 方法概述</strong><br>
+Shodh-MoE采用一种物理信息自编码器将高维物理场压缩为 \(16^3\) 潜变量，并利用亥姆霍兹式速度参数化确保速度场无散度。模型引入了Top-1软语义路由器，动态地将局部潜变量块分配给不同的专家子网络，为不同物理机制建立专门的参数路径。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然摘要展示了在两种特定物理体系下的成功，但该方法在更复杂的多物理场场景下的泛化能力仍需验证。此外，引入稀疏路由机制增加了模型的架构复杂度和训练调试难度。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地将混合专家模型应用于物理约束，物理可解释性强，特别是路由器自主分叉的现象令人印象深刻。其优点在于不仅提升了模型性能，还保证了物理守恒律，为构建通用科学计算基础模型提供了极具潜力的技术路径。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.13503v1" target="_blank">Limits of Personalizing Differential Privacy Budgets</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Edwige Cyffers, Juba Ziani<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.13503v1" target="_blank">2605.13503v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">differential_privacy</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了在差分隐私中应用个性化隐私预算的有效性和局限性，核心问题是研究在均值估计任务中，完全个性化的隐私机制是否显著优于简单的非个性化基线。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献普遍认为个性化隐私预算是解决固定预算选择困难的有效方案。本文挑战了这一观点，通过理论分析揭示了个性化预算的实际增益上限，填补了对个性化机制效用局限性的认知空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文证明了在均值估计中，决定效用的关键因素是选择正确的有效隐私预算而非完全个性化。作者提出了一个简单的阈值算子作为基线，并量化了在混合数据集或两级隐私设置下，完全个性化机制相比该基线仅能带来常数级的有限改进。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者设计了一种简单的阈值算子，用于筛选数据并确定最优的有效隐私预算。通过理论推导，该研究建立了任意隐私需求下个性化机制增益的上界，并分析了达到最大增益的条件。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究主要集中在均值估计这一特定任务上，结论可能难以直接推广到更复杂的机器学习模型或非数值型数据分析。此外，虽然理论增益有限，但在特定高敏感场景下常数级的提升仍可能具有实际意义。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作提供了重要的反直觉见解，指出复杂的个性化机制可能是不必要的。它为工程实践提供了极具价值的理论指导，表明简单的阈值处理方法在大多数情况下已足够有效，有助于降低差分隐私系统的实现复杂度。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.14889v1" target="_blank">SurgicalMamba: Dual-Path SSD with State Regramming for Online Surgical Phase Recognition</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Sukju Oh, Sukkyu Sun<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.14889v1" target="_blank">2605.14889v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决在线手术阶段识别任务中，如何在保持低计算成本的同时处理极长视频序列、非均匀时间流以及高通道特征相关性的难题。核心研究问题是如何设计一个因果模型，使其能够高效且准确地捕捉长视频中瞬时的关键相位变化。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作填补了现有视频识别模型在手术场景下的空白，现有方法难以同时兼顾计算效率与非均匀时间建模。它将 Mamba 架构引入手术视频分析领域，针对手术视频特有的长时序和视觉特征高相关性进行了专门优化，超越了传统的自然视频识别器。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了 SurgicalMamba 模型，基于 Mamba2 的结构化状态空间对偶性 (SSD) 构建，实现了每帧 \(O(d)\) 的计算复杂度。主要创新包括分离长短时状态的双路径 SSD 块、适应关键信息流速的强度调制步进机制，以及实现跨通道特征混合的状态重编程技术。该模型在七个公开数据集上达到了最先进的识别精度，且具备极高的推理速度。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法构建了一个双路径 SSD 模块，在循环状态层面分离处理长期和短期信息。通过引入强度调制步进技术，模型能够根据视频内容的重要性动态调整时间流速，同时利用状态重编程技术通过 Cayley 旋转在状态空间中实现跨通道特征交互。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文展示了优异的性能，但该方法的复杂性主要集中在模型内部机制的设计上，可能增加了训练和调试的难度。状态重编程虽然有效，但其引入的额外旋转操作在特定硬件上的部署效率仍有待验证。此外，模型对强度调制步进的依赖可能使其对视频光照变化或噪声较为敏感。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作成功地将 Mamba 架构适配到手术视频分析这一特定领域，针对性解决了长序列建模中的痛点。其在保持线性计算复杂度的同时，通过物理先验和数学变换增强了模型表达能力，具有很强的工程实用价值。模型在精度和速度上的双重提升证明了状态空间模型在细粒度时序理解任务中的巨大潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.14291v1" target="_blank">To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chengshuai Zhao, Zhen Tan, Dawei Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.14291v1" target="_blank">2605.14291v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决大型视觉语言模型在未经授权的情况下抓取并微调多模态网络数据所引发的版权和隐私侵权问题。核心研究问题是如何让数据所有者在数据发布前主动防御，使模型无法从受保护的数据中有效学习。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有防御手段如机器遗忘和水印属于事后补救措施，仅在侵权行为发生后生效。本文填补了多模态数据主动防御领域的空白，提出了一种在侵权发生前通过数据预处理进行保护的方案。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了MMGuard框架，这是首个针对LVLMs未授权微调的主动防御机制。其创新之处在于引入了跨模态绑定破坏技术，通过理论保证强制模型过拟合噪声，并利用集成学习策略增强了跨模型的可迁移性。</p>
+
+<p><strong>4. 方法概述</strong><br>
+MMGuard通过向图像注入人类难以察觉的扰动来生成不可学习样本。该方法通过最小化训练损失构建优化捷径，诱导模型过拟合噪声而非真实特征，并利用跨模态绑定破坏策略转移模型注意力，导致模型在推理阶段性能显著下降。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管论文展示了黑盒设置下的有效性，但生成高质量扰动通常依赖于对模型架构的一定了解或代理模型，这在完全未知的现实场景中可能受限。此外，面对未来可能出现的专门针对此类扰动的数据清洗或对抗性防御技术，其鲁棒性仍需持续验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作将防御范式从被动事后处理转变为主动事前预防，为数据版权保护提供了极具价值的新思路。其结合理论保证的攻击策略设计巧妙，但在实际大规模部署中，如何应对不断迭代的模型架构和潜在的防御手段，将是决定其长期实用性的关键。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.14404v1" target="_blank">Knowledge Beyond Language: Bridging the Gap in Multilingual Machine Unlearning Evaluation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kyomin Hwang, Hyeonjin Kim, Sangyeon Cho et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.14404v1" target="_blank">2605.14404v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决多语言大模型遗忘评估中，现有方法无法准确捕捉跨语言信息分布的问题。核心在于如何有效衡量敏感信息在多语言环境下的移除质量与一致性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究大多局限于单语言遗忘评估，或仅将单语言协议简单扩展至多语言场景，忽视了知识在不同语言间的关联。该工作填补了多语言机器遗忘领域缺乏跨语言信息分布评估标准的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了知识可分离性得分 \(KSS\) 和知识持久性得分 \(KPS\) 两个新指标。\(KSS\) 衡量跨语言的整体遗忘质量，\(KPS\) 则评估不同语言对间信息移除的一致性。这为理解多语言遗忘特有的现象提供了新的量化工具和分析视角。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者设计了 \(KSS\) 和 \(KPS\) 两个量化指标，专门用于捕捉知识在不同语言间的传播与残留特性。通过这些指标，团队对多种遗忘方法进行了系统评估，揭示了多语言环境下独有的遗忘现象。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确列出具体局限，但新指标可能依赖于特定的跨语言数据集构建方式。此外，该评估框架在处理极低资源语言或更复杂隐私数据时的鲁棒性仍有待观察。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该研究敏锐地指出了多语言遗忘评估中“语言独立性”假设的缺陷，具有重要的现实意义。引入 \(KSS\) 和 \(KPS\) 能够更精准地指导隐私保护算法的开发，推动了遗忘技术在多语言场景下的落地应用。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.12799v1" target="_blank">Synthesizing the Expert: A Validated Multimodal Dataset for Trustworthy AI-Assisted Swimming Coaching</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ahmad Al-Kabbany, Esraa Kassem<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.12799v1" target="_blank">2605.12799v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">multi_agent_systems</span>
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文主要解决在游泳领域构建鲁棒的检索增强生成(RAG)系统时面临的数据稀缺与标注成本高昂问题。核心挑战在于如何在遵守运动员生物数据伦理约束的前提下，获取高质量的结构化领域知识以确保AI建议的可信度。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该研究位于人工智能体育应用与大语言模型增强技术的交叉前沿。它填补了游泳领域缺乏经过验证的、高质量多模态数据集的空白，为从原始数据工程到实际体育科学应用之间搭建了关键的桥梁。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的核心贡献在于提出了一种新颖的生成式框架，并构建了包含1,864个经过验证的“问题-上下文-回答”三元组的高保真数据集。其创新之处在于利用多智能体架构合成数据，确立了可信AI游泳指导的基础基准。</p>
+
+<p><strong>4. 方法概述</strong><br>
+作者提出了一种基于多智能体LLM架构的生成框架，整合了生理数据、文献、运动学传感器数据和非结构化专家知识四个维度的多模态知识库。系统生成的数据草案经过12条生理学合理性规则的严格评估与筛选，最终输出高质量的结构化数据。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管采用了验证机制，合成数据仍可能无法完全捕捉现实世界中复杂多变的游泳训练场景。验证规则主要基于生理学原理，可能忽略了实际执教中涉及的心理或环境等隐性因素。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作通过合成数据巧妙地规避了伦理限制和高昂的标注成本，具有较高的工程实用价值。虽然合成数据的真实性仍需在真实场景中进一步检验，但其为构建可信赖的AI教练系统提供了坚实的数据基础。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.14708v1" target="_blank">StyleTextGen: Style-Conditioned Multilingual Scene Text Generation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Zeyu Chen, Fangmin Zhao, Yan Shu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.14708v1" target="_blank">2605.14708v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                        <span class="topic-tag">low_resourced_languages</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+该研究旨在解决风格条件化场景文本生成中，从复杂背景提取精确文本风格以及跨字符保持细粒度风格一致性的难题，特别是在多语言场景下。</p>
+
+<p><strong>2. 研究定位</strong><br>
+此项工作位于场景文本生成与风格迁移的交叉领域。它填补了现有研究在多语言脚本特别是跨语言风格泛化能力上的空白，提升了复杂真实场景下的生成质量。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了双分支风格编码器以增强风格表示，设计了文本风格一致性损失函数，并引入了掩码引导推理策略。此外，构建了一个名为StyleText-CE的双语基准数据集以支持系统性评估。</p>
+
+<p><strong>4. 方法概述</strong><br>
+StyleTextGen框架核心在于一个双分支风格编码器，专门用于从复杂场景中学习鲁棒的风格表示。配合新设计的风格一致性损失和掩码引导推理策略，该框架实现了生成文本与参考文本在风格上的精确对齐。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+摘要未明确提及具体局限，但多语言场景下数据分布的不平衡可能影响模型在某些低资源语言上的表现。此外，从极端复杂的背景中完全剥离文本风格仍是一项具有挑战性的任务。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作通过引入双分支结构和专门的损失函数，显著提升了多语言场景文本生成的视觉效果和风格一致性。构建的双语基准数据集填补了评估标准的空白，对后续跨语言文本生成研究具有重要参考价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2605.15196v1" target="_blank">RefDecoder: Enhancing Visual Generation with Conditional Video Decoding</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xiang Fan, Yuheng Wang, Bohan Fang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2605.15196v1" target="_blank">2605.15196v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的潜在扩散模型通常使用重条件的去噪网络，但其解码器往往是无条件的。这种架构不对称性导致生成视频细节丢失以及与输入图像不一致的问题。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位在视频生成流水线中的解码阶段优化。它填补了现有研究中对去噪过程关注较多，但对解码过程条件化不足的研究空白，旨在通过改进解码器来提升生成质量的上限。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了RefDecoder，一种参考条件化的视频VAE解码器。主要创新在于通过参考注意力机制，直接将高保真参考图像信号注入解码过程，从而显著提升重建质量和生成一致性。该方法无需微调即可直接集成到现有系统中，在多个基准测试中实现了高达 \(+2.1\) dB的PSNR提升。</p>
+
+<p><strong>4. 方法概述</strong><br>
+RefDecoder使用轻量级图像编码器将参考帧映射为细节丰富的高维token。在解码器的每个上采样阶段，这些参考token与去噪后的视频潜变量token共同处理，确保细节信息能够有效传递到最终生成的视频中。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文摘要未明确提及局限性。潜在不足可能包括对参考帧质量的依赖，以及在处理大运动幅度场景时参考信息可能引入的视觉伪影。此外引入额外的图像编码器和参考注意力机制可能会带来轻微的计算开销。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项非常实用的工程改进，直击现有架构中解码器条件缺失的痛点。其即插即用的特性使得它具有很高的应用价值，无需重新训练即可受益。通过简单的架构调整获得显著的性能提升，有力证明了条件化解码对于保持结构完整性的重要性。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2605.15138v1" target="_blank">Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.09971v1" target="_blank">HapticLDM: A Diffusion Model for Text-to-Vibrotactile Generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.15179v1" target="_blank">Eradicating Negative Transfer in Multi-Physics Foundation Models via Sparse Mixture-of-Experts Routing</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.13503v1" target="_blank">Limits of Personalizing Differential Privacy Budgets</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.14889v1" target="_blank">SurgicalMamba: Dual-Path SSD with State Regramming for Online Surgical Phase Recognition</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.14291v1" target="_blank">To See is Not to Learn: Protecting Multimodal Data from Unauthorized Fine-Tuning of Large Vision-Language Model</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.14404v1" target="_blank">Knowledge Beyond Language: Bridging the Gap in Multilingual Machine Unlearning Evaluation</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.12799v1" target="_blank">Synthesizing the Expert: A Validated Multimodal Dataset for Trustworthy AI-Assisted Swimming Coaching</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.14708v1" target="_blank">StyleTextGen: Style-Conditioned Multilingual Scene Text Generation</a></li>
+                    <li><a href="https://arxiv.org/abs/2605.15196v1" target="_blank">RefDecoder: Enhancing Visual Generation with Conditional Video Decoding</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
