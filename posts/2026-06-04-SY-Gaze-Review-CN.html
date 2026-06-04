@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-06-04</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">June 04, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年06月04日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Gaze-based intention recognition</h2>
+                <p><strong>概念定义</strong><br>
+基于眼动的意图识别是指利用眼动追踪数据推断用户行为目标或认知状态的技术。它将眼动特征序列映射为特定的意图类别，例如选择目标对象或执行特定操作。</p>
+
+<p><strong>核心原理</strong><br>
+该技术通过提取眼动轨迹中的时空特征，如注视点位置、注视时长和扫视幅度，来建模用户的认知过程。机器学习模型学习这些特征与潜在意图之间的映射关系。数学上，目标是基于观测到的眼动序列 \( S = \{s_1, s_2, ..., s_T\} \) 找到最大化后验概率的意图类别 \( I^* \)。<br>
+\[ I^* = \arg\max_{I} P(I | S) \]</p>
+
+<p><strong>研究意义</strong><br>
+在大语言模型研究中，眼动数据提供了关于用户兴趣和困惑的隐式反馈，使模型能够优化回答或预测用户需求。这项技术增强了人机交互的自然性，实现了无需手动输入的意图理解。它架起了非语言认知信号与语言模型语义理解之间的桥梁，推动了多模态AI的发展。</p>
+
+<p><strong>关键洞见</strong><br>
+眼动数据揭示了显性行为之前的隐性认知状态，使系统能够预测意图而不仅仅是记录注意力。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.00825v1" target="_blank">SuperMemory-VQA: An Egocentric Visual Question-Answering Benchmark for Long-Horizon Memory</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Samiul Alam, Shakhrul Iman Siam, Michael J. Proulx et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.00825v1" target="_blank">2606.00825v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是关于论文《SuperMemory-VQA. An Egocentric Visual Question-Answering Benchmark for Long-Horizon Memory》的结构化总结。</p>
+
+<p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决AI智能体作为个性化记忆助手时，如何从长时间跨度的自我中心视频流中检索并回答人类实际记忆需求的问题。核心研究问题是如何构建一个能够测试AI长期记忆能力且符合真实人类记忆需求的基准。</p>
+
+<p>2. <strong>研究定位</strong><br>
+该工作填补了现有自我中心数据集主要关注短片段动作识别或通用问答，而忽视长期记忆需求的空白。它将研究重点从感知层面的视频理解转移到了认知层面的记忆检索与重建，为AI眼镜平台的实际应用提供了评估标准。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文发布了SuperMemory-VQA数据集，包含52.9小时的多模态数据（含眼动追踪）和4853个经过人工验证的问答对。其创新之处在于引入了包含显式“无法回答”选项的多选题形式以测试模型幻觉，并涵盖了从物体位置到对话记忆等六大类贴近生活的记忆任务。</p>
+
+<p>4. <strong>方法概述</strong><br>
+论文利用AI眼镜采集了包含RGB视频、音频转录、眼动、IMU和SLAM轨迹的多模态数据。通过人工标注流程构建了针对长期记忆的问答对，并在此基准上评估了现有的智能体框架和LLM模型的表现。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+尽管数据集包含了丰富的模态，但现有最先进的LLM和智能体框架在该基准上的表现仍远未达到可靠水平，表明当前技术架构尚不足以处理真实世界的记忆任务。此外，数据集规模（52.9小时）相较于人类终身记忆的容量可能仍显不足。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+该研究非常有意义，特别是将眼动追踪数据整合进记忆模型评测中，因为注视点往往与注意力分配和记忆形成密切相关。它不仅揭示了当前LLM在处理长时程、多模态记忆时的短板，也为未来开发具备“自知之明”且能利用多模态线索的AI记忆架构提供了重要方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.00170v1" target="_blank">UF-AMA: A unified framework for cross-domain emotion recognition via adaptive multimodal alignment</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Zheng Wang, Shuo Wang, Junhong Wang<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.00170v1" target="_blank">2606.00170v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是针对论文《UF-AMA. A unified framework for cross-domain emotion recognition via adaptive multimodal alignment》的中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决跨主体和跨会话情感识别中因个体差异和样本质量波动导致的分布偏移问题。核心挑战在于如何构建具有高泛化能力和鲁棒性的多模态生理信号识别模型。</p>
+
+<p>2. <strong>研究定位</strong><br>
+该工作定位在基于多模态生理信号的情感识别领域，特别是结合脑电EEG和眼动追踪数据。它填补了现有研究中在跨域场景下忽视模态质量差异的空白，提出了一种能够动态处理低质量模态数据的统一框架。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献在于提出了UF-AMA统一框架，创新性地引入了置信度感知筛选机制来动态评估模态可靠性。此外，该研究设计了多级域适应框架，通过联合优化局部和全局特征分布有效减少了跨域差异。</p>
+
+<p>4. <strong>方法概述</strong><br>
+方法首先利用Transformer编码器和多头交叉注意力模块深度融合EEG信号与眼动追踪数据。随后引入置信度感知机制划分样本质量子集，并据此执行全局一致性对齐与跨模态蒸馏。最后通过多级域适应优化特征的边缘分布与条件分布以提升泛化性能。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+该方法依赖于置信度评估的准确性，若评估偏差可能影响后续对齐效果。基于Transformer的融合网络可能对计算资源要求较高，且在小样本数据集上可能面临过拟合风险。此外，研究仅在特定数据集上验证，在更复杂现实场景中的鲁棒性有待进一步考察。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作将Transformer架构引入生理信号处理，有效利用了眼动追踪数据补充EEG信息，展现了多模态融合在情感计算中的潜力。其提出的动态筛选机制巧妙地解决了模态质量不均的痛点，为未来基于眼动的鲁棒性模型设计提供了重要参考。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2606.00825v1" target="_blank">SuperMemory-VQA: An Egocentric Visual Question-Answering Benchmark for Long-Horizon Memory</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.00170v1" target="_blank">UF-AMA: A unified framework for cross-domain emotion recognition via adaptive multimodal alignment</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
