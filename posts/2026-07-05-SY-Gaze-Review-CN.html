@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-07-05</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">July 05, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年07月05日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Gaze-based intention recognition</h2>
+                <p><strong>1. 概念定义</strong><br>
+基于眼动的意图识别是指利用眼动追踪数据推断用户行为目标或认知状态的技术。它超越了单纯的注视点定位，旨在解码用户注视背后的深层目的，例如想要点击、阅读或搜索特定信息。在AI系统中，这通常被建模为一个从时空眼动特征到语义意图标签的映射问题。</p>
+
+<p><strong>2. 核心原理</strong><br>
+该技术将眼动信号视为时空序列数据，通过深度学习模型提取注视时长、眼跳幅度及瞳孔直径等特征。核心目标是学习一个映射函数，将观察到的眼动序列映射到特定的意图类别。数学上，这可以表示为最大化后验概率。<br>
+\[ \hat{y} = \arg\max_{c \in C} P(c | X_{gaze}, \Theta) \]<br>
+其中 \(X_{gaze}\) 代表眼动特征序列，\(C\) 是意图类别集合，\(\Theta\) 是模型参数。现代方法常结合多模态融合，将眼动特征与视觉上下文或文本输入联合建模。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在眼动追踪与LLM的交叉领域，该技术实现了人机交互从显式指令向隐式意图的转变。它允许大语言模型根据用户的视觉注意力主动提供辅助，例如在阅读时预测用户需要解释的词汇。这为构建更自然、更智能的无缝人机协作系统奠定了基础。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+眼动不仅是视觉感知的窗口，更是连接人类认知与AI系统的隐式接口，使模型能够“读懂”用户的未言之需。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.09142v1" target="_blank">Decoding Pedestrian Crossing Intention from Egocentric Vision via Vision Language Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Danya Li, Xiang Su, Yan Feng et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.09142v1" target="_blank">2606.09142v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决如何利用第一人称视角的视频片段准确预测行人过街意图的问题。核心研究问题在于探索视觉语言模型能否有效解码这种自我中心视角下的交通行为意图。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献多关注第三人称视角，该研究填补了利用VLM处理第一人称视角交通场景预测的空白。通过将传统预测任务重构为视觉问答(VQA)任务，它拓展了自我中心视觉在交通安全领域的应用边界。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于证明了参数高效微调能显著提升模型性能，相比专用Transformer基线提升了 \(9\%\) 的准确率。更重要的是，研究创新性地引入眼动追踪等生理及运动线索，将模型准确率进一步提升了 \(14.5\%\)，达到了新的SOTA水平。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究方法将意图预测建模为封闭式VQA任务，先在零样本设置下评估主流VLM，再利用参数高效微调进行适配。为了增强预测能力，模型还融合了眼动追踪数据、自我运动和车辆运动等多模态上下文线索。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究发现VLM在零样本设置下仅略优于随机猜测，表明通用模型缺乏高层交通推理能力。此外，虽然引入眼动追踪线索提升了效果，但也意味着模型性能依赖于额外的传感器数据，可能限制了其在缺乏眼动数据场景下的泛化能力。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该研究巧妙地将眼动追踪这一认知线索与VLM结合，为理解人类决策过程提供了新思路。它不仅验证了微调对于垂直领域VLM的重要性，也展示了眼动追踪数据在提升AI模型情境感知能力方面的关键价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.02083v1" target="_blank">DeepGaze3.5-VL: Modeling Scanpaths via Autoregressive Token Prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Susmit Agrawal, Matthias Bethge, Matthias Kümmerer<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.02083v1" target="_blank">2607.02083v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+传统扫描路径预测模型依赖专用架构和手工先验，结构僵化且难以灵活扩展，无法有效整合任务指令或个性化条件。这篇论文旨在解决如何在统一框架下实现灵活的条件设置，并提升预测性能的问题。</p>
+
+<p>### 2. 研究定位<br>
+该工作将扫描路径预测重新定义为离散序列建模任务，填补了传统专用架构与通用大模型之间的空白。通过利用预训练视觉语言模型，它打破了以往模型在条件设置和扩展性上的限制，为眼动追踪研究提供了新的范式。</p>
+
+<p>### 3. 核心贡献<br>
+论文提出了DeepGaze3.5-VL模型，在MIT1003数据集上实现了2.18 bits的 \( IG \)，相比DeepGaze III提升了46%。其创新在于通过简单的提示机制实现了灵活的条件控制，并能精确计算每个注视点的对数似然。</p>
+
+<p>### 4. 方法概述<br>
+该方法将注视点坐标映射为文本词汇表中的token，利用预训练视觉语言模型的表征能力进行自回归预测。通过这种方式，模型可以轻松整合观看者身份、任务目标以及注视持续时间等属性，无需定制化的架构修改。</p>
+
+<p>### 5. 局限与不足<br>
+虽然摘要未明确提及局限，但将连续坐标离散化为token可能会损失空间精度。此外，自回归生成的推理速度可能低于非生成式的专用架构，且模型性能高度依赖于预训练视觉语言编码器的质量。</p>
+
+<p>### 6. 评价与思考<br>
+这项工作成功地将大模型范式引入眼动追踪领域，极大地提升了模型的通用性和扩展性。它不仅提高了预测精度，还提供了一个强大的计算模拟工具，使得在计算机模拟中进行难以实现的行为干预实验成为可能，具有重要的应用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.26505v1" target="_blank">Same Scrutiny, More Time: Eye Tracking Insights into Reviewing LLM-Labelled Code</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ranim Khojah, Francisco Gomes de Oliveira Neto, Mazen Mohamad et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.26505v1" target="_blank">2606.26505v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+当代码被明确标记为大型语言模型(LLM)生成时，软件工程师的代码审查行为会发生怎样的变化？研究旨在探索“LLM生成”这一标签如何影响开发者的注意力分配、审查策略以及对代码的信任度。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献多关注LLM生成代码的质量或开发者对AI的主观态度，却鲜有研究通过客观行为数据揭示开发者在面对AI代码时的真实表现。该工作填补了人机交互领域中关于AI标签如何影响开发者认知负荷与审查行为的实证空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+研究发现参与者的代码审查彻底性并未改变，但他们在标记为LLM生成的代码上花费了更多的注视时间，表明标签本身引起了额外的认知注意。参与者调整了审查策略，例如更侧重逻辑正确性检查或利用提示词辅助审查。论文还揭示了审查者意图与实际行为之间的差距，为制定AI辅助开发政策提供了依据。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究采用了Wizard-of-Oz实验设计，让参与者在部分代码被标记为LLM生成的情境下执行代码审查任务。通过眼动追踪技术收集客观的视觉注意力数据，并结合离场访谈获取主观反馈。数据分析结合了贝叶斯统计分析与定性分析方法。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+实验环境可能无法完全模拟真实的工业级软件开发场景，参与者的行为可能受到实验设置的影响。眼动追踪指标虽然客观，但难以完全捕捉复杂的认知过程和内在的信任机制。此外，样本的多样性限制可能影响研究结论的普适性。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作巧妙地结合了眼动追踪技术与软件工程研究，为理解人机协作中的认知负荷提供了客观证据。研究揭示的“注视时间增加但审查彻底性不变”这一现象尤为深刻，暗示了AI标签可能带来的心理负担而非单纯的效率提升。这对未来设计更人性化的AI辅助编程工具以及制定合理的企业AI使用规范具有重要的指导意义。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.25647v1" target="_blank">Retrieval-Grounded Multilingual LLM Assistance for Island Smallholder Farmers</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Nikolaos D. Tantaroudas, Ilias Karachalios, Andrew J. McCracken<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.25647v1" target="_blank">2606.25647v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决偏远岛屿小农户难以获取可信农业建议的问题。核心挑战在于通用大语言模型缺乏对当地方言和特定农艺知识的理解，导致生成的回答流利但缺乏依据且不可靠。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作填补了资源受限农村环境中部署可信多语言AI系统的空白。它挑战了必须自托管模型以保障数据隐私的传统观点，提出了一种基于托管服务但通过检索增强来保证可信度的轻量级架构。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是开发了一个名为Falco eleonorae的双语对话AI助手，创新性地利用模型上下文协议工具实现了基于地理空间数据的检索增强生成。系统集成了语音、图像和文本多模态交互，并针对低带宽环境进行了渐进式Web应用设计。</p>
+
+<p><strong>4. 方法概述</strong><br>
+系统采用后端为前端代理架构，将答案生成委托给OpenAI GPT-5系列模型，并通过模型上下文协议工具查询包含Well-Known Text地理空间信封的只读数据接口。视觉模型直接处理上传的农田照片并转换为文本描述，语音输入则由欧盟流式语音转文本服务处理。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该系统依赖于上游托管模型服务，这在一定程度上牺牲了对模型推理过程的完全控制权。虽然强调了数据保护，但将数据传输至外部API仍可能引发特定用户群体的隐私顾虑。此外，该方案主要针对特定岛屿区域定制，其向其他语言或农业生态系统的泛化能力仍需验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项非常务实的工程落地研究，巧妙地利用检索增强技术解决了通用模型在垂直领域幻觉严重的问题。虽然论文未涉及眼动追踪技术，但其集成的视觉模态能够辅助模型理解用户视野中的农田环境，这在某种程度上模拟了视觉注意力的输入过程。这种结合多模态输入与地理空间依据的方法，为构建可信的农业AI智能体提供了极佳的参考范式。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.25489v1" target="_blank">When LLM Rationales Become User-Facing: Effects on Trust Perception, Decision-Making, and Gaze Behaviors</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xin Sun, Ting Pan, Yajing Wang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.25489v1" target="_blank">2606.25489v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在探究当大语言模型向用户展示逐步推理过程时，这些推理是帮助用户准确校准信任，还是仅仅通过流畅的语言说服用户。核心问题在于用户如何基于这些推理判断信息的可信度，以及推理如何影响决策与认知行为。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献多关注模型内部的推理能力，而本研究将其定位为一种用户界面特征，填补了关于用户如何审计AI推理的实证空白。通过引入眼动追踪视角，该工作连接了人机交互与可解释AI领域，深入探讨了信任校准的机制。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于挑战了"推理越多越好"的假设，发现错误的推理会显著降低系统信任并增加认知努力。研究还发现眼动特征（如注视时长和瞳孔直径）能有效预测用户的信任水平和决策状态，为设计可审计的AI交互提供了依据。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究采用两项关联实验，首先通过在线实验操纵推理呈现格式、正确性和确定性框架。随后在受控实验室环境中利用眼动追踪技术，分析用户在无推理、正确推理和错误推理条件下的注视模式和瞳孔变化。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+两项研究的样本量相对较小（分别为68人和54人），可能限制结果的普适性。实验仅聚焦于事实验证任务，结论能否推广到更复杂的开放式生成任务尚需进一步验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+该工作创新性地利用眼动追踪客观指标验证了用户的主观信任感知，不仅揭示了错误推理带来的认知代价，也为LLM交互设计提供了重要启示。研究建议未来的推理设计应更具选择性并与证据关联，这对构建可信赖的AI系统具有重要实践价值。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2606.09142v1" target="_blank">Decoding Pedestrian Crossing Intention from Egocentric Vision via Vision Language Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.02083v1" target="_blank">DeepGaze3.5-VL: Modeling Scanpaths via Autoregressive Token Prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.26505v1" target="_blank">Same Scrutiny, More Time: Eye Tracking Insights into Reviewing LLM-Labelled Code</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.25647v1" target="_blank">Retrieval-Grounded Multilingual LLM Assistance for Island Smallholder Farmers</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.25489v1" target="_blank">When LLM Rationales Become User-Facing: Effects on Trust Perception, Decision-Making, and Gaze Behaviors</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
