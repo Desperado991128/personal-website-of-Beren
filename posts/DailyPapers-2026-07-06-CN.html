@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究论文日报 - 2026-07-06</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .topic-tag {
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">AI研究论文日报</h2>
+            <div class="post-meta">
+                <span class="date">July 06, 2026</span>
+                <span class="author">Beren Meng</span>
+                <span class="label">AI研究日报</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年07月06日 精选的AI研究论文摘要和概念解释。</p>
+
+                <h2 id="daily-concept">每日概念: Parameter-efficient fine-tuning</h2>
+                <p><strong>1. 概念定义</strong><br>
+参数高效微调是一类旨在通过仅更新模型参数的一小部分子集来适配大型预训练模型的技术。与全量微调不同，这类方法冻结了预训练模型的绝大部分权重，仅训练少量额外参数或特定层。这种方法显著降低了计算成本和存储需求，同时保持了与全量微调相当的性能。</p>
+
+<p><strong>2. 核心原理</strong><br>
+核心思想在于将模型参数划分为冻结部分和可训练部分，通过极小的参数增量来改变模型行为。以LoRA为例，它假设模型适应过程中的权重更新具有低秩特性，将权重更新量 \( \Delta W \) 分解为两个低秩矩阵的乘积 \( BA \)。在前向传播中，输入 \( x \) 同时经过原始权重和低秩适配器，输出为 \( h = W_0 x + BAx \)。这种方法避免了更新庞大的原始权重矩阵，从而大幅降低了计算梯度所需的显存。</p>
+
+<p><strong>3. 研究意义</strong><br>
+在基础架构领域，PEFT使得在消费级硬件上定制大型语言模型成为可能，促进了开源社区的发展。在AI安全方面，它允许研究者通过调整少量参数来注入安全对齐机制，同时保留模型原有的通用能力。针对KAN等新兴架构，PEFT的理念有助于在保持网络拓扑结构不变的情况下，高效地优化网络的边函数或样条参数。</p>
+
+<p><strong>4. 关键洞见</strong><br>
+PEFT证明了大型模型在适应新任务时并不需要改变所有参数，其适应能力往往集中在低维子空间中。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.02512v1" target="_blank">Program-as-Weights: A Programming Paradigm for Fuzzy Functions</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Wentao Zhang, Liliana Hotsko, Woojeong Kim et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.02512v1" target="_blank">2607.02512v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+论文旨在解决那些难以用明确规则定义的编程任务，例如日志告警或JSON修复。现有方案依赖云端大模型API，存在成本高、延迟大及可复现性差的问题，该研究试图将模糊逻辑编译为本地可执行程序。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作位于传统确定性编程与基于提示工程的LLM应用之间，填补了模糊任务本地化高效执行的空白。它提出了一种新的范式，将基础模型从每次输入的问题解决者转变为一次性的工具构建者。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了模糊函数编程范式及其具体实现Program-as-Weights (PAW)，并发布了包含1000万样本的FuzzyBench数据集。其核心创新在于通过编译器生成轻量级适配器，使得0.6B参数的小模型在特定任务上能匹配32B大模型的性能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法训练一个4B参数的编译器，使其能够根据自然语言描述生成参数高效的适配器权重。这些权重被加载到一个冻结的0.6B参数轻量级解释器中，从而在本地以极低的内存占用实现高效的模糊函数推理。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管推理效率高，但该方法可能受限于编译器的泛化能力，对于训练数据分布外的任务表现可能不佳。此外，构建高质量的FuzzyBench数据集及训练编译器本身需要较大的前期投入，且生成的适配器缺乏通用大模型的广泛世界知识。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具工程价值，成功实现了大模型能力的端侧下沉，解决了实际应用中的成本与隐私痛点。它打破了“大模型即服务”的固有思维，通过“权重即程序”的理念为边缘计算场景下的AI应用提供了极具启发性的解决方案。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.01436v1" target="_blank">Discrete Diffusion Language Models for Interactive Radiology Report Drafting</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Max Van Puyvelde, Halil Ibrahim Gulluk, Wim Van Criekinge et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.01436v1" target="_blank">2607.01436v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">diffusion_models</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+现有的医学基础模型几乎完全依赖自回归(AR)生成方式，缺乏灵活的交互式起草能力。本文旨在探索离散扩散语言模型在放射学报告起草任务中能否匹敌甚至超越AR模型，并利用其双向去噪特性解决实际临床报告编辑中的痛点。</p>
+
+<p><strong>2. 研究定位</strong><br>
+尽管扩散语言模型在通用领域已展现出竞争力，但在医学基础模型领域尚未得到广泛应用。这项工作填补了将大规模混合专家扩散模型应用于放射学报告生成的空白，挑战了AR模型在该领域的统治地位。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文证明了扩散模型在医学视觉问答任务上性能匹配或超越同规模的AR模型，且解码速度提升了3.5至4.4倍。更重要的是，研究利用扩散模型的双向去噪机制实现了任意顺序填充，允许医生固定报告片段并生成中间文本，这是传统AR模型难以实现的交互功能。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究者改编了混合专家扩散模型DiffusionGemma-26B，并在相同的LoRA微调配方下与其同规模的AR兄弟模型Gemma-4-26B进行对比。实验在医学视觉问答数据集上进行，使用对输出长度鲁棒的LLM作为评判者来评估模型性能。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+虽然摘要未明确列出局限，但潜在挑战包括扩散模型在生成极长文本时可能存在的连贯性问题，以及对医生提供的固定片段质量的依赖。此外，该方法主要针对放射学报告，在其他医学领域的泛化能力尚待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具实用价值，它不仅证明了扩散模型在医学领域的效率优势，更关键地指出了双向生成机制在交互式起草场景中的独特优势。相比于单纯追求生成质量，该研究关注到了临床工作流中“修改与填充”的实际需求，为医学AI工具的设计提供了新的方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.27821v1" target="_blank">Parameter-Efficient Quantum-Inspired Fast Weight Programmers for Traffic-Matrix Forecasting</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kuo-Chung Peng, Jiun-Cheng Jiang, Chun-Hua Lin et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.27821v1" target="_blank">2606.27821v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">kan</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决在线网络控制场景下，如何在严格的内存、更新和训练预算限制中实现准确的全网流量矩阵预测问题。核心挑战在于不依赖复杂的图神经网络或Transformer模块，仅利用紧凑型模型实现高效的多步预测。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于资源受限的时间序列预测研究，区别于依赖重计算量模块的主流方法。它填补了量子启发模型在网络流量工程领域应用的空白，探索了在低参数量下超越经典循环神经网络的性能极限。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了门控量子启发柯尔莫哥洛夫-阿诺德网络快速权重程序员(G-QKAN-FWP)。主要创新在于证明了该模型仅使用较大LSTM模型22.4%的参数量，便实现了更低的预测误差。研究确立了经典慢速程序员与量子启发快速程序员相结合的高效架构设计范式。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法将量子启发的柯尔莫哥洛夫-阿诺德网络(KAN)集成到门控快速权重程序员(FWP)框架中。模型利用两小时的历史数据直接预测未来20个时间步的144通道起点-终点(OD)矩阵。实验在固定训练预算协议下，将三种QKAN变体与不同规模的LSTM及经典FWP基线进行了对比。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+论文主要在Abilene数据集上进行验证，数据集规模相对有限，可能影响结论在更复杂网络环境下的泛化性。量子启发模型引入的额外结构复杂性可能增加训练调参的难度。相比于极简的基线模型，该方法在推理延迟方面可能存在潜在劣势。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作在精度与效率的权衡上表现出色，为资源敏感型网络控制提供了极具价值的解决方案。它成功展示了量子启发算法在经典机器学习任务中的实用潜力，而非仅停留在理论层面。未来的工作可以进一步探索该架构在更大规模网络数据集上的表现及其可解释性。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.02291v1" target="_blank">Optimizing Visual Generative Models via Distribution-wise Rewards</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ruihang Li, Mengde Xu, Shuyang Gu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.02291v1" target="_blank">2607.02291v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">ai_security_safety</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+传统的视觉生成强化学习方法通常采用样本级奖励函数，这往往导致奖励黑客现象，进而降低图像多样性并引入视觉异常。核心问题是如何避免模型为了追求高奖励而牺牲样本的多样性和分布的真实性。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作定位于视觉生成模型的微调优化领域，特别是针对强化学习在生成任务中的应用。它填补了现有方法在处理奖励优化时忽视样本整体分布导致模式崩塌的空白，提出了一种更符合真实数据分布的优化范式。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献在于提出了基于分布级奖励的微调框架，有效缓解了模式崩塌问题。创新点包括引入子集替换策略以降低计算成本，以及利用强化学习优化事后模型合并系数，从而缓解训练与推理不一致的问题。</p>
+
+<p><strong>4. 方法概述</strong><br>
+该方法摒弃了传统的单样本评估方式，转而采用能够考量样本数据分布的分布级奖励函数。为了解决估计此类奖励的高昂计算成本，作者设计了子集替换策略，通过仅更新生成参考集的一小部分来高效提供奖励信号。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管引入了子集替换策略，分布级奖励的计算开销可能仍然高于简单的样本级奖励。此外，该方法的有效性可能依赖于生成参考集的质量与更新策略的超参数设置，这在实际应用中可能需要额外的调整。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作通过从样本级优化转向分布级优化，为解决生成模型中的奖励黑客问题提供了极具价值的视角。实验结果显示在SiT和EDM2等模型上FID指标显著下降，证明了该方法在提升感知质量的同时有效保持了样本多样性，具有很强的实用价值。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.01283v1" target="_blank">Scaling Laws for Grid-Based Approximate Nearest Neighbor Search in High Dimensions</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Matthew J Liu, Wei Hang Zheng, Vidhan Purohit et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.01283v1" target="_blank">2607.01283v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决基于网格的近似最近邻搜索算法缺乏现代扩展性分析的问题。核心研究问题是探究多探针网格算法在数据集规模 \(N\) 和维度 \(d\) 变化下的性能表现及其扩展规律。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有文献主要集中在图、树和划分类方法的扩展性分析，而忽略了基于网格的方法。这项工作填补了该领域的空白，通过系统性的实验分析，重新评估了网格方法在现代高维数据处理中的地位。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文发现了GloVe嵌入数据上前所未见的维度扩展交叉现象，即多探针网格方法在高维下能保持稳定的吞吐量，而其他方法的吞吐量则会下降。研究证明了该方法具有近线性的查询扩展性和较低的索引成本，并指出其适用于重建频繁或高维的场景。此外，论文还将ANN算法的扩展性与Transformer架构的成本分析建立了联系。</p>
+
+<p><strong>4. 方法概述</strong><br>
+研究人员对多探针网格算法进行了系统的实验表征，量化了其随数据集大小 \(N\) 和维度 \(d\) 变化的性能指标。通过与其他主流ANN方法（图、树、划分类）进行对比实验，分析了不同算法在扩展性上的差异。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该研究的优势主要集中在重建频繁或高维数据的特定场景下，在通用低维场景中的竞争力可能有限。实验结论主要基于GloVe嵌入数据集，其在更广泛数据分布上的普适性仍需验证。此外，将ANN扩展性应用于Transformer成本分析目前仅为理论指导，缺乏具体的实际应用验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作复兴了网格方法在高维搜索中的应用价值，挑战了主流图方法在扩展性上的优势地位。其将基础算法扩展性与前沿Transformer架构效率联系起来的视角非常新颖，具有重要的理论启发意义。不过在实际应用中，用户仍需根据具体的索引构建频率和维度特征来权衡是否采用该方法。</p>
+                </div>
+                <div class="paper-entry" id="paper-6">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.30562v1" target="_blank">Morphing into Hybrid Attention Models</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Disen Lan, Jianbin Zheng, Yuxi Ren et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.30562v1" target="_blank">2606.30562v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mamba</span>
+                        <span class="topic-tag">new_llm_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+该论文旨在解决将Transformer转换为混合注意力模型时，如何高效且准确地选择保留全注意力层的问题。现有方法往往忽略层间依赖性，导致模型转换效果不佳或计算成本过高。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于长上下文Transformer模型的高效化改造领域，特别是混合注意力架构的设计。它填补了现有研究在混合层选择上缺乏全局优化视角的空白，挑战了传统的固定模式或孤立评估策略。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的核心贡献在于将混合层选择形式化为预算约束子集优化问题，并提出了一种名为FlashMorph的高效解决方案。该方法创新地引入了可变形模型和门控优化机制，在保证模型性能的同时大幅降低了层选择的时间成本。</p>
+
+<p><strong>4. 方法概述</strong><br>
+FlashMorph首先构建一个包含全注意力与线性注意力双分支的可变形模型，随后冻结权重并在合成数据上联合优化逐层门控参数。该方法引入线性化正则化以鼓励模型利用线性注意力，最终根据预设预算离散化门控值，确定混合架构并完成蒸馏微调。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖于合成长上下文检索数据进行门控优化，这可能无法完全覆盖真实应用场景的复杂性。此外，门控参数的优化和随后的微调过程仍需一定的计算资源，且预设的全注意力预算需要人工调整。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很强的工程实用价值，巧妙地将架构搜索思想融入模型变形过程，解决了混合模型设计中层选择依赖经验的难题。它不仅提升了长上下文处理的效率，也为模型架构优化提供了新的思路，是一项兼具理论深度与落地潜力的研究。</p>
+                </div>
+                <div class="paper-entry" id="paper-7">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.01224v1" target="_blank">AutoMem: Automated Learning of Memory as a Cognitive Skill</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Shengguang Wu, Hao Zhu, Yuhui Zhang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.01224v1" target="_blank">2607.01224v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">agent_memory</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文旨在解决大语言模型智能体在长跨度任务中如何有效管理记忆的问题。核心研究问题是如何自动化地学习记忆的编码、检索和组织策略，从而提升模型的元记忆能力。</p>
+
+<p><strong>2. 研究定位</strong><br>
+该工作将认知科学中的元记忆概念引入LLM领域，区别于以往仅关注任务执行或依赖人工设计记忆机制的研究。它填补了将记忆管理视为一种独立、可训练的认知技能的空白，解决了长序列任务中人工调试记忆系统不可行的难题。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文提出了AutoMem框架，实现了记忆结构与模型记忆熟练度的自动化联合优化。其创新之处在于将文件系统操作提升为一等公民，并证明了仅优化记忆管理技能即可使32B开源模型性能提升2到4倍，达到前沿闭源模型水平。</p>
+
+<p><strong>4. 方法概述</strong><br>
+方法包含两个自动化循环。第一个循环利用强LLM审查完整轨迹，迭代修正记忆结构如提示词和文件模式。第二个循环从多轮次中筛选优质的记忆决策作为训练信号，直接微调模型以提升其记忆熟练度。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该方法依赖一个强大的外部LLM来审查轨迹并优化结构，这可能带来较高的计算成本和时间开销。此外，实验主要基于程序化生成的游戏环境，在更复杂的现实世界非结构化场景中的泛化能力仍有待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具洞察力，成功地将记忆管理从工程设定转变为可学习的技能，解耦了任务能力与记忆能力。其显著的效果提升表明记忆机制是当前智能体能力的瓶颈，为构建更自主、长程规划能力的AI系统提供了重要方向。</p>
+                </div>
+                <div class="paper-entry" id="paper-8">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.01763v1" target="_blank">Denser $\neq$ Better: Limits of On-Policy Self-Distillation for Continual Post-Training</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Meng Wang, Haohan Zhao, Wenzhuo Liu et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.01763v1" target="_blank">2607.01763v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">unlearning</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文探讨了在持续后训练中，同策略自蒸馏方法的有效性及其局限性。核心研究问题是，更密集的自蒸馏信号是否真能缓解灾难性遗忘，还是会反而导致模型崩溃和泛化能力下降。</p>
+
+<p><strong>2. 研究定位</strong><br>
+现有研究普遍认为同策略学习能缓解遗忘，自蒸馏因此被视为一种有吸引力的解决方案。本研究挑战了这一乐观观点，填补了对自蒸馏在持续学习场景下失效机制的认知空白，并对比了其与同策略强化学习方法的差异。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文主要贡献在于揭示了密集自蒸馏会导致参数空间和响应空间的显著漂移，甚至通过师生循环放大格式伪影。研究证明了自蒸馏策略优化(SDPO)虽能加速领域内专业化，但在分布外泛化上表现不佳，且不如GRPO等强化学习方法稳健。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出了自蒸馏策略优化(SDPO)作为分析工具，系统性地比较了其与同策略强化学习方法(如GRPO)在持续后训练中的表现。研究通过分析参数漂移和响应空间的变化，揭示了密集自蒸馏如何引发模型遗忘和性能崩溃。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+研究表明仅依靠同策略数据不足以支持持续学习，且密集自蒸馏在教师信号不稳定时风险较高。该方法容易导致模型遗忘先验知识，且在分布外场景下泛化能力受限，甚至可能因为自我强化循环而放大错误模式。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作具有很高的实践价值，打破了“越密集越好”的迷思，为持续学习算法的设计提供了重要警示。它清晰地界定了自蒸馏的适用边界，指出其在稳定场景下的专业化优势与持续学习场景下的稳定性劣势。这提示研究者在实际应用中需谨慎选择蒸馏密度，或结合其他保守策略使用。</p>
+                </div>
+                <div class="paper-entry" id="paper-9">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2607.00466v2" target="_blank">ELDR: Expert-Locality-Aware Decode Routing for PD-Disaggregated MoE Serving</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Sangjin Choi, Sukmin Cho, Yifan Xiong et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2607.00466v2" target="_blank">2607.00466v2</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">mixture_of_experts</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>以下是针对论文《ELDR. Expert-Locality-Aware Decode Routing for PD-Disaggregated MoE Serving》的结构化中文总结：</p>
+
+<p>1. <strong>研究问题</strong><br>
+ 在PD分离架构的MoE模型服务中，现有的解码路由器仅关注负载均衡，忽略了专家局部性对延迟的影响。即使负载相同，不同工作节点激活的专家集合不同会导致权重加载开销差异，从而产生性能瓶颈。</p>
+
+<p>2. <strong>研究定位</strong><br>
+ 这项工作填补了PD分离架构下MoE模型路由策略的空白，指出了单纯负载均衡的不足。它将专家局部性引入路由决策，解决了现有方法无法有效降低解码阶段权重加载开销的问题。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+ 论文提出了ELDR系统，这是一种首个针对PD分离架构且感知专家局部性的解码路由器。主要创新在于设计了基于预填激活的专家签名预测机制，以及结合负载均衡与局部性的Locality-band routing策略。</p>
+
+<p>4. <strong>方法概述</strong><br>
+ ELDR首先利用请求在预填阶段的专家激活情况构建专家签名，以此预测生成阶段所需的专家。离线时使用平衡K-means算法将签名空间划分给解码工作节点，在线时将请求发送至与其签名匹配度最高且负载最低的工作节点。此外，系统维护了一个与KV缓存联合索引的签名缓存，确保在前缀缓存场景下的预测准确性。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+ 该方法依赖于预填阶段的专家激活情况来预测解码阶段的行为，若两者差异较大可能影响路由效果。实验规模限制在40个GPU以内，在更大规模集群上的扩展性有待验证。此外，该方法需要修改底层推理框架如vLLM，集成成本较高。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+ 这是一项极具实用价值的工作，精准地识别并解决了MoE模型服务中因专家局部性导致的性能瓶颈。通过将专家激活模式转化为可路由的签名，巧妙地平衡了负载与数据局部性。实验结果显示TPOT显著降低，证明了该方法在提升资源利用率和降低延迟方面的有效性。</p>
+                </div>
+                <div class="paper-entry" id="paper-10">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2606.29526v1" target="_blank">The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jing Liang, Hongyao Tang, Yi Ma et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2606.29526v1" target="_blank">2606.29526v1</a>
+                    </div>
+                    <div class="paper-topics">
+                        <span class="topic-tag">foundational_architecture</span>
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>### 1. 研究问题<br>
+这篇论文要解决大语言模型强化学习中因训练与推理引擎分离导致的概率不一致问题，即训练推理不匹配。核心研究问题在于如何确保训练过程中的策略更新能够真正提升部署时使用的推理策略性能，而非仅仅优化训练策略本身。</p>
+
+<p>### 2. 研究定位<br>
+这项工作定位在解决大语言模型强化学习中长期被忽视的训练与推理目标错位问题。现有文献多关注如何缓解训练推理不匹配带来的非策略性影响以稳定训练策略，而本文指出真正的优化目标应当是推理策略，填补了直接针对推理策略进行单调改进的理论空白。</p>
+
+<p>### 3. 核心贡献<br>
+论文提出了单调推理策略改进（MIPI）这一新的优化目标，纠正了传统方法仅关注训练策略改进的误区。基于此原则，论文引入了单调推理策略更新（MIPU）框架，通过两步法确保推理策略的单调提升。实验证明该方法在高不匹配场景下显著提升了推理能力和训练稳定性。</p>
+
+<p>### 4. 方法概述<br>
+论文提出了单调推理策略更新（MIPU）框架，包含构建采样器参考的候选更新和选择性接受同步候选两个步骤。该方法利用推理侧差距代理来筛选更新，确保只有能改进推理策略的更新才会被接受，从而实现对部署策略的直接优化。</p>
+
+<p>### 5. 局限与不足<br>
+论文主要在高不匹配场景下验证了方法的有效性，对于低不匹配场景的改进幅度可能不够显著。引入推理侧差距代理和候选筛选机制可能会增加训练流程的计算开销和工程复杂度。此外，该方法的有效性依赖于推理侧概率估计的准确性，若估计存在偏差可能影响筛选效果。</p>
+
+<p>### 6. 评价与思考<br>
+这项工作具有很强的工程实践价值，敏锐地指出了LLM强化学习中训练优化目标与实际部署目标不一致的核心矛盾。它将研究视角从单纯稳定训练过程转向了直接优化推理效果，为解决训练崩溃问题提供了新的思路。不过该方法在实际应用中可能需要权衡额外的计算成本与性能收益。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2607.02512v1" target="_blank">Program-as-Weights: A Programming Paradigm for Fuzzy Functions</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.01436v1" target="_blank">Discrete Diffusion Language Models for Interactive Radiology Report Drafting</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.27821v1" target="_blank">Parameter-Efficient Quantum-Inspired Fast Weight Programmers for Traffic-Matrix Forecasting</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.02291v1" target="_blank">Optimizing Visual Generative Models via Distribution-wise Rewards</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.01283v1" target="_blank">Scaling Laws for Grid-Based Approximate Nearest Neighbor Search in High Dimensions</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.30562v1" target="_blank">Morphing into Hybrid Attention Models</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.01224v1" target="_blank">AutoMem: Automated Learning of Memory as a Cognitive Skill</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.01763v1" target="_blank">Denser $\neq$ Better: Limits of On-Policy Self-Distillation for Continual Post-Training</a></li>
+                    <li><a href="https://arxiv.org/abs/2607.00466v2" target="_blank">ELDR: Expert-Locality-Aware Decode Routing for PD-Disaggregated MoE Serving</a></li>
+                    <li><a href="https://arxiv.org/abs/2606.29526v1" target="_blank">The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Beren Meng. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
