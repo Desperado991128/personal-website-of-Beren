@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-09-12</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">September 12, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年09月12日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Cognitive load measurement via eye tracking</h2>
+                <p>1. <strong>概念定义</strong><br>
+通过眼动追踪测量认知负荷是指利用眼部行为特征来量化用户在执行任务时消耗的心理资源。这种方法将瞳孔直径变化和注视时长等生理指标转化为认知努力程度的数值估计。在大型语言模型交互中，它提供了一种客观评估用户阅读或生成文本时心理负担的途径。</p>
+
+<p>2. <strong>核心原理</strong><br>
+该机制依赖于自主神经系统对眼部生理特征的直接影响。当认知需求增加时，瞳孔直径会随之扩大，同时扫视频率降低而注视时间延长。机器学习模型通常将这些眼动特征序列作为输入，映射到一个连续的认知负荷指数。一个简单的线性映射可以表示为 \[ L = \beta_0 + \beta_1 \cdot P + \beta_2 \cdot F + \epsilon \] 其中 \( L \) 是预测的认知负荷，\( P \) 代表瞳孔扩张量，\( F \) 代表注视时长，而深度学习模型如RNN或Transformer则可以捕捉这些特征在时间序列上的复杂动态变化。</p>
+
+<p>3. <strong>研究意义</strong><br>
+在眼动追踪与大型语言模型的交叉领域，这种测量方法为评估人机交互提供了客观且实时的生理指标。它克服了传统主观问卷方法存在滞后性和偏差的缺陷，使研究人员能够精确量化用户在处理LLM复杂输出时的心理负担。基于这些实时反馈，AI系统可以动态调整文本的复杂度或提供适时的解释，从而实现自适应的交互界面。</p>
+
+<p>4. <strong>关键洞见</strong><br>
+眼动数据是用户认知状态的实时代理。将这种生理反馈回路集成到LLM中，使人工智能从被动的文本生成器进化为具备认知感知能力的自适应系统。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2609.10139v1" target="_blank">TransGaze-Object: Transformer Based Driver Gaze Object Prediction Framework in Real Driving</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Pavan Kumar Sharma, Ayush Pande, Pranamesh Chakraborty<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2609.10139v1" target="_blank">2609.10139v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文要解决如何直接从驾驶员面部和交通场景信息中预测驾驶员注视的交通对象问题。核心研究问题是绕过传统的注视点估计步骤，实现端到端的对象级视线预测。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有的驾驶员视线估计研究通常将视线表示为视线区域或注视点，缺乏对视觉注意力的语义级别理解。这项工作填补了直接将驾驶员视线映射到交通场景中特定对象的研究空白，将视线估计从几何层面提升到了语义对象层面。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文提出了基于Transformer的端到端驾驶员注视对象预测框架TransGaze-Object。创新之处在于引入交叉注意力机制直接计算面部特征与交通对象空间特征的相似度，并构建了包含同步人脸与交通场景的基准数据集UD-FSG。</p>
+
+<p>4. <strong>方法概述</strong><br>
+该框架首先提取包含人脸和虹膜加权眼部特征的面部特征，以及交通对象的空间特征。随后利用Transformer的交叉注意力机制计算相似度得分和注意力权重，从而直接预测驾驶员注视的对象。该方法避免了传统方法中先估计注视点再进行对象关联的中间步骤。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+尽管准确率达到 \(60\%\)，但模型在复杂交通场景下的预测能力仍有提升空间。论文未探讨该方法在极端光照或驾驶员面部遮挡情况下的鲁棒性，且新构建的数据集可能缺乏足够的场景多样性。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作将眼动追踪从几何点映射转向语义对象识别，利用Transformer强大的上下文建模能力取得了显著效果。优点是端到端架构减少了中间误差累积，缺点是绝对准确率尚需优化以适应实际自动驾驶安全需求。未来可考虑引入大语言模型LLM进行多模态场景推理，结合交通对象的语义文本信息，进一步提升对象级视线预测的准确度与可解释性。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2609.02163v2" target="_blank">Do Cantonese-Adapted Language Models Better Predict Cantonese Reading? A Cross-Model Eye-Tracking Evaluation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Ziqi Zhang, Emmanuele Chersoni, Mohammad Momenian<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2609.02163v2" target="_blank">2609.02163v2</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. 研究问题<br>
+这篇论文探讨针对特定语言变体进行微调的大语言模型是否能更好地预测人类的阅读行为。核心研究问题是，粤语专属训练是否能够提升自回归语言模型与心理语言学眼动数据之间的对齐效果。</p>
+
+<p>2. 研究定位<br>
+现有研究广泛使用信息论度量来表征塑造人类阅读的预期，但特定语言变体训练能否改善这种心理语言学对齐仍不明确。在粤语自然语言处理领域，近期评估对粤语专属训练相较于普通话或通用模型的收益存在分歧。该工作填补了粤语阅读眼动追踪与LLM预测能力对齐评估的空白。</p>
+
+<p>3. 核心贡献<br>
+论文通过跨模型的眼动追踪评估，揭示了粤语适应程度与模型预测拟合度之间的关系。研究发现，更广泛的粤语持续预训练和指令微调与更强的预测拟合度相关。此外，研究还证明了模型排名高度依赖于所评估的具体信息论度量。</p>
+
+<p>4. 方法概述<br>
+研究利用自然粤语眼动追踪数据，对比了两组家族内适应模型，即CKIP GPT-2 Tiny与轻度适应的JED351，以及Qwen2.5-7B与深度适应的CantoneseLLM-7B。从每个模型中提取了四个信息论度量，包括 \( lexical\ surprisal \)，\( POS\ surprisal \)，\( entropy\ before\ the\ target \) 和 \( entropy\ reduction \)。通过分析这些度量与眼动数据的拟合度来评估模型的预测能力。</p>
+
+<p>5. 局限与不足<br>
+摘要中未明确提及局限性，但潜在不足可能包括仅评估了两组模型对比，样本代表性有限。不同信息论度量对模型排名的不一致影响，可能使得难以得出单一最优模型的绝对结论。此外，粤语和普通话之间的语言相似性可能使得隔离粤语专属训练的纯粹效应变得复杂。</p>
+
+<p>6. 评价与思考<br>
+这项工作巧妙地将眼动追踪心理语言学与大语言模型的跨语言适应评估结合，具有很强的跨学科价值。其优点在于使用了多维度的信息论度量进行综合评估，避免了单一指标的偏差。未来研究需要探索为何不同度量偏好不同规模的模型，并进一步扩大模型评估范围以验证结论的普适性。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2608.30142v1" target="_blank">LandmarkLens: Predicting and Presenting Effective Landmarks for Mixed-Reality Urban Exploration</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chu Li, Yotam Sechayk, Jared Hwang et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2608.30142v1" target="_blank">2608.30142v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. 研究问题<br>
+这篇论文要解决方向感差的人群在空间导航中难以构建认知地图的问题。现有导航工具过度追求路径效率而忽视了用户的空间知识学习。</p>
+
+<p>2. 研究定位<br>
+该研究处于空间认知与人机交互的交叉领域，填补了现有导航工具在促进空间学习方面的空白。通过结合眼动追踪与混合现实技术，这项工作将研究焦点从单纯的路线引导转向了对用户空间认知能力的干预。</p>
+
+<p>3. 核心贡献<br>
+论文的主要贡献在于揭示了不同方向感人群在注视行为和有效地标选择上的系统性差异。研究团队构建了LandmarkLens系统，创新性地利用视觉语言模型在混合现实中识别并高亮导航相关的地标，从而显著提升了方向感差人群的场景识别能力。</p>
+
+<p>4. 方法概述<br>
+研究首先在VR环境中对20名参与者进行眼动追踪实验，分析其在城市导航时的注视数据和口头报告。基于提取的地标特征，研究开发了LandmarkLens系统，该系统集成了视觉语言模型来实时检测并高亮混合现实场景中的关键导航地标。随后通过8名方向感较差参与者的后续实验验证了系统的有效性。</p>
+
+<p>5. 局限与不足<br>
+该研究的MR测试样本量较小，仅包含8名方向感差的参与者，可能影响统计结果的普适性。视觉语言模型在复杂动态城市环境中的实时推理延迟和准确性在摘要中未详细说明，存在潜在的技术瓶颈。此外，短期场景识别的提升能否转化为长期的空间认知改善仍需验证。</p>
+
+<p>6. 评价与思考<br>
+这项工作巧妙地将眼动追踪的认知发现与视觉语言模型结合，为空间认知障碍人群提供了创新的交互范式。其优点在于通过AI驱动的视觉引导直接干预用户的注意力机制，而非仅提供路线规划。然而，如何在真实世界的多变光照和遮挡条件下保证VLM的鲁棒性，将是未来落地应用的关键挑战。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2608.23836v1" target="_blank">Predicting Radiologist Expertise from 3D Gaze Patterns During CT Interpretation</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Leila Khaertdinova, Anna Anikina, Claudia Mello-Thoms et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2608.23836v1" target="_blank">2608.23836v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. 研究问题<br>
+这篇论文要解决如何利用眼动追踪技术在三维CT影像解读中客观评估放射科医生专业技能的问题。核心研究问题是如何将医生的视觉搜索行为与深度学习模型结合以预测其专业水平。</p>
+
+<p>2. 研究定位<br>
+现有文献多关注二维医学影像中的眼动追踪应用，对三维CT容积扫描场景的探索较少。这项工作填补了在复杂三维医学影像中利用眼动数据评估医生经验的空白。</p>
+
+<p>3. 核心贡献<br>
+论文的主要贡献是提出了一个基于注视信息的Transformer框架，用于胸部CT阅片的专业技能分类。创新之处在于将基于DINOv2骨干网络的视觉特征与眼动注视模式深度融合，在测试集上实现了 \( \text{ROC-AUC} = 0.91 \) 和 \( \text{F1} = 0.86 \) 的优异性能。</p>
+
+<p>4. 方法概述<br>
+论文提出使用DINOv2作为主干网络，并将放射科医生的注视模式整合到容积特征学习中。具体技术包括在自注意力机制中引入可学习的对数空间偏置，以及对patch嵌入进行注视加权池化。</p>
+
+<p>5. 局限与不足<br>
+研究的数据规模相对有限，仅包含5名放射科医生的182次阅片会话，可能影响模型的泛化能力。此外摘要未讨论眼动数据采集设备对临床环境的依赖性，以及模型在实时预测延迟方面的表现。</p>
+
+<p>6. 评价与思考<br>
+这项工作将基础视觉模型与眼动追踪巧妙结合，为医学影像技能评估提供了新思路。优点是预测指标高且代码开源，缺点是样本量小且未涉及大语言模型对阅片过程的文本推理融合，未来可探索多模态LLM在此领域的应用。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2608.16514v1" target="_blank">Matched Outcomes, Divergent Gaze: How Foveated MLLMs Search Compared to Humans</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Mohamed Amine Kerkouri, Marouane Tliba, Aladine Chetouani et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2608.16514v1" target="_blank">2608.16514v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文旨在探讨多模态大语言模型（MLLMs）在接收与人类相同的中央凹视觉输入时，其视觉搜索过程是否与人类一致。核心问题是模型在目标搜索中的眼动轨迹和时间动态是否符合人类模式。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有文献常将MLLMs视为人类视觉的潜在模型并依赖注意力对齐分数进行评估。这项工作填补了在严格控制视网膜输入的条件下，对MLLMs与人类视觉搜索过程进行细粒度对比的空白。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文从目标存在决策，到达目标的效率以及注视过程三个维度进行评估，发现模型在决策和效率上超越人类但注视过程完全非人类。研究揭示了模型表现出低熵且大幅度的自洽扫描路径，并指出传统的答案对齐和显著性指标无法衡量这种时间过程维度的差异。</p>
+
+<p>4. <strong>方法概述</strong><br>
+研究在COCO-Search18数据集上逐个注视点地驱动三个通用MLLMs，确保模型接收与人类完全相同的中央凹视觉输入。随后通过对比模型与人类的眼动扫描路径，分析其在三个维度上的表现差异。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+研究仅对比了三个通用MLLMs，未涵盖更多特定架构的视觉模型。论文发现任何退化机制都无法使模型在保持人类级别成功率的同时恢复类似人类的搜索过程，暗示了架构层面的根本限制，但未提出具体的改进方案。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+该研究设计精巧，通过控制输入一致性巧妙剥离了视觉敏锐度的影响，揭示了MLLMs单次前向传播架构与人类串行视觉搜索的本质差异。其优点在于指出了现有评估指标的盲区，提醒我们在使用零样本模型回答时间性问题时需保持谨慎。未来研究可探索如何为MLLMs引入串行处理机制以真正模拟人类视觉时间动态。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2609.10139v1" target="_blank">TransGaze-Object: Transformer Based Driver Gaze Object Prediction Framework in Real Driving</a></li>
+                    <li><a href="https://arxiv.org/abs/2609.02163v2" target="_blank">Do Cantonese-Adapted Language Models Better Predict Cantonese Reading? A Cross-Model Eye-Tracking Evaluation</a></li>
+                    <li><a href="https://arxiv.org/abs/2608.30142v1" target="_blank">LandmarkLens: Predicting and Presenting Effective Landmarks for Mixed-Reality Urban Exploration</a></li>
+                    <li><a href="https://arxiv.org/abs/2608.23836v1" target="_blank">Predicting Radiologist Expertise from 3D Gaze Patterns During CT Interpretation</a></li>
+                    <li><a href="https://arxiv.org/abs/2608.16514v1" target="_blank">Matched Outcomes, Divergent Gaze: How Foveated MLLMs Search Compared to Humans</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
