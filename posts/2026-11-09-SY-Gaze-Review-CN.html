@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-11-09</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">November 09, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年11月09日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Eye tracking in multimodal AI</h2>
+                <p>1. <strong>概念定义</strong><br>
+多模态AI中的眼动追踪是指将人类的注视点和瞳孔数据作为一种额外的输入模态融入到人工智能模型中。这种技术通过捕捉人类视觉注意力来揭示认知过程和意图，从而增强大型语言模型对人类行为的理解。它使AI系统能够结合文本图像和眼动信号进行联合推理。</p>
+
+<p>2. <strong>核心原理</strong><br>
+核心机制在于将眼动轨迹转化为连续的时空特征向量，并与语言模型的词嵌入进行对齐与融合。眼动信号通常被编码为位置权重，用于引导自注意力机制。例如注视时长可以作为注意力偏置项注入到注意力分数的计算中，公式表示为 \[ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + B_{eye}\right)V \]。这样模型在处理文本时会优先关注人类视觉聚焦的语义单元。</p>
+
+<p>3. <strong>研究意义</strong><br>
+在眼动追踪与LLM的交叉领域，这一技术为模型对齐和认知建模提供了全新的监督信号。它帮助研究人员理解人类在阅读和推理时的认知负荷，进而优化LLM的生成策略和可解释性。此外结合眼动数据的多模态LLM能够更自然地适应用户的阅读习惯，推动更加智能化和个性化的人机交互系统发展。</p>
+
+<p>4. <strong>关键洞见</strong><br>
+眼动追踪将人类的隐式认知状态转化为显式的可计算向量，为LLM提供了一种基于人类生物视觉反馈的原生对齐机制。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.07386v1" target="_blank">Breaking the Modality Barrier: Multimodal Fusion With Missing Modalities for Cybersickness Prediction</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Purnata Saha, Rifatul Islam, John Quarles<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.07386v1" target="_blank">2611.07386v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文旨在解决虚拟现实(VR)晕动症预测中多模态数据缺失的问题。现有的预测模型通常假设输入模态固定，当传感器不可用或跨不同配置的数据集时难以泛化。</p>
+
+<p>2. <strong>研究定位</strong><br>
+该工作填补了异构VR系统间生理与行为传感器数据难以统一建模的空白。它打破了传统多模态模型对固定传感器组合的依赖，将眼动追踪作为核心锚点，推动了跨设备泛化能力的研究。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文提出了一种基于Transformer的模型，无需插补缺失数据即可处理任意传感器组合。其创新之处在于利用眼动追踪作为锚点模态进行对比学习，并结合掩码自注意力机制动态排除不可用的传感器。</p>
+
+<p>4. <strong>方法概述</strong><br>
+该方法包含两个核心组件。首先通过基于锚点的对比学习，以眼动追踪数据为基准，将异构传感器嵌入映射到共享的潜在空间。其次采用掩码自注意力机制，在融合阶段直接排除不可用的传感器特征。模型在三个不同配置的公开数据集上进行了联合训练和评估。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+尽管模型在单传感器丢失时表现稳健，但在多个传感器同时缺失的极端情况下的性能尚未明确探讨。此外，高度依赖眼动追踪作为锚点模态，若眼动数据本身质量不佳或不可用，可能会严重影响整体预测效果。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作具有很强的实用价值，巧妙利用眼动追踪作为跨模态对齐的锚点，结合Transformer的掩码注意力机制实现了出色的跨数据集泛化能力。缺点在于对锚点模态的强依赖可能引入新的单点故障风险，且未深入探讨与LLM结合进行多模态时序推理的潜力。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2610.31620v1" target="_blank">Bilingual Language Models Capture Cross-Linguistic Influence in Second-Language Reading</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Abderrahmane Issam, Irene E. Winther, Stefan L. Frank<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2610.31620v1" target="_blank">2610.31620v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+单语语言模型的惊奇度无法捕捉二语阅读中受母语影响的认知动态。本文核心探讨双语语言模型内部的跨语言迁移是否与人类在二语阅读时受母语驱动的偏差相一致。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有研究广泛使用单语语言模型惊奇度预测阅读时间，但忽略了二语读者的母语背景影响。这项工作填补了计算模型与心理语言学之间的空白，即如何用计算模型量化跨语言影响在二语阅读眼动轨迹中的表现。它将双语语言模型的表征学习与多语言眼动追踪数据直接关联。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文证明了匹配读者母语背景的双语模型能显著提升二语阅读时间的预测能力。这种预测优势集中在晚期眼动指标上，受 \(L1-L2\) 文字重叠度调节，并在中等熟练度读者中达到峰值。这为双语语言模型能够捕捉跨语言影响提供了坚实的实证证据。</p>
+
+<p>4. <strong>方法概述</strong><br>
+研究在12种不同母语背景读者阅读英文文本的眼动追踪数据上评估双语语言模型。为了分离出母语特有的迁移效应，将匹配读者母语的双语模型与单语英文基线及其他母语训练的双语模型进行对比。通过对比模型惊奇度与眼动指标的关联来量化跨语言影响。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+研究仅评估了以英语为二语的阅读情况，未验证其他语言组合的普适性。眼动追踪数据本身可能包含个体差异噪音，且模型惊奇度与认知负荷的映射机制尚不完全明确。此外，未深入探讨不同架构的双语模型在捕捉跨语言影响上的差异。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作巧妙地将眼动追踪与语言模型结合，为理解双语者的阅读认知机制提供了新视角。其发现对开发更具认知合理性的多语言模型具有重要意义。未来可进一步探索跨语言影响在生成任务或更复杂语境中的表现。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2610.25436v1" target="_blank">Intent-Informed Model Predictive Control for Shared Autonomy in Remote Manipulation Tasks</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Lorena Maria Genua, Camilla Tabasso, Mya Schroder et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2610.25436v1" target="_blank">2610.25436v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文要解决在远程操作任务中如何动态调整机器人的自主级别这一核心问题。研究旨在利用人类意图推断来优化人机共享控制的融合过程。</p>
+
+<p>2. <strong>研究定位</strong><br>
+这项工作位于人机共享自主和意图推断研究的交叉领域。它填补了现有文献中难以利用多模态信息实现从直接遥操作到完全自主连续平滑过渡的空白。通过引入眼动追踪技术，该研究将人类认知状态显式地融入了控制循环。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献是提出了一种基于意图信息的模型预测控制（MPC）仲裁策略。创新之处在于使用动态贝叶斯网络（DBN）融合实时眼动追踪数据和机械臂运动来推断人类目标信念。该策略利用信念分布的熵 \(H(b)\) 来动态调整自主级别，实现了控制权的平滑过渡。</p>
+
+<p>4. <strong>方法概述</strong><br>
+论文提出使用动态贝叶斯网络对人类意图进行建模，根据实时的操作者眼动数据和机械臂运动更新目标信念分布。随后将人类输入与自主控制融合构建为MPC问题，利用信念分布引导系统的自主行为。这种方法允许系统根据推断意图的熵值在直接遥操作和完全自主之间连续切换。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+尽管论文未明确列出局限，但该方法高度依赖眼动追踪数据的准确性和实时性，在光照变化或操作者注意力分散时可能性能下降。基于DBN的意图推断模型可能缺乏大语言模型（LLM）所具备的高级语义理解能力，难以处理高度复杂或未见过的开放任务场景。此外，实验环境的多样性可能不足以证明其在极端工业场景中的鲁棒性。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这是一项将眼动追踪与机器人控制深度结合的优秀工作，其实验数据在效率和降低工作负荷方面表现突出。优点在于通过DBN和MPC实现了数学上严谨的控制权平滑交接。未来研究可以考虑引入LLM来增强多模态意图推断的语义理解深度，从而在更抽象的任务指令下实现更智能的共享自主。</p>
+                </div>
+                <div class="paper-entry" id="paper-4">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2610.24364v1" target="_blank">GazeAgent: VLM-Guided Implicit Gaze Calibration from Egocentric Multimodal Behavior for AI Glasses</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yuhong Zhang, Khanh An Nguyen, Xinyu Tian et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2610.24364v1" target="_blank">2610.24364v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. 研究问题<br>
+AI眼镜的眼动追踪通常需要显式校准，且设备滑动会导致精度漂移。本文旨在解决如何在不打断用户活动的情况下，实现连续且自适应的隐式眼动校准。</p>
+
+<p>2. 研究定位<br>
+现有眼动追踪校准方法多依赖用户主动配合，难以适应日常佩戴中的设备位移。该研究将视觉语言模型引入自我视角的多模态行为分析中，填补了自然交互场景下无感眼动校准的技术空白。</p>
+
+<p>3. 核心贡献<br>
+论文提出了GazeAgent框架，通过识别精确视觉注意力事件并验证其任务相关性，将功能目标作为伪校准目标。在设备扰动下，该方法相比显式校准将中位眼动误差降低了 \(44.1\%\)。同时系统实现了最低的用户工作负荷与干扰，所有参与者更倾向于在日常使用中采用它。</p>
+
+<p>4. 方法概述<br>
+GazeAgent融合了惯性测量单元、眼动和手部信号等多模态数据流，利用视觉语言模型引导识别自然行为中的精确视觉注意力事件。系统据此定位功能性目标并将其作为伪校准点，从而在不中断用户活动的前提下动态更新眼动追踪参数。</p>
+
+<p>5. 局限与不足<br>
+尽管效果显著，但脚本研究的样本量较小仅10人，且伪校准目标的识别高度依赖视觉语言模型的推理准确度与视觉条件。在复杂动态环境或缺乏明确功能性目标的场景中，系统的连续校准能力可能会受到限制。</p>
+
+<p>6. 评价与思考<br>
+这项工作巧妙地将视觉语言模型与多模态感知结合，解决了AI眼镜眼动追踪的实际痛点，具有极高的工程落地价值。其优点在于实现了无感且抗扰动的自适应校准，但未来可能需要评估VLM推理延迟对实时眼动追踪性能的影响以及边缘设备的算力消耗。</p>
+                </div>
+                <div class="paper-entry" id="paper-5">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2610.23715v1" target="_blank">The Cognitive Cost of LLM Writing: A Reading-Time Comparison with Human Text</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Kamer Cekini, Elisabetta Biondi, Chiara Boldrini et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2610.23715v1" target="_blank">2610.23715v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文探讨阅读大语言模型生成的文本是否会带来与人类撰写文本不同的认知负荷。核心研究问题是人类文本及其LLM改写版本在预测阅读时间上是否存在差异，从而反映读者认知加工需求的不同。</p>
+
+<p>2. <strong>研究定位</strong><br>
+现有文献已广泛研究了人类与LLM文本的语言学差异，但较少关注这些差异对人类阅读认知努力的影响。该工作将心理语言学中的阅读时间作为认知加工努力的间接衡量标准，填补了机器生成文本对人类认知处理影响的研究空白。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献是提出了RoBERTa-RT模型，该模型基于人类眼动追踪数据训练以预测词级阅读时间。研究还构建了496对人类文章与LLM改写版本的配对数据集，并揭示了LLM文本在阅读认知需求上的重新分配机制，即总文本量减少但单字加工努力增加。</p>
+
+<p>4. <strong>方法概述</strong><br>
+研究者首先利用人类眼动追踪数据训练RoBERTa-RT模型来预测词级阅读时间，并在内外部测试集上验证了模型性能。随后将模型应用于构建的496对人类与LLM配对文本数据集，对比预测阅读时间并结合语言学特征进行系统分析。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+论文的局限性在于阅读时间是通过模型预测而非真实眼动追踪实验直接测量的，可能存在预测误差。此外研究主要关注LLM的改写文本，未涵盖从零开始的LLM生成文本，且未考虑不同读者群体的认知差异。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作视角新颖，将眼动追踪与LLM文本评估结合，为理解机器生成内容的认知代价提供了量化依据。其优点在于引入了RoBERTa-RT这一实用工具，但缺点是缺乏真实读者参与的验证实验，未来若能结合实际眼动数据验证预测结果将更具说服力。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2611.07386v1" target="_blank">Breaking the Modality Barrier: Multimodal Fusion With Missing Modalities for Cybersickness Prediction</a></li>
+                    <li><a href="https://arxiv.org/abs/2610.31620v1" target="_blank">Bilingual Language Models Capture Cross-Linguistic Influence in Second-Language Reading</a></li>
+                    <li><a href="https://arxiv.org/abs/2610.25436v1" target="_blank">Intent-Informed Model Predictive Control for Shared Autonomy in Remote Manipulation Tasks</a></li>
+                    <li><a href="https://arxiv.org/abs/2610.24364v1" target="_blank">GazeAgent: VLM-Guided Implicit Gaze Calibration from Egocentric Multimodal Behavior for AI Glasses</a></li>
+                    <li><a href="https://arxiv.org/abs/2610.23715v1" target="_blank">The Cognitive Cost of LLM Writing: A Reading-Time Comparison with Human Text</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
