@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-11-10</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">November 10, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年11月10日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Fixation detection algorithms</h2>
+                <p>1. <strong>概念定义</strong><br>
+注视检测算法是用于处理原始眼动轨迹数据并将其分类为注视和眼跳等基本眼动事件的计算方法。这些算法从高频的眼动信号中提取出视觉停留在特定区域的稳定时间段。在眼动与语言模型交叉研究中，它们是构建高质量眼动数据集的基础步骤。</p>
+
+<p>2. <strong>核心原理</strong><br>
+这些算法通常基于速度阈值或空间离散度来区分静止的注视点和快速移动的眼跳。以经典的I-DT（基于离散度阈值）算法为例，它通过计算时间窗口 \(W\) 内所有采样点 \(P_i\) 的空间离散度 \(D\) 来判断是否为注视。离散度计算公式可以表示为<br>
+\[ D = \max_{i,j \in W} \| P_i - P_j \| \]<br>
+其中 \(P_i\) 和 \(P_j\) 是窗口内的二维坐标点。如果离散度小于预设阈值 \(T\)，则该窗口内的数据被标记为注视。</p>
+
+<p>3. <strong>研究意义</strong><br>
+在眼动追踪与大语言模型的交叉领域，注视检测算法提取的注视数据为模型提供了人类认知加工的地面真值。通过将人类阅读文本时的注视时长和顺序与LLM的注意力机制对齐，研究人员可以更好地评估或增强模型的文本理解能力。这种人类视觉注意力的引入有助于指导LLM的训练，使其更接近人类的阅读和推理模式。</p>
+
+<p>4. <strong>关键洞见</strong><br>
+注视点不仅是视觉停留的物理坐标，更是连接人类认知负荷与机器注意力机制的关键数据桥梁。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.13640v1" target="_blank">EyeQ: Exploring Corneal Reflection for Mobile Context Sensing</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Jaewook Lee, Judith Amores, Donghoon Shin et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.13640v1" target="_blank">2611.13640v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文要解决如何利用单个前置摄像头通过人眼角膜反射来感知用户周围环境的问题。核心研究问题是如何从移动设备拍摄的模糊且变形的角膜反射图像中提取有效的场景上下文信息。</p>
+
+<p><strong>2. 研究定位</strong><br>
+传统基于视觉的上下文感知依赖后置摄像头或双摄像头设置，需要用户主动对准目标。这项工作将人机交互中的眼睛从视线估计的目标重新定义为环境的被动镜子，填补了利用角膜反射结合大语言模型进行移动场景感知的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+主要贡献是提出了EyeQ系统，证明了现成的视觉语言模型能够从智能手机拍摄的角膜反射中读取场景上下文。创新之处在于结合端侧虹膜引导捕获和服务器端AI增强，并系统评估了VLM在这种扭曲且陌生图像序列上的检测，误分类和幻觉表现。</p>
+
+<p><strong>4. 方法概述</strong><br>
+EyeQ首先通过端侧虹膜引导捕获技术获取高质量的角膜反射图像块，然后在服务器端进行AI图像增强以恢复可用细节。最后系统利用视觉语言模型从这些经过处理的眼部图像中提取场景类型，特定名称和物体信息。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+该研究仅在小规模 \(N=10\) 用户群体中进行了评估，角膜反射的保真度高度依赖拍摄条件如光照和角度。此外视觉语言模型在处理高度扭曲的图像时存在误分类和幻觉问题，且利用角膜反射被动获取环境信息引发了显著的隐私担忧。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这项工作极具想象力，巧妙地将眼动追踪相关的虹膜识别技术与多模态大模型结合，开辟了被动环境感知的新范式。其优点在于硬件要求低且应用场景明确，例如区分司机与乘客。缺点在于图像增强和模型推理的延迟可能影响实时性，且隐私问题需要严格的机制来缓解。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.13477v1" target="_blank">Leveraging Psychophysical Attentional Distribution for Gaze-Augmented Reward Modeling</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Chaeho Lee, Junyup Kim, Wansoo Kim et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.13477v1" target="_blank">2611.13477v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文探讨如何更有效地将眼动追踪数据融入大语言模型的奖励建模中。核心研究问题是如何利用认知心理学中的人类字母识别规律来改进基于注视点的奖励模型，从而提升人类偏好预测的准确性。</p>
+
+<p>2. <strong>研究定位</strong><br>
+这项工作建立在现有结合眼动追踪数据进行人类反馈强化学习的研究基础之上。它填补了以往仅依赖离散注视点而忽略视觉注意力空间分布特征的空白，将认知心理学的经典发现引入大模型对齐过程。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献在于提出了一种以当前注视点为中心的空间梯度注意力分布建模方法。该方法不仅显著提升了奖励模型在偏好预测上的准确率，还通过实验结果验证了其与人类阅读时注意力分配的认知规律在定性上保持一致。</p>
+
+<p>4. <strong>方法概述</strong><br>
+论文基于认知心理学的人类字母识别规律，将视觉注意力建模为以当前注视点 \( (x_0, y_0) \) 为中心的空间梯度分布 \( A(x, y) \)。这种注意力分布表示被作为一种额外的监督信号，直接融入到基于人类反馈的奖励模型训练过程中。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+摘要未明确列出局限性，但潜在问题包括眼动数据的采集成本较高且可能限制了训练数据的规模。此外，空间注意力分布的具体参数可能因个体差异或不同语言阅读习惯而异，泛化能力有待进一步验证。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作巧妙地将认知心理学的经典理论与大模型对齐技术相结合，具有很高的跨学科创新价值。其优点在于为眼动数据提供了更具解释性的建模方式，但缺点在于眼动追踪设备的硬件依赖可能制约其在通用大语言模型训练中的大规模普及。</p>
+                </div>
+                <div class="paper-entry" id="paper-3">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.13654v1" target="_blank">EgoHMP: Achieving Precise Human Motion Prediction in 3D Scenes via Egocentric Cues</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Xin Zhao, Pengzhan Zhou, Ziyi Li et al.<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.13654v1" target="_blank">2611.13654v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p><strong>1. 研究问题</strong><br>
+这篇论文要解决在3D场景中准确预测人体运动意图的难题。核心问题在于现有基于眼动追踪的方法存在信号模糊和漂移问题，且过度依赖硬件。</p>
+
+<p><strong>2. 研究定位</strong><br>
+这项工作定位于3D场景中的人体运动预测研究。它填补了摆脱眼动追踪硬件依赖，转而利用第一人称视角和头部运动来稳健推断交互意图的空白。</p>
+
+<p><strong>3. 核心贡献</strong><br>
+论文的主要贡献是提出了一种全新的EgoHMP框架，将第一人称视角和头部运动作为交互意图的载体。创新之处在于设计了视觉运动对齐编码器和模态感知调制机制来预测交互概率图，并结合接触感知解码器生成真实合理的运动。</p>
+
+<p><strong>4. 方法概述</strong><br>
+论文提出一种结合视觉特征和运动特征的框架。首先通过视觉运动对齐编码器对齐特征空间，然后利用第一人称意图预测器生成交互概率图。最后通过接触感知运动解码器，结合全局轨迹自提示和基于图卷积网络的多阶段去噪策略，合成符合物理规律的人体运动。</p>
+
+<p><strong>5. 局限与不足</strong><br>
+尽管该方法摆脱了眼动追踪硬件，但第一人称视角的获取仍依赖于头戴式摄像头等设备，这在一定程度上限制了应用场景的广泛性。此外多阶段去噪和接触建模可能带来较高的计算复杂度，且对复杂动态场景的泛化能力有待验证。</p>
+
+<p><strong>6. 评价与思考</strong><br>
+这是一项极具启发性的工作，巧妙地将认知科学中的头部运动前兆理论与深度学习结合，替代了易受干扰的眼动信号。优点在于理论支撑扎实且工程实现完整。缺点是未能完全摆脱穿戴设备的束缚，未来若能结合LLM进行多模态意图推理，可能会进一步提升对复杂场景的语义理解和泛化能力。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2611.13640v1" target="_blank">EyeQ: Exploring Corneal Reflection for Mobile Context Sensing</a></li>
+                    <li><a href="https://arxiv.org/abs/2611.13477v1" target="_blank">Leveraging Psychophysical Attentional Distribution for Gaze-Augmented Reward Modeling</a></li>
+                    <li><a href="https://arxiv.org/abs/2611.13654v1" target="_blank">EgoHMP: Achieving Precise Human Motion Prediction in 3D Scenes via Egocentric Cues</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
