@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SY眼动LLM研究日报 - 2026-11-22</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]}
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .site-title {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 2.4em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.5em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+        h4 {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            background: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 0.9em;
+        }
+        blockquote {
+            margin: 1em 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        .post-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        /* SY Profile specific styling - green tint */
+        .label {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5em 0;
+        }
+        th, td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        #table-of-contents {
+            background-color: #f0f7f0;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            border-left: 4px solid #137333;
+        }
+        #table-of-contents h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #137333;
+        }
+        #table-of-contents ol, #table-of-contents ul {
+            margin-bottom: 0;
+        }
+        #table-of-contents a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        #table-of-contents a:hover {
+            text-decoration: underline;
+        }
+        .post-content {
+            margin-top: 2rem;
+        }
+        .paper-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eaecef;
+        }
+        .paper-entry:last-child {
+            border-bottom: none;
+        }
+        .paper-title {
+            font-size: 1.3em;
+            margin-bottom: 0.5em;
+        }
+        .paper-title a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .paper-title a:hover {
+            text-decoration: underline;
+        }
+        .paper-meta {
+            color: #6a737d;
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        .paper-topics {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        /* SY Profile topic tags - green tint */
+        .topic-tag {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 0.2em 0.6em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title">Beren's Blog</h1>
+            <nav>
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li><a href="../blog.html">Blog</a></li>
+                  <li><a href="../gallery.html">Gallery</a></li>
+                  <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">SY眼动LLM研究日报</h2>
+            <div class="post-meta">
+                <span class="date">November 22, 2026</span>
+                <span class="author">SY</span>
+                <span class="label">眼动LLM研究</span>
+            </div>
+
+            <div id="table-of-contents">
+              <h3>目录</h3>
+              <ol>
+                <li><a href="#daily-concept">每日概念</a></li>
+                <li><a href="#papers">论文摘要</a></li>
+                <li><a href="#references">参考链接</a></li>
+              </ol>
+            </div>
+
+            <div class="post-content">
+                <p>以下是 2026年11月22日 精选的眼动追踪与LLM交叉研究论文摘要。</p>
+
+                <h2 id="daily-concept">每日概念: Cognitive load measurement via eye tracking</h2>
+                <p>1. <strong>概念定义</strong><br>
+通过眼动追踪测量认知负荷是指利用眼球运动数据来量化个体在处理特定任务时大脑所承受的心理努力程度。这种方法将瞳孔直径变化和注视时长等生理指标作为认知资源消耗的客观代理变量。在机器学习语境下，它提供了一种生理信号来评估模型输出或交互过程对人类用户造成的心理负担。</p>
+
+<p>2. <strong>核心原理</strong><br>
+其核心机制在于认知资源的调动会引发自主神经系统反应，从而直接体现在眼部生理特征上。例如任务难度增加会导致瞳孔直径发生显著扩张。我们可以通过提取眼动特征向量 \( \mathbf{X} = [d_{pupil}, t_{fixation}, f_{saccade}]^T \) 来构建机器学习模型。模型通过非线性映射函数 \( \hat{y} = f(\mathbf{X}; \theta) \) 预测出连续的认知负荷得分。</p>
+
+<p>3. <strong>研究意义</strong><br>
+在眼动追踪与大语言模型的交叉领域，这种测量方法为评估LLM生成文本的可读性和提示词的复杂性提供了客观的生理依据。它使研究者能够超越传统的主观问卷，实时监测用户在阅读LLM输出时的认知状态。这对于构建以人为本的AI系统至关重要，可以帮助模型根据用户实时的认知负荷动态调整输出内容的难度和长度。</p>
+
+<p>4. <strong>关键洞见</strong><br>
+眼动追踪提供的认知负荷信号可以作为LLM的实时人类反馈机制，从而优化模型以匹配人类的认知处理极限。</p>
+
+                <h2 id="papers">论文摘要</h2>
+
+                <div class="paper-entry" id="paper-1">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.25508v1" target="_blank">Persona Lenses: What Makes a Vision-Language Model See Through Its Persona&#39;s Eyes?</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Yoonho Shin<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.25508v1" target="_blank">2611.25508v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文探讨视觉语言模型在模拟用户网页眼动注视时，提示词中的persona设定往往只能部分影响最终注视点的问题。核心研究问题是如何有效量化并增强persona对模型眼动模拟行为的控制力。</p>
+
+<p>2. <strong>研究定位</strong><br>
+该工作处于眼动追踪与视觉语言模型交叉领域，专注于利用VLM模拟用户在网页上的注视行为。现有研究通常直接在提示词中加入用户画像，但本文填补了画像特征如何具体传导至眼动输出机制的空白。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文的主要贡献是提出了三种persona lenses机制，将用户画像置于模型与网页之间以干预注视模拟。创新之处在于量化了画像的触达效果，并揭示了不同透镜在鲁棒性与分离度上的权衡，同时发现大模型无需透镜即可区分画像。</p>
+
+<p>4. <strong>方法概述</strong><br>
+论文通过比较仅存在单一属性差异的MatrAIx画像来测量注视点差异，并提出了三种干预方法。文本透镜采用两步提示让模型先描述画像关注点，像素透镜在匹配兴趣的网页区域添加标记，权重透镜则利用保持扫视路径自然的注视时长奖励进行微调。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+文本透镜虽然能强有力地分离画像，但对不应改变注视的无关属性变化不够鲁棒。像素透镜的分离效果较弱，且整体透镜的选择高度依赖计算成本和模型大小，缺乏一种通用且低成本的完美解决方案。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作对LLM在眼动模拟中的可控性进行了细致拆解，提出的透镜机制具有很强的工程指导意义。优点在于实验设计严谨且对比了不同模型规模，缺点在于各种透镜方法存在鲁棒性与效果不可兼得的矛盾，未来可能需要探索更自适应的融合机制。</p>
+                </div>
+                <div class="paper-entry" id="paper-2">
+                    <h3 class="paper-title">
+                        <a href="https://arxiv.org/pdf/2611.25970v1" target="_blank">The Depth of a Prediction: Where Language Models Resolve a Word Predicts Human Reading Time</a>
+                    </h3>
+                    <div class="paper-meta">
+                        <strong>作者:</strong> Donato Riccio, Fabrizio Maturo<br>
+                        <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2611.25970v1" target="_blank">2611.25970v1</a>
+                    </div>
+                    <div class="paper-topics">
+                    </div>
+
+                    <h4>摘要</h4>
+                    <p>1. <strong>研究问题</strong><br>
+这篇论文探讨语言模型在多层网络中预测词汇的过程如何影响人类的阅读时间。核心问题是除了最终层的预测惊异度之外，模型在内部层级解析词汇的深度是否也能预测人类的阅读耗时。</p>
+
+<p>2. <strong>研究定位</strong><br>
+以往研究主要依赖语言模型最终层输出的惊异度来解释人类阅读行为。这项工作填补了模型内部逐层计算过程与人类认知处理时间之间的空白，将眼动追踪研究与LLM内部机制可解释性结合起来。</p>
+
+<p>3. <strong>核心贡献</strong><br>
+论文提出了分辨率深度这一新指标，量化了模型在不同层级间解析词汇预测的变化轨迹。研究发现模型解析越晚的词汇及其后续词汇会被人类阅读得更慢。该指标在最终层惊异度的基础上显著提升了阅读时间的预测精度，增益约为每词 \(0.26\) millinats。</p>
+
+<p>4. <strong>方法概述</strong><br>
+研究者使用tuned lens技术提取GPT-2, OPT和Pythia等十个模型在每一层对词汇的预测。通过计算逐层惊异度轨迹的中心位置来定义分辨率深度。随后在八个包含八万多词的英语眼动追踪和自定步调阅读语料库上进行回归分析，验证该深度与阅读时间的关系。</p>
+
+<p>5. <strong>局限与不足</strong><br>
+该研究带来的预测增益相对有限，仅约为熵增益的三分之一。净增益在不同语料库之间存在较大差异，部分情况下的统计显著性较弱。此外研究仅限于英语语料且高度依赖tuned lens等探针技术的准确性，未训练的网络在logit lens下未表现出增益。</p>
+
+<p>6. <strong>评价与思考</strong><br>
+这项工作巧妙地将LLM的内部层级动态与人类认知负荷联系起来，为眼动追踪和LLM交叉领域提供了新视角。其优点在于跨多个模型和大规模语料库的严谨验证。缺点是效应量较小且跨语料库稳定性一般，未来可探索多语言环境及更深层模型中的分辨率深度表现。</p>
+                </div>
+
+                <hr>
+
+                <h3 id="references">参考链接</h3>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/2611.25508v1" target="_blank">Persona Lenses: What Makes a Vision-Language Model See Through Its Persona&#39;s Eyes?</a></li>
+                    <li><a href="https://arxiv.org/abs/2611.25970v1" target="_blank">The Depth of a Prediction: Where Language Models Resolve a Word Predicts Human Reading Time</a></li>
+                </ul>
+
+                <p><em>欢迎讨论和反馈。感谢阅读!</em></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SY. All rights reserved. | Gaze/LLM Research Daily Review</p>
+        </div>
+    </footer>
+</body>
+</html>
